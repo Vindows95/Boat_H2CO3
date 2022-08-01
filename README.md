@@ -3,4 +3,4 @@
 ## 分支更改
 增加了新JRE版本支持，精简了一些页面
 ## 提示
-** 源码库：https://github.com/NaCln4c1/Boat_H2O2 **
+* 源码库：https://github.com/NaCln4c1/Boat_H2O2 *
