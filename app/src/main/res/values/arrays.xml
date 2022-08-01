@@ -3,9 +3,9 @@
 <resources>
 
     <string-array name="list_preference_control">
-        <item>None</item>
-        <item>Space</item>
-        <item>LShift</item>
+        <item>空</item>
+        <item>空格</item>
+        <item>左Shift</item>
     </string-array>
 
     <string-array name="list_preference_control_value">
@@ -26,14 +26,28 @@
         <item>Brown</item>
     </string-array>
 
+    <string-array name="list_java">
+        <item>JRE8</item>
+        <item>JRE17</item>
+    </string-array>
+
+    <string-array name="list_java_value">
+        <item>jre_8</item>
+        <item>jre_17</item>
+    </string-array>
+
     <string-array name="list_preference_gl">
         <item>GL4ES-1.1.2</item>
-        <item>GL4ES-1.1.5</item>
+        <item>GL4ES-1.1.4</item>
+        <item>GL4ES-1.1.5（推荐）</item>
+        <item>VGPU（测试中）</item>
     </string-array>
 
     <string-array name="list_preference_gl_value">
-        <item>libGL112.so.1</item>
-        <item>libGL115.so.1</item>
+        <item>libGL112.so</item>
+        <item>libGL114.so</item>
+        <item>libGL115.so</item>
+        <item>VGPU</item>
     </string-array>
 
     <!-- Reply Preference -->
