@@ -17,7 +17,7 @@ public class BoatApplication extends Application implements Application.Activity
 	public static Activity getCurrentActivity(){
 		return BoatApplication.mCurrentActivity;
 	}
-	public static BoatApplication mInstance = null;
+	public static final BoatApplication mInstance = null;
 	public SharedPreferences mPref;
 
 	public static BoatApplication getInstance() {

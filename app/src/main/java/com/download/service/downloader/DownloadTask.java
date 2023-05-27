@@ -3,14 +3,18 @@ package com.download.service.downloader;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+
+import androidx.annotation.NonNull;
+
 import java.io.Closeable;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.RandomAccessFile;
+import java.nio.charset.StandardCharsets;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
-import okhttp3.Call;
-import okhttp3.Response;
+
 import okhttp3.*;
 
 /**
@@ -20,16 +24,16 @@ import okhttp3.*;
 public class DownloadTask extends Handler {
 
     private final int THREAD_COUNT = 4;//线程数
-    private FilePoint mPoint;
+    private final FilePoint mPoint;
     private long mFileLength;
 
     private volatile boolean isDownloading = false;
-    private AtomicInteger childCanleCount = new AtomicInteger(0);//子线程取消数量
-    private AtomicInteger childPauseCount = new AtomicInteger(0);//子线程暂停数量
-    private AtomicInteger childFinshCount = new AtomicInteger(0);//子线程完成数量
-    private HttpUtil mHttpUtil;
+    private final AtomicInteger childCanleCount = new AtomicInteger(0);//子线程取消数量
+    private final AtomicInteger childPauseCount = new AtomicInteger(0);//子线程暂停数量
+    private final AtomicInteger childFinshCount = new AtomicInteger(0);//子线程完成数量
+    private final HttpUtil mHttpUtil;
     private long[] mProgress;
-    private File[] mCacheFiles;
+    private final File[] mCacheFiles;
     private File mTmpFile;//临时占位文件
     private volatile boolean pause;//是否暂停
     private volatile boolean cancel;//是否取消下载
@@ -37,14 +41,12 @@ public class DownloadTask extends Handler {
     private static final int MSG_FINISH = 2;//完成下载
     private static final int MSG_PAUSE = 3;//暂停
     private static final int MSG_CANCEL = 4;//暂停
-    private DownloadListner mListner;//下载回调监听
+    private final DownloadListner mListner;//下载回调监听
 
 
     /**
      * 任务管理器初始化数据
      *
-     * @param point
-     * @param l
      */
     public DownloadTask(FilePoint point, DownloadListner l) {
         this.mPoint = point;
@@ -60,7 +62,6 @@ public class DownloadTask extends Handler {
     /**
      * 任务回调消息
      *
-     * @param msg
      */
     @Override
     public void handleMessage(Message msg) {
@@ -70,8 +71,8 @@ public class DownloadTask extends Handler {
         switch (msg.what) {
             case MSG_PROGRESS://进度
                 long progress = 0;
-                for (int i = 0, length = mProgress.length; i < length; i++) {
-                    progress += mProgress[i];
+                for (long l : mProgress) {
+                    progress += l;
                 }
                 mListner.onProgress(progress * 1.0f / mFileLength,progress,mFileLength);
                 break;
@@ -107,7 +108,7 @@ public class DownloadTask extends Handler {
             isDownloading = true;
             mHttpUtil.getContentLength(mPoint.getUrl(), new okhttp3.Callback() {
                 @Override
-                public void onResponse(Call call, Response response) throws IOException {
+                public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                     Log.e(TAG, "start: " + response.code() + "\t isDownloading:" + isDownloading + "\t" + mPoint.getUrl());
                     if (response.code() != 200) {
                         close(response.body());
@@ -126,7 +127,7 @@ public class DownloadTask extends Handler {
                     close(response.body());
                     // 在本地创建一个与资源同样大小的文件来占位
                     mTmpFile = new File(mPoint.getFilePath(), mPoint.getFileName() + ".tmp");
-                    if (!mTmpFile.getParentFile().exists()) mTmpFile.getParentFile().mkdirs();
+                    if (!Objects.requireNonNull(mTmpFile.getParentFile()).exists()) mTmpFile.getParentFile().mkdirs();
                     RandomAccessFile tmpAccessFile = new RandomAccessFile(mTmpFile, "rw");
                     tmpAccessFile.setLength(mFileLength);//长度0修复
                     /*将下载任务分配给每个线程*/
@@ -145,7 +146,7 @@ public class DownloadTask extends Handler {
            }
 
                 @Override
-                public void onFailure(Call call, IOException e) {
+                public void onFailure(@NonNull Call call, @NonNull IOException e) {
                     Log.e(TAG, "start:Exception " + e.getMessage() + "\n" + mPoint.getUrl());
                     resetStutus();
 					
@@ -181,7 +182,7 @@ public class DownloadTask extends Handler {
         final long finalStartIndex = newStartIndex;
         mHttpUtil.downloadFileByRange(mPoint.getUrl(), finalStartIndex, endIndex, new okhttp3.Callback() {
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 Log.e(TAG, "download: " + response.code() + "\t isDownloading:" + isDownloading + "\t" + mPoint.getUrl());
                 if (response.code() != 206) {// 206：请求部分资源成功码
                     resetStutus();
@@ -219,7 +220,7 @@ public class DownloadTask extends Handler {
 
                     //将当前现在到的位置保存到文件中
                     cacheAccessFile.seek(0);
-                    cacheAccessFile.write((progress + "").getBytes("UTF-8"));
+                    cacheAccessFile.write((progress + "").getBytes(StandardCharsets.UTF_8));
                     //发送进度消息
                     mProgress[threadId] = progress - startIndex;
                     sendEmptyMessage(MSG_PROGRESS);
@@ -233,7 +234,7 @@ public class DownloadTask extends Handler {
             }
 
             @Override
-            public void onFailure(Call call, IOException e) {
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
                 isDownloading = false;
 				
 				
@@ -246,15 +247,13 @@ public class DownloadTask extends Handler {
     /**
      * 关闭资源
      *
-     * @param closeables
      */
     private void close(Closeable... closeables) {
         int length = closeables.length;
         try {
-            for (int i = 0; i < length; i++) {
-                Closeable closeable = closeables[i];
+            for (Closeable closeable : closeables) {
                 if (null != closeable)
-                    closeables[i].close();
+                    closeable.close();
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -269,9 +268,9 @@ public class DownloadTask extends Handler {
      * 删除临时文件
      */
     private void cleanFile(File... files) {
-        for (int i = 0, length = files.length; i < length; i++) {
-            if (null != files[i])
-                files[i].delete();
+        for (File file : files) {
+            if (null != file)
+                file.delete();
         }
     }
 
@@ -309,8 +308,6 @@ public class DownloadTask extends Handler {
     /**
      * 确认下载状态
      *
-     * @param count
-     * @return
      */
     private boolean confirmStatus(AtomicInteger count) {
         return count.incrementAndGet() % THREAD_COUNT != 0;

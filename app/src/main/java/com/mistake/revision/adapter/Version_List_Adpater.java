@@ -4,44 +4,31 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.app.AlertDialog;
+
 import android.content.Context;
-import android.database.DataSetObserver;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.*;
-import android.widget.RadioGroup.*;
-import android.view.*;
-import java.lang.reflect.*;
-import com.download.service.util.*;
-import com.download.service.*;
 
-import org.koishi.launcher.h2o2pro.R;
+import com.download.service.util.*;
+
+import org.koishi.launcher.h2co3.R;
 
 public class Version_List_Adpater extends BaseAdapter {
 
 	protected final Context mContext;
 	protected final LayoutInflater mInflater;
-	private List<VersionUtil> overall;
-	private List<VersionUtil>release;
-	private List<VersionUtil>snapshot;
-	private List<VersionUtil>old_alpha;
+	private final List<VersionUtil>release;
+	private final List<VersionUtil>snapshot;
+	private final List<VersionUtil>old_alpha;
 	private List<VersionUtil> display;
-	private Map<Integer, RelativeLayout> viewMap = new HashMap<Integer, RelativeLayout>();
+	private final Map<Integer, RelativeLayout> viewMap = new HashMap<>();
 	public OnItemDepartment listener = null;
 	public Version_List_Adpater(Context context,List<VersionUtil> overall ,int type){
 		mContext = context;
 
-		this.overall = overall;
-		display=new ArrayList<VersionUtil>();
+		display= new ArrayList<>();
 
 		release=new ArrayList<>();
 		old_alpha=new ArrayList<>();
@@ -52,7 +39,7 @@ public class Version_List_Adpater extends BaseAdapter {
 				release.add(util);
 			}else if(util.type().equals("snapshot")){
 				snapshot.add(util);
-			}else if(util.type().indexOf("old") != -1){
+			}else if(util.type().contains("old")){
 				old_alpha.add(util);
 			}
 		}
@@ -141,7 +128,7 @@ public class Version_List_Adpater extends BaseAdapter {
 		viewMap.put(arg0, madapter);
 		return madapter;
 	}
-	class ViewHolder
+	static class ViewHolder
 	{
 		public LinearLayout item;
 		public TextView idText,typeText;
@@ -151,8 +138,8 @@ public class Version_List_Adpater extends BaseAdapter {
 		return display;
 	}
 	public interface OnItemDepartment{
-		public abstract void OnItemDepartmentItem(String type);
-		public abstract void OnItemDepartmentItem(String id,String url);
+		void OnItemDepartmentItem(String type);
+		void OnItemDepartmentItem(String id,String url);
 
 
 	}

@@ -6,13 +6,9 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.webkit.WebResourceRequest;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-
-import java.io.File;
 
 public class MarkdownWebView extends WebView {
 
@@ -54,23 +50,6 @@ public class MarkdownWebView extends WebView {
             this.getSettings().setLoadWithOverviewMode(true);
             this.getSettings().setJavaScriptEnabled(true);
 //            this.getSettings().setUseWideViewPort(true);
-        }
-
-        if (false) {
-            // caching
-            File dir = context.getCacheDir();
-            if (!dir.exists()) {
-                Log.d(TAG, "directory does not exist");
-                boolean mkdirsStatus = dir.mkdirs();
-                if (!mkdirsStatus) {
-                    Log.e(TAG, "directory creation failed");
-                }
-            }
-
-            getSettings().setAppCachePath(dir.getPath());
-            getSettings().setAppCacheEnabled(true);
-            getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
-
         }
 
         {
@@ -129,11 +108,11 @@ public class MarkdownWebView extends WebView {
             escapeText = "";
         }
 
-        String javascriptCommand = "javascript:setText(\'" + escapeText + "\')";
+        String javascriptCommand = "javascript:setText('" + escapeText + "')";
         this.loadUrl(javascriptCommand);
     }
 
-    static final boolean open(Context context, Uri uri) {
+    static void open(Context context, Uri uri) {
         int launchFlags = Intent.FLAG_ACTIVITY_NEW_TASK
                 | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED;
 
@@ -142,12 +121,10 @@ public class MarkdownWebView extends WebView {
 
         try {
             context.startActivity(intent);
-            return true;
-        } catch (Exception e) {
+        } catch (Exception ignored) {
 
         }
 
-        return false;
     }
 
     static String escape(String s) {

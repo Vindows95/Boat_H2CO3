@@ -4,14 +4,9 @@ import android.app.Application;
 import android.app.Activity;
 import android.os.Bundle;
 import android.content.Context;
-import java.io.Writer;
-import java.io.StringWriter;
-import java.io.FileOutputStream;
-import java.io.PrintWriter;
-import java.io.IOException;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import android.widget.*;
+
+import androidx.annotation.NonNull;
+
 import java.io.*;
 
 public class BUG extends Application implements Application.ActivityLifecycleCallbacks
@@ -73,10 +68,9 @@ public class BUG extends Application implements Application.ActivityLifecycleCal
 		this.registerActivityLifecycleCallbacks(this);
 		Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler(){
 
-				private byte[] bug;
-//设置默认的未捕获的异常处理程序
+			//设置默认的未捕获的异常处理程序
 				@Override
-				public void uncaughtException(Thread p1, Throwable p2)
+				public void uncaughtException(@NonNull Thread p1, @NonNull Throwable p2)
 				{
 					
 					
@@ -87,7 +81,7 @@ public class BUG extends Application implements Application.ActivityLifecycleCal
 					ByteArrayOutputStream baos = new ByteArrayOutputStream();
 					
 					p2.printStackTrace(new PrintStream(baos));
-					bug=baos.toByteArray();
+					byte[] bug = baos.toByteArray();
 					
 					try {
 						FileOutputStream f=new FileOutputStream("/sdcard/boat/error.log");

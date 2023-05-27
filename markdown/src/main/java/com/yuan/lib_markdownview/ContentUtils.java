@@ -19,12 +19,13 @@ import androidx.core.content.ContextCompat;
 import java.io.*;
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.Objects;
 
 public class ContentUtils {
 
     private static final String TAG = ContentUtils.class.getSimpleName();
 
-    public static final String getExtension(Uri data) {
+    public static String getExtension(Uri data) {
         String name = data.getLastPathSegment();
         int pos = name.lastIndexOf('.');
         if (pos < 0) {
@@ -34,7 +35,7 @@ public class ContentUtils {
         return name.substring(pos + 1);
     }
 
-    public static final File copy(Context context, Uri source, File target) {
+    public static File copy(Context context, Uri source, File target) {
 
         File result = null;
 
@@ -54,8 +55,6 @@ public class ContentUtils {
             }
 
             result = target;
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -79,26 +78,25 @@ public class ContentUtils {
         return result;
     }
 
-    public static final String getDisplayName(Context context, Uri data) {
+    public static String getDisplayName(Context context, Uri data) {
 
         String path = getFilePath(context, data);
         if (!TextUtils.isEmpty(path)) {
-            File file = new File(path);
+            File file = new File(Objects.requireNonNull(path));
 
             return file.getName();
         }
 
         HashMap<String, String> map = query(context, data);
-        String value = map.get(OpenableColumns.DISPLAY_NAME);
 
-        return value;
+        return map.get(OpenableColumns.DISPLAY_NAME);
     }
 
-    public static final long getSize(Context context, Uri data) {
+    public static long getSize(Context context, Uri data) {
 
         String path = getFilePath(context, data);
         if (!TextUtils.isEmpty(path)) {
-            File file = new File(path);
+            File file = new File(Objects.requireNonNull(path));
 
             return file.length();
         }
@@ -112,7 +110,7 @@ public class ContentUtils {
         return Long.parseLong(value);
     }
 
-    public static final HashMap<String, String> query(Context context, Uri data) {
+    public static HashMap<String, String> query(Context context, Uri data) {
 
         HashMap<String, String> columns = new HashMap<>();
 
@@ -140,7 +138,7 @@ public class ContentUtils {
         return columns;
     }
 
-    public static final String getFilePath(final Context context, final Uri data) {
+    public static String getFilePath(final Context context, final Uri data) {
         if (ContextCompat.checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE)
                 == PackageManager.PERMISSION_GRANTED) {
             return getPath(context, data);
@@ -172,10 +170,10 @@ public class ContentUtils {
                 if (!TextUtils.isEmpty(id)) {
                     try {
                         final Uri contentUri = ContentUris.withAppendedId(
-                                Uri.parse("content://downloads/public_downloads"), Long.valueOf(id));
+                                Uri.parse("content://downloads/public_downloads"), Long.parseLong(id));
                         return getDataColumn(context, contentUri, null, null);
                     } catch (NumberFormatException e) {
-                        Log.i(TAG, e.getMessage());
+                        Log.i(TAG, Objects.requireNonNull(e.getMessage()));
                         return null;
                     }
                 }

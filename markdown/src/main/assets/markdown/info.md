@@ -1,4 +1,4 @@
-# Boat_H2O2 Pro  
+# Boat_H2CO3  
 基于boat app为核心的运行在安卓设备上的Minecraft启动器。  
 [视频教程](https://m.bilibili.com/video/BV1TM4y1N7j2?p=1&share_medium=android&share_plat=android&share_source=COPY&share_tag=s_i&timestamp=1627515206&unique_k=ea3HRj&share_times=1)  
 ![2dcode](./markdown/author.jpg)  

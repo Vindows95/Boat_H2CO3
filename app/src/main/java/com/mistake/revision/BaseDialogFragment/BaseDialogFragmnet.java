@@ -10,7 +10,6 @@ import java.util.Objects;
 import android.view.WindowManager;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.Color;
-import android.widget.ImageView;
 import android.os.Bundle;
 
 import androidx.annotation.IdRes;
@@ -21,17 +20,17 @@ import androidx.fragment.app.DialogFragment;
 public class BaseDialogFragmnet extends DialogFragment {
 
     public static final Handler HANDLER = new Handler();
-    private Object mView;
+    private final Object mView;
     private View mRootView;
-    private float mAlpha;
-    private boolean mAutoDismiss;
-    private boolean mCancelable;
+    private final float mAlpha;
+    private final boolean mAutoDismiss;
+    private final boolean mCancelable;
     private Window window;
-    private int mAnimation;
-    private int mGravity;
+    private final int mAnimation;
+    private final int mGravity;
     private SparseArray<OnListener> mClickArray;
     private SparseArray<String> mSetText;
-    private SparseArray<String> mSetImage;
+    private final SparseArray<String> mSetImage;
 
     BaseDialogFragmnet(Object view, float alpha, boolean autoDismiss, boolean cancelable, int animation, int gravity) {
         this.mView = view;
@@ -69,8 +68,8 @@ public class BaseDialogFragmnet extends DialogFragment {
         return mRootView;
     }
 
-    public static DialogBuilder<BaseDialogFragmnet> Builder() {
-        return new DialogBuilder();
+    public static DialogBuilder Builder() {
+        return new DialogBuilder<>();
     }
 
     /**

@@ -21,7 +21,7 @@
 
         <fragment
             android:id="@+id/fragment_home"
-            android:name="org.koishi.launcher.h2o2pro.ui.home.HomeFragment"
+            android:name="h2co3i.home.HomeFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:label="@string/menu_home"
@@ -29,7 +29,7 @@
 
         <fragment
             android:id="@+id/fragment_version"
-            android:name="org.koishi.launcher.h2o2pro.ui.version.VersionFragment"
+            android:name="h2co3i.version.VersionFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:label="@string/menu_ver"
@@ -38,7 +38,7 @@
 
         <fragment
             android:id="@+id/fragment_manager"
-            android:name="org.koishi.launcher.h2o2pro.ui.manager.ManagerFragment"
+            android:name="h2co3i.manager.ManagerFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:label="@string/menu_manager"
@@ -46,7 +46,7 @@
 
         <fragment
             android:id="@+id/fragment_install"
-            android:name="org.koishi.launcher.h2o2pro.ui.install.InstallFragment"
+            android:name="h2co3i.install.InstallFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:label="@string/menu_install"
@@ -55,7 +55,7 @@
 
         <fragment
             android:id="@+id/fragment_custom"
-            android:name="org.koishi.launcher.h2o2pro.ui.custom.CustomFragment"
+            android:name="h2co3i.custom.CustomFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:label="@string/menu_more"

@@ -1,14 +1,15 @@
 plugins {
     id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
 }
 
 android {
-    compileSdk 31
+    compileSdk 33
 
     defaultConfig {
-        applicationId "org.koishi.launcher.h2o2pro"
-        minSdk 28
-        targetSdk 29
+        applicationId "org.koishi.launcher.h2co3"
+        minSdk 26
+        targetSdk 33
         versionCode 1024
         versionName "3.3.13"
 
@@ -22,37 +23,41 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
 
     lint {
         baseline = file("lint-baseline.xml")
     }
+    namespace 'org.koishi.launcher.h2co3'
+    buildToolsVersion '33.0.2'
+    ndkVersion '25.2.9519653'
 }
 
 dependencies {
 
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.appcompat:appcompat:1.3.0'
-    implementation "androidx.browser:browser:1.3.0"
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-    implementation 'androidx.navigation:navigation-fragment:2.2.2'
-    implementation 'androidx.navigation:navigation-ui:2.2.2'
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
+    implementation 'androidx.appcompat:appcompat:1.6.0-alpha01'
+    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'androidx.browser:browser:1.4.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
+    implementation 'androidx.navigation:navigation-fragment:2.5.2'
+    implementation 'androidx.navigation:navigation-ui:2.5.2'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.preference:preference:1.1.1'
-    implementation 'androidx.recyclerview:recyclerview:1.1.0'
-    implementation 'com.afollestad.material-dialogs:commons:0.9.0.2'
-    implementation 'com.android.billingclient:billing:3.0.3'
-    implementation 'com.github.bumptech.glide:glide:4.9.0'
-    implementation 'com.google.android.material:material:1.5.0-alpha04'
-    implementation 'com.google.dagger:hilt-android:2.37'
+    implementation 'androidx.preference:preference:1.2.0'
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    implementation 'com.afollestad.material-dialogs:commons:0.9.6.0'
+    implementation 'com.android.billingclient:billing:4.1.0'
+    implementation 'com.github.bumptech.glide:glide:4.15.1'
+    implementation 'com.google.android.material:material:1.6.0-beta01'
+    implementation 'com.google.dagger:hilt-android:2.46.1'
     implementation 'com.ashokvarma.android:bottom-navigation-bar:2.2.0'
+    implementation 'com.github.getActivity:XXPermissions:16.8'
 
-    implementation 'cat.ereza:customactivityoncrash:2.2.0'
+    implementation 'cat.ereza:customactivityoncrash:2.4.0'
 
     implementation project(path: ':boat')
     implementation project(path: ':shell')
@@ -62,7 +67,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     testImplementation 'junit:junit:4.+'
 
-    implementation 'com.alibaba:fastjson:1.2.2'
+    implementation 'com.alibaba:fastjson:2.0.32'
     //implementation 'com.google.code.gson:gson:2.8.2'
-    implementation 'com.squareup.okhttp3:okhttp:4.8.0'
+    implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.11'
 }

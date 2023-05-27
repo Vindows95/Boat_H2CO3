@@ -5,14 +5,10 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.DataSetObserver;
 import android.graphics.Typeface;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.provider.Settings;
 import android.view.View;
-import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.RadioButton;
@@ -45,15 +41,13 @@ import java.util.Objects;
 import android.view.MenuItem;
 import android.view.Menu;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 
-import org.koishi.launcher.h2o2pro.HomeActivity;
-import org.koishi.launcher.h2o2pro.R;
-import org.koishi.launcher.h2o2pro.VersionsActivity;
-import org.koishi.launcher.h2o2pro.tool.GetGameJson;
+import org.koishi.launcher.h2co3.HomeActivity;
+import org.koishi.launcher.h2co3.R;
 
 public class VanillaActivity extends AppCompatActivity
 {
@@ -61,7 +55,7 @@ public class VanillaActivity extends AppCompatActivity
 	private LauncherSettingModel  settingModel;
 	
 	private static final int REQUEST_EXTERNAL_STORAGE = 1;
-    private static String[] PERMISSIONS_STORAGE = {
+    private static final String[] PERMISSIONS_STORAGE = {
 		"android.permission.READ_EXTERNAL_STORAGE",
 		"android.permission.WRITE_EXTERNAL_STORAGE" };
 	private static final int REQUEST_OVERLAY = 4444;
@@ -69,7 +63,6 @@ public class VanillaActivity extends AppCompatActivity
 	private Spinner spDownloadSourceMode;
 	private String download_source;
 
-	private RadioGroup rgSelect;
 	private RadioButton rbRelease;
 	private RadioButton rbSnapshot;
 	private RadioButton rbOldbeta;
@@ -173,7 +166,7 @@ public class VanillaActivity extends AppCompatActivity
 
 		spDownloadSourceMode = (Spinner)findViewById(R.id.sp_download_source_mode);
 
-	    rgSelect = (RadioGroup)findViewById(R.id.rg_select);
+		RadioGroup rgSelect = (RadioGroup) findViewById(R.id.rg_select);
 
 		rbRelease = (RadioButton)findViewById(R.id.rb_release);
 	    rbSnapshot = (RadioButton)findViewById(R.id.rb_snapshot);
@@ -186,30 +179,27 @@ public class VanillaActivity extends AppCompatActivity
 		rbSnapshot.setEnabled(false);
 		rbOldbeta.setEnabled(false);
 
-		rgSelect.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-				@Override
-				public void onCheckedChanged(RadioGroup group, int checkedId) {
-					/*if(adapter==null){
-					 get("https://download.mcbbs.net/mc/game/version_manifest.json");
-					 }{*/
-					switch (checkedId){
-						case R.id.rb_release:
-							adapter.setType(1);
-							//Toast.makeText(MainActivity.this, checkedId , Toast.LENGTH_SHORT).show();
-							break;
-						case R.id.rb_snapshot:
-							adapter.setType(0);
-							break;
-						case R.id.rb_old_beta:
-							adapter.setType(2);
-							break;
-						default:
-							break;
-					}
-				}
-			});
+		rgSelect.setOnCheckedChangeListener((group, checkedId) -> {
+			/*if(adapter==null){
+			 get("https://download.mcbbs.net/mc/game/version_manifest.json");
+			 }{*/
+			switch (checkedId){
+				case R.id.rb_release:
+					adapter.setType(1);
+					//Toast.makeText(MainActivity.this, checkedId , Toast.LENGTH_SHORT).show();
+					break;
+				case R.id.rb_snapshot:
+					adapter.setType(0);
+					break;
+				case R.id.rb_old_beta:
+					adapter.setType(2);
+					break;
+				default:
+					break;
+			}
+		});
 		String[] mItems = getResources().getStringArray(R.array.download_source);
-		ArrayAdapter adapter_source = new ArrayAdapter<>(VanillaActivity.this,
+		ArrayAdapter<String> adapter_source = new ArrayAdapter<>(VanillaActivity.this,
 				android.R.layout.simple_spinner_dropdown_item, mItems);
 	    spDownloadSourceMode.setAdapter(adapter_source);
 		spDownloadSourceMode.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -278,30 +268,26 @@ public class VanillaActivity extends AppCompatActivity
 	
 	@Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-		    case R.id.download_ref:
-                if (spDownloadSourceMode.getSelectedItem().toString().equals(getString(R.string.spinner_official))) {
-                    list.setAdapter(null);
-					rbRelease.setChecked(true);
-					get("https://launchermeta.mojang.com/mc/game/version_manifest.json");
-					download_source = "https://launchermeta.mojang.com";
-					//Toast.makeText(MainActivity.this, download_source , Toast.LENGTH_SHORT).show();
-                } else if (spDownloadSourceMode.getSelectedItem().toString().equals(getString(R.string.spinner_mcbbs))) {
-                    list.setAdapter(null);
-					rbRelease.setChecked(true);
-					get("https://download.mcbbs.net/mc/game/version_manifest.json");
-					download_source = "https://download.mcbbs.net";
-					//Toast.makeText(MainActivity.this, download_source , Toast.LENGTH_SHORT).show();
-                } else if (spDownloadSourceMode.getSelectedItem().toString().equals(getString(R.string.spinner_bmclapi))){
-                    list.setAdapter(null);
-					rbRelease.setChecked(true);
-					get("https://bmclapi2.bangbang93.com/mc/game/version_manifest.json");
-					download_source = "https://bmclapi2.bangbang93.com";
-					//Toast.makeText(MainActivity.this, download_source , Toast.LENGTH_SHORT).show();
-                }
-		        break;
-			default:
-				break;
+		if (item.getItemId() == R.id.download_ref) {
+			if (spDownloadSourceMode.getSelectedItem().toString().equals(getString(R.string.spinner_official))) {
+				list.setAdapter(null);
+				rbRelease.setChecked(true);
+				get("https://launchermeta.mojang.com/mc/game/version_manifest.json");
+				download_source = "https://launchermeta.mojang.com";
+				//Toast.makeText(MainActivity.this, download_source , Toast.LENGTH_SHORT).show();
+			} else if (spDownloadSourceMode.getSelectedItem().toString().equals(getString(R.string.spinner_mcbbs))) {
+				list.setAdapter(null);
+				rbRelease.setChecked(true);
+				get("https://download.mcbbs.net/mc/game/version_manifest.json");
+				download_source = "https://download.mcbbs.net";
+				//Toast.makeText(MainActivity.this, download_source , Toast.LENGTH_SHORT).show();
+			} else if (spDownloadSourceMode.getSelectedItem().toString().equals(getString(R.string.spinner_bmclapi))) {
+				list.setAdapter(null);
+				rbRelease.setChecked(true);
+				get("https://bmclapi2.bangbang93.com/mc/game/version_manifest.json");
+				download_source = "https://bmclapi2.bangbang93.com";
+				//Toast.makeText(MainActivity.this, download_source , Toast.LENGTH_SHORT).show();
+			}
 		}
 		return true;
 	}
@@ -321,21 +307,16 @@ public class VanillaActivity extends AppCompatActivity
 		public void handleMessage(Message msg)
 		{
 
-			switch (msg.what)
-			{
-				case 1:
-					getlist((String)msg.obj);
-					rbRelease.setEnabled(true);
-					rbSnapshot.setEnabled(true);
-					rbOldbeta.setEnabled(true);
-					break;
-				default:
-				    break;
+			if (msg.what == 1) {
+				getlist((String) msg.obj);
+				rbRelease.setEnabled(true);
+				rbSnapshot.setEnabled(true);
+				rbOldbeta.setEnabled(true);
 			}
 		}
 	}
 
-	private MyHandler mHandler=new MyHandler();
+	private final MyHandler mHandler=new MyHandler();
 
 	private void getlist(String json)
 	{
@@ -412,24 +393,20 @@ public class VanillaActivity extends AppCompatActivity
 	private void get(String url){
 		HttpUtil.sendOkHttpRequest(url, new okhttp3.Callback(){
 				@Override
-				public void onFailure(Call call, final IOException e) {
+				public void onFailure(@NonNull Call call, @NonNull final IOException e) {
 
 				}
 				@Override
-				public void onResponse(Call p1, Response p2) throws IOException
+				public void onResponse(@NonNull Call p1, @NonNull Response p2) throws IOException
 				{
 					final String url=p2.body().string();
-					new Thread(){
-						public void run(){
-							set(url);
-						}
-					}.start();
+					new Thread(() -> set(url)).start();
 				}
 			});
 	}
 
 	public ArrayList<VersionUtil> Online_Version_List(String json) throws JSONException{
-		ArrayList<VersionUtil> data_list=new ArrayList<VersionUtil>();
+		ArrayList<VersionUtil> data_list= new ArrayList<>();
 		if(json!=null){
 
 			JSONObject root = JSON.parseObject(json);
@@ -491,7 +468,7 @@ public class VanillaActivity extends AppCompatActivity
 	 */
 	
 	private  String ReadString(String sourcePath){
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		BufferedReader br = null;
 		try {
 			br = new BufferedReader(new FileReader(sourcePath));
@@ -518,8 +495,7 @@ public class VanillaActivity extends AppCompatActivity
 				//TypeToken导入的是 com.google.gson.reflect.TypeToken的包
 				Type type = new TypeToken<LauncherSettingModel >() {
 				}.getType();
-				LauncherSettingModel  pointList = gson.fromJson(json, type);
-				return pointList;
+				return gson.fromJson(json, type);
 			}else{
 				return null;
 			}

@@ -10,8 +10,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.Request.Builder;
 public class HttpUtil {
-    private OkHttpClient mOkHttpClient;
-    private static HttpUtil mInstance;
+    private final OkHttpClient mOkHttpClient;
     private final static long CONNECT_TIMEOUT = 60;//超时时间，秒
     private final static long READ_TIMEOUT = 60;//读取时间，秒
     private final static long WRITE_TIMEOUT = 60;//写入时间，秒
@@ -21,7 +20,6 @@ public class HttpUtil {
      * @param startIndex 下载起始位置
      * @param endIndex   结束为止
      * @param callback   回调
-     * @throws IOException
      */
     public void downloadFileByRange(String url, long startIndex, long endIndex, Callback callback) throws IOException {
         // 创建一个Request
@@ -67,18 +65,15 @@ public class HttpUtil {
     }
 
 
+    private static final class MInstanceHolder {
+        private static final HttpUtil mInstance = new HttpUtil();
+    }
+
     /**
      * @return HttpUtil实例对象
      */
     public static HttpUtil getInstance() {
-        if (null == mInstance) {
-            synchronized (HttpUtil.class) {
-                if (null == mInstance) {
-                    mInstance = new HttpUtil();
-                }
-            }
-        }
-        return mInstance;
+        return MInstanceHolder.mInstance;
     }
 
     /**

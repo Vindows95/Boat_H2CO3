@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="org.koishi.launcher.h2o2pro">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.STATUS_BAR" />
+    <uses-permission android:name="android.permission.STATUS_BAR"
+        tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.EXPAND_STATUS_BAR" />
     <uses-permission
         android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
@@ -21,12 +21,15 @@
         android:label="@string/app_name"
         android:requestLegacyExternalStorage="true"
         android:supportsRtl="true"
+        android:isGame="true"
+        android:appCategory="game"
         android:theme="@style/AppBaseTheme">
         <activity
             android:name=".LogcatActivity"
             android:screenOrientation="portrait"
             android:label="@string/log_title"
-            android:theme="@style/AppBaseTheme.NoActionBar"/>
+            android:theme="@style/AppBaseTheme.NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".SettingsActivity"
             android:label="@string/settings"
@@ -36,29 +39,36 @@
             android:name=".HomeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppBaseTheme.NoActionBar"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="adjustPan"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".ModsActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppBaseTheme.NoActionBar" />
+            android:theme="@style/AppBaseTheme.NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".VersionsActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppBaseTheme.NoActionBar" />
+            android:theme="@style/AppBaseTheme.NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".InstructionActivity"
             android:label=""
             android:screenOrientation="portrait"
-            android:theme="@style/AppBaseTheme.NoActionBar" />
+            android:theme="@style/AppBaseTheme.NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".TerminalActivity"
             android:label="@string/menu_terminal"
             android:screenOrientation="portrait"
-            android:theme="@style/AppBaseTheme.NoActionBar" />
+            android:theme="@style/AppBaseTheme.NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".WelcomeActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppBaseTheme.NoActionBar">
+            android:theme="@style/AppBaseTheme.NoActionBar"
+            android:exported="true"
+            tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -68,29 +78,32 @@
         <activity
             android:name=".MainActivity"
             android:configChanges="uiMode"
-            android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppBaseTheme.NoActionBar"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="stateHidden"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name="com.mistake.revision.VanillaActivity"
             android:label="Minecraft"
             android:screenOrientation="portrait"
-            android:theme="@style/AppBaseTheme.NoActionBar" />
+            android:theme="@style/AppBaseTheme.NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".InitialActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppBaseTheme.NoActionBar" />
+            android:theme="@style/AppBaseTheme.NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppBaseTheme.NoActionBar" />
+            android:theme="@style/AppBaseTheme.NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
 
         <service android:name="com.mistake.revision.Download.DownloadService" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="org.koishi.launcher.h2o2pro.fileprovider"
+            android:authorities="org.koishi.launcher.h2co3.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

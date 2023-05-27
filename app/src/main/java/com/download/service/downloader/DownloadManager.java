@@ -1,13 +1,7 @@
 package com.download.service.downloader;
 
-import android.os.Environment;
 import android.text.TextUtils;
 
-import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.*;
-import java.util.Map.*;
 /**
  * 下载管理器，断点续传
  *
@@ -28,18 +22,13 @@ public class DownloadManager {
 	private FilePoint mfilepoint2;
 	private FilePoint mfilepoint3;
 
-	private static DownloadManager mInstance;
-	
-	
-    public static DownloadManager getInstance() {//管理器初始化
-        if (mInstance == null) {
-            synchronized (DownloadManager.class) {
-                if (mInstance == null) {
-                    mInstance = new DownloadManager();
-                }
-            }
-        }
-        return mInstance;
+
+	private static final class MInstanceHolder {
+		private static final DownloadManager mInstance = new DownloadManager();
+	}
+
+	public static DownloadManager getInstance() {//管理器初始化
+		return MInstanceHolder.mInstance;
     }
 	
 
@@ -152,13 +141,7 @@ public class DownloadManager {
 			
 			return null;
 		}
-		/*for (Map.Entry<String, DownloadTask> entry : mDownloadTasks.entrySet()) {    
-			//System.out.println("key= " +  + " and value= " + );    
-			String a=entry.getKey();
-			DownloadTask b = entry.getValue();
-			b.cancel();
-		}*/
-		
+
 	}
 	public FilePoint Self_destruction2() {
 
@@ -169,12 +152,6 @@ public class DownloadManager {
 
 			return null;
 		}
-		/*for (Map.Entry<String, DownloadTask> entry : mDownloadTasks.entrySet()) {    
-		 //System.out.println("key= " +  + " and value= " + );    
-		 String a=entry.getKey();
-		 DownloadTask b = entry.getValue();
-		 b.cancel();
-		 }*/
 
 	}
 	public FilePoint Self_destruction3() {
@@ -186,12 +163,6 @@ public class DownloadManager {
 
 			return null;
 		}
-		/*for (Map.Entry<String, DownloadTask> entry : mDownloadTasks.entrySet()) {    
-		 //System.out.println("key= " +  + " and value= " + );    
-		 String a=entry.getKey();
-		 DownloadTask b = entry.getValue();
-		 b.cancel();
-		 }*/
 
 	}
 	

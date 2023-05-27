@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="org.koishi.launcher.h2o2pro.ui.manager.ManagerFragment">
+    tools:context="org.koishi.launcher.h2co3.ui.manager.ManagerFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

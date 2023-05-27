@@ -109,27 +109,12 @@
             app:title="@string/custom_gl"
             app:useSimpleSummaryProvider="true" />
         <ListPreference
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
             app:defaultValue="libGL112.so.1"
             app:entries="@array/list_java"
             app:entryValues="@array/list_preference_gl_value"
             app:key="set_java"
             app:title="Java"
             app:useSimpleSummaryProvider="true" />
-
-        <!--
-        <SwitchPreferenceCompat
-            app:key="sync"
-            app:title="@string/sync_title" />
-
-        <SwitchPreferenceCompat
-            app:dependency="sync"
-            app:key="attachment"
-            app:summaryOff="@string/attachment_summary_off"
-            app:summaryOn="@string/attachment_summary_on"
-            app:title="@string/attachment_title" />
-        -->
 
     </PreferenceCategory>
 

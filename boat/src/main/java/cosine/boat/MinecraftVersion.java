@@ -1,4 +1,5 @@
 package cosine.boat;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import com.google.gson.*;
 import java.io.*;
@@ -7,14 +8,14 @@ import java.lang.reflect.*;
 public class MinecraftVersion
 {
 	
-	public class AssetsIndex{
+	public static class AssetsIndex{
 		public String id;
 		public String sha1;
 		public int size;
 		public int totalSize;
 		public String url;
 	}
-	public class Download{
+	public static class Download{
 		public String path;
 		public String sha1;
 		public int size;
@@ -32,7 +33,7 @@ public class MinecraftVersion
 		
 	}
 	
-	public Library libraries[];
+	public Library[] libraries;
 	
 	public String mainClass;
 	public String minecraftArguments;
@@ -41,15 +42,15 @@ public class MinecraftVersion
 	public String time;
 	public String type;
 	
-	public class Rule {
+	public static class Rule {
 		String action;
 		HashMap<String, Boolean> os;
 		HashMap<String, Boolean> features;
 	}
 	public class RuledArgument extends Argument
 	{
-		public Rule rules[];
-		public String value[];
+		public Rule[] rules;
+		public String[] value;
 		@Override
 		public String[] getValue(HashMap<String, Boolean> features, HashMap<String, String> os)
 		{
@@ -64,7 +65,9 @@ public class MinecraftVersion
 						}
 					}
 					for (Map.Entry<String, Boolean> e : r.os.entrySet()) {
-						if (e.getValue() != null && !e.getValue().equals(os.get(e.getKey()))) {
+						if (e.getValue() != null) {
+							e.getValue();
+							os.get(e.getKey());
 							if (r.action != null && r.action.equals("allow")) {
 								return null;
 							}
@@ -97,7 +100,7 @@ public class MinecraftVersion
 	
 	public class StringArgument extends Argument
 	{
-		public String value;
+		public final String value;
 		public StringArgument(String v) {
 			this.value = v;
 		}
@@ -111,7 +114,7 @@ public class MinecraftVersion
 		
 	}
 	
-	public abstract class Argument
+	public abstract static class Argument
 	{
 		public abstract String[] getValue(HashMap<String, Boolean> features, HashMap<String, String> os);
 	}
@@ -130,7 +133,7 @@ public class MinecraftVersion
 	}
 	
 	
-	public class Arguments {
+	public static class Arguments {
 		private Object[] game;
         public Object[] getGame() { return game; }
 	}
@@ -146,93 +149,86 @@ public class MinecraftVersion
 	public String minecraftPath;
 	
 	public static MinecraftVersion fromDirectory(File file){
-		try
-		{
-			
-			String json = new String(Utils.readFile(new File(file, file.getName() + ".json")), "UTF-8");
-			MinecraftVersion result = new Gson().fromJson(json, MinecraftVersion.class);
-			if (new File(file, file.getName() + ".jar").exists()){
-				result.minecraftPath = new File(file, file.getName() + ".jar").getAbsolutePath();
-			}
-			else{
-				result.minecraftPath = "";
-			}
-			
-			if (result.inheritsFrom != null && !result.inheritsFrom.equals("") ){
-				
-				MinecraftVersion self = result;
-				result = MinecraftVersion.fromDirectory(new File(file.getParentFile(), self.inheritsFrom));
-				
-				if (self.assetIndex != null){
-					result.assetIndex = self.assetIndex;
-				}
-				if (self.assets != null && !self.assets.equals("")){
-					result.assets = self.assets;
-				}
-				if (self.downloads != null && !self.downloads.isEmpty()){
-					
-					if (result.downloads == null){
-						result.downloads = new HashMap<String, Download>();
-					}
-					
-					for (Map.Entry<String, Download> e : self.downloads.entrySet()){
-						result.downloads.put(e.getKey(), e.getValue());
-					}
-				}
-				if (self.libraries != null && self.libraries.length > 0){
-					Library newLibs[] = new Library[result.libraries.length + self.libraries.length];
-					int i = 0;
-					for (Library lib : self.libraries){
-						newLibs[i] = lib;
-						i++;
-					}
-					for (Library lib : result.libraries){
-						newLibs[i] = lib;
-						i++;
-					}
-					
-					
-					result.libraries = newLibs;
-				}
-				
-				if (self.mainClass != null && !self.mainClass.equals("")){
-					result.mainClass = self.mainClass;
-				}
-				if (self.minecraftArguments != null && !self.minecraftArguments.equals("")){
-					result.minecraftArguments = self.minecraftArguments;
-				}
-				
-				if (self.minimumLauncherVersion > result.minimumLauncherVersion){
-					result.minimumLauncherVersion = self.minimumLauncherVersion;
-				}
-				if (self.releaseTime != null && !self.releaseTime.equals("")){
-					result.releaseTime = self.releaseTime;
-				}
-				if (self.time != null && !self.time.equals("")){
-					result.time = self.time;
-				}
-				if (self.type != null && !self.type.equals("")){
-					result.type = self.type;
-				}
-				
-				if (self.minecraftPath != null && !self.minecraftPath.equals("")){
-					result.minecraftPath = self.minecraftPath;
-				}
-				
-			}
-			result.minecraftArguments = "--username ${auth_player_name} --version ${version_name} --gameDir ${game_directory} --assetsDir ${assets_root} --assetIndex ${assets_index_name} --uuid ${auth_uuid} --accessToken ${auth_access_token} --userProperties ${user_properties} --userType ${user_type} --versionType ${version_type}";
-			
-			return result;
-			
+
+		String json = new String(Utils.readFile(new File(file, file.getName() + ".json")), StandardCharsets.UTF_8);
+		MinecraftVersion result = new Gson().fromJson(json, MinecraftVersion.class);
+		if (new File(file, file.getName() + ".jar").exists()){
+			result.minecraftPath = new File(file, file.getName() + ".jar").getAbsolutePath();
 		}
-		catch (UnsupportedEncodingException e)
-		{
-			return null;
+		else{
+			result.minecraftPath = "";
 		}
+
+		if (result.inheritsFrom != null && !result.inheritsFrom.equals("") ){
+
+			MinecraftVersion self = result;
+			result = MinecraftVersion.fromDirectory(new File(file.getParentFile(), self.inheritsFrom));
+
+			if (self.assetIndex != null){
+				result.assetIndex = self.assetIndex;
+			}
+			if (self.assets != null && !self.assets.equals("")){
+				result.assets = self.assets;
+			}
+			if (self.downloads != null && !self.downloads.isEmpty()){
+
+				if (result.downloads == null){
+					result.downloads = new HashMap<>();
+				}
+
+				for (Map.Entry<String, Download> e : self.downloads.entrySet()){
+					result.downloads.put(e.getKey(), e.getValue());
+				}
+			}
+			if (self.libraries != null && self.libraries.length > 0){
+				Library[] newLibs = new Library[result.libraries.length + self.libraries.length];
+				int i = 0;
+				for (Library lib : self.libraries){
+					newLibs[i] = lib;
+					i++;
+				}
+				for (Library lib : result.libraries){
+					newLibs[i] = lib;
+					i++;
+				}
+
+
+				result.libraries = newLibs;
+			}
+
+			if (self.mainClass != null && !self.mainClass.equals("")){
+				result.mainClass = self.mainClass;
+			}
+			if (self.minecraftArguments != null && !self.minecraftArguments.equals("")){
+				result.minecraftArguments = self.minecraftArguments;
+			}
+
+			if (self.minimumLauncherVersion > result.minimumLauncherVersion){
+				result.minimumLauncherVersion = self.minimumLauncherVersion;
+			}
+			if (self.releaseTime != null && !self.releaseTime.equals("")){
+				result.releaseTime = self.releaseTime;
+			}
+			if (self.time != null && !self.time.equals("")){
+				result.time = self.time;
+			}
+			if (self.type != null && !self.type.equals("")){
+				result.type = self.type;
+			}
+
+			if (self.minecraftPath != null && !self.minecraftPath.equals("")){
+				result.minecraftPath = self.minecraftPath;
+			}
+
+		}
+		result.minecraftArguments = "--username ${auth_player_name} --version ${version_name} --gameDir ${game_directory} --assetsDir ${assets_root} --assetIndex ${assets_index_name} --uuid ${auth_uuid} --accessToken ${auth_access_token} --userProperties ${user_properties} --userType ${user_type} --versionType ${version_type}";
+
+		return result;
+
 	}
 	
 	public String getClassPath(LauncherConfig config){
-		String cp = "";
+		StringBuilder cp = new StringBuilder();
 		int count = 0;
 		
 		String libraries_path = config.get("game_directory") + "/libraries/";
@@ -242,7 +238,7 @@ public class MinecraftVersion
 				continue;
 			}
 			
-			String names[] = lib.name.split(":");
+			String[] names = lib.name.split(":");
 			String packageName = names[0];
 			String mainName = names[1];
 			String versionName = names[2];
@@ -265,33 +261,33 @@ public class MinecraftVersion
 			
 			
 			if (count > 0){
-				cp = cp + ":";
+				cp.append(":");
 			}
-			cp = cp + path;
+			cp.append(path);
 			count++;
 		}
 		if (count > 0){
-			cp = ":" + cp;
+			cp.insert(0, ":");
 		}
-		cp = minecraftPath + cp;
+		cp.insert(0, minecraftPath);
 		
-		return cp;
+		return cp.toString();
 	}
 	
 	public String[] getMinecraftArguments(LauncherConfig config, boolean isHighVer){
 		String test = "";
         if(isHighVer){
             Object[] objs= this.arguments.game;
-            for(int i=0;i<objs.length;i++){
-                if(objs[i] instanceof String){
-                    test+=objs[i].toString()+" ";
+            for (Object obj : objs) {
+                if (obj instanceof String) {
+                    test += obj.toString() + " ";
                 }
             }
         }else{
-			test= new String(this.minecraftArguments);
+			test= this.minecraftArguments;
 		}
 
-		String result = "";
+		StringBuilder result = new StringBuilder();
 
 		int state = 0;
 		int start = 0;
@@ -300,7 +296,7 @@ public class MinecraftVersion
 		for (int i = 0; i < test.length(); i++){
 			if (state == 0 ){
 				if (test.charAt(i) != '$'){
-					result = result + test.charAt(i);
+					result.append(test.charAt(i));
 
 				}
 				else{
@@ -309,11 +305,10 @@ public class MinecraftVersion
 						start = i;
 					}
 					else{
-						result = result + test.charAt(i);
+						result.append(test.charAt(i));
 					}
 
 				}
-				continue;
 			}
 			else{
 				if (test.charAt(i) == '}'){
@@ -323,10 +318,10 @@ public class MinecraftVersion
 
 					String value = "";
 
-					if (key != null && key.equals("version_name")){
+					if (key.equals("version_name")){
 						value = "HPv3";
 					}
-					else if (key != null && key.equals("assets_index_name")){
+					else if (key.equals("assets_index_name")){
 
 
 						if (assetIndex != null){
@@ -337,20 +332,19 @@ public class MinecraftVersion
 						}
 
 					}
-					else if (key != null && key.equals("game_directory") && pdir.equals("true")){
+					else if (key.equals("game_directory") && pdir.equals("true")){
 						value = config.get("currentVersion");
 					}
 
 					else{
 						value = config.get(key);
 					}
-					result = result + value;
-					i = stop;
+					result.append(value);
 					state = 0;
 				}
 			}
 		}
-		return result.split(" ");
+		return result.toString().split(" ");
 	
 		
 	}

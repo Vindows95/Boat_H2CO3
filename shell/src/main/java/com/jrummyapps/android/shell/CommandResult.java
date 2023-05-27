@@ -76,6 +76,7 @@ public class CommandResult implements ShellExitCode {
     return toString(stderr);
   }
 
+  @NonNull
   @Override public String toString() {
     return getStdout();
   }

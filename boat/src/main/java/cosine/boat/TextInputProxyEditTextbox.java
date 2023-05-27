@@ -9,6 +9,10 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
 import android.view.inputmethod.InputConnectionWrapper;
 
+import androidx.annotation.NonNull;
+
+import java.util.Objects;
+
 public class TextInputProxyEditTextbox extends androidx.appcompat.widget.AppCompatEditText {
     /* access modifiers changed from: private */
     public MCPEKeyWatcher _mcpeKeyWatcher;
@@ -40,16 +44,14 @@ public class TextInputProxyEditTextbox extends androidx.appcompat.widget.AppComp
         this._mcpeKeyWatcher = null;
         this.allowedLength = allowedLength2;
         this.limitInput = limitInput2;
-        setFilters(limitInput2 ? new InputFilter[]{new InputFilter.LengthFilter(this.allowedLength), new InputFilter() {
-            public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
-                if (source.equals("")) {
-                }
-                return source;
+        setFilters(limitInput2 ? new InputFilter[]{new InputFilter.LengthFilter(this.allowedLength), (source, start, end, dest, dstart, dend) -> {
+            if (source.equals("")) {
             }
+            return source;
         }} : new InputFilter[]{new InputFilter.LengthFilter(this.allowedLength)});
     }
 
-    public InputConnection onCreateInputConnection(EditorInfo outAttrs) {
+    public InputConnection onCreateInputConnection(@NonNull EditorInfo outAttrs) {
         return new MCPEInputConnection(super.onCreateInputConnection(outAttrs), true, this);
     }
 
@@ -68,7 +70,7 @@ public class TextInputProxyEditTextbox extends androidx.appcompat.widget.AppComp
     }
 
     private class MCPEInputConnection extends InputConnectionWrapper {
-        TextInputProxyEditTextbox textbox;
+        final TextInputProxyEditTextbox textbox;
 
         public MCPEInputConnection(InputConnection target, boolean mutable, TextInputProxyEditTextbox textbox2) {
             super(target, mutable);
@@ -76,7 +78,7 @@ public class TextInputProxyEditTextbox extends androidx.appcompat.widget.AppComp
         }
 
         public boolean sendKeyEvent(KeyEvent event) {
-            if (this.textbox.getText().length() != 0 || event.getAction() != 0 || event.getKeyCode() != 67) {
+            if (Objects.requireNonNull(this.textbox.getText()).length() != 0 || event.getAction() != 0 || event.getKeyCode() != 67) {
                 return super.sendKeyEvent(event);
             }
             if (TextInputProxyEditTextbox.this._mcpeKeyWatcher != null) {

@@ -3,6 +3,7 @@ package cosine.boat;
 import android.util.Log;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.Vector;
 
 public class LoadMe {
@@ -20,7 +21,7 @@ public class LoadMe {
 		System.loadLibrary("boat");
 	}
 
-	public static int exec(LauncherConfig config) {
+	public static void exec(LauncherConfig config) {
 		try {
 
 			MinecraftVersion mcVersion = MinecraftVersion.fromDirectory(new File(config.get("currentVersion")));
@@ -60,7 +61,7 @@ public class LoadMe {
 			}
 			// Java 版本加载
 			dlopen(runtimePath + "/libopenal.so");
-			if (java_v == "jre_8") {
+			if (java_v.equals("jre_8")) {
 				//setenv("HOME", home);
 				setenv("JAVA_HOME" , runtimePath + "/jre_8");
 				setenv("LIBGL_MIPMAP", "3");
@@ -102,20 +103,22 @@ public class LoadMe {
 			if (!gl.equals("libGL114-EX.so")) {
 				dlopen(runtimePath + "/libOSMesa_8.so");
 			}
-			if (gl.equals("libGL112.so")){
-				dlopen(runtimePath + "/libGL112.so");
-			} else if (gl.equals("libGL114.so")) {
-				dlopen(runtimePath + "/libGL114.so");
-			} else if (gl.equals("libGL115.so")) {
-				dlopen(runtimePath + "/libGL115.so");
-			} else if (gl.equals("VGPU")) {
-				dlopen(runtimePath + "/libvgpu.so");
+			switch (gl) {
+				case "libGL112.so":
+					dlopen(runtimePath + "/libGL112.so");
+					break;
+				case "libGL114.so":
+					dlopen(runtimePath + "/libGL114.so");
+					break;
+				case "libGL115.so":
+					dlopen(runtimePath + "/libGL115.so");
+					break;
+				case "VGPU":
+					dlopen(runtimePath + "/libvgpu.so");
+					break;
 			}
 
-			boolean isLwjgl3=false;
-			if (mcVersion.minimumLauncherVersion >= 21) {
-				isLwjgl3 = true;
-			}
+			boolean isLwjgl3= mcVersion.minimumLauncherVersion >= 21;
 			String libraryPath;
 			String classPath;
 
@@ -146,7 +149,7 @@ public class LoadMe {
 				chdir(strd);
 			}
 
-			Vector<String> args = new Vector<String>();
+			Vector<String> args = new Vector<>();
 
 			args.add(runtimePath +  "/"+java_v+"/bin/java");
 			args.add("-cp");
@@ -163,17 +166,22 @@ public class LoadMe {
 			//添加tｍpdir以获得权限读取json
 			args.add("-Djava.io.tmpdir="+home+"/cache");
 
-			if (gl.equals("VGPU")) {
-				args.add("-Dorg.lwjgl.opengl.libname=libvgpu.so");
-			} else if (gl.equals("libGL112.so")) {
-				args.add("-Dorg.lwjgl.opengl.libname=libGL112.so");
-			} else if (gl.equals("libGL114.so")) {
-				args.add("-Dorg.lwjgl.opengl.libname=libGL114.so");
-			} else if (gl.equals("libGL115.so")) {
-				args.add("-Dorg.lwjgl.opengl.libname=libGL115.so");
+			switch (gl) {
+				case "VGPU":
+					args.add("-Dorg.lwjgl.opengl.libname=libvgpu.so");
+					break;
+				case "libGL112.so":
+					args.add("-Dorg.lwjgl.opengl.libname=libGL112.so");
+					break;
+				case "libGL114.so":
+					args.add("-Dorg.lwjgl.opengl.libname=libGL114.so");
+					break;
+				case "libGL115.so":
+					args.add("-Dorg.lwjgl.opengl.libname=libGL115.so");
+					break;
 			}
 
-			String extraJavaFlags[] = config.get("extraJavaFlags").split(" ");
+			String[] extraJavaFlags = config.get("extraJavaFlags").split(" ");
 
 			for (String flag : extraJavaFlags) {
 				args.add(flag);
@@ -186,15 +194,13 @@ public class LoadMe {
 
 			args.add(mcVersion.mainClass);
 
-			String minecraftArgs[]=null;
+			String[] minecraftArgs =null;
 			if (isLwjgl3) {
 				minecraftArgs = mcVersion.getMinecraftArguments(config, true);
 			} else {
 				minecraftArgs = mcVersion.getMinecraftArguments(config, false);
 			}
-			for (String flag : minecraftArgs) {
-				args.add(flag);
-			}
+			args.addAll(Arrays.asList(minecraftArgs));
 
 			args.add("Update20210321");
 			args.add("--width");
@@ -204,18 +210,6 @@ public class LoadMe {
 
 			if (mcVersion.minimumLauncherVersion >= 21) {
 				//判断minimumLauncherVersion是否大于21，大于的是高版本，高版本需要用方法加载不同版本的loader，这个只是其中一个
-				/*
-				 args.add("--launchTarget");
-				 args.add("fmlclient");
-				 args.add("--fml.forgeVersion");
-				 args.add("31.2.47");
-				 args.add("--fml.mcVersion");
-				 args.add("1.15.2");
-				 args.add("--fml.forgeGroup");
-				 args.add("net.minecraftforge");
-				 args.add("--fml.mcpVersion");
-				 args.add("20200515.085601");
-				 */
 				args.add("--tweakClass");
 				args.add("optifine.OptiFineTweaker");
 			}
@@ -223,7 +217,7 @@ public class LoadMe {
 			if (mcVersion.minimumLauncherVersion >= 14 && mcVersion.minimumLauncherVersion < 21 && mcVersion.assetIndex.size != 72996) {
 				// 1.8-1.12.2
 				args.add("--tweakClass");
-				if (mcVersion.id.indexOf("OptiFine") != -1) {
+				if (mcVersion.id.contains("OptiFine")) {
 					args.add("optifine.OptiFineTweaker");
 				} else {
 					args.add("net.minecraftforge.fml.common.launcher.FMLTweaker");
@@ -233,23 +227,19 @@ public class LoadMe {
 			if (mcVersion.minimumLauncherVersion >= 14 && mcVersion.minimumLauncherVersion < 21 && mcVersion.assetIndex.size == 72996) {
 				// Below 1.7.10
 				args.add("--tweakClass");
-				if (mcVersion.id.indexOf("OptiFine") != -1) {
+				if (mcVersion.id.contains("OptiFine")) {
 					args.add("optifine.OptiFineTweaker");
 				} else {
 					args.add("cpw.mods.fml.common.launcher.FMLTweaker");
 				}
 
 			}
-			if (token.equals("0000")) {
-				//args.add("--demo");
-			}
+			//args.add("--demo");
 
-			String extraMinecraftArgs[] = config.get("extraMinecraftFlags").split(" ");
-			for (String flag : extraMinecraftArgs) {
-				args.add(flag);
-			}
+			String[] extraMinecraftArgs = config.get("extraMinecraftFlags").split(" ");
+			args.addAll(Arrays.asList(extraMinecraftArgs));
 
-			String finalArgs[] = new String[args.size()];
+			String[] finalArgs = new String[args.size()];
 			for (int i = 0; i < args.size(); i++) {
 
 				finalArgs[i] = args.get(i);
@@ -257,24 +247,10 @@ public class LoadMe {
 			}
 
 			System.out.println("OpenJDK exited with code : " + jliLaunch(finalArgs));
-			/*
-			 File so_map = new File("/proc/self/maps");
-			 BufferedReader br=new BufferedReader(new InputStreamReader(new FileInputStream(so_map)));
-
-			 File map_log= new File("/sdcard/boat/boat_mem_maps.txt");
-			 BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(map_log)));
-			 String line;
-			 while((line = br.readLine()) != null){
-			 bw.write(line + "\n");
-
-			 }
-			 */
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			return 1;
 		}
-		return 0;
 	}
 
 }

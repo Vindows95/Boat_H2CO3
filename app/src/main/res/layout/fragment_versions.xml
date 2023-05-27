@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    tools:context="org.koishi.launcher.h2o2pro.ui.version.VersionFragment">
+    tools:context="org.koishi.launcher.h2co3.ui.version.VersionFragment">
 
     <TextView
         style="@style/TextStyleMain"

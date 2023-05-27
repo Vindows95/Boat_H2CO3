@@ -56,7 +56,7 @@ public class ByteBuffer {
                 MAX_ARRAY_SIZE;
     }
 
-    public synchronized void write(byte b[], int off, int len) {
+    public synchronized void write(byte[] b, int off, int len) {
         if ((off < 0) || (off > b.length) || (len < 0) ||
                 ((off + len) - b.length > 0)) {
             throw new IndexOutOfBoundsException();
@@ -70,7 +70,7 @@ public class ByteBuffer {
         return count;
     }
 
-    public static final ByteBuffer create(InputStream is, int size) throws IOException {
+    public static ByteBuffer create(InputStream is, int size) throws IOException {
 
         ByteBuffer data = null;
 
@@ -107,7 +107,7 @@ public class ByteBuffer {
         return data;
     }
 
-    public static final ByteBuffer create(Context context, Uri data, long size) {
+    public static ByteBuffer create(Context context, Uri data, long size) {
         ByteBuffer buf = null;
 
         {
@@ -116,8 +116,6 @@ public class ByteBuffer {
             try {
                 is = context.getContentResolver().openInputStream(data);
                 buf = ByteBuffer.create(is, (int) size);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             } finally {
@@ -134,7 +132,7 @@ public class ByteBuffer {
         return buf;
     }
 
-    public static final ByteBuffer create(File file) {
+    public static ByteBuffer create(File file) {
         if (!file.exists()) {
             return null;
         }
@@ -149,8 +147,6 @@ public class ByteBuffer {
 
                 buf = ByteBuffer.create(fis, (int) (file.length()));
 
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             } finally {

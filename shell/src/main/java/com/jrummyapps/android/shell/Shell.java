@@ -33,6 +33,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Method;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -40,6 +41,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -93,8 +95,8 @@ public class Shell {
    */
   @WorkerThread
   public static CommandResult run(@NonNull String shell, @NonNull String[] commands, @Nullable String[] env) {
-    List<String> stdout = Collections.synchronizedList(new ArrayList<String>());
-    List<String> stderr = Collections.synchronizedList(new ArrayList<String>());
+    List<String> stdout = Collections.synchronizedList(new ArrayList<>());
+    List<String> stderr = Collections.synchronizedList(new ArrayList<>());
     int exitCode;
 
     try {
@@ -109,14 +111,14 @@ public class Shell {
       stderrGobbler.start();
       try {
         for (String write : commands) {
-          stdin.write((write + "\n").getBytes("UTF-8"));
+          stdin.write((write + "\n").getBytes(StandardCharsets.UTF_8));
           stdin.flush();
         }
-        stdin.write("exit\n".getBytes("UTF-8"));
+        stdin.write("exit\n".getBytes(StandardCharsets.UTF_8));
         stdin.flush();
       } catch (IOException e) {
         //noinspection StatementWithEmptyBody
-        if (e.getMessage().contains("EPIPE")) {
+        if (Objects.requireNonNull(e.getMessage()).contains("EPIPE")) {
           // method most horrid to catch broken pipe, in which case we do nothing. the command is not a shell, the
           // shell closed stdin, the script already contained the exit command, etc. these cases we want the output
           // instead of returning null
@@ -168,8 +170,7 @@ public class Shell {
   @WorkerThread
   public static Process runWithEnv(@NonNull String command, @Nullable String[] environment) throws IOException {
     if (environment != null) {
-      Map<String, String> newEnvironment = new HashMap<>();
-      newEnvironment.putAll(System.getenv());
+      Map<String, String> newEnvironment = new HashMap<>(System.getenv());
       int split;
       for (String entry : environment) {
         if ((split = entry.indexOf("=")) >= 0) {
@@ -266,7 +267,6 @@ public class Shell {
      * your own interactive shell using {@link Builder} or {@link Console.Builder}.</p>
      *
      * @return The {@link Console} instance for running commands in a normal shell.
-     * @throws ShellNotFoundException
      */
     @WorkerThread
     public static Console getConsole() throws ShellNotFoundException {
@@ -318,7 +318,7 @@ public class Shell {
   public static class SU {
 
     private static Boolean isSELinuxEnforcing = null;
-    private static String[] suVersion = new String[]{null, null};
+    private static final String[] suVersion = new String[]{null, null};
     private static volatile Console console;
 
     /**
@@ -328,7 +328,6 @@ public class Shell {
      * your own interactive shell using {@link Builder} or {@link Console.Builder}.</p>
      *
      * @return The {@link Console} instance for running commands in a root shell.
-     * @throws ShellNotFoundException
      */
     @WorkerThread
     public static Console getConsole() throws ShellNotFoundException {
@@ -376,7 +375,7 @@ public class Shell {
         return console.run(commands);
       } catch (ShellNotFoundException e) {
         return new CommandResult(
-            Collections.<String>emptyList(), Collections.<String>emptyList(), ShellExitCode.SHELL_NOT_FOUND);
+            Collections.emptyList(), Collections.emptyList(), ShellExitCode.SHELL_NOT_FOUND);
       }
     }
 
@@ -483,7 +482,7 @@ public class Shell {
         if ((display != null) &&
             (internal != null) &&
             (display.endsWith("SUPERSU")) &&
-            (Integer.valueOf(internal) >= 190)) {
+            (Integer.parseInt(internal) >= 190)) {
           shell = String.format(Locale.ENGLISH, "%s --context %s", shell, context);
         }
       }
@@ -525,19 +524,10 @@ public class Shell {
           // Detect enforcing through sysfs, not always present
           File f = new File("/sys/fs/selinux/enforce");
           if (f.exists()) {
-            InputStream is = null;
-            try {
-              is = new FileInputStream("/sys/fs/selinux/enforce");
+            try (InputStream is = new FileInputStream("/sys/fs/selinux/enforce")) {
               enforcing = (is.read() == '1');
             } catch (Exception e) {
               // we might not be allowed to read, thanks SELinux
-            } finally {
-              if (is != null) {
-                try {
-                  is.close();
-                } catch (IOException ignored) {
-                }
-              }
             }
           }
 
@@ -654,8 +644,8 @@ public class Shell {
    */
   public static class Builder {
 
-    private Map<String, String> environment = new HashMap<>();
-    private List<Command> commands = new LinkedList<>();
+    private final Map<String, String> environment = new HashMap<>();
+    private final List<Command> commands = new LinkedList<>();
     private StreamGobbler.OnLineListener onStdoutLineListener;
     private StreamGobbler.OnLineListener onStderrLineListener;
     private Handler handler;
@@ -818,7 +808,7 @@ public class Shell {
      * @return This Builder object for method chaining
      */
     public Builder addCommand(List<String> commands, int code, OnCommandResultListener onCommandResultListener) {
-      return addCommand(commands.toArray(new String[commands.size()]), code,
+      return addCommand(commands.toArray(new String[0]), code,
           onCommandResultListener);
     }
 
@@ -967,7 +957,6 @@ public class Shell {
   public static class Interactive {
 
     private final Handler handler;
-    private final boolean autoHandler;
     final String shell;
     final boolean wantSTDERR;
     private final List<Command> commands;
@@ -1002,7 +991,7 @@ public class Shell {
      *     Builder class to take values from
      */
     Interactive(final Builder builder, final OnCommandResultListener onCommandResultListener) {
-      autoHandler = builder.autoHandler;
+      boolean autoHandler = builder.autoHandler;
       shell = builder.shell;
       wantSTDERR = builder.wantStderr;
       commands = builder.commands;
@@ -1023,17 +1012,14 @@ public class Shell {
         // Allow up to 60 seconds for SuperSU/Superuser dialog, then enable the user-specified timeout for all
         // subsequent operations
         watchdogTimeout = 60;
-        commands.add(0, new Command(Shell.AVAILABLE_TEST_COMMANDS, 0, new OnCommandResultListener() {
-
-          @Override public void onCommandResult(int commandCode, int exitCode, List<String> output) {
-            if ((exitCode == ShellExitCode.SUCCESS) &&
-                !Shell.parseAvailableResult(output, Shell.SU.isSU(shell))) {
-              // shell is up, but it's brain-damaged
-              exitCode = ShellExitCode.SHELL_EXEC_FAILED;
-            }
-            watchdogTimeout = builder.watchdogTimeout;
-            onCommandResultListener.onCommandResult(0, exitCode, output);
+        commands.add(0, new Command(Shell.AVAILABLE_TEST_COMMANDS, 0, (commandCode, exitCode, output) -> {
+          if ((exitCode == ShellExitCode.SUCCESS) &&
+              !Shell.parseAvailableResult(output, SU.isSU(shell))) {
+            // shell is up, but it's brain-damaged
+            exitCode = ShellExitCode.SHELL_EXEC_FAILED;
           }
+          watchdogTimeout = builder.watchdogTimeout;
+          onCommandResultListener.onCommandResult(0, exitCode, output);
         }, null));
       }
 
@@ -1112,7 +1098,7 @@ public class Shell {
      */
     public void addCommand(@NonNull List<String> commands, int code,
                            @Nullable OnCommandResultListener onCommandResultListener) {
-      addCommand(commands.toArray(new String[commands.size()]), code, onCommandResultListener);
+      addCommand(commands.toArray(new String[0]), code, onCommandResultListener);
     }
 
     /**
@@ -1131,7 +1117,7 @@ public class Shell {
      */
     public void addCommand(@NonNull List<String> commands, int code,
                            @Nullable OnCommandLineListener lineListener) {
-      addCommand(commands.toArray(new String[commands.size()]), code, lineListener);
+      addCommand(commands.toArray(new String[0]), code, lineListener);
     }
 
     /**
@@ -1222,12 +1208,7 @@ public class Shell {
       }
       watchdogCount = 0;
       watchdog = new ScheduledThreadPoolExecutor(1);
-      watchdog.scheduleAtFixedRate(new Runnable() {
-
-        @Override public void run() {
-          handleWatchdog();
-        }
-      }, 1, 1, TimeUnit.SECONDS);
+      watchdog.scheduleAtFixedRate(() -> handleWatchdog(), 1, 1, TimeUnit.SECONDS);
     }
 
     /**
@@ -1267,17 +1248,17 @@ public class Shell {
             if (command.onCommandResultListener != null) {
               // no reason to store the output if we don't have an OnCommandResultListener.
               // user should catch the output with an OnLineListener in this case.
-              buffer = Collections.synchronizedList(new ArrayList<String>());
+              buffer = Collections.synchronizedList(new ArrayList<>());
             }
 
             idle = false;
             this.command = command;
             startWatchdog();
             for (String write : command.commands) {
-              stdin.write((write + "\n").getBytes("UTF-8"));
+              stdin.write((write + "\n").getBytes(StandardCharsets.UTF_8));
             }
-            stdin.write(("echo " + command.marker + " $?\n").getBytes("UTF-8"));
-            stdin.write(("echo " + command.marker + " >&2\n").getBytes("UTF-8"));
+            stdin.write(("echo " + command.marker + " $?\n").getBytes(StandardCharsets.UTF_8));
+            stdin.write(("echo " + command.marker + " >&2\n").getBytes(StandardCharsets.UTF_8));
             stdin.flush();
           } catch (IOException e) {
             // stdin might have closed
@@ -1329,14 +1310,11 @@ public class Shell {
           final StreamGobbler.OnLineListener fListener = listener;
 
           startCallback();
-          handler.post(new Runnable() {
-
-            @Override public void run() {
-              try {
-                fListener.onLine(fLine);
-              } finally {
-                endCallback();
-              }
+          handler.post(() -> {
+            try {
+              fListener.onLine(fLine);
+            } finally {
+              endCallback();
             }
           });
         } else {
@@ -1382,17 +1360,14 @@ public class Shell {
       }
       startCallback();
 
-      handler.post(new Runnable() {
-
-        @Override public void run() {
-          try {
-            if ((fCommand.onCommandResultListener != null) && (fOutput != null))
-              fCommand.onCommandResultListener.onCommandResult(fCommand.code, fExitCode, fOutput);
-            if (fCommand.onCommandLineListener != null)
-              fCommand.onCommandLineListener.onCommandResult(fCommand.code, fExitCode);
-          } finally {
-            endCallback();
-          }
+      handler.post(() -> {
+        try {
+          if ((fCommand.onCommandResultListener != null) && (fOutput != null))
+            fCommand.onCommandResultListener.onCommandResult(fCommand.code, fExitCode, fOutput);
+          if (fCommand.onCommandLineListener != null)
+            fCommand.onCommandLineListener.onCommandResult(fCommand.code, fExitCode);
+        } finally {
+          endCallback();
         }
       });
     }
@@ -1420,72 +1395,66 @@ public class Shell {
         // setup our process, retrieve stdin stream, and stdout/stderr gobblers
         process = runWithEnv(shell, environment);
         stdin = new DataOutputStream(process.getOutputStream());
-        stdout = new StreamGobbler(process.getInputStream(), new StreamGobbler.OnLineListener() {
+        stdout = new StreamGobbler(process.getInputStream(), line -> {
+          synchronized (Interactive.this) {
+            if (command == null) {
+              return;
+            }
 
-          @Override public void onLine(String line) {
-            synchronized (Interactive.this) {
-              if (command == null) {
-                return;
+            String contentPart = line;
+            String markerPart = null;
+
+            int markerIndex = line.indexOf(command.marker);
+            if (markerIndex == 0) {
+              contentPart = null;
+              markerPart = line;
+            } else if (markerIndex > 0) {
+              contentPart = line.substring(0, markerIndex);
+              markerPart = line.substring(markerIndex);
+            }
+
+            if (contentPart != null) {
+              addBuffer(contentPart);
+              processLine(contentPart, onStdoutLineListener);
+              processLine(contentPart, command.onCommandLineListener);
+            }
+
+            if (markerPart != null) {
+              try {
+                lastExitCode = Integer.valueOf(markerPart.substring(command.marker.length() + 1), 10);
+              } catch (Exception e) {
+                // this really shouldn't happen
+                e.printStackTrace();
               }
-
-              String contentPart = line;
-              String markerPart = null;
-
-              int markerIndex = line.indexOf(command.marker);
-              if (markerIndex == 0) {
-                contentPart = null;
-                markerPart = line;
-              } else if (markerIndex > 0) {
-                contentPart = line.substring(0, markerIndex);
-                markerPart = line.substring(markerIndex);
-              }
-
-              if (contentPart != null) {
-                addBuffer(contentPart);
-                processLine(contentPart, onStdoutLineListener);
-                processLine(contentPart, command.onCommandLineListener);
-              }
-
-              if (markerPart != null) {
-                try {
-                  lastExitCode = Integer.valueOf(markerPart.substring(command.marker.length() + 1), 10);
-                } catch (Exception e) {
-                  // this really shouldn't happen
-                  e.printStackTrace();
-                }
-                lastMarkerStdout = command.marker;
-                processMarker();
-              }
+              lastMarkerStdout = command.marker;
+              processMarker();
             }
           }
         });
-        stderr = new StreamGobbler(process.getErrorStream(), new StreamGobbler.OnLineListener() {
+        stderr = new StreamGobbler(process.getErrorStream(), line -> {
+          synchronized (Interactive.this) {
+            if (command == null) {
+              return;
+            }
 
-          @Override public void onLine(String line) {
-            synchronized (Interactive.this) {
-              if (command == null) {
-                return;
-              }
+            String contentPart = line;
 
-              String contentPart = line;
+            int markerIndex = line.indexOf(command.marker);
+            if (markerIndex == 0) {
+              contentPart = null;
+            } else if (markerIndex > 0) {
+              contentPart = line.substring(0, markerIndex);
+            }
 
-              int markerIndex = line.indexOf(command.marker);
-              if (markerIndex == 0) {
-                contentPart = null;
-              } else if (markerIndex > 0) {
-                contentPart = line.substring(0, markerIndex);
-              }
+            if (contentPart != null) {
+              if (wantSTDERR)
+                addBuffer(contentPart);
+              processLine(contentPart, onStderrLineListener);
+            }
 
-              if (contentPart != null) {
-                if (wantSTDERR)
-                  addBuffer(contentPart);
-                processLine(contentPart, onStderrLineListener);
-              }
-
-              if (markerIndex >= 0) {
-                lastMarkerStderr = command.marker;
-                processMarker();
-              }
+            if (markerIndex >= 0) {
+              lastMarkerStderr = command.marker;
+              processMarker();
             }
           }
         });
@@ -1529,11 +1498,11 @@ public class Shell {
 
       try {
         try {
-          stdin.write(("exit\n").getBytes("UTF-8"));
+          stdin.write(("exit\n").getBytes(StandardCharsets.UTF_8));
           stdin.flush();
         } catch (IOException e) {
           //noinspection StatementWithEmptyBody
-          if (e.getMessage().contains("EPIPE")) {
+          if (Objects.requireNonNull(e.getMessage()).contains("EPIPE")) {
             // we're not running a shell, the shell closed stdin,
             // the script already contained the exit command, etc.
           } else {
@@ -1724,11 +1693,9 @@ public class Shell {
         shellBuilder.setWantStderr(false);
 
         if (builder.wantStderr) {
-          shellBuilder.setOnStderrLineListener(new StreamGobbler.OnLineListener() {
-            @Override public void onLine(String line) {
-              if (stderr != null) {
-                stderr.add(line);
-              }
+          shellBuilder.setOnStderrLineListener(line -> {
+            if (stderr != null) {
+              stderr.add(line);
             }
           });
         }
@@ -1756,7 +1723,7 @@ public class Shell {
     public synchronized CommandResult run(String... commands) {
       isCommandRunning = true;
       if (wantStderr) {
-        stderr = Collections.synchronizedList(new ArrayList<String>());
+        stderr = Collections.synchronizedList(new ArrayList<>());
       } else {
         stderr = Collections.emptyList();
       }
@@ -1830,7 +1797,7 @@ public class Shell {
     public static class Builder {
 
       Console.OnCloseListener onCloseListener;
-      Map<String, String> environment = new HashMap<>();
+      final Map<String, String> environment = new HashMap<>();
       String shell = "sh";
       boolean wantStderr = true;
       int watchdogTimeout;

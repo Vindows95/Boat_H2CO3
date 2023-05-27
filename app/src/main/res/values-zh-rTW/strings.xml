@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Boat_H2O2 Pro</string>
+    <string name="app_name">Boat_H2CO3</string>
     <string name="launcher_play_boat" translatable="false">啟動</string>
     <string name="launcher_play_boardwalk" translatable="false">啟動</string>
     <string name="launcher_activity_name_setting">設定</string>

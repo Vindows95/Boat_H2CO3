@@ -8,31 +8,13 @@ public class LauncherSettingModel {
 		
         downloadType = "official";
 
-        /*
-        MinecraftParameter = new MinecraftParameter();
-        MinecraftParameter.auth_uuid = "00000000-0000-0000-0000-000000000000";
-        MinecraftParameter.extraMinecraftFlags = "";
-        MinecraftParameter.auth_player_name = "Steve";
-        MinecraftParameter.auth_session = "0";
-        MinecraftParameter.extraJavaFlags = "-server -Xms850M -Xmx850M";
-        MinecraftParameter.home = "/storage/emulated/0/games/com.koishi.launcher/h2o2";
-        MinecraftParameter.runtimePath = "/data/user/0/cosine.boat/app_runtime/";
-        MinecraftParameter.auth_access_token = "0";
-        MinecraftParameter.currentVersion = "/storage/emulated/0/boat/gamedir/versions/";
-        MinecraftParameter.game_assets = "/storage/emulated/0/boat/gamedir/assets/virtual/legacy";
-        MinecraftParameter.user_type = "mojang";
-        MinecraftParameter.game_directory = "/storage/emulated/0/boat/gamedir";
-		MinecraftParameter.user_properties = "{}";
-		MinecraftParameter.assets_root = "/storage/emulated/0/boat/gamedir/assets";
-         */
-		
-    }
+	}
 
     private  String downloadType; //下载源："office"官方 "bmclapi"国内BMCLAPI "mcbbs"国内MCBBS
     private MinecraftParameter MinecraftParameter; //Config配置
     
     //Config配置
-    public class MinecraftParameter {
+    public static class MinecraftParameter {
 
 		private String auth_uuid;
 		private String extraMinecraftFlags;

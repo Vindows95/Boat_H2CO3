@@ -6,6 +6,7 @@ import android.os.Environment;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.Objects;
 
 /**
  * create by water.yuan
@@ -26,7 +27,7 @@ public class MarkDownFileUtil {
         ByteBuffer stream = ByteBuffer.create(mdFile);
 
         int length = 6 * 1024;
-        length = (stream.size() > length) ? length : stream.size();
+        length = Math.min(Objects.requireNonNull(stream).size(), length);
         String charset = CharsetUtils.getCharset(stream.getData(), length, "utf-8");
 
         String str = "";

@@ -49,16 +49,9 @@ public class LogcatService extends Service
         if (!mDaemonStarted) {
 			mDaemonStarted = true;
 			final int initResult = startOutOfProcessDaemon(this, reportPath);
-			if (initResult != 0) {
-				//Log.e(TAG, "Couldn't start NDCrash out-of-process daemon with unwinder: " + unwinder + ", error: " + initResult);
-			} else {
-				//Log.i(TAG, "Out-of-process unwinding daemon is started with unwinder: " + unwinder + " report path: " +
-				//	  (reportPath != null ? reportPath : "null"));
-				
-			}
-        } else {
-            //Log.i(TAG, "NDCrash out-of-process daemon is already started.");
-        }
+            //Log.e(TAG, "Couldn't start NDCrash out-of-process daemon with unwinder: " + unwinder + ", error: " + initResult);
+        }  //Log.i(TAG, "NDCrash out-of-process daemon is already started.");
+
         // START_REDELIVER_INTENT may seem better but found by experimental way that when we return
         // this value a service is restarted significantly slower (with a longer delay) after its
         // process is killed. So a workaround is used: Saving initialization parameters to shared
@@ -89,8 +82,6 @@ public class LogcatService extends Service
      *
      * @param context         Context instance. Used to determine a socket name.
      * @param crashReportPath Path where to save a crash report.
-     * @param unwinder        Unwinder to use.
-     * @param callback        Callback to execute when a crash has occurred.
      * @return Error status.
      */
     static int startOutOfProcessDaemon(
@@ -103,7 +94,7 @@ public class LogcatService extends Service
 		{
 			mLogcatProcess = new ProcessBuilder("logcat", "-v", "long", "-f", crashReportPath).start();
 		}
-		catch (IOException e)
+		catch (IOException ignored)
 		{}
         return 0;
     }

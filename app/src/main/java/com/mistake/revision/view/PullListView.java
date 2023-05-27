@@ -4,7 +4,6 @@ import android.animation.ValueAnimator;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
@@ -14,7 +13,7 @@ public class PullListView extends ListView implements OnTouchListener{
 	/**初始可拉动Y轴方向距离*/
 	private static final int MAX_Y_OVER_SCROLL_DISTANCE = 100;
 
-	private Context mContext;
+	private final Context mContext;
 
 	/**实际可上下拉动Y轴上的距离*/
 	private int mMaxYOverScrollDistance;
@@ -39,9 +38,9 @@ public class PullListView extends ListView implements OnTouchListener{
 	/**手指是否离开屏幕*/
 	private boolean mIsActionUp = false;
 	/**是否支持显示下拉刷新loading*/
-	private boolean mEnableRefreshHeader = false;
+	private final boolean mEnableRefreshHeader = false;
 	/**是否支持加载更多loading*/
-	private boolean mEnableLoadingMoreHeader = false;
+	private final boolean mEnableLoadingMoreHeader = false;
 
 	private View mDefaultRefreshViewHeader;
 	private View mDefaultLoadingMore;
@@ -95,23 +94,19 @@ public class PullListView extends ListView implements OnTouchListener{
 	 * */
 	@Override
 	public boolean onInterceptTouchEvent(MotionEvent event) {
-		switch (event.getAction()) {
-			case MotionEvent.ACTION_DOWN:
-				mIsActionUp = false;
-				resetStatus();
-				if(getFirstVisiblePosition() == 0 || (getLastVisiblePosition() == getAdapter().getCount()-1)) {
-					mStartY = event.getY();
-					mStartCalc = true;
-					mCalcOnItemVisible = true;
-				}else{
-					mStartCalc = false;
-					mCalcOnItemVisible = false;
-				}
+		if (event.getAction() == MotionEvent.ACTION_DOWN) {
+			mIsActionUp = false;
+			resetStatus();
+			if (getFirstVisiblePosition() == 0 || (getLastVisiblePosition() == getAdapter().getCount() - 1)) {
+				mStartY = event.getY();
+				mStartCalc = true;
+				mCalcOnItemVisible = true;
+			} else {
+				mStartCalc = false;
+				mCalcOnItemVisible = false;
+			}
 
-				mLastMotionY = (int)event.getY();
-				break;
-			default:
-				break;
+			mLastMotionY = (int) event.getY();
 		}
 		return super.onInterceptTouchEvent(event);
 	}
@@ -188,18 +183,15 @@ public class PullListView extends ListView implements OnTouchListener{
 		final int scrollY = mScrollY;
 		int time = Math.abs(500*scrollY/mMaxYOverScrollDistance);
 		ValueAnimator animator = ValueAnimator.ofInt(0,1).setDuration(time);//设置为动态时间
-		animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-				@Override
-				public void onAnimationUpdate(ValueAnimator animator) {
-					float fraction = animator.getAnimatedFraction();
-					scrollTo(0, scrollY - (int) (scrollY * fraction));
+		animator.addUpdateListener(animator1 -> {
+			float fraction = animator1.getAnimatedFraction();
+			scrollTo(0, scrollY - (int) (scrollY * fraction));
 
-					if((int)fraction == 1) {
-						scrollTo(0, 0);
-						resetStatus();
-					}
-				}
-			});
+			if((int)fraction == 1) {
+				scrollTo(0, 0);
+				resetStatus();
+			}
+		});
 		animator.start();
 
 

@@ -18,7 +18,6 @@ package ren.qinc.edit;
 
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
@@ -33,12 +32,12 @@ public class PerformEdit {
     //操作序号(一次编辑可能对应多个操作，如替换文字，就是删除+插入)
     int index;
     //撤销栈
-    Stack<Action> history = new Stack<>();
+    final Stack<Action> history = new Stack<>();
     //恢复栈
-    Stack<Action> historyBack = new Stack<>();
+    final Stack<Action> historyBack = new Stack<>();
 
     private Editable editable;
-    private EditText editText;
+    private final EditText editText;
     //自动操作标志，防止重复回调,导致无限撤销
     private boolean flag = false;
 
@@ -215,14 +214,14 @@ public class PerformEdit {
 
     }
 
-    private class Action {
+    private static class Action {
         /** 改变字符. */
-        CharSequence actionTarget;
+        final CharSequence actionTarget;
         /** 光标位置. */
-        int startCursor;
+        final int startCursor;
         int endCursor;
         /** 标志增加操作. */
-        boolean isAdd;
+        final boolean isAdd;
         /** 操作序号. */
         int index;
 

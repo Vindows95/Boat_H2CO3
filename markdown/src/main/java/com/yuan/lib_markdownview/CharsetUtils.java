@@ -8,23 +8,23 @@ import org.mozilla.universalchardet.UniversalDetector;
 
 public class CharsetUtils {
 
-    public static final String getCharset(@NonNull byte[] bytes, String defaultCharset) {
+    public static String getCharset(@NonNull byte[] bytes, String defaultCharset) {
         return getCharset(bytes, bytes.length, defaultCharset);
     }
 
-    public static final String getCharset(@NonNull byte[] bytes, int length, String defaultCharset) {
+    public static String getCharset(@NonNull byte[] bytes, int length, String defaultCharset) {
         return getCharset(bytes, 0, length, defaultCharset);
     }
 
-    public static final String getCharset(@NonNull byte[] bytes, int offset, int length, String defaultCharset) {
+    public static String getCharset(@NonNull byte[] bytes, int offset, int length, String defaultCharset) {
         UniversalDetector detector = new UniversalDetector();
 
         String encoding;
 
         int size = 3 * 1024;
-        int step = 1 * 1024;
+        int step = 1024;
         while (true) {
-            size = (size > length) ? length : size;
+            size = Math.min(size, length);
             encoding = getCharset(detector, bytes, offset, size);
 
             if (!TextUtils.isEmpty(encoding)) {
@@ -42,7 +42,7 @@ public class CharsetUtils {
         return encoding;
     }
 
-    static final String getCharset(UniversalDetector detector, byte[] bytes, int offset, int length) {
+    static String getCharset(UniversalDetector detector, byte[] bytes, int offset, int length) {
         detector.handleData(bytes, offset, length);
         detector.dataEnd();
 

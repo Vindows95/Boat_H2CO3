@@ -1,26 +1,18 @@
 package com.mistake.revision.Download;
 
 
-import com.download.service.util.Config;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import java.lang.reflect.Type;
-import java.io.File;
-import java.io.BufferedReader;
-import java.io.FileReader;
+
 import android.app.*;
 import android.os.*;
 import android.widget.*;
 import com.alibaba.fastjson.*;
 
 import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
 import okhttp3.Response;
-import okhttp3.Request.Builder;
+
 import com.download.service.util.*;
-import com.download.service.*;
 import com.download.service.downloader.DownloadManager;
 import java.util.*;
 import java.io.*;
@@ -28,16 +20,13 @@ import android.content.*;
 import android.view.*;
 import android.graphics.*;
 import android.provider.*;
-import com.mistake.revision.adapter.*;
-import android.view.View.*;
-import android.view.WindowManager.*;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
-import java.nio.charset.*;
 import com.download.service.downloader.*;
 
-import org.koishi.launcher.h2o2pro.R;
+import org.koishi.launcher.h2co3.R;
 
 public class DownloadService extends Service
 {
@@ -78,23 +67,18 @@ public class DownloadService extends Service
 	//private boolean switch_api;
 
 	private TextView title;
-	private LinearLayout mwindow;
 	private Button button;
 	private WindowManager.LayoutParams layoutparams_button;
 
 	private ImageButton close;
 	private ImageButton pause_start1,pause_start2,pause_start3;
-//
-	private static String Source_address;
-	private static String 
-	API_Version_client_server_json,
-	API_Assets,
-	API_Libraries,
-	API_Manifest_Version_json;
+	private static String
+	API_Version_client_server_json;
+	private static String API_Assets;
+	private static String API_Libraries;
 
 	private static String 
-	game_directory,
-	assets_root;
+	game_directory;
 
 	private static String 
 	Version,
@@ -113,7 +97,7 @@ public class DownloadService extends Service
 	//某读取文本
 	private  String ReadString(String sourcePath){
 
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		BufferedReader br = null;
 		try {
 			br = new BufferedReader(new FileReader(sourcePath));
@@ -169,14 +153,12 @@ public class DownloadService extends Service
 		if(height>width){
 			layoutParams.width = width*9/10;
 			layoutParams.height = width*8/10;
-			layoutParams.x = (width/2)-(layoutParams.width/2);
-			layoutParams.y = (height/2)-(layoutParams.height/2);
 		}else{
 			layoutParams.width = height*9/10;
 			layoutParams.height = height*8/10;
-			layoutParams.x = (width/2)-(layoutParams.width/2);
-			layoutParams.y = (height/2)-(layoutParams.height/2);
 		}
+		layoutParams.x = (width/2)-(layoutParams.width/2);
+		layoutParams.y = (height/2)-(layoutParams.height/2);
 		layoutParams.alpha=0.8f;
 		mDownloadManager = new DownloadManager();
 
@@ -240,8 +222,7 @@ public class DownloadService extends Service
 				pause_start3.setOnClickListener(onclick);
 
 
-
-				mwindow=(LinearLayout)base.findViewById(R.id.downloadLinearLayout1);
+				LinearLayout mwindow = (LinearLayout) base.findViewById(R.id.downloadLinearLayout1);
 				mwindow.setOnTouchListener(window);
 				button=new Button(this);
 				button.setBackgroundResource(R.drawable.ic_h2o2_low_px);
@@ -280,26 +261,22 @@ public class DownloadService extends Service
 	public  void loading_config(String version,String homepath,String address){
 
 
-
-		//Version = "1.7.10";//下载版本--->manifest_version_json
-		//game_directory = "/storage/emulated/0/boat/gamedir";//主游戏目录->结尾不带"/"
-		//Source_address = "https://download.mcbbs.net";//需要提供的源->结尾不带"/"
 		Version = version;//下载版本--->manifest_version_json
 		game_directory = homepath;//主游戏目录->结尾不带"/"
-		Source_address = address;//需要提供的源->结尾不带"/"
+		//
 
 
-		API_Version_client_server_json = Source_address + "/version/";
-		API_Assets = Source_address + "/assets/";
-		API_Libraries = Source_address + "/maven/";
-		API_Manifest_Version_json = Source_address + "/mc/game/version_manifest.json";
+		API_Version_client_server_json = address + "/version/";
+		API_Assets = address + "/assets/";
+		API_Libraries = address + "/maven/";
+		String API_Manifest_Version_json = address + "/mc/game/version_manifest.json";
 
-		assets_root = game_directory+"/assets";
+		String assets_root = game_directory + "/assets";
 		Version_jar = game_directory+"/versions/"+Version+"/"+ Version+".jar";
 		Version_json = game_directory+"/versions/"+Version+"/"+ Version+".json";
 		//Version_url=url;
 		Version_libraries = game_directory+"/libraries/";
-		Version_assets = assets_root+"/";
+		Version_assets = assets_root +"/";
 
 
 		//如何终结
@@ -333,13 +310,11 @@ public class DownloadService extends Service
 
 
 
-	private View.OnTouchListener window= new View.OnTouchListener(){
+	private final View.OnTouchListener window= new View.OnTouchListener(){
 
 		private int x;
         private int y;
 		private long Time1;
-		private int movedX=0;
-		private int movedY=0;
 		private long Time2;
 
         @Override
@@ -354,8 +329,8 @@ public class DownloadService extends Service
                 case MotionEvent.ACTION_MOVE:
 					int nowX = (int) event.getRawX();
                     int nowY = (int) event.getRawY();
-					movedX = nowX - x;
-					movedY = nowY - y;
+					int movedX = nowX - x;
+					int movedY = nowY - y;
 					Time2 = System.currentTimeMillis() - Time1;
                     x = nowX;
                     y = nowY;
@@ -368,16 +343,13 @@ public class DownloadService extends Service
 
 					break;
 				case MotionEvent.ACTION_UP:
-					if(Time2<100){
-
-					}
 
 					break;
 			}
 			return false;
 		}
 	};
-    private View.OnClickListener onclick=new View.OnClickListener(){
+    private final View.OnClickListener onclick=new View.OnClickListener(){
 
 		@Override
 		public void onClick(View p1)
@@ -452,8 +424,8 @@ public class DownloadService extends Service
 	private void run_download_libraries(){
 		success_libraries=0;
 		overall_libraries=0;
-		Temporary=new ArrayList<Object>();
-		ArrayList<Object> unexists_File_Manager=new ArrayList<Object>();
+		Temporary= new ArrayList<>();
+		ArrayList<Object> unexists_File_Manager= new ArrayList<>();
 		for(LibrariesUtil util:libraries){
 			if(util.get()){
 				File file=new File(Version_libraries+util.getpath());
@@ -477,25 +449,6 @@ public class DownloadService extends Service
 					unexists_File_Manager.add(util);
 					overall_libraries+=util.getsize();
 				}
-			}else{
-				/*File file=new File(Turn_Path(Version_libraries,util.getname()));
-				 util.setpath(file.getAbsolutePath());
-				 if(switch_api){
-				 util.seturl(Turn_Url(APILibraries_bmclapi,util.getname()));
-				 }else{
-				 util.seturl(Turn_Url(APILibraries,util.getname()));
-				 }
-				 if(file.exists()){
-				 if(file.isDirectory()){
-				 file.delete();
-				 unexists_File_Manager.add(util);
-				 }else{
-				 //此为数据缺失
-				 }
-				 }else{
-				 unexists_File_Manager.add(util);
-				 }*/
-
 			}
 		}
 		if(unexists_File_Manager.size()>=1){
@@ -534,8 +487,8 @@ public class DownloadService extends Service
 	private void run_download_assets(){
 		success_libraries=0;
 		overall_libraries=0;
-		Temporary=new ArrayList<Object>();
-		ArrayList<Object> unexists_File_Manager=new ArrayList<Object>();
+		Temporary= new ArrayList<>();
+		ArrayList<Object> unexists_File_Manager= new ArrayList<>();
 		for(AssetsUtil util:assets){
 			if(util.get()){
 				File file=new File(Version_assets+"objects/"+util.gethash().substring(0,2)+"/"+util.gethash());
@@ -796,7 +749,7 @@ public class DownloadService extends Service
 	}
 
 
-	public  Handler mhandler=new Handler(){
+	public final Handler mhandler=new Handler(){
 		@Override
 		public void handleMessage(Message msg) {
 			switch(msg.what){
@@ -813,8 +766,6 @@ public class DownloadService extends Service
 								if(!download3){
 									mhandler.sendEmptyMessage(101);
 									setlibraries();
-								}else{
-
 								}
 							}
 						}
@@ -839,9 +790,6 @@ public class DownloadService extends Service
 								if(!download3){
 									mhandler.sendEmptyMessage(101);
 									setassets();
-								}else{
-
-
 								}
 							}
 						}
@@ -904,11 +852,6 @@ public class DownloadService extends Service
 					run_download_assets();
 					break;
 				case 6:
-					/*
-					 for(LibrariesUtil a:libraries){
-					 append(Turn_Url(APILibraries_bmclapi,a.getname()));
-					 append(Turn_Path(Version_libraries,a.getname()));
-					 }*/
 
 					mpath_progress1.setProgress(100);
 					mpath_progress2.setProgress(100);
@@ -956,10 +899,6 @@ public class DownloadService extends Service
 	};
 
 
-	/*
-	 private String[] turn(String [] a){
-
-	 }*/
 	private  void object_turn_libraries()
 	{
 		//101101102103201202203
@@ -983,8 +922,6 @@ public class DownloadService extends Service
 					}else{
 						if(!download3){
 							mhandler.sendEmptyMessage(101);
-						}else{
-
 						}
 					}//true未加载
 				}else{
@@ -1001,8 +938,6 @@ public class DownloadService extends Service
 						}else{
 							if(!download1){
 								mhandler.sendEmptyMessage(101);
-							}else{
-
 							}
 						}//true未加载
 					}else{
@@ -1019,10 +954,8 @@ public class DownloadService extends Service
 							}else{
 								if(!download3){
 									mhandler.sendEmptyMessage(101);
-								}else{
-									//list2.clear();
+								}//list2.clear();
 
-								}
 							}//true未加载
 						}
 					}
@@ -1043,8 +976,6 @@ public class DownloadService extends Service
 						if(!download3){
 							download_manager_3(url,path,name,1000,name,rock.getsize());
 							Temporary.remove(0);
-						}else{
-
 						}
 					}
 				}
@@ -1078,8 +1009,6 @@ public class DownloadService extends Service
 					}else{
 						if(!download3){
 							mhandler.sendEmptyMessage(101);
-						}else{
-
 						}
 					}//true未加载
 				}else{
@@ -1096,8 +1025,6 @@ public class DownloadService extends Service
 						}else{
 							if(!download1){
 								mhandler.sendEmptyMessage(101);
-							}else{
-
 							}
 						}//true未加载
 					}else{
@@ -1114,9 +1041,8 @@ public class DownloadService extends Service
 							}else{
 								if(!download3){
 									mhandler.sendEmptyMessage(101);
-								}else{
-									//list2.clear();
-								}
+								}//list2.clear();
+
 							}//true未加载
 						}
 					}
@@ -1137,8 +1063,6 @@ public class DownloadService extends Service
 						if(!download3){
 							download_manager_3(url,path,name,2000,rock.getname(),rock.getsize());
 							Temporary.remove(0);
-						}else{
-
 						}
 					}
 				}
@@ -1165,22 +1089,20 @@ public class DownloadService extends Service
 	{
 		HttpUtil.sendOkHttpRequest(url1, new okhttp3.Callback(){
 				@Override
-				public void onFailure(Call call, final IOException e) {
+				public void onFailure(@NonNull Call call, @NonNull final IOException e) {
 					//
 				}
 				@Override
-				public void onResponse(Call p1, Response p2) throws IOException
+				public void onResponse(@NonNull Call p1, @NonNull Response p2) throws IOException
 				{
 					final String url=p2.body().string();
-					new Thread(){
-						public void run(){
-							Message msg = new Message();
-							msg.what = msg1;
-							msg.obj = url;
+					new Thread(() -> {
+						Message msg = new Message();
+						msg.what = msg1;
+						msg.obj = url;
 
-							mhandler.sendMessage(msg);
-						}
-					}.start();
+						mhandler.sendMessage(msg);
+					}).start();
 				}
 			});
 	}
@@ -1192,7 +1114,7 @@ public class DownloadService extends Service
 			JSONObject main= client.getJSONObject("client");
 
 			String Url=(String) main.get("url");
-			int size=Integer.valueOf((Integer) main.get("size"));
+			int size= (Integer) main.get("size");
 
 
 			JSONObject assetindex= objects.getJSONObject("assetIndex");
@@ -1254,15 +1176,14 @@ public class DownloadService extends Service
 	private void VersionLibraries(String json){
 		if(json==null){
 			mhandler.sendEmptyMessage(3);
-			return;
 		}else{
 			JSONObject version_json = JSON.parseObject(json);
 			JSONArray version_libraries = version_json.getJSONArray("libraries");
-			libraries=new ArrayList<LibrariesUtil>();
+			libraries= new ArrayList<>();
 			for (int i = 0 ; i < version_libraries.size();i++){
 				JSONObject key = (JSONObject)version_libraries.get(i);
 				JSONObject downloads = (JSONObject)key.get("downloads");
-				JSONObject artifact=(JSONObject)downloads.get("artifact");
+				JSONObject artifact=(JSONObject) Objects.requireNonNull(downloads).get("artifact");
 				if(artifact!=null){
 					LibrariesUtil util =new LibrariesUtil();
 					util.setname((String)key.get("name"));
@@ -1271,27 +1192,7 @@ public class DownloadService extends Service
 					util.setsize((int)artifact.get("size"));
 					util.set(true);
 					libraries.add(util);
-				}else{
-					/*LibrariesUtil util =new LibrariesUtil();
-					 util.setname((String)key.get("name"));
-					 util.setpath("");
-					 util.seturl("");
-					 util.setsize(0);
-					 util.set(false);
-					 libraries.add(util);
-					 */
 				}
-				/*
-				 JSONObject downloads = (JSONObject)key.get("downloads");
-				 JSONObject artifact=(JSONObject)downloads.get("artifact");
-				 if(artifact!=null){
-				 util.setpath((String)artifact.get("path"));
-				 util.seturl(((String)artifact.get("url")).replace(APILibraries,Libraries));
-				 util.setsize((int)artifact.get("size"));
-				 util.set(true);
-				 }else{
-				 }
-				 get_libraries_list.add(util);*/
 			}
 			mhandler.sendEmptyMessage(4);
 		}
@@ -1308,7 +1209,7 @@ public class DownloadService extends Service
 			String turn_txt=objects.toJSONString();
 			Gson gson = new Gson();	
 			Map<String, VersionAssetsUtil> map = gson.fromJson(turn_txt,new TypeToken<Map<String,VersionAssetsUtil>>() {}.getType());    
-			assets=new ArrayList<AssetsUtil>();
+			assets= new ArrayList<>();
 			for (Map.Entry<String, VersionAssetsUtil> entry : map.entrySet()) {    
 				//System.out.println("key= " +  + " and value= " + );    
 				AssetsUtil util=new AssetsUtil();

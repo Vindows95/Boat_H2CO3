@@ -8,10 +8,11 @@ android {
         minSdkVersion 21
         targetSdkVersion 29
   }
+    namespace 'com.jrummyapps.android.shell'
 }
 
 
 dependencies {
-    implementation 'com.android.support:support-annotations:25.1.0'
-    implementation 'androidx.annotation:annotation:1.2.0'
+    implementation 'com.android.support:support-annotations:28.0.0'
+    implementation 'androidx.annotation:annotation:1.3.0'
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--App-->
-    <string name="app_name" translatable="false">Boat_H2O2 Pro</string>
+    <string name="app_name" translatable="false">Boat_H2CO3</string>
     <string name="launcher_play_boat" translatable="false">Play Boat</string>
     <string name="launcher_play_boardwalk" translatable="false">Play Pojav</string>
     <string name="launcher_activity_name_setting">Settings</string>
