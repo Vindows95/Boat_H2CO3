@@ -15,19 +15,19 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/material_card_background"
+
         android:fitsSystemWindows="true"
-        android:theme="@style/AppTheme.AppBarOverlay"
+        android:theme="@style/AppBaseTheme.AppBarOverlay"
         app:elevation="0dp">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/material_card_background"
+
             app:title="@string/menu_ver"
             app:elevation="0dp"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            app:popupTheme="@style/AppBaseTheme.PopupOverlay" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -35,7 +35,7 @@
         android:id="@+id/ver_tab"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/material_background"
+
         android:orientation="horizontal"
         app:tabIndicatorFullWidth="false"
         app:layout_scrollFlags="scroll|enterAlways"
@@ -112,7 +112,8 @@
         android:layout_marginBottom="16dp"
         android:onClick="newDir"
         android:src="@drawable/file_folder"
-        android:tint="@color/appWhite_ff_l" />
+        android:tint="@color/appWhite_ff_l"
+        android:contentDescription="TODO" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/ver_new_ver"
@@ -123,6 +124,7 @@
         android:onClick="newVer"
         android:layout_margin="16dp"
         android:src="@drawable/ic_launcher_install_file"
-        android:tint="@color/appWhite_ff_l"/>
+        android:tint="@color/appWhite_ff_l"
+        android:contentDescription="TODO" />
 
 </RelativeLayout>

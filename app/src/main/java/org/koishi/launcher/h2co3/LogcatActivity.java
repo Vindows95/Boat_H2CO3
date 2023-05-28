@@ -1,6 +1,8 @@
 package org.koishi.launcher.h2co3;
 
-import androidx.appcompat.app.AppCompatActivity;
+import static org.koishi.launcher.h2co3.tool.CHTools.LAUNCHER_FILE_DIR;
+
+import org.koishi.launcher.h2co3.application.H2CO3Activity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.app.AlertDialog;
@@ -25,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class LogcatActivity extends AppCompatActivity {
+public class LogcatActivity extends H2CO3Activity {
 
     public LinearLayout logLay;
     public ListView log,log2;
@@ -34,7 +36,7 @@ public class LogcatActivity extends AppCompatActivity {
     //public TextView textList, li;
     public List clientTxt() {
         //将读出来的一行行数据使用List存储
-        String filePath = "/storage/emulated/0/games/com.koishi.launcher/h2o2/client_output.txt";
+        String filePath = LAUNCHER_FILE_DIR+"client_output.txt";
 
         List<String> newList = new ArrayList<>();
         try {
@@ -65,7 +67,7 @@ public class LogcatActivity extends AppCompatActivity {
 
     public List appTxt() {
         //将读出来的一行行数据使用List存储
-        String filePath = "/storage/emulated/0/games/com.koishi.launcher/h2o2/log.txt";
+        String filePath = LAUNCHER_FILE_DIR+"log.txt";
 
         List<String> newList = new ArrayList<>();
         try {
@@ -111,7 +113,7 @@ public class LogcatActivity extends AppCompatActivity {
                 AlertDialog alertDialog1 = new AlertDialog.Builder(LogcatActivity.this)
                         .setTitle(getResources().getString(R.string.action))//标题
                         .setIcon(R.drawable.ic_boat)//图标
-                        .setMessage("Boat log:\n/storage/emulated/0/games/com.koishi.launcher/h2o2/client_output.txt\nClient log:\n/storage/emulated/0/games/com.koishi.launcher/h2o2/log.txt")
+                        .setMessage("Boat log:\n/storage/emulated/0/games/org.koishi.launcher/h2co3/client_output.txt\nClient log:\n/storage/emulated/0/games/org.koishi.launcher/h2co3/log.txt")
                         .setNegativeButton("OK", (dialogInterface, i) -> {
                             //TODO
                         })
@@ -131,7 +133,7 @@ public class LogcatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_logcat);
 
-        getWindow().setStatusBarColor(getResources().getColor(R.color.material_card_background));
+        
 
         logLay = findViewById(R.id.log_lay);
 

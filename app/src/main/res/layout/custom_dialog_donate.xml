@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@color/material_background">
+    >
 
     <TextView
         style="@style/TextStyleMain"
@@ -29,11 +30,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:drawableStart="@drawable/ic_main_msg_app"
-        android:drawableTint="@color/empty"
         android:drawablePadding="15dp"
         android:paddingHorizontal="15dp"
-        android:text="捐赠请注明qq号，验证加群需要辨认（仅支持微信捐赠）。"/>
+        android:text="捐赠请注明qq号，验证加群需要辨认（仅支持微信捐赠）。"
+        app:drawableStartCompat="@drawable/ic_main_msg_app"
+        app:drawableTint="@color/empty" />
 
     <LinearLayout
         android:layout_width="match_parent"

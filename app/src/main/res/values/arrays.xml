@@ -72,5 +72,10 @@
         <item>https://download.mcbbs.net</item>
         <item>https://bmclapi2.bangbang93.com</item>
     </string-array>
+    <string-array name="list_preference_java_value">
+        <item>jre_8</item>
+        <item>jre_17</item>
+    </string-array>
+
 
 </resources>

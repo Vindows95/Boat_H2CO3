@@ -36,7 +36,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/material_card_background"
+
                         android:orientation="vertical">
 
                         <LinearLayout
@@ -56,7 +56,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:src="@drawable/ic_build"
-                                    app:tint="?colorPrimary" />
+                                    app:tint="?colorPrimary"
+                                    android:contentDescription="TODO" />
 
                                 <com.google.android.material.circularreveal.CircularRevealLinearLayout
                                     android:layout_width="match_parent"
@@ -87,7 +88,7 @@
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:background="@color/material_background" />
+                             />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -101,14 +102,15 @@
                                 android:background="?android:attr/selectableItemBackground"
                                 android:gravity="center_vertical"
                                 android:orientation="horizontal"
-                                android:paddingHorizontal="15dp">
+                                android:paddingHorizontal="15dp"
+                                tools:ignore="PrivateResource">
 
                                 <com.google.android.material.textview.MaterialTextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:text="@string/custom_id"
-                                    android:textSize="15dp" />
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/custom_set_id"
@@ -122,7 +124,8 @@
                                 <ImageView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:src="@drawable/ic_home_edit" />
+                                    android:src="@drawable/ic_home_edit"
+                                    android:contentDescription="TODO" />
 
                             </com.google.android.material.circularreveal.CircularRevealLinearLayout>
 
@@ -138,7 +141,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:text="@string/custom_control"
-                                    android:textSize="15dp" />
+                                    android:textSize="15sp" />
 
                                 <com.google.android.material.button.MaterialButton
                                     android:id="@+id/custom_set_ctrl"
@@ -171,7 +174,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/material_card_background"
+
                         android:orientation="vertical">
 
                         <LinearLayout
@@ -191,7 +194,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:src="@drawable/ic_more_jvm"
-                                    app:tint="?colorPrimary" />
+                                    app:tint="?colorPrimary"
+                                    android:contentDescription="TODO" />
 
                                 <com.google.android.material.circularreveal.CircularRevealLinearLayout
                                     android:layout_width="match_parent"
@@ -222,7 +226,7 @@
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:background="@color/material_background" />
+                             />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -236,14 +240,15 @@
                                 android:background="?android:attr/selectableItemBackground"
                                 android:gravity="center_vertical"
                                 android:orientation="horizontal"
-                                android:paddingHorizontal="15dp">
+                                android:paddingHorizontal="15dp"
+                                tools:ignore="PrivateResource">
 
                                 <com.google.android.material.textview.MaterialTextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:text="@string/custom_jvm"
-                                    android:textSize="15dp" />
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/custom_set_jvm"
@@ -257,7 +262,8 @@
                                 <ImageView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:src="@drawable/ic_home_edit" />
+                                    android:src="@drawable/ic_home_edit"
+                                    android:contentDescription="TODO" />
 
                             </com.google.android.material.circularreveal.CircularRevealLinearLayout>
 
@@ -269,14 +275,15 @@
                                 android:background="?android:attr/selectableItemBackground"
                                 android:gravity="center_vertical"
                                 android:orientation="horizontal"
-                                android:paddingHorizontal="15dp">
+                                android:paddingHorizontal="15dp"
+                                tools:ignore="PrivateResource">
 
                                 <com.google.android.material.textview.MaterialTextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:text="@string/custom_mcf"
-                                    android:textSize="15dp" />
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/custom_set_mcf"
@@ -290,14 +297,15 @@
                                 <ImageView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:src="@drawable/ic_home_edit" />
+                                    android:src="@drawable/ic_home_edit"
+                                    android:contentDescription="TODO" />
 
                             </com.google.android.material.circularreveal.CircularRevealLinearLayout>
 
                             <View
                                 android:layout_width="match_parent"
                                 android:layout_height="1dp"
-                                android:background="@color/material_background" />
+                                 />
 
                             <com.google.android.material.circularreveal.CircularRevealLinearLayout
                                 android:layout_width="match_parent"
@@ -352,7 +360,7 @@
                             <View
                                 android:layout_width="match_parent"
                                 android:layout_height="1dp"
-                                android:background="@color/material_background" />
+                                 />
 
                             <com.google.android.material.circularreveal.CircularRevealLinearLayout
                                 android:layout_width="match_parent"
@@ -387,7 +395,7 @@
                                     android:background="@color/empty"
                                     android:foreground="?android:attr/selectableItemBackground"
                                     android:text="@string/custom_back"
-                                    android:textSize="15dp"
+                                    android:textSize="15sp"
                                     android:paddingHorizontal="15dp"/>
 
                             </com.google.android.material.circularreveal.CircularRevealLinearLayout>
@@ -414,7 +422,7 @@
                             <View
                                 android:layout_width="match_parent"
                                 android:layout_height="1dp"
-                                android:background="@color/material_background" />
+                                 />
 
                             <LinearLayout
                                 android:layout_width="match_parent"

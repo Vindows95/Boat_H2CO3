@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -8,7 +9,7 @@
     android:paddingTop="20dp"
     android:paddingEnd="20dp"
     android:paddingBottom="10dp"
-    android:background="@color/material_background">
+    >
 
     <TextView
         style="@style/TextStyleMain"
@@ -68,12 +69,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:drawableStart="@drawable/ic_main_msg_app"
                 android:drawablePadding="5dp"
                 android:paddingStart="4dp"
                 android:text="@string/api_action"
                 android:textSize="14sp"
-                android:fontFamily="@font/sans"/>
+                android:fontFamily="@font/sans"
+                app:drawableStartCompat="@drawable/ic_main_msg_app"
+                tools:ignore="RtlSymmetry" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/api_lay"

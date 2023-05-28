@@ -161,16 +161,16 @@ public class DownloadFragment extends DialogFragment
 		Version_assets = assets_root +"/";
 
 		/*{
-		 "assets_root":"/storage/emulated/0/boat/gamedir/assets",
+		 "assets_root":"/storage/emulated/0/boat/.minecraft/assets",
 		 "auth_access_token":"0",
 		 "auth_player_name":"Steve",
 		 "auth_session":"0",
 		 "auth_uuid":"00000000-0000-0000-0000-000000000000",
-		 "currentVersion":"/storage/emulated/0/boat/gamedir/versions/1.7.10",
+		 "currentVersion":"/storage/emulated/0/boat/.minecraft/versions/1.7.10",
 		 "extraJavaFlags":"-server -Xms500M -Xmx500M",
 		 "extraMinecraftFlags":"",
-		 "game_assets":"/storage/emulated/0/boat/gamedir/assets/virtual/legacy",
-		 "game_directory":"/storage/emulated/0/boat/gamedir",
+		 "game_assets":"/storage/emulated/0/boat/.minecraft/assets/virtual/legacy",
+		 "game_directory":"/storage/emulated/0/boat/.minecraft",
 		 "home":"/storage/emulated/0/boat",
 		 "runtimePath":"/data/user/0/cosine.boat/app_runtime/32",
 		 "user_properties":"{}",

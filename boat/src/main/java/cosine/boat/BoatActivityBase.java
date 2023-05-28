@@ -34,14 +34,17 @@ public class BoatActivityBase extends Activity implements View.OnClickListener, 
 		System.out.println("Surface is available!");
 		BoatActivityBase.setBoatNativeWindow(p1.getSurface());
 
-		new Thread(() -> {
+		new Thread(){
+			@Override
+			public void run(){
 
-			LauncherConfig config = LauncherConfig.fromFile(getIntent().getExtras().getString("config"));
-			LoadMe.exec(config);
-			Message msg = new Message();
-			msg.what = -1;
-			mHandler.sendMessage(msg);
-		}).start();
+				LauncherConfig config = LauncherConfig.fromFile(getIntent().getExtras().getString("config"));
+				LoadMe.exec(config);		
+				Message msg = new Message();
+				msg.what = -1;
+				mHandler.sendMessage(msg);
+			}
+		}.start();
 	}
 
 	@Override
@@ -67,9 +70,19 @@ public class BoatActivityBase extends Activity implements View.OnClickListener, 
 		
 		// TODO: Implement this method
 		super.onCreate(savedInstanceState);
-
+		//mainSurfaceView = new SurfaceView(this);
+		//mainSurfaceView.getHolder().addCallback(this);
+		
 		setContentView(R.layout.overlay);
-		TextureView mainTextureView = (TextureView) this.findViewById(R.id.main_surface);
+		/*
+		popupWindow = new PopupWindow();
+		popupWindow.setWidth(LayoutParams.FILL_PARENT);
+		popupWindow.setHeight(LayoutParams.FILL_PARENT);
+		popupWindow.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
+		popupWindow.setFocusable(true);
+		base = (RelativeLayout)LayoutInflater.from(BoatActivity.this).inflate(R.layout.overlay,null);
+		*/
+		mainTextureView = (TextureView)this.findViewById(R.id.main_surface);
 		mainTextureView.setSurfaceTextureListener(this);
 		mouseCursor = (ImageView)findViewById(R.id.mouse_cursor);
 		touchPad = this.findButton(R.id.touch_pad);
@@ -131,8 +144,9 @@ public class BoatActivityBase extends Activity implements View.OnClickListener, 
 		super.onPause();
 		if (cursorMode == BoatInput.CursorDisabled){
 		BoatInput.setKey(BoatKeycodes.BOAT_KEYBOARD_Escape, 0, true);
+		}else{
 		}
-        //popupWindow.dismiss();
+		//popupWindow.dismiss();
 	}
 	
 	@Override
@@ -140,6 +154,12 @@ public class BoatActivityBase extends Activity implements View.OnClickListener, 
 	{
 		// TODO: Implement this method
 		super.onWindowFocusChanged(hasFocus);
+		/*
+		if (hasFocus){
+			popupWindow.showAtLocation(BoatActivity.this.getWindow().getDecorView(),Gravity.TOP|Gravity.LEFT,0,0);	
+
+		}
+		*/
 
 	}
 
@@ -162,14 +182,17 @@ public class BoatActivityBase extends Activity implements View.OnClickListener, 
 		System.out.println("SurfaceTexture is available!");
 		BoatActivityBase.setBoatNativeWindow(new Surface(surface));
 
-		new Thread(() -> {
+		new Thread(){
+			@Override
+			public void run(){
 
-			LauncherConfig config = LauncherConfig.fromFile(getIntent().getExtras().getString("config"));
-			LoadMe.exec(config);
-			Message msg = new Message();
-			msg.what = -1;
-			mHandler.sendMessage(msg);
-		}).start();
+				LauncherConfig config = LauncherConfig.fromFile(getIntent().getExtras().getString("config"));
+				LoadMe.exec(config);		
+				Message msg = new Message();
+				msg.what = -1;
+				mHandler.sendMessage(msg);
+			}
+		}.start();
 	}
 
 	@Override
@@ -207,6 +230,9 @@ public class BoatActivityBase extends Activity implements View.OnClickListener, 
 		mHandler.sendMessage(msg);
 	}
 
+	//private boolean overlayCreated = false;
+	//private PopupWindow popupWindow;
+	//private RelativeLayout base;
 	private Button touchPad;
 	private Button controlUp;
 	private Button controlDown;
@@ -234,6 +260,7 @@ public class BoatActivityBase extends Activity implements View.OnClickListener, 
 	private Button controlCopy;
 	private Button controlPaste;
 	private ImageView mouseCursor;
+	private TextureView mainTextureView;
 	private SurfaceView mainSurfaceView;
 	private Button esc;
 	

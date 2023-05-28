@@ -1,5 +1,10 @@
 package org.koishi.launcher.h2co3;
 
+import static org.koishi.launcher.h2co3.tool.CHTools.LAUNCHER_DATA_DIR;
+import static org.koishi.launcher.h2co3.tool.CHTools.LAUNCHER_FILE_DIR;
+import static org.koishi.launcher.h2co3.tool.CHTools.boatCfg;
+import static org.koishi.launcher.h2co3.tool.CHTools.h2co3Cfg;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -7,7 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import org.koishi.launcher.h2co3.application.H2CO3Activity;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.hjq.permissions.OnPermissionCallback;
@@ -15,7 +20,7 @@ import com.hjq.permissions.Permission;
 import com.hjq.permissions.XXPermissions;
 
 import org.koishi.launcher.h2co3.tool.AssetsUtils;
-import org.koishi.launcher.h2co3.tool.GetGameJson;
+import org.koishi.launcher.h2co3.tool.CHTools;
 import org.koishi.launcher.h2co3.tool.file.AppExecute;
 
 import java.io.File;
@@ -24,21 +29,21 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends H2CO3Activity {
 
     public LinearLayout splash;
     public TextView splashCheck;
 
-    final boolean existMcConfig = FileExists("/storage/emulated/0/games/com.koishi.launcher/h2o2/config.txt");
-    final boolean existH2oConfig = FileExists("/storage/emulated/0/games/com.koishi.launcher/h2o2/h2ocfg.json");
-    //boolean existH2oMd = FileExists("/storage/emulated/0/games/com.koishi.launcher/h2o2/info.md");
-    final boolean existRuntime = FileExists("/data/data/org.koishi.launcher.h2co3/app_runtime/libopenal.so.1");
-    final boolean existGame = FileExists(GetGameJson.getBoatCfg("game_directory", "/storage/emulated/0/games/com.koishi.launcher/h2o2/gamedir"));
+    final boolean existMcConfig = FileExists(boatCfg);
+    final boolean existH2oConfig = FileExists(h2co3Cfg);
+    //boolean existH2oMd = FileExists(LAUNCHER_FILE_DIR+"info.md");
+    final boolean existRuntime = FileExists(LAUNCHER_DATA_DIR+"app_runtime/libopenal.so.1");
+    final boolean existGame = FileExists(CHTools.getBoatCfg("game_directory", LAUNCHER_FILE_DIR+".minecraft"));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setTheme(R.style.Theme_Boat_H2O2_Custom_GREEN);
+        //setTheme(R.style.Theme_Boat_H2CO3_Custom_GREEN);
         setContentView(R.layout.activity_splah);
         splash = findViewById(R.id.splash_view);
         splashCheck = findViewById(R.id.splash_check);
@@ -74,14 +79,14 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     public void updateMarkDown() {
-        File md = new File("/storage/emulated/0/games/com.koishi.launcher/h2o2/markdown");
+        File md = new File(LAUNCHER_FILE_DIR+"markdown");
         if (md.exists()&&md.isDirectory()){
         } else {
             md.mkdir();
         }
         copyData();
         /*
-        AssetsUtils.getInstance(SplashActivity.this).copyAssetsToSD("markdown", "games/com.koishi.launcher/h2o2/markdown").setFileOperateCallback(new AssetsUtils.FileOperateCallback() {
+        AssetsUtils.getInstance(SplashActivity.this).copyAssetsToSD("markdown", "games/org.koishi.launcher/h2co3/markdown").setFileOperateCallback(new AssetsUtils.FileOperateCallback() {
             @Override
             public void onSuccess() {
                 // TODO: 文件复制成功时，主线程回调
@@ -106,7 +111,7 @@ public class SplashActivity extends AppCompatActivity {
         //String path = this.getApplicationContext().getFilesDir()
 
                 //.getAbsolutePath() + "/mydb.db3"; // data/data目录
-        String path = "/storage/emulated/0/games/com.koishi.launcher/h2o2/markdown/info.md";
+        String path = LAUNCHER_FILE_DIR+"markdown/info.md";
 
         File file = new File(path);
             try
@@ -151,7 +156,7 @@ public class SplashActivity extends AppCompatActivity {
 
 
     public void updateAuthlib() {
-        AssetsUtils.getInstance(SplashActivity.this).copyAssetsToSD("authlib", "games/com.koishi.launcher/h2o2/authlib").setFileOperateCallback(new AssetsUtils.FileOperateCallback() {
+        AssetsUtils.getInstance(SplashActivity.this).copyAssetsToSD("authlib", "games/org.koishi.launcher/h2co3/authlib").setFileOperateCallback(new AssetsUtils.FileOperateCallback() {
             @Override
             public void onSuccess() {
                 // TODO: 文件复制成功时，主线程回调
@@ -170,14 +175,14 @@ public class SplashActivity extends AppCompatActivity {
         if (existRuntime) {
             if (existGame && existMcConfig && existH2oConfig) {
                 updateMarkDown();
-                Intent i = new Intent(this, HomeActivity.class);
+                Intent i = new Intent(this, MainActivity.class);
                 i.putExtra("fragment", getResources().getString(R.string.menu_home));
                 startActivity(i);
                 this.finish();
             } else {
                 new Thread(() -> {
                     try {
-                        AppExecute.output(SplashActivity.this, "h2o2.zip", "/storage/emulated/0/games/com.koishi.launcher/h2o2");
+                        AppExecute.output(SplashActivity.this, "h2co3.zip", LAUNCHER_FILE_DIR);
                     } catch (IOException e) {
                         Snackbar.make(splash, e.toString(), Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show();
@@ -185,7 +190,7 @@ public class SplashActivity extends AppCompatActivity {
                 }).start();
                 splashCheck.setText(getResources().getString(R.string.launcher_initial_install_start));
                 new Handler().postDelayed(() -> {
-                    Intent i = new Intent(SplashActivity.this, HomeActivity.class);
+                    Intent i = new Intent(SplashActivity.this, MainActivity.class);
                     i.putExtra("fragment", getResources().getString(R.string.menu_home));
                     startActivity(i);
                     finish();
@@ -198,7 +203,7 @@ public class SplashActivity extends AppCompatActivity {
             } else {
                 new Thread(() -> {
                     try {
-                        AppExecute.output(SplashActivity.this, "h2o2.zip", "/storage/emulated/0/games/com.koishi.launcher/h2o2");
+                        AppExecute.output(SplashActivity.this, "h2co3.zip", LAUNCHER_FILE_DIR);
                     } catch (IOException e) {
                         Snackbar.make(splash, e.toString(), Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show();

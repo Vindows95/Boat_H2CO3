@@ -127,7 +127,7 @@ MC参数：
 ### 游戏崩溃  
 
 设置-查看日志，可查看客户端client_outpt.txt和启动器输出日志log.txt，位置在  
-> /storage/emulated/0/games/com.koishi.launcher/h2o2  
+> /storage/emulated/0/games/org.koishi.launcher/h2co3  
 
 发送给开发者。  
 ![2dcode](./markdown/18.png)  

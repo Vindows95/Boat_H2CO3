@@ -1,7 +1,10 @@
 package org.koishi.launcher.h2co3;
 
+import static org.koishi.launcher.h2co3.tool.CHTools.LAUNCHER_FILE_DIR;
+import static org.koishi.launcher.h2co3.tool.CHTools.boatCfg;
+
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import org.koishi.launcher.h2co3.application.H2CO3Activity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -40,7 +43,7 @@ import com.mistake.revision.VanillaActivity;
 import org.json.JSONObject;
 import org.koishi.launcher.h2co3.adapters.BaseRecycleAdapter;
 //import org.koishi.launcher.h2co3.adapters.SeachRecordAdapter;
-import org.koishi.launcher.h2co3.tool.GetGameJson;
+import org.koishi.launcher.h2co3.tool.CHTools;
 import org.koishi.launcher.h2co3.tool.data.DbDao;
 import org.koishi.launcher.h2co3.tool.file.AppExecute;
 
@@ -55,7 +58,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
-public class VersionsActivity extends AppCompatActivity {
+public class VersionsActivity extends H2CO3Activity {
 
     private Button mbtn_serarch;
     private Dialog mDialog;
@@ -66,7 +69,7 @@ public class VersionsActivity extends AppCompatActivity {
     private TextView mtv_deleteAll;
     private SearchDirAdapter mAdapter;
     private String getBoatDir;
-    private final String sd1 = "/storage/emulated/0/games/com.koishi.launcher/h2o2/gamedir";
+    private final String sd1 = LAUNCHER_FILE_DIR+".minecraft";
 
     private List<String> verList;
 
@@ -77,14 +80,14 @@ public class VersionsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_versions);
-        getWindow().setStatusBarColor(getResources().getColor(R.color.material_card_background));
+        
         page = findViewById(R.id.dir_layout);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(v -> {
             finish();
-            startActivity(new Intent(VersionsActivity.this,HomeActivity.class));
+            startActivity(new Intent(VersionsActivity.this,MainActivity.class));
         });
         Typeface tf = Typeface.createFromAsset(this.getAssets(),
                 "Sans.ttf");
@@ -187,7 +190,7 @@ public class VersionsActivity extends AppCompatActivity {
     }
 
     public void initVers(){
-        File versionlist = new File(GetGameJson.getBoatCfg("game_directory","null") + "/versions");
+        File versionlist = new File(CHTools.getBoatCfg("game_directory","null") + "/versions");
         if (versionlist.isDirectory() && versionlist.exists()) {
             Comparator<Object> cp = Collator.getInstance(Locale.CHINA);
             String[] getVer = versionlist.list();
@@ -348,7 +351,7 @@ public class VersionsActivity extends AppCompatActivity {
             MaterialButton del = (MaterialButton) holder.getView(R.id.tv_remove_dir);
             MaterialButton delDir = (MaterialButton) holder.getView(R.id.tv_del_dir);
             textView.setText(datas.get(position));
-            if (datas.get(position).equals(GetGameJson.getBoatCfg("game_directory", "null"))) {
+            if (datas.get(position).equals(CHTools.getBoatCfg("game_directory", "null"))) {
                 //lay.setSelected(true);
                 //check.setImageDrawable(getResources().getDrawable(R.drawable.ic_launcher_check_file_blue_true));
                 lay.setBackground(getResources().getDrawable(R.drawable.recycler_button_pressed));
@@ -357,8 +360,8 @@ public class VersionsActivity extends AppCompatActivity {
                 //check.setImageDrawable(getResources().getDrawable(R.drawable.cv_shape));
                 lay.setBackground(getResources().getDrawable(R.drawable.recycler_button_normal));
             }
-            String sd3 = "/mnt/sdcard/games/com.koishi.launcher/h2o2/gamedir";
-            String sd2 = "/sdcard/games/com.koishi.launcher/h2o2/gamedir";
+            String sd3 = LAUNCHER_FILE_DIR+".minecraft";
+            String sd2 = LAUNCHER_FILE_DIR+".minecraft";
             if (datas.get(position).equals(sd1) || datas.get(position).equals(sd2) || datas.get(position).equals(sd3)) {
                 del.setVisibility(View.GONE);
                 delDir.setVisibility(View.GONE);
@@ -413,7 +416,7 @@ public class VersionsActivity extends AppCompatActivity {
             //
             del.setOnClickListener(view -> {
                 //if (null != mRvItemOnclickListener) {
-                //if (datas.get(position).equals(GetGameJson.getBoatCfg("game_directory", "null"))) {
+                //if (datas.get(position).equals(CHTools.getBoatCfg("game_directory", "null"))) {
                 //setDir(sd1);
                 //} else {
 
@@ -426,7 +429,7 @@ public class VersionsActivity extends AppCompatActivity {
 
             delDir.setOnClickListener(view -> {
                 if (null != mRvItemOnclickListener) {
-                    if (datas.get(position).equals(GetGameJson.getBoatCfg("game_directory", "null"))) {
+                    if (datas.get(position).equals(CHTools.getBoatCfg("game_directory", "null"))) {
                         setDir(sd1);
                     }
                     //添加"Yes"按钮
@@ -443,7 +446,7 @@ public class VersionsActivity extends AppCompatActivity {
                                 //startActivity(new Intent(VersionsActivity.this,VersionsActivity.class));
                                 mAdapter.updata(mDbDao.queryData(""));
                                 new Thread(() -> {
-                                    //String file2= "/data/data/com.koishi.launcher.h2o2/app_runtime";
+                                    //String file2= "/data/data/org.koishi.launcher.h2co3/app_runtime";
                                     deleteDirWihtFile(f1);
                         /*
                          File file = new File(file2);
@@ -486,7 +489,7 @@ public class VersionsActivity extends AppCompatActivity {
 
         public void setDir(String dir) {
             try {
-                FileInputStream in = new FileInputStream("/storage/emulated/0/games/com.koishi.launcher/h2o2/config.txt");
+                FileInputStream in = new FileInputStream(boatCfg);
                 byte[] b = new byte[in.available()];
                 in.read(b);
                 in.close();
@@ -500,7 +503,7 @@ public class VersionsActivity extends AppCompatActivity {
                 json.put("game_assets", dir + "/assets/virtual/legacy");
                 json.put("assets_root", dir + "/assets");
                 json.put("currentVersion", dir + "/versions");
-                FileWriter fr = new FileWriter("/storage/emulated/0/games/com.koishi.launcher/h2o2/config.txt");
+                FileWriter fr = new FileWriter(boatCfg);
                 fr.write(json.toString());
                 fr.close();
             } catch (Exception e) {
@@ -527,7 +530,7 @@ public class VersionsActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(VersionRecyclerAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
             holder.textview.setText(datas.get(position));
-            File f = new File(GetGameJson.getBoatCfg("game_directory","Null")+"/versions/"+datas.get(position));
+            File f = new File(CHTools.getBoatCfg("game_directory","Null")+"/versions/"+datas.get(position));
             if (f.isDirectory()&&f.exists()){
             }else{
                 holder.rl.setEnabled(false);
@@ -549,14 +552,14 @@ public class VersionsActivity extends AppCompatActivity {
                             holder.btn.setVisibility(View.INVISIBLE);
                             holder.textview.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG | Paint.ANTI_ALIAS_FLAG);
                             holder.rl.setEnabled(false);
-                            File f1 = new File(GetGameJson.getBoatCfg("game_directory","Null")+"/versions/"+datas.get(position));
+                            File f1 = new File(CHTools.getBoatCfg("game_directory","Null")+"/versions/"+datas.get(position));
                             //TODO
                             new Thread(() -> {
-                                //String file2= "/data/data/com.koishi.launcher.h2o2/app_runtime";
+                                //String file2= "/data/data/org.koishi.launcher.h2co3/app_runtime";
                                 if (f1.isDirectory()){
                                     deleteDirWihtFile(f1);
                                 }else{
-                                    deleteFile(GetGameJson.getBoatCfg("game_directory","Null")+"/versions/"+datas.get(position));
+                                    deleteFile(CHTools.getBoatCfg("game_directory","Null")+"/versions/"+datas.get(position));
                                 }
                         /*
                          File file = new File(file2);
@@ -584,12 +587,12 @@ public class VersionsActivity extends AppCompatActivity {
             mDialog = new Dialog(VersionsActivity.this);
             View dialogView = VersionsActivity.this.getLayoutInflater().inflate(R.layout.custom_dialog_choose_exec, null);
             mDialog.setContentView(dialogView);
-            String load = GetGameJson.getAppCfg("allVerLoad","false");
+            String load = CHTools.getAppCfg("allVerLoad","false");
             String loadDir;
             if (load.equals("true")){
-                loadDir = GetGameJson.getBoatCfg("game_directory","Null")+"/versions/"+dir;
+                loadDir = CHTools.getBoatCfg("game_directory","Null")+"/versions/"+dir;
             }else{
-                loadDir = GetGameJson.getBoatCfg("game_directory","Null");
+                loadDir = CHTools.getBoatCfg("game_directory","Null");
             }
             LinearLayout lay = dialogView.findViewById(R.id.ver_exec_mod);
             lay.setOnClickListener(v->{
@@ -653,7 +656,7 @@ public class VersionsActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         finish();
-        startActivity(new Intent(VersionsActivity.this,HomeActivity.class));
+        startActivity(new Intent(VersionsActivity.this,MainActivity.class));
     }
 
     @Override
@@ -663,7 +666,7 @@ public class VersionsActivity extends AppCompatActivity {
         //initViews();
         //mRecyclerView.post(() -> updateDirList());
 
-        String currentDir = GetGameJson.getBoatCfg("game_directory","Null");
+        String currentDir = CHTools.getBoatCfg("game_directory","Null");
         File f = new File(currentDir);
         //if (mRecyclerView.isComputingLayout()) {
            //updateDirList();
@@ -690,7 +693,7 @@ public class VersionsActivity extends AppCompatActivity {
 
     public void setDir(String dir) {
         try {
-            FileInputStream in = new FileInputStream("/storage/emulated/0/games/com.koishi.launcher/h2o2/config.txt");
+            FileInputStream in = new FileInputStream(boatCfg);
             byte[] b = new byte[in.available()];
             in.read(b);
             in.close();
@@ -704,7 +707,7 @@ public class VersionsActivity extends AppCompatActivity {
             json.put("game_assets", dir + "/assets/virtual/legacy");
             json.put("assets_root", dir + "/assets");
             json.put("currentVersion", dir + "/versions");
-            FileWriter fr = new FileWriter("/storage/emulated/0/games/com.koishi.launcher/h2o2/config.txt");
+            FileWriter fr = new FileWriter(boatCfg);
             fr.write(json.toString());
             fr.close();
         } catch (Exception e) {

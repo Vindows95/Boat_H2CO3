@@ -1,10 +1,12 @@
 package com.mistake.revision;
 
+import static org.koishi.launcher.h2co3.tool.CHTools.LAUNCHER_FILE_DIR;
+import static org.koishi.launcher.h2co3.tool.CHTools.boatCfg;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.DataSetObserver;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -14,7 +16,6 @@ import android.widget.ArrayAdapter;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
@@ -42,14 +43,14 @@ import android.view.MenuItem;
 import android.view.Menu;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import org.koishi.launcher.h2co3.application.H2CO3Activity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 
-import org.koishi.launcher.h2co3.HomeActivity;
+import org.koishi.launcher.h2co3.MainActivity;
 import org.koishi.launcher.h2co3.R;
 
-public class VanillaActivity extends AppCompatActivity
+public class VanillaActivity extends H2CO3Activity
 {
 	
 	private LauncherSettingModel  settingModel;
@@ -74,9 +75,9 @@ public class VanillaActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         /*
-		String sys = GetGameJson.getAppCfg("followSys","true");
+		String sys = CHTools.getAppCfg("followSys","true");
 		if (sys.equals("true")){
-			String getThemeType = GetGameJson.getAppCfg("theme","1");
+			String getThemeType = CHTools.getAppCfg("theme","1");
 			if (getThemeType.equals("0")){
 				setTheme(R.style.AppTheme_NoActionBar);
 			} else if (getThemeType.equals("1")){
@@ -93,10 +94,10 @@ public class VanillaActivity extends AppCompatActivity
 				setTheme(R.style.PinkTheme_NoActionBar);
 			}
 		} else {
-			String getDarkType = GetGameJson.getAppCfg("darkMode","1");
+			String getDarkType = CHTools.getAppCfg("darkMode","1");
 			if (getDarkType.equals("0")){
 				AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-				String getThemeType = GetGameJson.getAppCfg("theme","1");
+				String getThemeType = CHTools.getAppCfg("theme","1");
 				if (getThemeType.equals("0")){
 					setTheme(R.style.AppTheme_NoActionBar);
 				} else if (getThemeType.equals("1")){
@@ -114,7 +115,7 @@ public class VanillaActivity extends AppCompatActivity
 				}
 			} else if (getDarkType.equals("1")){
 				AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-				String getThemeType = GetGameJson.getAppCfg("theme","0");
+				String getThemeType = CHTools.getAppCfg("theme","0");
 				Window window = getWindow();
 				if (getThemeType.equals("0")){
 					setTheme(R.style.AppTheme_NoActionBar);
@@ -143,20 +144,15 @@ public class VanillaActivity extends AppCompatActivity
          */
 
 		setContentView(R.layout.activity_download);
-		getWindow().setStatusBarColor(getResources().getColor(R.color.material_card_background));
+		
 		//getWindow().setStatusBarColor(getResources().getColor(R.color.material_blue_dark));
 		Toolbar toolbar = findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
-		Typeface tf = Typeface.createFromAsset(this.getAssets(),
-				"Sans.ttf");
-		TextView bigTitle= (TextView) toolbar.getChildAt(0);
-		bigTitle.setTypeface(tf);
-		bigTitle.setText("Minecraft");
 
 		Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 		toolbar.setNavigationOnClickListener(v -> {
 			finish();
-			startActivity(new Intent(VanillaActivity.this, HomeActivity.class));
+			startActivity(new Intent(VanillaActivity.this, MainActivity.class));
 		});
 
 		verifyStoragePermissions(this);//读写权限获取
@@ -263,7 +259,7 @@ public class VanillaActivity extends AppCompatActivity
 	@Override
 	public void onBackPressed() {
 		finish();
-		startActivity(new Intent(VanillaActivity.this,HomeActivity.class));
+		startActivity(new Intent(VanillaActivity.this, MainActivity.class));
 	}
 	
 	@Override
@@ -357,7 +353,7 @@ public class VanillaActivity extends AppCompatActivity
 					Intent i=new Intent(MainActivity.this,DownloadService.class);
 					Bundle bundle=new Bundle();
 					bundle.putString("version",id);
-					bundle.putString("game","/sdcard/boat/gamedir");
+					bundle.putString("game","/sdcard/boat/.minecraft");
 					bundle.putString("address",download_source);
 					i.putExtras(bundle);
 					startService(i);*/
@@ -366,7 +362,7 @@ public class VanillaActivity extends AppCompatActivity
 					Intent i=new Intent(MainActivity.this,DownloadService.class);
 					Bundle bundle=new Bundle();
 					bundle.putString("version",id);
-					bundle.putString("game","/sdcard/boat/gamedir");
+					bundle.putString("game","/sdcard/boat/.minecraft");
 					bundle.putString("address",download_source);
 					i.putExtras(bundle);
 					startService(i);*/
@@ -377,7 +373,7 @@ public class VanillaActivity extends AppCompatActivity
 
 	public static String getDir() {
 		try {
-			FileInputStream in = new FileInputStream("/storage/emulated/0/games/com.koishi.launcher/h2o2/config.txt");
+			FileInputStream in = new FileInputStream(boatCfg);
 			byte[] b = new byte[in.available()];
 			in.read(b);
 			in.close();
@@ -387,7 +383,7 @@ public class VanillaActivity extends AppCompatActivity
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-		return "/storage/emulated/0/games/com.koishi.launcher/h2o2/gamedir";
+		return LAUNCHER_FILE_DIR+".minecraft";
 	}
 
 	private void get(String url){
@@ -460,7 +456,7 @@ public class VanillaActivity extends AppCompatActivity
 
 	/*
 	private void user(){
-		LauncherSettingModel a = Read(ReadString("/storage/emulated/0/games/com.koishi.launcher/h2o2/config.txt").toString());
+		LauncherSettingModel a = Read(ReadString(boatCfg).toString());
 		if(a!=null){
 		settingModel.getMinecraftParameter().setauth_player_name("aaa");
 		}
@@ -528,7 +524,7 @@ public class VanillaActivity extends AppCompatActivity
         arrayList.add(arrayMap);
 		
         Gson gson = new Gson();
-        File file = new File("/storage/emulated/0/games/com.koishi.launcher/h2o2/config.txt");
+        File file = new File(boatCfg);
         boolean r=false;
         if (!file.exists()) {
 			for (int i = 0; i < arrayList.size(); i++) {
@@ -556,11 +552,11 @@ public class VanillaActivity extends AppCompatActivity
 		 String home = getPreferences(MODE_PRIVATE).getString("home", "/sdcard/boat").toString();
 		 String runtimePath = getPreferences(MODE_PRIVATE).getString("runtimePath", "/data/user/0/cosine.boat/app_runtime").toString();
 		 String auth_access_token = getPreferences(MODE_PRIVATE).getString("auth_access_token", "0").toString();
-		 String game_assets = getPreferences(MODE_PRIVATE).getString("game_assets", "/storage/emulated/0/boat/gamedir/assets/virtual/legacy").toString();
+		 String game_assets = getPreferences(MODE_PRIVATE).getString("game_assets", "/storage/emulated/0/boat/.minecraft/assets/virtual/legacy").toString();
 		 String user_type = getPreferences(MODE_PRIVATE).getString("user_type", "mojang").toString();
-		 String game_directory = getPreferences(MODE_PRIVATE).getString("game_directory", "/sdcard/boat/gamedir").toString();
+		 String game_directory = getPreferences(MODE_PRIVATE).getString("game_directory", "/sdcard/boat/.minecraft").toString();
 		 String user_properties = getPreferences(MODE_PRIVATE).getString("user_properties", "{}").toString();
-		 String assets_root = getPreferences(MODE_PRIVATE).getString("assets_root", "/sdcard/boat/gamedir/assets").toString();
+		 String assets_root = getPreferences(MODE_PRIVATE).getString("assets_root", "/sdcard/boat/.minecraft/assets").toString();
 		 String auth_player_name = getPreferences(MODE_PRIVATE).getString("auth_player_name", "steve").toString();
 		 String extraJavaFlags = getPreferences(MODE_PRIVATE).getString("extraJavaFlags", "450").toString();
 		 extraJavaFlags = new StringBuffer().append(new StringBuffer().append(new StringBuffer().append(new StringBuffer().append("-client -Xms").append(extraJavaFlags).toString()).append("M -Xmx").toString()).append(extraJavaFlags).toString()).append("M").toString();*/

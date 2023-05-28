@@ -9,7 +9,10 @@ public class UsbBroadCast extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         switch (intent.getAction()) {
 
-            case Intent.ACTION_MEDIA_MOUNTED:
+            case Intent.ACTION_MEDIA_MOUNTED: {
+
+                break;
+            }
             case Intent.ACTION_MEDIA_UNMOUNTED: {
 
                 break;

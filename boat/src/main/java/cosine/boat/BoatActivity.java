@@ -1,5 +1,7 @@
 package cosine.boat;
 
+import static cosine.boat.CHTools.h2co3Cfg;
+
 import android.annotation.SuppressLint;
 import android.view.MotionEvent;
 import android.os.Bundle;
@@ -42,7 +44,7 @@ import org.json.JSONObject;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
-//import com.koishi.launcher.h2o2.MainActivity;
+//import org.koishi.launcher.h2co3.MainActivity;
 
 
 public class BoatActivity extends Activity implements View.OnClickListener, View.OnTouchListener, TextWatcher, TextView.OnEditorActionListener, TextureView.SurfaceTextureListener, SurfaceHolder.Callback {
@@ -68,8 +70,13 @@ public class BoatActivity extends Activity implements View.OnClickListener, View
     private Button bu9;
     private CheckBox fc;
     private String noesc, jl;
+    private boolean alpha = false;
     private Button touchMode;
+    //private boolean overlayCreated = false;
+    //private PopupWindow popupWindow;
+    //private RelativeLayout base;
     private PopupWindow popupWindow;
+    private RelativeLayout base;
     private Button touchPad;
     private Button controlUp;
     private Button controlDown;
@@ -194,6 +201,7 @@ public class BoatActivity extends Activity implements View.OnClickListener, View
     private Button show;
     private Button hide;
     private TextView loc;
+    private TextureView mainTextureView;
     private SurfaceView mainSurfaceView;
     private EditText inputScanner;
     private MyHandler mHandler;
@@ -210,14 +218,17 @@ public class BoatActivity extends Activity implements View.OnClickListener, View
         System.out.println("Surface is available!");
         BoatActivity.setBoatNativeWindow(p1.getSurface());
 
-        new Thread(() -> {
+        new Thread() {
+            @Override
+            public void run() {
 
-            LauncherConfig config = LauncherConfig.fromFile(getIntent().getExtras().getString("config"));
-            LoadMe.exec(config);
-            Message msg = new Message();
-            msg.what = -1;
-            mHandler.sendMessage(msg);
-        }).start();
+                LauncherConfig config = LauncherConfig.fromFile(getIntent().getExtras().getString("config"));
+                LoadMe.exec(config);
+                Message msg = new Message();
+                msg.what = -1;
+                mHandler.sendMessage(msg);
+            }
+        }.start();
     }
 
     @Override
@@ -237,27 +248,45 @@ public class BoatActivity extends Activity implements View.OnClickListener, View
 
         // TODO: Implement this method
         super.onCreate(savedInstanceState);
+        //mainSurfaceView = new SurfaceView(this);
+        //mainSurfaceView.getHolder().addCallback(this);
 
         setContentView(R.layout.overlay_old);
 
-        boolean alpha = Build.VERSION.SDK_INT >= Build.VERSION_CODES.O;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            alpha = true;
+        } else {
+            alpha = false;
 
-        RelativeLayout base = (RelativeLayout) findViewById(R.id.base);
-        TextureView mainTextureView = base.findViewById(R.id.client_surface);
+        }
+
+        base = (RelativeLayout) findViewById(R.id.base);
+		/*
+		popupWindow = new PopupWindow();
+		popupWindow.setWidth(LayoutParams.FILL_PARENT);
+		popupWindow.setHeight(LayoutParams.FILL_PARENT);
+		popupWindow.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
+		popupWindow.setFocusable(true);
+		base = (RelativeLayout)LayoutInflater.from(BoatActivity.this).inflate(R.layout.overlay,null);
+		*/
+        mainTextureView = base.findViewById(R.id.client_surface);
         mainTextureView.setSurfaceTextureListener(this);
         mouseCursor = (ImageView) base.findViewById(R.id.mouse_cursor);
         touchPad = this.findButton(R.id.touch_pad);
 
         fc = (CheckBox) findViewById(R.id.fc);
-        fc.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) {
-                mousePrimary.setTextColor(0xffff0000);
-                mouseSecondary.setTextColor(0xffff0000);
-                timer = new Timer();
-            } else {
-                mousePrimary.setTextColor(0xffffffff);
-                mouseSecondary.setTextColor(0xffffffff);
-                timer.cancel();
+        fc.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    mousePrimary.setTextColor(0xffff0000);
+                    mouseSecondary.setTextColor(0xffff0000);
+                    timer = new Timer();
+                } else {
+                    mousePrimary.setTextColor(0xffffffff);
+                    mouseSecondary.setTextColor(0xffffffff);
+                    timer.cancel();
+                }
             }
         });
 
@@ -273,13 +302,16 @@ public class BoatActivity extends Activity implements View.OnClickListener, View
 
         touchMode = this.findViewById(R.id.touch_mode);
         touchMode.setText(getResources().getString(R.string.touch_mode_2));
-        touchMode.setOnClickListener(p1 -> {
-            if (touchMode.getText().toString().equals(getResources().getString(R.string.touch_mode_2))) {
-                touchMode.setText(getResources().getString(R.string.touch_mode_1));
-                touchMode.setTextColor(0xff00ff00);
-            } else if (touchMode.getText().toString().equals(getResources().getString(R.string.touch_mode_1))) {
-                touchMode.setText(getResources().getString(R.string.touch_mode_2));
-                touchMode.setTextColor(0xff83b2ff);
+        touchMode.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View p1) {
+                if (touchMode.getText().toString().equals(getResources().getString(R.string.touch_mode_2))) {
+                    touchMode.setText(getResources().getString(R.string.touch_mode_1));
+                    touchMode.setTextColor(0xff00ff00);
+                } else if (touchMode.getText().toString().equals(getResources().getString(R.string.touch_mode_1))) {
+                    touchMode.setText(getResources().getString(R.string.touch_mode_2));
+                    touchMode.setTextColor(0xff83b2ff);
+                }
             }
         });
 
@@ -413,13 +445,16 @@ public class BoatActivity extends Activity implements View.OnClickListener, View
 
 
         controlLctrl.setText("□");
-        controlLctrl.setOnClickListener(p1 -> {
-            if (controlLctrl.getText().toString().equals("□")) {
-                BoatInput.setKey(BoatKeycodes.BOAT_KEYBOARD_Control_L, 0, true);
-                controlLctrl.setText("■");
-            } else if (controlLctrl.getText().toString().equals("■")) {
-                BoatInput.setKey(BoatKeycodes.BOAT_KEYBOARD_Control_L, 0, false);
-                controlLctrl.setText("□");
+        controlLctrl.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View p1) {
+                if (controlLctrl.getText().toString().equals("□")) {
+                    BoatInput.setKey(BoatKeycodes.BOAT_KEYBOARD_Control_L, 0, true);
+                    controlLctrl.setText("■");
+                } else if (controlLctrl.getText().toString().equals("■")) {
+                    BoatInput.setKey(BoatKeycodes.BOAT_KEYBOARD_Control_L, 0, false);
+                    controlLctrl.setText("□");
+                }
             }
         });
 
@@ -429,19 +464,27 @@ public class BoatActivity extends Activity implements View.OnClickListener, View
         //Input TextView with full screen.
         input = (EditText) base.findViewById(R.id.texttest);
         send = this.findButton(R.id.send);
-        send.setOnClickListener(p1 -> BoatInput.setKey(BoatKeycodes.BOAT_KEYBOARD_t, 0, true));
+        send.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View p1) {
+                BoatInput.setKey(BoatKeycodes.BOAT_KEYBOARD_t, 0, true);
+            }
+        });
 
         //Shift Lock
         controlLshift.setText("▽");
-        controlLshift.setOnClickListener(p1 -> {
-            if (controlLshift.getText().toString().equals("▽")) {
-                BoatInput.setKey(BoatKeycodes.BOAT_KEYBOARD_Shift_L, 0, true);
-                controlLshift.setText("▲");
-                controlLshift.setBackground(getResources().getDrawable(R.drawable.control_button_normal_2));
-            } else if (controlLshift.getText().toString().equals("▲")) {
-                BoatInput.setKey(BoatKeycodes.BOAT_KEYBOARD_Shift_L, 0, false);
-                controlLshift.setText("▽");
-                controlLshift.setBackground(getResources().getDrawable(R.drawable.control_button_normal));
+        controlLshift.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View p1) {
+                if (controlLshift.getText().toString().equals("▽")) {
+                    BoatInput.setKey(BoatKeycodes.BOAT_KEYBOARD_Shift_L, 0, true);
+                    controlLshift.setText("▲");
+                    controlLshift.setBackground(getResources().getDrawable(R.drawable.control_button_normal_2));
+                } else if (controlLshift.getText().toString().equals("▲")) {
+                    BoatInput.setKey(BoatKeycodes.BOAT_KEYBOARD_Shift_L, 0, false);
+                    controlLshift.setText("▽");
+                    controlLshift.setBackground(getResources().getDrawable(R.drawable.control_button_normal));
+                }
             }
         });
 
@@ -596,6 +639,10 @@ public class BoatActivity extends Activity implements View.OnClickListener, View
         BoatActivity.this.bu9.getBackground().setAlpha(0);
         button.setOnTouchListener(new View.OnTouchListener() {
 
+            private float ddx;
+
+            private float ddy;
+
             private TextView 文本;
 
             private int ww;
@@ -604,8 +651,6 @@ public class BoatActivity extends Activity implements View.OnClickListener, View
 
             @Override
             public boolean onTouch(View p1, MotionEvent p2) {
-                float ddy;
-                float ddx;
                 if (jl.equals("None")) {
                     if (p2.getAction() == MotionEvent.ACTION_DOWN) {
                         ddx = p2.getX() - button.getX();
@@ -1536,6 +1581,11 @@ public class BoatActivity extends Activity implements View.OnClickListener, View
                         bu9.getBackground().setAlpha(0);
 
                     } else if (ddxy > wh / 3 && ddxy < wh * 2 / 3 && ddxx > ww / 3 && ddxx < ww * 2 / 3) {
+                        //BoatInput.setKey(BoatKeycodes.BOAT_KEYBOARD_Shift_L, 0,true);
+                        //controlLshift.setText("▲");
+                        //controlLshift.setBackground(getResources().getDrawable(R.drawable.control_button_normal_2));
+                        //bu5.setBackground(getResources().getDrawable(R.drawable.be_s_p));
+                        //controlLshift.setEnabled(false);
                         bu1.getBackground().setAlpha(0);
                         bu2.getBackground().setAlpha(128);
                         bu3.getBackground().setAlpha(0);
@@ -1690,7 +1740,7 @@ public class BoatActivity extends Activity implements View.OnClickListener, View
 
     private String cp3() {
         try {
-            FileInputStream in = new FileInputStream("/storage/emulated/0/games/com.koishi.launcher/h2o2/h2ocfg.json");
+            FileInputStream in = new FileInputStream(h2co3Cfg);
             byte[] b = new byte[in.available()];
             in.read(b);
             in.close();
@@ -1705,7 +1755,7 @@ public class BoatActivity extends Activity implements View.OnClickListener, View
 
     private String cp4() {
         try {
-            FileInputStream in = new FileInputStream("/storage/emulated/0/games/com.koishi.launcher/h2o2/h2ocfg.json");
+            FileInputStream in = new FileInputStream(h2co3Cfg);
             byte[] b = new byte[in.available()];
             in.read(b);
             in.close();
@@ -1726,7 +1776,9 @@ public class BoatActivity extends Activity implements View.OnClickListener, View
         if (cursorMode == BoatInput.CursorDisabled) {
             if (noesc.equals("false")) {
                 BoatInput.setKey(BoatKeycodes.BOAT_KEYBOARD_Escape, 0, true);
+            } else {
             }
+        } else {
         }
 
         //popupWindow.dismiss();
@@ -1736,6 +1788,28 @@ public class BoatActivity extends Activity implements View.OnClickListener, View
     public void onWindowFocusChanged(boolean hasFocus) {
         // TODO: Implement this method
         super.onWindowFocusChanged(hasFocus);
+		/*
+		if (Build.VERSION.SDK_INT > 11 && Build.VERSION.SDK_INT < 19) { // lower api
+            View v = this.getWindow().getDecorView();
+            v.setSystemUiVisibility(View.GONE);
+        } else if (Build.VERSION.SDK_INT >= 19) {
+            //for new api versions.
+            View decorView = getWindow().getDecorView();
+            int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+				| View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN;
+            decorView.setSystemUiVisibility(uiOptions);
+        }
+		//button.setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+
+
+
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+			alpha=true;
+		}else{
+			alpha=false;
+
+		}
+		*/
     }
 
     @Override
@@ -1750,14 +1824,17 @@ public class BoatActivity extends Activity implements View.OnClickListener, View
         System.out.println("SurfaceTexture is available!");
         BoatActivity.setBoatNativeWindow(new Surface(surface));
 
-        new Thread(() -> {
+        new Thread() {
+            @Override
+            public void run() {
 
-            LauncherConfig config = LauncherConfig.fromFile(getIntent().getExtras().getString("config"));
-            LoadMe.exec(config);
-            Message msg = new Message();
-            msg.what = -1;
-            mHandler.sendMessage(msg);
-        }).start();
+                LauncherConfig config = LauncherConfig.fromFile(getIntent().getExtras().getString("config"));
+                LoadMe.exec(config);
+                Message msg = new Message();
+                msg.what = -1;
+                mHandler.sendMessage(msg);
+            }
+        }.start();
     }
 
     @Override
@@ -1841,6 +1918,10 @@ public class BoatActivity extends Activity implements View.OnClickListener, View
     }
 
     private void overlayshow() {
+        //this.controlUp.setVisibility(View.VISIBLE);
+        //this.controlDown.setVisibility(View.VISIBLE);
+        //this.controlLeft.setVisibility(View.VISIBLE);
+        //this.controlRight.setVisibility(View.VISIBLE);
         this.controlJump.setVisibility(View.VISIBLE);
         this.controlLshift.setVisibility(View.VISIBLE);
         this.controlLctrl.setVisibility(View.VISIBLE);
@@ -1884,6 +1965,10 @@ public class BoatActivity extends Activity implements View.OnClickListener, View
     }
 
     private void overlayhide() {
+        //this.controlUp.setVisibility(View.INVISIBLE);
+        //this.controlDown.setVisibility(View.INVISIBLE);
+        //this.controlLeft.setVisibility(View.INVISIBLE);
+        //this.controlRight.setVisibility(View.INVISIBLE);
         this.controlJump.setVisibility(View.INVISIBLE);
         this.controlLshift.setVisibility(View.INVISIBLE);
         this.controlLctrl.setVisibility(View.INVISIBLE);
@@ -1926,6 +2011,11 @@ public class BoatActivity extends Activity implements View.OnClickListener, View
         this.allkeyoff.setVisibility(View.VISIBLE);
         this.allkey.setVisibility(View.VISIBLE);
 
+        //this.controlUp.setVisibility(View.INVISIBLE);
+        //this.controlDown.setVisibility(View.INVISIBLE);
+        //this.controlLeft.setVisibility(View.INVISIBLE);
+        //this.controlRight.setVisibility(View.INVISIBLE);
+        //this.controlLshift.setVisibility(View.INVISIBLE);
         this.bu2.setVisibility(View.INVISIBLE);
         this.bu4.setVisibility(View.INVISIBLE);
         this.bu5.setVisibility(View.INVISIBLE);
@@ -1951,6 +2041,11 @@ public class BoatActivity extends Activity implements View.OnClickListener, View
         this.allkeyoff.setVisibility(View.INVISIBLE);
         this.allkey.setVisibility(View.GONE);
 
+        //this.controlUp.setVisibility(View.VISIBLE);
+        //this.controlDown.setVisibility(View.VISIBLE);
+        //this.controlLeft.setVisibility(View.VISIBLE);
+        //this.controlRight.setVisibility(View.VISIBLE);
+        //this.controlLshift.setVisibility(View.VISIBLE);
         this.control3rd.setVisibility(View.VISIBLE);
         this.button.setVisibility(View.VISIBLE);
         this.bu2.setVisibility(View.VISIBLE);
@@ -3575,11 +3670,19 @@ public class BoatActivity extends Activity implements View.OnClickListener, View
                 dialog.setTitle("Input");
                 dialog.setView(editText);
                 dialog.setCancelable(true);
-                dialog.setPositiveButton(getResources().getString(R.string.control_send), (dialog1, which) -> {
-                    inputScanner.setText("\\" + editText.getText().toString());
-                    BoatInput.setKey(BoatKeycodes.BOAT_KEYBOARD_Return, 0, true);
+                dialog.setPositiveButton(getResources().getString(R.string.control_send), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        inputScanner.setText("\\" + editText.getText().toString());
+                        BoatInput.setKey(BoatKeycodes.BOAT_KEYBOARD_Return, 0, true);
+                    }
                 });
-                dialog.setNegativeButton(getResources().getString(R.string.control_set), (dialog12, which) -> inputScanner.setText("\\" + editText.getText().toString()));
+                dialog.setNegativeButton(getResources().getString(R.string.control_set), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        inputScanner.setText("\\" + editText.getText().toString());
+                    }
+                });
                 dialog.show();
 
 
@@ -3706,6 +3809,8 @@ public class BoatActivity extends Activity implements View.OnClickListener, View
                     break;
 
                 default:
+                    //Intent intent1=new Intent(BoatActivity.this,MainActivity.class);
+                    //startActivity(intent1);
                     BoatActivity.this.finish();
                     break;
             }

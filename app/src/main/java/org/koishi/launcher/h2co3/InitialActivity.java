@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
-import androidx.appcompat.app.AppCompatActivity;
+import org.koishi.launcher.h2co3.application.H2CO3Activity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -19,7 +19,7 @@ import java.io.InputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-public class InitialActivity extends AppCompatActivity {
+public class InitialActivity extends H2CO3Activity {
 
     public ConstraintLayout initial;
 
@@ -29,7 +29,7 @@ public class InitialActivity extends AppCompatActivity {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            Intent intent1 = new Intent(InitialActivity.this, HomeActivity.class);
+            Intent intent1 = new Intent(InitialActivity.this, MainActivity.class);
             intent1.putExtra("fragment", getResources().getString(R.string.menu_home));
             startActivity(intent1);
             InitialActivity.this.finish();
@@ -40,7 +40,7 @@ public class InitialActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setTheme(R.style.Theme_Boat_H2O2_Custom_GREEN);
+        //setTheme(R.style.Theme_Boat_H2CO3_Custom_GREEN);
         setContentView(R.layout.activity_initial);
         initial = findViewById(R.id.initial_view);
         new Thread(() -> {

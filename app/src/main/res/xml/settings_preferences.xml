@@ -2,13 +2,6 @@
 
     <PreferenceCategory app:title="@string/custom_basic">
 
-        <EditTextPreference
-            app:key="set_id"
-            app:title="@string/custom_id"
-            app:useSimpleSummaryProvider="true"
-            app:defaultValue="player"
-            app:icon="@drawable/ic_home_user_normal" />
-
         <SwitchPreferenceCompat
             app:key="set_click"
             app:title="@string/custom_right_click"
@@ -41,11 +34,11 @@
     <PreferenceCategory app:title="@string/app">
 
         <SwitchPreferenceCompat
-            app:key="set_theme"
+            app:key="material_you"
             app:title="@string/menu_theme"
             app:summary="@string/theme_summary"
-            app:icon="@drawable/ic_theme_custom"
-            app:enabled="false"/>
+            app:enabled="true"
+            app:icon="@drawable/ic_theme_custom" />
 
         <ListPreference
             app:defaultValue="None"
@@ -102,16 +95,16 @@
             app:defaultValue="" />
 
         <ListPreference
-            app:defaultValue="libGL112.so.1"
+            app:defaultValue="libGL112.so"
             app:entries="@array/list_preference_gl"
             app:entryValues="@array/list_preference_gl_value"
             app:key="set_gl"
             app:title="@string/custom_gl"
             app:useSimpleSummaryProvider="true" />
         <ListPreference
-            app:defaultValue="libGL112.so.1"
+            app:defaultValue="jre_8"
             app:entries="@array/list_java"
-            app:entryValues="@array/list_preference_gl_value"
+            app:entryValues="@array/list_preference_java_value"
             app:key="set_java"
             app:title="Java"
             app:useSimpleSummaryProvider="true" />

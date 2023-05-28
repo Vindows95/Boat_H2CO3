@@ -1,12 +1,12 @@
 package cosine.boat;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.util.Objects;
-
+import java.util.*;
 import android.content.res.*;
 import org.apache.commons.compress.compressors.xz.*;
 import org.apache.commons.compress.archivers.tar.*;
+import org.apache.commons.compress.archivers.examples.*;
+import org.apache.commons.compress.archivers.*;
 import org.apache.commons.compress.utils.*;
 
 public final class Utils {
@@ -20,7 +20,7 @@ public final class Utils {
 		if (file.exists()){
 			file.delete();
 		}
-		Objects.requireNonNull(file.getParentFile()).mkdirs();
+		file.getParentFile().mkdirs();
 
 		try
 		{
@@ -41,7 +41,7 @@ public final class Utils {
 		try{
 			
 			fis=new FileInputStream(file);
-			byte[] result =new byte[(int)file.length()];
+			byte result[]=new byte[(int)file.length()];
 			fis.read(result);
 			fis.close();
 			return result;
@@ -100,12 +100,19 @@ public final class Utils {
 	public static boolean writeFile(File file, String str){
 
 		boolean retval = false;
-		retval = Utils.writeFile(file, str.getBytes(StandardCharsets.UTF_8));
+		try
+		{
+			retval = Utils.writeFile(file, str.getBytes("UTF-8"));
+		}
+		catch (UnsupportedEncodingException e)
+		{
+			e.printStackTrace();
+		}
 		return retval;
 	}
 	
-	public static void writeFile(String outFile, String str){
-		writeFile(new File(outFile), str);
+	public static boolean writeFile(String outFile, String str){
+		return writeFile(new File(outFile), str);
 	}
 	
 	public static boolean extractAsset(AssetManager am, String src, File targetFile ){
@@ -240,8 +247,8 @@ public final class Utils {
 	public static boolean setExecutable(File file){
 		boolean retval = true;
 		if (file.isDirectory()){
-			File[] subFiles = file.listFiles();
-			for (File subFile : Objects.requireNonNull(subFiles)){
+			File subFiles[] = file.listFiles();
+			for (File subFile : subFiles){
 				retval = retval && setExecutable(subFile);
 			}
 		}

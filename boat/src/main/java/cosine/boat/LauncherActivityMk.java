@@ -1,5 +1,7 @@
 package cosine.boat;
 
+import static cosine.boat.CHTools.LAUNCHER_FILE_DIR;
+
 import android.app.Activity;
 import android.os.Bundle;
 import cosine.boat.logcat.Logcat;
@@ -11,17 +13,20 @@ public class LauncherActivityMk extends Activity {
     public void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
 
-		final String logPath = "/mnt/sdcard/games/com.koishi.launcher/h2o2/log.txt";
+		final String logPath = LAUNCHER_FILE_DIR+"log.txt";
 		Logcat.initializeOutOfProcess(this, logPath, LogcatService.class);
 
         setContentView(R.layout.launcher_layout_mk);
 		
 		Intent intent = this.getIntent();
 		//String c = intent.getStringExtra("data");
-		
-		Intent i = new Intent(LauncherActivityMk.this, BoatActivityMk.class);
+
+		Intent i = null;
+		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+			i = new Intent(LauncherActivityMk.this, BoatActivityMk.class);
+		}
 		Bundle bundle=new Bundle();
-		bundle.putString("config", "/sdcard/games/com.koishi.launcher/h2o2/config.txt");
+		bundle.putString("config", LAUNCHER_FILE_DIR+"config.txt");
 		i.putExtras(bundle);
 		//i.putExtra("dat",c);
 		this.startActivity(i);

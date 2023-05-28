@@ -17,7 +17,7 @@ public class BoatApplication extends Application implements Application.Activity
 	public static Activity getCurrentActivity(){
 		return BoatApplication.mCurrentActivity;
 	}
-	public static final BoatApplication mInstance = null;
+	public static BoatApplication mInstance = null;
 	public SharedPreferences mPref;
 
 	public static BoatApplication getInstance() {
@@ -135,7 +135,7 @@ public class BoatApplication extends Application implements Application.Activity
 	}
 
 	public void setAppColorTheme(){
-		//setTheme(R.style.Theme_Boat_H2O2_Custom_GREEN);
+		//setTheme(R.style.Theme_Boat_H2CO3_Custom_GREEN);
 	}
 
 }

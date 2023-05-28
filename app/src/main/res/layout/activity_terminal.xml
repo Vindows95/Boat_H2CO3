@@ -10,18 +10,18 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/material_card_background"
+
         android:fitsSystemWindows="true"
-        android:theme="@style/AppTheme.AppBarOverlay"
+        android:theme="@style/AppBaseTheme.AppBarOverlay"
         app:elevation="0dp">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/terminal_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/material_card_background"
+
             app:elevation="0dp"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            app:popupTheme="@style/AppBaseTheme.PopupOverlay" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -112,7 +112,8 @@
         android:textColor="?colorPrimary"
         android:textIsSelectable="true"
         android:textSize="14.5sp"
-        android:typeface="monospace" />
+        android:typeface="monospace"
+        android:autofillHints="" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/terminal_card"
@@ -128,6 +129,10 @@
         app:cardElevation="0dp">
 
         <EditText
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="7.5dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="7.5dp"
             android:id="@+id/terminal_output"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -135,7 +140,8 @@
             android:textIsSelectable="true"
             android:textSize="14.5sp"
             android:typeface="monospace"
-            android:background="@color/material_background"/>
+            android:autofillHints="name"
+            tools:ignore="LabelFor" />
 
     </com.google.android.material.card.MaterialCardView>
 </LinearLayout>

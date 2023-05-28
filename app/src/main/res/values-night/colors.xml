@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <!--Base color-->
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
@@ -10,33 +11,36 @@
     <color name="white">#FFFFFFFF</color>
     <color name="toolbar_background">#00000000</color>
 
-    <color name="colorPrimary">#FF6E89B6</color>
-    <color name="colorPrimaryDark">#FF6E89B6</color>
-    <!--Base color-->
-    <color name="blue_light_primary">#FF83B2FF</color>
-    <color name="blue_light_primaryDark">#FF83A2FF</color>
-
-    <color name="blue_base_primary">#FF212121</color>
-
-    <color name="red_light_primary">#FFFF0000</color>
-    <color name="red_light_primaryDark">#FFFF0000</color>
-
-    <color name="green_light_primary_toolbar">#00CFE9CC</color>
-
-    <color name="theme_status_bar_color">#FF212121</color>
-    <color name="theme_status_bar_color_empty">#FF212121</color>
-    <color name="theme_window_color">#FF212121</color>
-    <color name="theme_card_color">#FF323232</color>
-
-    <color name="nav_color">#FF121214</color>
-
-    <color name="nav_color_bg">#AA000000</color>
-
-    <!--View color-->
-    <color name="green_light">#FF32CD32</color>
-    <color name="red_light">#FFFF2300</color>
-    <color name="gray_light">#FF868686</color>
-    <color name="pink_light">#FFCD72CD</color>
+    <color name="md_theme_primary">#B7C4FF</color>
+    <color name="md_theme_onPrimary">#0B2878</color>
+    <color name="md_theme_primaryContainer">#294190</color>
+    <color name="md_theme_onPrimaryContainer">#DCE1FF</color>
+    <color name="md_theme_secondary">#C2C5DD</color>
+    <color name="md_theme_onSecondary">#2B3042</color>
+    <color name="md_theme_secondaryContainer">#424659</color>
+    <color name="md_theme_onSecondaryContainer">#DEE1F9</color>
+    <color name="md_theme_tertiary">#B0C6FF</color>
+    <color name="md_theme_onTertiary">#002D6F</color>
+    <color name="md_theme_tertiaryContainer">#1A438F</color>
+    <color name="md_theme_onTertiaryContainer">#D9E2FF</color>
+    <color name="md_theme_error">#FFB4AB</color>
+    <color name="md_theme_errorContainer">#93000A</color>
+    <color name="md_theme_onError">#690005</color>
+    <color name="md_theme_onErrorContainer">#FFDAD6</color>
+    <color name="md_theme_background">#1B1B1F</color>
+    <color name="md_theme_onBackground">#E4E1E6</color>
+    <color name="md_theme_surface">#1B1B1F</color>
+    <color name="md_theme_onSurface">#E4E1E6</color>
+    <color name="md_theme_surfaceVariant">#45464F</color>
+    <color name="md_theme_onSurfaceVariant">#C6C5D0</color>
+    <color name="md_theme_outline">#90909A</color>
+    <color name="md_theme_inverseOnSurface">#1B1B1F</color>
+    <color name="md_theme_inverseSurface">#E4E1E6</color>
+    <color name="md_theme_inversePrimary">#4359A9</color>
+    <color name="md_theme_shadow">#000000</color>
+    <color name="md_theme_surfaceTint">#B7C4FF</color>
+    <color name="md_theme_outlineVariant">#45464F</color>
+    <color name="md_theme_scrim">#000000</color>
 
     <color name="appBlack_35">#35FFFFFF</color>
     <color name="appWhite_35">#35000000</color>
@@ -46,21 +50,7 @@
     <color name="appWhite_ff">#AA000000</color>
     <color name="appWhite_ff_l">#AA000000</color>
     <color name="appTint">#AAFFFFFF</color>
-    <color name="bgTint">@color/colorPrimary</color>
 
-    <color name="material_blue">#FF464845</color>
-    <color name="material_blue_dark">#FF36383A</color>
-    <color name="material_blue_light">#FF36383A</color>
-    <color name="material_blue_btn">#00E4F0FF</color>
-
-    <color name="material_green_light">#FF36383A</color>
-    <color name="material_orange_light">#FF36383A</color>
-    <color name="material_red_light">#FF36383A</color>
-    <color name="material_purple_light">#FF36383A</color>
-    <color name="material_pink_light">#FF36383A</color>
-
-    <color name="material_background">#FF1A1C19</color>
-    <color name="material_card_background">#FF252525</color>
     <color name="app_green_normal">#96D7BE</color>
     <color name="app_blue_normal">#FFADEAEA</color>
 

@@ -7,7 +7,7 @@
     android:paddingEnd="20dp"
     android:paddingTop="20dp"
     android:paddingBottom="10dp"
-    android:background="@color/material_background">
+    >
 
     <TextView
         style="@style/TextStyleMain"

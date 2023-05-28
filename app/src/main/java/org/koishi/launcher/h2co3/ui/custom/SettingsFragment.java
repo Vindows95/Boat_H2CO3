@@ -1,5 +1,8 @@
 package org.koishi.launcher.h2co3.ui.custom;
 
+import static org.koishi.launcher.h2co3.tool.CHTools.LAUNCHER_DATA_DIR;
+import static org.koishi.launcher.h2co3.tool.CHTools.h2co3Cfg;
+
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -20,7 +23,7 @@ import androidx.preference.SwitchPreferenceCompat;
 import org.koishi.launcher.h2co3.LogcatActivity;
 import org.koishi.launcher.h2co3.MainActivity;
 import org.koishi.launcher.h2co3.R;
-import org.koishi.launcher.h2co3.tool.GetGameJson;
+import org.koishi.launcher.h2co3.tool.CHTools;
 import org.koishi.launcher.h2co3.tool.file.AppExecute;
 
 import java.io.File;
@@ -36,18 +39,14 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.settings_preferences, rootKey);
-        etId = (EditTextPreference) findPreference("set_id");
         editJvm = (EditTextPreference) findPreference("set_jvm");
         editMcf= (EditTextPreference) findPreference("set_mcf");
 
-        assert etId != null;
-        etId.setText(GetGameJson.getBoatCfg("auth_player_name","player"));
-
         assert  editJvm != null;
-        editJvm.setText(GetGameJson.getBoatCfg("extraJavaFlags","-client -Xmx750M"));
+        editJvm.setText(CHTools.getBoatCfg("extraJavaFlags","-client -Xmx4000M"));
 
         assert  editMcf != null;
-        editMcf.setText(GetGameJson.getBoatCfg("extraMinecraftFlags",""));
+        editMcf.setText(CHTools.getBoatCfg("extraMinecraftFlags",""));
 
         delRun = findPreference("set_reset_cfg");
         if (delRun != null) {
@@ -63,15 +62,18 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 return true;
             });
         }
-
-        appTheme = findPreference("set_theme");
+        appTheme = findPreference("material_you");
         assert appTheme != null;
-        appTheme.setChecked(Build.VERSION.SDK_INT >= 31);
-
+        if (Build.VERSION.SDK_INT >= 31) {
+            appTheme.setEnabled(true);
+        } else {
+            appTheme.setSummary(getResources().getString(R.string.can_not_material_you));
+            appTheme.setEnabled(false);
+        }
         langTr = findPreference("set_lang_tr");
         if (langTr != null){
             langTr.setOnPreferenceClickListener(preference -> {
-                CustomTabsIntent intent = new CustomTabsIntent.Builder().setToolbarColor(getResources().getColor(R.color.colorPrimary)).build();
+                CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
                 intent.launchUrl(requireActivity(), Uri.parse("https://wwa.lanzoui.com/iGyPkvlgqdc\n"));
                 return true;
             });
@@ -102,17 +104,17 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 .setMessage(getResources().getString(R.string.resetwarn))
                 .setPositiveButton("Yes Yes Yes", (dialogInterface, i) -> {
                     //TODO
-                    deleteFile("/storage/emulated/0/games/com.koishi.launcher/h2o2/h2ocfg.json");
+                    deleteFile(h2co3Cfg);
                     try {
                         /*
-                        FileWriter fr = new FileWriter("/storage/emulated/0/games/com.koishi.launcher/h2o2/h2ocfg.json");
+                        FileWriter fr = new FileWriter(h2co3Cfg);
                         fr.write("{\"mouseMode\":\"false\",\"backToRightClick\":\"false\",\"jumpToLeft\":\"None\",\"email\":\"\",\"password\":\"\",\"dontEsc\":\"false\",\"pack\":\"Default\",\"allVerLoad\":\"true\",\"openGL\":\"libGL112.so.1\"}");
                         fr.close();
                         Intent intent = new Intent(getActivity(), MainActivity.class);
                         startActivity(intent);// TODO: Implement this method
                         System.out.println("success");
                         getActivity().finish();
-                         */ AppExecute.output(getActivity(),"h2o2.zip",  Environment.getExternalStorageDirectory() + "/games/com.koishi.launcher/h2o2");
+                         */ AppExecute.output(getActivity(),"h2co3.zip",  Environment.getExternalStorageDirectory() + "/games/org.koishi.launcher/h2co3");
                         Intent i2 = new Intent(getActivity(), MainActivity.class);
                         i2.putExtra("fragment", getResources().getString(R.string.menu_home));
                         startActivity(i2);
@@ -142,7 +144,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                     delCfg.setEnabled(false);
                     //TODO
                     new Thread(() -> {
-                        //String file2= "/data/data/com.koishi.launcher.h2o2/app_runtime";
+                        //String file2= "/data/data/org.koishi.launcher.h2co3/app_runtime";
                         killlist();
                         /*
                          File file = new File(file2);
@@ -166,7 +168,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     }
 
     private void killlist() {
-        File file2 = new File("/data/data/org.koishi.launcher.h2co3/app_runtime/");
+        File file2 = new File(LAUNCHER_DATA_DIR);
         deleteDirWihtFile(file2);
     }
 
@@ -191,7 +193,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     }
 
     private void crash() {
-        throw new RuntimeException("Crash test from SettingsActivity. 这是从设置里点进来的崩溃，给我发这个是没用的！！请在log.txt或者client_output.txt中找原因。路径是/sdcard/games/com.koishi.launcher/h2o2。");
+        throw new RuntimeException("Crash test from SettingsActivity. 这是从设置里点进来的崩溃，给我发这个是没用的！！请在log.txt或者client_output.txt中找原因。路径是/sdcard/games/org.koishi.launcher/h2co3。");
     }
 
     @SuppressLint("HandlerLeak")
@@ -205,7 +207,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 intent1.putExtra("fragment", getResources().getString(R.string.menu_home));
                 startActivity(intent1);
                 Toast.makeText(getActivity(), getResources().getString(R.string.delete), Toast.LENGTH_SHORT).show();
-                Objects.requireNonNull(getActivity()).finish();
+                requireActivity().finish();
             }
         }
     };

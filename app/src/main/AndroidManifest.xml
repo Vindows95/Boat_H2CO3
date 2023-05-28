@@ -23,7 +23,7 @@
         android:supportsRtl="true"
         android:isGame="true"
         android:appCategory="game"
-        android:theme="@style/AppBaseTheme">
+        android:theme="@style/Theme.Boat_H2CO3">
         <activity
             android:name=".LogcatActivity"
             android:screenOrientation="portrait"
@@ -32,41 +32,28 @@
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".SettingsActivity"
-            android:label="@string/settings"
-            android:theme="@style/AppBaseTheme.NoActionBar.Settings" />
+            android:label="@string/settings" />
         <activity android:name=".LoginActivity" />
-        <activity
-            android:name=".HomeActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppBaseTheme.NoActionBar"
-            android:windowSoftInputMode="adjustPan"
-            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".ModsActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppBaseTheme.NoActionBar"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".VersionsActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppBaseTheme.NoActionBar"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".InstructionActivity"
-            android:label=""
             android:screenOrientation="portrait"
-            android:theme="@style/AppBaseTheme.NoActionBar"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".TerminalActivity"
             android:label="@string/menu_terminal"
             android:screenOrientation="portrait"
-            android:theme="@style/AppBaseTheme.NoActionBar"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".WelcomeActivity"
+            android:name=".SplashActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppBaseTheme.NoActionBar"
             android:exported="true"
             tools:ignore="LockedOrientationActivity">
             <intent-filter>
@@ -79,24 +66,16 @@
             android:name=".MainActivity"
             android:configChanges="uiMode"
             android:screenOrientation="portrait"
-            android:theme="@style/AppBaseTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name="com.mistake.revision.VanillaActivity"
             android:label="Minecraft"
             android:screenOrientation="portrait"
-            android:theme="@style/AppBaseTheme.NoActionBar"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".InitialActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppBaseTheme.NoActionBar"
-            tools:ignore="LockedOrientationActivity" />
-        <activity
-            android:name=".SplashActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppBaseTheme.NoActionBar"
             tools:ignore="LockedOrientationActivity" />
 
         <service android:name="com.mistake.revision.Download.DownloadService" />

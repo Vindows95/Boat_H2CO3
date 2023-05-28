@@ -2,6 +2,10 @@ package cosine.boat.logcat;
 
 import android.content.Context;
 import android.content.Intent;
+/*
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+*/
 
 /**
  * Main binding class for NDCrash functionality.
@@ -14,11 +18,13 @@ public class Logcat {
      *
      * @param context         Context instance. Used to determine a socket name and start a service.
      * @param crashReportPath Path where a crash report is saved.
+     * @param unwinder        Used unwinder. See ndcrash_unwinder type in ndcrash.h.
      * @param serviceClass    Class of background service. Used when we need to use a custom subclass
      *                        of NDCrashUnwinder to use as a background service. If you didn't subclass
      *                        NDCrashUnwinder, please pass NDCrashUnwinder.class.
+     * @return Error status.
      */
-    public static void initializeOutOfProcess(
+    public static int initializeOutOfProcess(
             /*@NonNull*/ Context context,
             /*@Nullable*/ String crashReportPath,
             /*@NonNull*/ Class<? extends LogcatService> serviceClass) {
@@ -26,7 +32,7 @@ public class Logcat {
             // If it's a background crash service process we don't need to initialize anything,
             // we treat this situation as no error because this method is designed to call from
             // Application.onCreate().
-            return;
+            return 1;
         }
         // Saving service class, we should be able to stop it on de-initialization.
         mServiceClass = serviceClass;
@@ -37,9 +43,11 @@ public class Logcat {
             try {
                 context.startService(serviceIntent);
             } catch (RuntimeException e) {
+                return 2;
             }
         }
         // Initializing signal handler.
+        return 0;
     }
 
 

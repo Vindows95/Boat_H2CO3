@@ -6,15 +6,15 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
+import org.koishi.launcher.h2co3.application.H2CO3Activity;
 import androidx.appcompat.widget.Toolbar;
 
-import org.koishi.launcher.h2co3.tool.GetGameJson;
+import org.koishi.launcher.h2co3.tool.CHTools;
 import org.koishi.launcher.h2co3.ui.custom.SettingsFragment;
 
 import java.util.Objects;
 
-public class SettingsActivity extends AppCompatActivity {
+public class SettingsActivity extends H2CO3Activity {
 
     public SharedPreferences sp;
     public Toolbar toolbar;
@@ -23,7 +23,7 @@ public class SettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-        getWindow().setStatusBarColor(getResources().getColor(R.color.material_card_background));
+        
         toolbar = findViewById(R.id.terminal_toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle(R.string.menu_terminal);
@@ -62,9 +62,10 @@ public class SettingsActivity extends AppCompatActivity {
         new Thread(() -> {
             String set_id = sp.getString("set_id","player");
             String set_control = sp.getString("set_control","None");
-            String set_jvm = sp.getString("set_jvm","-client -Xmx750M");
+            String set_jvm = sp.getString("set_jvm","-client -Xmx4000M");
             String set_mcf = sp.getString("set_mcf","");
-            String set_gl = sp.getString("set_gl","libGL112.so.1");
+            String set_gl = sp.getString("set_gl","libGL112.so");
+            String set_java = sp.getString("set_java","jre_8");
             String set_source = sp.getString("set_source","https://download.mcbbs.net");
             boolean set_click_b = sp.getBoolean("set_click",false);
             boolean set_pause_b = sp.getBoolean("set_pause",false);
@@ -75,16 +76,17 @@ public class SettingsActivity extends AppCompatActivity {
             String set_single = String.valueOf(set_single_b);
             String set_check = String.valueOf(set_check_b);
 
-            GetGameJson.setBoatJson("auth_player_name",set_id);
-            GetGameJson.setAppJson("jumpToLeft",set_control);
-            GetGameJson.setBoatJson("extraJavaFlags",set_jvm);
-            GetGameJson.setBoatJson("extraMinecraftFlags",set_mcf);
-            GetGameJson.setAppJson("openGL",set_gl);
-            GetGameJson.setAppJson("sourceLink",set_source);
-            GetGameJson.setAppJson("backToRightClick",set_click);
-            GetGameJson.setAppJson("dontEsc",set_pause);
-            GetGameJson.setAppJson("allVerLoad",set_single);
-            GetGameJson.setAppJson("checkFile",set_check);
+            CHTools.setBoatJson("auth_player_name",set_id);
+            CHTools.setAppJson("jumpToLeft",set_control);
+            CHTools.setBoatJson("extraJavaFlags",set_jvm);
+            CHTools.setBoatJson("extraMinecraftFlags",set_mcf);
+            CHTools.setAppJson("openGL",set_gl);
+            CHTools.setAppJson("java",set_java);
+            CHTools.setAppJson("sourceLink",set_source);
+            CHTools.setAppJson("backToRightClick",set_click);
+            CHTools.setAppJson("dontEsc",set_pause);
+            CHTools.setAppJson("allVerLoad",set_single);
+            CHTools.setAppJson("checkFile",set_check);
         }).start();
 
     }

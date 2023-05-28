@@ -37,7 +37,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/material_card_background"
+
                 android:padding="5dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
@@ -46,7 +46,8 @@
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_marginStart="10dp"
-                    android:src="@drawable/ic_mc_vanilla_release" />
+                    android:src="@drawable/ic_mc_vanilla_release"
+                    android:contentDescription="TODO" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -74,7 +75,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    android:src="@drawable/ic_arrow_right_black"/>
+                    android:src="@drawable/ic_arrow_right_black"
+                    android:contentDescription="TODO" />
 
             </LinearLayout>
 
@@ -99,7 +101,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/material_background"
+
                 android:padding="5dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
@@ -159,7 +161,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/material_background"
+
                 android:padding="5dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
@@ -219,7 +221,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/material_background"
+
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:padding="5dp">
@@ -279,7 +281,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/material_background"
+
                 android:padding="5dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
@@ -350,7 +352,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/material_background"
+
                 android:padding="5dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
@@ -421,7 +423,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/material_background"
+
                 android:padding="5dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
@@ -481,7 +483,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/material_background"
+
                 android:padding="5dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
@@ -541,7 +543,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/material_background"
+
                 android:padding="5dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">

@@ -1,22 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Boat_H2CO3</string>
-    <string name="launcher_play_boat" translatable="false">开始游戏（Boat）</string>
-    <string name="launcher_play_boardwalk" translatable="false">开始游戏（Pojav）</string>
+    <string name="launcher_play_boat">使用BOAT后端</string>
+    <string name="launcher_play_boardwalk">使用POJAV后端</string>
     <string name="launcher_activity_name_setting">设置</string>
     <string name="launcher_activity_name_log">查看日志</string>
-
-    <string name="menu_home" translatable="false">主页</string>
-    <string name="menu_install" translatable="false">安装</string>
-    <string name="menu_custom" translatable="false">工具箱</string>
-    <string name="menu_manager" translatable="false">目录</string>
-
-    <string name="action_settings" translatable="false">设置(不可用)</string>
-
-    <string name="nav_header_desc" translatable="false">用户</string>
-    <string name="nav_header_title" translatable="false">玩家</string>
-    <string name="nav_header_subtitle" translatable="false">example@gmail.com</string>
-
+    <string name="menu_home">主页</string>
+    <string name="menu_install">安装</string>
+    <string name="menu_custom">配置文件</string>
+    <string name="menu_manager">目录</string>
+    <string name="action_settings">设置</string>
+    <string name="nav_header_desc">用户</string>
+    <string name="nav_header_title">玩家</string>
     <string name="launcher_check_file_true">游戏已被成功安装！</string>
     <string name="launcher_check_file_true_tip">点击下方按钮开始游戏</string>
     <string name="launcher_check_file_false">游戏文件缺失！</string>
@@ -38,7 +32,7 @@
     <string name="launcher_main_local_install_gamedir">本地安装</string>
     <string name="launcher_main_online_install_gamedir">在线下载</string>
     <string name="launcher_main_runtime_tip">运行Minecraft的核心，支持1.6-21w09a版本的运行。因为在21w10a版本需要更高的OpenGL核心，而目前所使用的为2.1版本，因此目前无法运行。并且由于技术原因目前没有使用与Pojav相同的渲染器(GL4ES而非Zink)，所以不支持大多数光影。</string>
-    <string name="launcher_main_gamedir_tip">目前暂时不支持自动安装，请手动解压gamedir文件夹到"/storage/emulated/0/games/com.koishi.launcher/h2o2" 目录下, 如果不存在，请手动创建。</string>
+    <string name="launcher_main_gamedir_tip">目前暂时不支持自动安装，请手动解压gamedir文件夹到"/storage/emulated/0/games/org.koishi.launcher/h2co3" 目录下, 如果不存在，请手动创建。</string>
     <string name="launcher_main_how_to_use">说明</string>
     <string name="launcher_main_how_to_use_tip">说明及事项</string>
     <string name="launcher_check_file">文件检查</string>
@@ -57,7 +51,7 @@
     <string name="launcher_main_share">分享此应用</string>
     <string name="launcher_main_none">未开通</string>
     <string name="share_with">分享到...</string>
-    <string name="share_url">Boat_H2O2, 一款轻便的运行在Android设备上的Minecraft启动器。\n下载链接: https://github.com/NaCln4c1/Boat_H2O2/releases \nTim或QQ群号: 572291176\nDiscord: https://discord.gg/Ktw9sYx879</string>
+    <string name="share_url">Boat_H2CO3, 一款轻便的运行在Android设备上的Minecraft启动器。\n下载链接: https://github.com/NaCln4c1/Boat_H2CO3/releases \nTim或QQ群号: 572291176\nDiscord: https://discord.gg/Ktw9sYx879</string>
     <string name="dialog">公告</string>
 
     <string name="launcher_download_runtimeDownload">下载运行库文件</string>
@@ -151,9 +145,8 @@
     <string name="donate">捐赠</string>
     <string name="donate_tip">感谢您的使用，如果您想给予我更多支持，是否考虑一下捐赠呢？如果可以的话，在下面三个链接中任意选择一个进行捐赠。如果使用爱发电或者Patreon进行捐赠，您将有机会出现在捐赠榜单里！</string>>
 
-    <string name="dialog_about">编写: <a href='http://www.coolapk.com/u/1996447'>酷安@東風谷早喵</a>, 具体代码可以访问: <a href='https://github.com/NaCln4c1/Boat_H2O2'>Github开源地址</a></string>
+    <string name="dialog_about">编写: <a href='http://www.coolapk.com/u/1996447'>酷安@東風谷早喵</a>, 具体代码可以访问: <a href='https://github.com/NaCln4c1/Boat_H2CO3'>Github开源地址</a></string>
     <string name="nav_title_3">关于</string>
-    <string name="menu_donate">捐赠</string>
     <string name="menu_ver">版本列表</string>
     <string name="menu_res">资源管理</string>
     <string name="menu_title_launcher">启动器</string>
@@ -221,7 +214,7 @@
     <string name="inst_open_bili">打开视频教程</string>
     <string name="menu_res_more">额外补充</string>
     <string name="tab_launch">启动</string>
-    <string name="home_view_library">查看H2O2仓库</string>
+    <string name="home_view_library">查看H2CO3仓库</string>
     <string name="open_source_library">引用的第三方库</string>
     <string name="thanks">感谢名单</string>
     <string name="menu_theme">主题</string>
@@ -284,5 +277,6 @@
     <string name="spinner_bmclapi">BMCLAPI源</string>
     <string name="ver_type_release">release</string>
     <string name="welcome_perm_title">权限</string>
+    <string name="can_not_material_you"><![CDATA[Can not use Material You Theme(Your Android API<31)]]></string>
 
 </resources>

@@ -4,12 +4,12 @@ plugins {
 }
 
 android {
-    compileSdk 33
+    compileSdk 32
 
     defaultConfig {
         applicationId "org.koishi.launcher.h2co3"
         minSdk 26
-        targetSdk 33
+        targetSdk 31
         versionCode 1024
         versionName "3.3.13"
 
@@ -27,9 +27,6 @@ android {
         targetCompatibility JavaVersion.VERSION_11
     }
 
-    lint {
-        baseline = file("lint-baseline.xml")
-    }
     namespace 'org.koishi.launcher.h2co3'
     buildToolsVersion '33.0.2'
     ndkVersion '25.2.9519653'
@@ -38,21 +35,20 @@ android {
 dependencies {
 
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'androidx.appcompat:appcompat:1.6.0-alpha01'
-    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'androidx.browser:browser:1.4.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
     implementation 'androidx.navigation:navigation-fragment:2.5.2'
     implementation 'androidx.navigation:navigation-ui:2.5.2'
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.1'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.preference:preference:1.2.0'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'com.afollestad.material-dialogs:commons:0.9.6.0'
     implementation 'com.android.billingclient:billing:4.1.0'
     implementation 'com.github.bumptech.glide:glide:4.15.1'
-    implementation 'com.google.android.material:material:1.6.0-beta01'
+    implementation 'com.google.android.material:material:1.7.0'
     implementation 'com.google.dagger:hilt-android:2.46.1'
     implementation 'com.ashokvarma.android:bottom-navigation-bar:2.2.0'
     implementation 'com.github.getActivity:XXPermissions:16.8'

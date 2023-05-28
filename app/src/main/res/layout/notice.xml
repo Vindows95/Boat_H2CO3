@@ -10,7 +10,8 @@
 		android:layout_height="45dp"
 		android:layout_width="45dp"
 		android:src="@drawable/grass"
-		android:layout_margin="10dp"/>
+		android:layout_margin="10dp"
+        android:contentDescription="TODO" />
 
 	<LinearLayout
 		android:layout_height="wrap_content"

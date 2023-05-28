@@ -1,10 +1,10 @@
 package org.koishi.launcher.h2co3;
 
-import androidx.appcompat.app.AppCompatActivity;
+import org.koishi.launcher.h2co3.application.H2CO3Activity;
 
 import android.os.Bundle;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends H2CO3Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

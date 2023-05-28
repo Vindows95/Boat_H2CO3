@@ -5,7 +5,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 
-import androidx.appcompat.app.AppCompatActivity;
+import org.koishi.launcher.h2co3.application.H2CO3Activity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.app.ProgressDialog;
@@ -30,7 +30,7 @@ import java.util.Objects;
 
 import ren.qinc.edit.PerformEdit;
 
-public class TerminalActivity extends AppCompatActivity {
+public class TerminalActivity extends H2CO3Activity {
 
     public MaterialCardView card;
     public EditText outputText,commandText;
@@ -46,7 +46,7 @@ public class TerminalActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_terminal);
-        getWindow().setStatusBarColor(getResources().getColor(R.color.material_card_background));
+        
         toolbar = findViewById(R.id.terminal_toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle(R.string.menu_terminal);
@@ -193,7 +193,7 @@ public class TerminalActivity extends AppCompatActivity {
             // exit status
             html.append("<p>");
             html.append("<font>").append("Command: ").append("</font>");
-            html.append("<font color = @color/?colorPrimary >").append(Objects.requireNonNull(inputText.getText()).toString()).append("</font>");
+            html.append("<font color = ?colorPrimary >").append(Objects.requireNonNull(inputText.getText()).toString()).append("</font>");
             html.append("</p>");
             html.append("<p>Exit Code: ");
             if (result.isSuccessful()) {

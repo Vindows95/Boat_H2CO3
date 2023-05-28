@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:animateLayoutChanges="true"
     android:orientation="vertical"
-    android:background="@color/material_background">
+    >
 
     <com.google.android.material.circularreveal.CircularRevealLinearLayout
         android:id="@+id/custom_page_3"

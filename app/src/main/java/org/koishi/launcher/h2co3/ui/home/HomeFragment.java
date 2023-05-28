@@ -1,5 +1,8 @@
 package org.koishi.launcher.h2co3.ui.home;
 
+import static org.koishi.launcher.h2co3.tool.CHTools.LAUNCHER_FILE_DIR;
+import static org.koishi.launcher.h2co3.tool.CHTools.boatCfg;
+
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -58,7 +61,7 @@ import org.json.JSONObject;
 import org.koishi.launcher.h2co3.InstructionActivity;
 import org.koishi.launcher.h2co3.R;
 import org.koishi.launcher.h2co3.VersionsActivity;
-import org.koishi.launcher.h2co3.tool.GetGameJson;
+import org.koishi.launcher.h2co3.tool.CHTools;
 import org.koishi.launcher.h2co3.tool.data.DBHelper;
 import org.koishi.launcher.h2co3.tool.login.NewLoginTask.auth.abstracts.exception.AuthenticationException;
 import org.koishi.launcher.h2co3.tool.login.NewLoginTask.auth.model.mojang.MinecraftAuthenticator;
@@ -75,6 +78,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.LineNumberReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.Collator;
@@ -190,11 +194,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Navi
         handler.postDelayed(task, 1000);
 
         /*-----------------文件检查--------------------*/
-        boolean existMcConfig = FileExists("/storage/emulated/0/games/com.koishi.launcher/h2o2/config.txt");
+        boolean existMcConfig = FileExists(boatCfg);
         //boolean existRuntime = FileExists("/data/data/"+getActivity().getPackageName()+"/libopenal.so.1");
-        boolean existGame = FileExists(GetGameJson.getBoatCfg("game_directory", "/storage/emulated/0/games/com.koishi.launcher/h2o2/gamedir"));
-        File file = new File(GetGameJson.getBoatCfg("game_directory", "/storage/emulated/0/games/com.koishi.launcher/h2o2/gamedir") + "/versions");
-        f = GetGameJson.getBoatCfg("game_directory", "/storage/emulated/0/games/com.koishi.launcher/h2o2/gamedir");
+        boolean existGame = FileExists(CHTools.getBoatCfg("game_directory", LAUNCHER_FILE_DIR+".minecraft"));
+        File file = new File(CHTools.getBoatCfg("game_directory", LAUNCHER_FILE_DIR+".minecraft") + "/versions");
+        f = CHTools.getBoatCfg("game_directory", LAUNCHER_FILE_DIR+".minecraft");
 
         list = root.findViewById(R.id.ver_list);
 
@@ -263,20 +267,20 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Navi
             });
             list.setSelection(adapter.getPosition(getVer()));
         }
-        //content://com.android.externalstorage.documents/document/primary%3Agames%2Fcom.koishi.launcher%2Fh2o2%2Fgamedir
+        //content://com.android.externalstorage.documents/document/primary%3Agames%2Forg.koishi.launcher%2Fh2co3%2F.minecraft
 
         /*-----------------登录状态UI--------------------*/
         userInfo = root.findViewById(R.id.user_info);
-        userInfo.setText(getResources().getString(R.string.account_before) + " " + GetGameJson.getBoatCfg("auth_player_name", "Null"));
+        userInfo.setText(getResources().getString(R.string.account_before) + " " + CHTools.getBoatCfg("auth_player_name", "Null"));
         mOffline = root.findViewById(R.id.home_offline_id);
-        mOffline.setText(GetGameJson.getBoatCfg("auth_player_name", "Null"));
+        mOffline.setText(CHTools.getBoatCfg("auth_player_name", "Null"));
         offlineLayout = root.findViewById(R.id.offline_lay);
         onlineLayout = root.findViewById(R.id.home_online_layout);
         skin = root.findViewById(R.id.home_skin);
         swOnline = root.findViewById(R.id.home_sw_online);
         userStatus = root.findViewById(R.id.user_status);
         showAcc = root.findViewById(R.id.show_login);
-        sp = Objects.requireNonNull(getActivity()).getSharedPreferences("isChecked", 0);
+        sp = requireActivity().getSharedPreferences("isChecked", 0);
         boolean result = sp.getBoolean("choose", true); // 这里就是开始取值了 false代表的就是如果没有得到对应数据我们默认显示为false
         // 把得到的状态设置给CheckBox组件
         swOnline.setChecked(result);
@@ -385,11 +389,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Navi
 
         //offline = root.findViewById(R.id.offline);
         newacc.setOnClickListener(v -> {
-            newacc.getBackground().setAlpha(90);
             newacc.setVisibility(View.GONE);
             skin.setImageResource(R.drawable.ic_home_user_normal);
-            GetGameJson.setBoatJson("auth_uuid", "");
-            GetGameJson.setBoatJson("auth_access_token", "");
+            CHTools.setBoatJson("auth_uuid", "");
+            CHTools.setBoatJson("auth_access_token", "");
             mPassword.setText("");
             editorName.putString("name", mUserName.getText().toString());
             editorPass.putString("pass", "");
@@ -416,12 +419,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Navi
         info.setChecked(false);
         info.setEnabled(false);
 
-        final String id = (GetGameJson.getBoatCfg("auth_player_name", "Null"));
+        final String id = (CHTools.getBoatCfg("auth_player_name", "Null"));
         if (!id.equals("")) {
         } else {
-            GetGameJson.setBoatJson("acth_player_name", "Player");
+            CHTools.setBoatJson("acth_player_name", "Player");
         }
-        logt.setText(getResources().getString(R.string.login_welcome) + "\n" + GetGameJson.getBoatCfg("auth_player_name", "Null"));
+        logt.setText(getResources().getString(R.string.login_welcome) + "\n" + CHTools.getBoatCfg("auth_player_name", "Null"));
 
         initLoginUserName();
 
@@ -524,7 +527,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Navi
         homeQQ = root.findViewById(R.id.home_qq);
 
         homeReg.setOnClickListener(v->{
-            CustomTabsIntent intent = new CustomTabsIntent.Builder().setToolbarColor(getResources().getColor(R.color.colorPrimary)).build();
+            CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
             intent.launchUrl(requireActivity(), Uri.parse("https://www.minecraft.net/store/minecraft-java-edition/buy\n"));
         });
         homeNew.setOnClickListener(v->{
@@ -542,7 +545,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Navi
         Menu m = nav.getMenu();
         //mainFix.setVisibility(View.VISIBLE);
         //mainFix.setVisibility(View.GONE);
-        m.findItem(R.id.home_open_fix).setVisible(GetGameJson.getAppCfg("checkFile", "false").equals("false"));
+        m.findItem(R.id.home_open_fix).setVisible(CHTools.getAppCfg("checkFile", "false").equals("false"));
 
         return root;
     }
@@ -641,27 +644,27 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Navi
     /**-----------------点击--------------------*/
     @Override
     public void onClick(View v) {
-        File file = new File(GetGameJson.getBoatCfg("game_directory", "/storage/emulated/0/games/com.koishi.launcher/h2o2/gamedir") + "/versions");
-        boolean existGame = FileExists(GetGameJson.getBoatCfg("game_directory", "/storage/emulated/0/games/com.koishi.launcher/h2o2/gamedir"));
+        File file = new File(CHTools.getBoatCfg("game_directory", LAUNCHER_FILE_DIR+".minecraft") + "/versions");
+        boolean existGame = FileExists(CHTools.getBoatCfg("game_directory", LAUNCHER_FILE_DIR+".minecraft"));
         if (v == mLoginButton) {
             if (swOnline.isChecked()) {
                 if (existGame && Objects.requireNonNull(file.list()).length != 0 && file.isDirectory()) {
                     doLogin();
                 } else {
-                    Snackbar.make(Objects.requireNonNull(getView()), getResources().getString(R.string.no_ver), Snackbar.LENGTH_LONG)
+                    Snackbar.make(requireView(), getResources().getString(R.string.no_ver), Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                 }
             } else {
                 if (mOffline.equals("")){
-                    Snackbar.make(Objects.requireNonNull(getView()), getResources().getString(R.string.home_no_username), Snackbar.LENGTH_LONG)
+                    Snackbar.make(requireView(), getResources().getString(R.string.home_no_username), Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                 } else {
                     if (existGame && Objects.requireNonNull(file.list()).length != 0 && file.isDirectory()) {
-                        GetGameJson.setBoatJson("auth_player_name", mOffline.getText().toString());
+                        CHTools.setBoatJson("auth_player_name", mOffline.getText().toString());
                         userInfo.setText(getResources().getString(R.string.account_before) + " " + mOffline.getText().toString());
                         chooseMode();
                     } else {
-                        Snackbar.make(Objects.requireNonNull(getView()), getResources().getString(R.string.no_ver), Snackbar.LENGTH_LONG)
+                        Snackbar.make(requireView(), getResources().getString(R.string.no_ver), Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show();
                     }
                 }
@@ -683,7 +686,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Navi
                         popView.dismiss();
                     }
                 } else {
-                    Snackbar.make(Objects.requireNonNull(getView()), getResources().getString(R.string.home_no_account), Snackbar.LENGTH_LONG)
+                    Snackbar.make(requireView(), getResources().getString(R.string.home_no_account), Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                 }
 
@@ -699,10 +702,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Navi
         final String api = mAPI.getText().toString();
         if (!userName.equals("") && !password.equals("") && !api.equals("")) {
             //Toast.makeText(getActivity(), getResources().getString(R.string.home_login_start_toast), Toast.LENGTH_SHORT).show();
-            Snackbar.make(Objects.requireNonNull(getView()), getResources().getString(R.string.home_login_start_toast), Snackbar.LENGTH_LONG)
+            Snackbar.make(requireView(), getResources().getString(R.string.home_login_start_toast), Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
             mLoginButton.setEnabled(false);
-            mLoginButton.getBackground().setAlpha(80);
             pb.show();
             //登录操作为耗时操作，必须放到线程中执行
             if (api.equals("Mojang")) {
@@ -728,6 +730,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Navi
                         Snackbar.make(getView(), e.toString(), Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show();
                         xboxHandler.sendEmptyMessage(0);
+                    } catch (UnsupportedEncodingException e) {
+                        throw new RuntimeException(e);
                     }
                 }).start();
             } else {
@@ -745,7 +749,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Navi
             }
         } else {
             //Toast.makeText(getActivity(), getResources().getString(R.string.home_no_account), Toast.LENGTH_SHORT).show();
-            Snackbar.make(Objects.requireNonNull(getView()), getResources().getString(R.string.home_no_account), Snackbar.LENGTH_LONG)
+            Snackbar.make(requireView(), getResources().getString(R.string.home_no_account), Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
         }
 
@@ -763,9 +767,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Navi
                 final String resultPw = mPassword.getText().toString();
                 final String resultApi = mAPI.getText().toString();
 
-                GetGameJson.setBoatJson("auth_player_name", pf.getUsername());
-                GetGameJson.setBoatJson("auth_uuid", pf.getUuid().toString());
-                GetGameJson.setBoatJson("auth_access_token", tk.getAccessToken());
+                CHTools.setBoatJson("auth_player_name", pf.getUsername());
+                CHTools.setBoatJson("auth_uuid", pf.getUuid().toString());
+                CHTools.setBoatJson("auth_access_token", tk.getAccessToken());
                 if (mCheckBox.isChecked()) {
                     editorName.putString("name", mUserName.getText().toString());
                     editorPass.putString("pass", mPassword.getText().toString());
@@ -785,12 +789,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Navi
                 }
                 pb.hide();
                 //Toast.makeText(getActivity(), getResources().getString(R.string.login_done), Toast.LENGTH_SHORT).show();
-                Snackbar.make(Objects.requireNonNull(getView()), getResources().getString(R.string.login_done), Snackbar.LENGTH_LONG)
+                Snackbar.make(requireView(), getResources().getString(R.string.login_done), Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
                 mLoginButton.setEnabled(true);
-                mLoginButton.getBackground().setAlpha(255);
                 userInfo.setText(getResources().getString(R.string.account_before) + " " + pf.getUsername());
-                mOffline.setText(GetGameJson.getBoatCfg("auth_player_name", "Null"));
+                mOffline.setText(CHTools.getBoatCfg("auth_player_name", "Null"));
                 //mLoginButton.setVisibility(View.VISIBLE);
                 newacc.setEnabled(true);
                 userNameLayout.setVisibility(View.GONE);
@@ -811,14 +814,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Navi
                 mCheckBox.setChecked(false);
                 mLoginButton.setEnabled(true);
                 pb.hide();
-                mLoginButton.getBackground().setAlpha(255);
                 logt.setText(":(");
                 mPassword.setText("");
-                newacc.getBackground().setAlpha(90);
                 newacc.setVisibility(View.GONE);
                 skin.setImageResource(R.drawable.ic_home_user_normal);
-                GetGameJson.setBoatJson("auth_uuid", "");
-                GetGameJson.setBoatJson("auth_access_token", "");
+                CHTools.setBoatJson("auth_uuid", "");
+                CHTools.setBoatJson("auth_access_token", "");
                 mPassword.setText("");
                 editorName.putString("name", mUserName.getText().toString());
                 editorPass.putString("pass", "");
@@ -864,19 +865,17 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Navi
             if (msg.what == 0) {
                 if (UserMsg == null) {
                     //Toast.makeText(getActivity(), UserMsg[0], Toast.LENGTH_SHORT).show();
-                    Snackbar.make(Objects.requireNonNull(getView()), UserMsg[0], Snackbar.LENGTH_LONG)
+                    Snackbar.make(requireView(), UserMsg[0], Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                     mCheckBox.setChecked(false);
                     mLoginButton.setEnabled(true);
                     pb.hide();
-                    mLoginButton.getBackground().setAlpha(255);
                     logt.setText(":(");
                     mPassword.setText("");
-                    newacc.getBackground().setAlpha(90);
                     newacc.setVisibility(View.GONE);
                     skin.setImageResource(R.drawable.ic_home_user_normal);
-                    GetGameJson.setBoatJson("auth_uuid", "");
-                    GetGameJson.setBoatJson("auth_access_token", "");
+                    CHTools.setBoatJson("auth_uuid", "");
+                    CHTools.setBoatJson("auth_access_token", "");
                     mPassword.setText("");
                     editorName.putString("name", mUserName.getText().toString());
                     editorPass.putString("pass", "");
@@ -902,19 +901,17 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Navi
                 } else if (UserMsg.length == 1) {
                     //UserMsg长度为1时说明出现了错误，使用toast输出错误信息
                     //Toast.makeText(getActivity(), getResources().getString(R.string.login_fail), Toast.LENGTH_SHORT).show();
-                    Snackbar.make(Objects.requireNonNull(getView()), getResources().getString(R.string.login_fail), Snackbar.LENGTH_LONG)
+                    Snackbar.make(requireView(), getResources().getString(R.string.login_fail), Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                     mCheckBox.setChecked(false);
                     mLoginButton.setEnabled(true);
                     pb.hide();
-                    mLoginButton.getBackground().setAlpha(255);
                     logt.setText(":(");
                     mPassword.setText("");
-                    newacc.getBackground().setAlpha(90);
                     newacc.setVisibility(View.GONE);
                     skin.setImageResource(R.drawable.ic_home_user_normal);
-                    GetGameJson.setBoatJson("auth_uuid", "");
-                    GetGameJson.setBoatJson("auth_access_token", "");
+                    CHTools.setBoatJson("auth_uuid", "");
+                    CHTools.setBoatJson("auth_access_token", "");
                     mPassword.setText("");
                     editorName.putString("name", mUserName.getText().toString());
                     editorPass.putString("pass", "");
@@ -949,9 +946,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Navi
 //                LoginTask.set("auth_uuid", userCon[2]);
 
                     //将获取到的token等显示出来
-                    GetGameJson.setBoatJson("auth_player_name", UserMsg[1]);
-                    GetGameJson.setBoatJson("auth_uuid", UserMsg[2]);
-                    GetGameJson.setBoatJson("auth_access_token", UserMsg[0]);
+                    CHTools.setBoatJson("auth_player_name", UserMsg[1]);
+                    CHTools.setBoatJson("auth_uuid", UserMsg[2]);
+                    CHTools.setBoatJson("auth_access_token", UserMsg[0]);
 
                     if (mCheckBox.isChecked()) {
                         editorName.putString("name", mUserName.getText().toString());
@@ -971,13 +968,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Navi
                         dbHelper.insertOrUpdate(resultAc, "", resultApi, 0);
                     }
 
-                    Snackbar.make(Objects.requireNonNull(getView()), getResources().getString(R.string.login_done), Snackbar.LENGTH_LONG)
+                    Snackbar.make(requireView(), getResources().getString(R.string.login_done), Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
 
                     pb.hide();
                     //Toast.makeText(getActivity(), getResources().getString(R.string.login_done), Toast.LENGTH_SHORT).show();
                     mLoginButton.setEnabled(true);
-                    mLoginButton.getBackground().setAlpha(255);
                     userInfo.setText(getResources().getString(R.string.account_before) + " " + UserMsg[1]);
                     mOffline.setText(UserMsg[1]);
                     newacc.setEnabled(true);
@@ -994,7 +990,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Navi
                     img1.setVisibility(View.VISIBLE);
                     logt.setVisibility(View.VISIBLE);
                     newacc.setVisibility(View.VISIBLE);
-                    logt.setText(getResources().getString(R.string.login_welcome) + "\n" + GetGameJson.getBoatCfg("auth_player_name", "Null"));
+                    logt.setText(getResources().getString(R.string.login_welcome) + "\n" + CHTools.getBoatCfg("auth_player_name", "Null"));
                     chooseMode();
                 }
             } else if (msg.what == 1) {
@@ -1021,12 +1017,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Navi
                     editorApi.commit();
                     dbHelper.insertOrUpdate(resultAc, "", resultApi, 0);
                 }
-                Snackbar.make(Objects.requireNonNull(getView()), getResources().getString(R.string.login_done), Snackbar.LENGTH_LONG)
+                Snackbar.make(requireView(), getResources().getString(R.string.login_done), Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
                 mLoginButton.setEnabled(true);
-                mLoginButton.getBackground().setAlpha(255);
-                userInfo.setText(getResources().getString(R.string.account_before) + " " + GetGameJson.getBoatCfg("auth_player_name", "Null"));
-                mOffline.setText(GetGameJson.getBoatCfg("auth_player_name", "Null"));
+                userInfo.setText(getResources().getString(R.string.account_before) + " " + CHTools.getBoatCfg("auth_player_name", "Null"));
+                mOffline.setText(CHTools.getBoatCfg("auth_player_name", "Null"));
                 userNameLayout.setVisibility(View.GONE);
                 passwordLayout.setVisibility(View.GONE);
                 apiLayout.setVisibility(View.GONE);
@@ -1039,7 +1034,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Navi
                 img1.setVisibility(View.VISIBLE);
                 logt.setVisibility(View.VISIBLE);
                 newacc.setVisibility(View.VISIBLE);
-                logt.setText(getResources().getString(R.string.login_welcome) + "\n" + GetGameJson.getBoatCfg("auth_player_name", "Null"));
+                logt.setText(getResources().getString(R.string.login_welcome) + "\n" + CHTools.getBoatCfg("auth_player_name", "Null"));
                 chooseMode();
 
             }
@@ -1076,23 +1071,23 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Navi
     }
 
     public void launchBoat() {
-        File file = new File(GetGameJson.getBoatCfg("game_directory", "/storage/emulated/0/games/com.koishi.launcher/h2o2/gamedir") + "/versions");
-        boolean existGame = FileExists(GetGameJson.getBoatCfg("game_directory", "/storage/emulated/0/games/com.koishi.launcher/h2o2/gamedir"));
+        File file = new File(CHTools.getBoatCfg("game_directory", LAUNCHER_FILE_DIR+".minecraft") + "/versions");
+        boolean existGame = FileExists(CHTools.getBoatCfg("game_directory", LAUNCHER_FILE_DIR+".minecraft"));
         if (existGame && Objects.requireNonNull(file.list()).length != 0 && file.isDirectory()) {
             startActivity(new Intent(getActivity(), LauncherActivity.class));
         } else {
-            Snackbar.make(Objects.requireNonNull(getView()), getResources().getString(R.string.no_ver), Snackbar.LENGTH_LONG)
+            Snackbar.make(requireView(), getResources().getString(R.string.no_ver), Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
         }
     }
 
     public void launchBoatMk() {
-        File file = new File(GetGameJson.getBoatCfg("game_directory", "/storage/emulated/0/games/com.koishi.launcher/h2o2/gamedir") + "/versions");
-        boolean existGame = FileExists(GetGameJson.getBoatCfg("game_directory", "/storage/emulated/0/games/com.koishi.launcher/h2o2/gamedir"));
+        File file = new File(CHTools.getBoatCfg("game_directory", LAUNCHER_FILE_DIR+".minecraft") + "/versions");
+        boolean existGame = FileExists(CHTools.getBoatCfg("game_directory", LAUNCHER_FILE_DIR+".minecraft"));
         if (existGame && Objects.requireNonNull(file.list()).length != 0 && file.isDirectory()) {
             startActivity(new Intent(getActivity(), LauncherActivityMk.class));
         } else {
-            Snackbar.make(Objects.requireNonNull(getView()), getResources().getString(R.string.no_ver), Snackbar.LENGTH_LONG)
+            Snackbar.make(requireView(), getResources().getString(R.string.no_ver), Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
         }
     }
@@ -1204,8 +1199,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Navi
 
     /**-----------------补全UI--------------------*/
     public void launchFragment() {
-        String dir = GetGameJson.getBoatCfg("game_directory", "/storage/emulated/0/games/com.koishi.launcher/h2o2/gamedir");
-        String link = GetGameJson.getBoatCfg("sourceLink", "https://download.mcbbs.net");
+        String dir = CHTools.getBoatCfg("game_directory", LAUNCHER_FILE_DIR+".minecraft");
+        String link = CHTools.getBoatCfg("sourceLink", "https://download.mcbbs.net");
         File f = new File(dir);
         File fv = new File(dir + "/versions");
         if (f.exists() && fv.isDirectory() && Objects.requireNonNull(fv.list()).length != 0) {
@@ -1215,9 +1210,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Navi
             bundle.putString("game", dir);
             bundle.putString("address", link);
             showDialog.setArguments(bundle);
-            showDialog.show(Objects.requireNonNull(getActivity()).getSupportFragmentManager(), "show");
+            showDialog.show(requireActivity().getSupportFragmentManager(), "show");
         } else {
-            Snackbar.make(Objects.requireNonNull(getView()), getResources().getString(R.string.no_ver), Snackbar.LENGTH_LONG)
+            Snackbar.make(requireView(), getResources().getString(R.string.no_ver), Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
         }
 
@@ -1226,7 +1221,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Navi
     /**-----------------设备信息--------------------*/
     public void showInfoDialog() {
         Dialog dialog = new Dialog(getContext());
-        View dialogView = Objects.requireNonNull(getActivity()).getLayoutInflater().inflate(R.layout.dialog_info, null);
+        View dialogView = requireActivity().getLayoutInflater().inflate(R.layout.dialog_info, null);
         String cpu, cpuInfo;
         //Initial
         TextView tv1 = dialogView.findViewById(R.id.info_android_ver);
@@ -1304,7 +1299,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Navi
     /**-----------------版本字符读取和更改--------------------*/
     public void setVersion(String version) {
         try {
-            FileInputStream in = new FileInputStream("/storage/emulated/0/games/com.koishi.launcher/h2o2/config.txt");
+            FileInputStream in = new FileInputStream(boatCfg);
             byte[] b = new byte[in.available()];
             in.read(b);
             in.close();
@@ -1312,7 +1307,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Navi
             JSONObject json = new JSONObject(str);
             json.remove("currentVersion");
             json.put("currentVersion", f + "/versions/" + version.trim());
-            FileWriter fr = new FileWriter("/storage/emulated/0/games/com.koishi.launcher/h2o2/config.txt");
+            FileWriter fr = new FileWriter(boatCfg);
             fr.write(json.toString());
             fr.close();
         } catch (Exception e) {
@@ -1322,7 +1317,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Navi
 
     public String getVer() {
         try {
-            FileInputStream in = new FileInputStream("/storage/emulated/0/games/com.koishi.launcher/h2o2/config.txt");
+            FileInputStream in = new FileInputStream(boatCfg);
             byte[] b = new byte[in.available()];
             in.read(b);
             in.close();
@@ -1341,7 +1336,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Navi
     /**-----------------加载皮肤头像--------------------*/
     public void loadSkin() {
         if (mAPI.getText().toString().equals("Mojang") || mAPI.getText().toString().equals("Microsoft")) {
-            String uuid = GetGameJson.getBoatCfg("auth_uuid", "0");
+            String uuid = CHTools.getBoatCfg("auth_uuid", "0");
             String skinUrl = "https://crafatar.com/avatars/" + uuid + "?overlay=true";
             Glide.with(this).load(skinUrl).placeholder(R.drawable.ic_home_user_normal).error(R.drawable.xicon_red).into(skin);
         } else {
@@ -1375,7 +1370,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Navi
             api3rd.setChecked(true);
             lay.setVisibility(View.VISIBLE);
         }
-        url.setText(GetGameJson.getAppCfg("LoginApiValue", ""));
+        url.setText(CHTools.getAppCfg("LoginApiValue", ""));
 
         apiMojang.setOnClickListener(v -> lay.setVisibility(View.GONE));
         apiMs.setOnClickListener(v -> lay.setVisibility(View.GONE));
@@ -1385,11 +1380,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Navi
             showAPIWebDialog();
         });
         mojang.setOnClickListener(v->{
-            CustomTabsIntent intent = new CustomTabsIntent.Builder().setToolbarColor(getResources().getColor(R.color.colorPrimary)).build();
+            CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
             intent.launchUrl(requireActivity(), Uri.parse("https://help.minecraft.net/hc/en-us/articles/360050865492-JAVA-Account-Migration-FAQ\n"));
         });
         reg.setOnClickListener(v->{
-            CustomTabsIntent intent = new CustomTabsIntent.Builder().setToolbarColor(getResources().getColor(R.color.colorPrimary)).build();
+            CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
             intent.launchUrl(requireActivity(), Uri.parse("https://www.minecraft.net/store/minecraft-java-edition/buy\n"));
         });
 
@@ -1397,15 +1392,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Navi
         ok.setOnClickListener(v -> {
             if (apiMojang.isChecked()) {
                 mAPI.setText("Mojang");
-                GetGameJson.setAppJson("LoginApi", "Mojang");
+                CHTools.setAppJson("LoginApi", "Mojang");
             } else if (apiMs.isChecked()) {
                 mAPI.setText("Microsoft");
-                GetGameJson.setAppJson("LoginApi", "Microsoft");
+                CHTools.setAppJson("LoginApi", "Microsoft");
             } else if (api3rd.isChecked()) {
                 //showCustomApiDialog();
                 mAPI.setText(Objects.requireNonNull(url.getText()).toString());
-                GetGameJson.setAppJson("LoginApi", url.getText().toString());
-                GetGameJson.setAppJson("LoginApiValue", url.getText().toString());
+                CHTools.setAppJson("LoginApi", url.getText().toString());
+                CHTools.setAppJson("LoginApiValue", url.getText().toString());
             }
             mDialog.dismiss();
         });
@@ -1449,15 +1444,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Navi
             }
         });
 
-        et.setText(GetGameJson.getAppCfg("apiWeb",""));
+        et.setText(CHTools.getAppCfg("apiWeb",""));
         cancel.setOnClickListener(v->{
             mDialog.dismiss();
             showAPIDialog();
         });
         start.setOnClickListener(v->{
-            CustomTabsIntent intent = new CustomTabsIntent.Builder().setToolbarColor(getResources().getColor(R.color.colorPrimary)).build();
+            CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
             intent.launchUrl(requireActivity(), Uri.parse(Objects.requireNonNull(et.getText()).toString()+"\n"));
-            GetGameJson.setAppJson("apiWeb",et.getText().toString());
+            CHTools.setAppJson("apiWeb",et.getText().toString());
         });
         mDialog.setContentView(dialogView);
         WindowManager windowManager = requireActivity().getWindowManager();

@@ -155,7 +155,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@drawable/ic_btn_green"
-                            android:src="@drawable/ic_home_user_normal" />
+                            android:src="@drawable/ic_home_user_normal"
+                            android:contentDescription="TODO" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -239,7 +240,8 @@
                             android:src="@drawable/ic_launcher_game_play"
                             app:tint="@color/empty"
                             android:background="@drawable/ic_btn_blue"
-                            android:backgroundTint="@color/empty"/>
+                            android:backgroundTint="@color/empty"
+                            android:contentDescription="TODO" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -321,7 +323,7 @@
             android:onClick="setLanguage"
             style="?android:attr/buttonBarButtonStyle"
             android:text="@string/login_language"
-            android:textColor="@color/colorPrimary"/>
+            android:textColor="@color/md_theme_primary"/>
         -->
 
         <com.google.android.material.card.MaterialCardView
@@ -339,7 +341,7 @@
                 android:id="@+id/login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/material_card_background"
+
                 android:foreground="?android:attr/selectableItemBackground"
                 android:orientation="vertical">
 
@@ -362,7 +364,8 @@
                             android:src="@drawable/ic_launcher_game_play"
                             android:background="@drawable/ic_btn_blue"
                             android:backgroundTint="?colorPrimary"
-                            app:tint="@color/material_background" />
+                            app:tint="@color/material_background"
+                            android:contentDescription="TODO" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -436,7 +439,8 @@
                             android:src="@drawable/ic_launcher_game_play"
                             app:tint="@color/empty"
                             android:background="@drawable/ic_btn_blue"
-                            android:backgroundTint="@color/empty"/>
+                            android:backgroundTint="@color/empty"
+                            android:contentDescription="TODO" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -544,7 +548,7 @@
                 android:id="@+id/bc_open"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/material_card_background"
+
                 android:foreground="?android:attr/selectableItemBackground"
                 android:orientation="vertical">
 
@@ -567,7 +571,8 @@
                             android:src="@drawable/ic_home_notification"
                             app:tint="@color/material_background"
                             android:background="@drawable/ic_btn_blue"
-                            android:backgroundTint="?colorPrimary"/>
+                            android:backgroundTint="?colorPrimary"
+                            android:contentDescription="TODO" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -640,7 +645,8 @@
                             android:src="@drawable/ic_launcher_game_play"
                             app:tint="@color/empty"
                             android:background="@drawable/ic_btn_blue"
-                            android:backgroundTint="@color/empty"/>
+                            android:backgroundTint="@color/empty"
+                            android:contentDescription="TODO" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -863,7 +869,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/material_card_background"
+
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -883,7 +889,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/ic_home_notification"
-                            app:tint="?colorPrimary" />
+                            app:tint="?colorPrimary"
+                            android:contentDescription="TODO" />
 
                         <com.google.android.material.circularreveal.CircularRevealLinearLayout
                             android:layout_width="match_parent"
@@ -1105,7 +1112,6 @@
         </com.google.android.material.circularreveal.CircularRevealLinearLayout>
 
         <com.google.android.material.navigation.NavigationView
-            style="@style/Widget.GoogleMaterial.NavigationView"
             android:id="@+id/nav_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -1117,8 +1123,6 @@
             android:layout_marginBottom="5dp"
             app:elevation="0dp"
             app:menu="@menu/menu_home_nav"
-            android:background="@color/material_background"
-            app:itemTextAppearance="@style/Widget.GoogleMaterial.NavigationView"
             app:itemVerticalPadding="15dp"
             app:itemIconTint="?colorPrimary"/>
 

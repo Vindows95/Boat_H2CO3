@@ -15,6 +15,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
@@ -45,7 +46,7 @@ public class MinecraftAuthenticator extends Authenticator<MinecraftToken> {
      * @param password the password
      * @return the minecraft token
      */
-    public MinecraftToken loginWithXbox(String email, String password) {
+    public MinecraftToken loginWithXbox(String email, String password) throws UnsupportedEncodingException {
         XboxToken xboxToken = microsoftAuthenticator.login(email, password);
 
         try {

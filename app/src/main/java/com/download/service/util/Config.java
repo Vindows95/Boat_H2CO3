@@ -146,12 +146,12 @@ public class Config
 "home":"/storage/emulated/0/boat"
 "runtimePath":"/data/user/0/cosine.boat/app_runtime"
 "auth_access_token":"0"
-"currentVersion":"/storage/emulated/0/boat/gamedir/versions/1.7.10"
-"game_assets":"/storage/emulated/0/boat/gamedir/assets/virtual/legacy"
+"currentVersion":"/storage/emulated/0/boat/.minecraft/versions/1.7.10"
+"game_assets":"/storage/emulated/0/boat/.minecraft/assets/virtual/legacy"
 "user_type":"mojang"
-"game_directory":"/storage/emulated/0/boat/gamedir"
+"game_directory":"/storage/emulated/0/boat/.minecraft"
 "user_properties":"{}"
-"assets_root":"/storage/emulated/0/boat/gamedir/assets"
+"assets_root":"/storage/emulated/0/boat/.minecraft/assets"
 
 
 

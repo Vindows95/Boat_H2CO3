@@ -30,7 +30,7 @@ public class MicrosoftAuthenticator extends Authenticator<XboxToken> {
     protected String loginPPFT;
 
     @Override
-    public XboxToken login(String email, String password) {
+    public XboxToken login(String email, String password) throws UnsupportedEncodingException {
         MicrosoftToken microsoftToken = generateTokenPair(generateLoginCode(email, password));
         XboxLiveToken xboxLiveToken = generateXboxTokenPair(microsoftToken);
         return generateXboxTokenPair(xboxLiveToken);
@@ -43,7 +43,7 @@ public class MicrosoftAuthenticator extends Authenticator<XboxToken> {
      * @param password microsoft password
      * @return login code
      */
-    private String generateLoginCode(String email, String password) {
+    private String generateLoginCode(String email, String password) throws UnsupportedEncodingException {
         try {
             URL url = new URL("https://login.live.com/oauth20_authorize.srf?redirect_uri=https://login.live.com/oauth20_desktop.srf&scope=" + scopeUrl + "&display=touch&response_type=code&locale=en&client_id=" + clientId);
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -83,7 +83,7 @@ public class MicrosoftAuthenticator extends Authenticator<XboxToken> {
      * @param password microsoft password
      * @return login code
      */
-    private String sendCodeData(String email, String password) {
+    private String sendCodeData(String email, String password) throws UnsupportedEncodingException {
         String authToken;
 
         Map<String, String> requestData = new HashMap<>();
@@ -116,7 +116,7 @@ public class MicrosoftAuthenticator extends Authenticator<XboxToken> {
 
             Pattern pattern = Pattern.compile("[?|&]code=([\\w.-]+)");
 
-            Matcher tokenMatcher = pattern.matcher(URLDecoder.decode(connection.getURL().toString(), StandardCharsets.UTF_8));
+            Matcher tokenMatcher = pattern.matcher(URLDecoder.decode(connection.getURL().toString(), String.valueOf(StandardCharsets.UTF_8)));
             if (tokenMatcher.find()) {
                 authToken = tokenMatcher.group(1);
             } else {
@@ -299,8 +299,8 @@ public class MicrosoftAuthenticator extends Authenticator<XboxToken> {
      * @param url the url
      * @return the string
      */
-    private String encodeURL(String url) {
-        return URLEncoder.encode(url, StandardCharsets.UTF_8);
+    private String encodeURL(String url) throws UnsupportedEncodingException {
+        return URLEncoder.encode(url, String.valueOf(StandardCharsets.UTF_8));
     }
 
 
@@ -310,7 +310,7 @@ public class MicrosoftAuthenticator extends Authenticator<XboxToken> {
      * @param map the map
      * @return the string
      */
-    private String encodeURL(Map<String, String> map) {
+    private String encodeURL(Map<String, String> map) throws UnsupportedEncodingException {
         StringBuilder sb = new StringBuilder();
         for (Map.Entry<String, String> entry : map.entrySet()) {
             if (sb.length() > 0) {

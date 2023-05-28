@@ -1,6 +1,10 @@
 package cosine.boat;
 
 
+import static cosine.boat.CHTools.h2co3Cfg;
+
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.res.Resources;
 import android.graphics.SurfaceTexture;
@@ -19,6 +23,7 @@ import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.TextureView;
 import android.view.View;
+import android.view.View.OnSystemUiVisibilityChangeListener;
 import android.view.View.OnTouchListener;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
@@ -36,6 +41,7 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 
 
+@RequiresApi(api = Build.VERSION_CODES.O)
 public class BoatActivityMk extends Activity implements TextureView.SurfaceTextureListener, SurfaceHolder.Callback, OnTouchListener, View.OnClickListener, TextWatcher, TextView.OnEditorActionListener, View.OnCapturedPointerListener {
     public static final int FLAG_HOMEKEY_DISPATCHED = 0x80000000;
 
@@ -51,6 +57,7 @@ public class BoatActivityMk extends Activity implements TextureView.SurfaceTextu
     private Button button;
     private int height;
     private int width;
+    private RelativeLayout base;
     private TextView text2;
     private EditText inputScanner;
     private String rc, noesc;
@@ -68,6 +75,7 @@ public class BoatActivityMk extends Activity implements TextureView.SurfaceTextu
     private int baseY = 0;
     private boolean Lock = false;
     private ImageView mouseCursor;
+    private TextureView mainTextureView;
     private MyHandler mHandler;
 
     View controllerView;
@@ -127,13 +135,16 @@ public class BoatActivityMk extends Activity implements TextureView.SurfaceTextu
         System.out.println("Surface is available!");
         BoatActivityMk.setBoatNativeWindow(p1.getSurface());
 
-        new Thread(() -> {
-            LauncherConfig config = LauncherConfig.fromFile(getIntent().getExtras().getString("config"));
-            LoadMe.exec(config);
-            Message msg = new Message();
-            msg.what = -1;
-            mHandler.sendMessage(msg);
-        }).start();
+        new Thread() {
+            @Override
+            public void run() {
+                LauncherConfig config = LauncherConfig.fromFile(getIntent().getExtras().getString("config"));
+                LoadMe.exec(config);
+                Message msg = new Message();
+                msg.what = -1;
+                mHandler.sendMessage(msg);
+            }
+        }.start();
     }
 
     @Override
@@ -155,9 +166,11 @@ public class BoatActivityMk extends Activity implements TextureView.SurfaceTextu
 
         new Thread(new Runnable() {
 
+            private java.lang.Process logcatProcess;
+
             @Override
             public void run() {
-                Process logcatProcess = null;
+                logcatProcess = null;
                 BufferedReader bufferedReader = null;
                 try {
                     /* 获取系统logcat日志信息 */
@@ -187,8 +200,8 @@ public class BoatActivityMk extends Activity implements TextureView.SurfaceTextu
 
         text = (TextView) findViewById(R.id.mainTextView1);
         text2 = (TextView) findViewById(R.id.mainTextView2);
-        RelativeLayout base = (RelativeLayout) findViewById(R.id.mainRelativeLayout1);
-        TextureView mainTextureView = (TextureView) this.findViewById(R.id.mouse_surface);
+        base = (RelativeLayout) findViewById(R.id.mainRelativeLayout1);
+        mainTextureView = (TextureView) this.findViewById(R.id.mouse_surface);
         //mainTextureView.setSurfaceTexture(new   SurfaceHolder.Callback(){});
 
         rc = cp2();
@@ -198,7 +211,12 @@ public class BoatActivityMk extends Activity implements TextureView.SurfaceTextu
         mouseCursor = (ImageView) findViewById(R.id.mouse_cursor2);
 
 
-        alpha = Build.VERSION.SDK_INT >= Build.VERSION_CODES.O;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            alpha = true;
+        } else {
+            alpha = false;
+
+        }
 
         Resources resources = this.getResources();
         DisplayMetrics dm = resources.getDisplayMetrics();
@@ -208,6 +226,9 @@ public class BoatActivityMk extends Activity implements TextureView.SurfaceTextu
 
 
         mHandler = new MyHandler();
+
+        //Intent intent = this.getIntent();
+        //d = intent.getStringExtra("dat");
 
         button = findViewById(R.id.touch_pad22);
         button.setOnTouchListener(this);
@@ -329,7 +350,14 @@ public class BoatActivityMk extends Activity implements TextureView.SurfaceTextu
         });
 
         Handler h = new Handler();
-        h.postDelayed(() -> Lock = true, 3000);
+        h.postDelayed(new Runnable() {
+
+
+            @Override
+            public void run() {
+                Lock = true;
+            }
+        }, 3000);
 
     }
 
@@ -339,7 +367,9 @@ public class BoatActivityMk extends Activity implements TextureView.SurfaceTextu
         controllerView.setDefaultFocusHighlightEnabled(false);
         controllerView.setOnCapturedPointerListener(this);
         Handler h = new Handler();
-        h.postDelayed(() -> controllerView.requestPointerCapture(), 500);//这个线程延时很重要，不做延时或者延时时间短是无法实现view的onCapturedPointer事件监听的
+        h.postDelayed(() -> {
+            controllerView.requestPointerCapture();
+        }, 500);//这个线程延时很重要，不做延时或者延时时间短是无法实现view的onCapturedPointer事件监听的
     }
 
     @Override
@@ -396,26 +426,26 @@ public class BoatActivityMk extends Activity implements TextureView.SurfaceTextu
             setMargins(posX, initialY);
         }
         //4
-        else if (X <= 0 && Y > 0) {
+        else if (X <= 0 && Y > 0 && Y < height) {
             posX -= 10;
             int y = posY + Y;
             setMargins(posX, y);
         }
         //2
-        else if (Y <= 0 && X > 0) {
+        else if (Y <= 0 && X > 0 && X < width) {
             int x = posX + X;
             posY -= 10;
             setMargins(x, posY);
         }
         //6
-        else if (X >= width && Y > 0) {
+        else if (X >= width && Y > 0 && Y < height) {
             posX += 10;
             initialX += 10;
             int y = posY + Y;
             setMargins(initialX, y);
         }
         //8
-        else if (Y >= height && X > 0) {
+        else if (Y >= height && X > 0 && X < width) {
 
 
             posY += 10;
@@ -426,7 +456,7 @@ public class BoatActivityMk extends Activity implements TextureView.SurfaceTextu
             setMargins(x, initialY);
         }
         //5
-        else if (X < width && Y > 0) {
+        else if (X > 0 && X < width && Y > 0 && Y < height) {
 
             int x = posX + X;
             int y = posY + Y;
@@ -553,17 +583,21 @@ public class BoatActivityMk extends Activity implements TextureView.SurfaceTextu
         }
 
 
-        if (event.getActionMasked() == MotionEvent.ACTION_SCROLL) {
-            if (event.getAxisValue(MotionEvent.AXIS_VSCROLL) < 0.0f) {
-                text.append("down");//5
-                BoatInput.setMouseButton(BoatInput.Button5, true);
-                xia = true;
+        switch (event.getActionMasked()) {
+            case MotionEvent.ACTION_SCROLL:
 
-            } else {
-                text.append("up");//4
-                BoatInput.setMouseButton(BoatInput.Button4, true);
-                shang = true;
-            }
+                if (event.getAxisValue(MotionEvent.AXIS_VSCROLL) < 0.0f) {
+                    text.append("down");//5
+                    BoatInput.setMouseButton(BoatInput.Button5, true);
+                    xia = true;
+
+                } else {
+                    text.append("up");//4
+                    BoatInput.setMouseButton(BoatInput.Button4, true);
+                    shang = true;
+                }
+                break;
+
         }
 
         return false;
@@ -576,7 +610,9 @@ public class BoatActivityMk extends Activity implements TextureView.SurfaceTextu
         if (cursorMode == BoatInput.CursorDisabled) {
             if (noesc.equals("false")) {
                 BoatInput.setKey(BoatKeycodes.BOAT_KEYBOARD_Escape, 0, true);
+            } else {
             }
+        } else {
         }
 
     }
@@ -598,8 +634,17 @@ public class BoatActivityMk extends Activity implements TextureView.SurfaceTextu
         //button.setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
 
 
-        alpha = Build.VERSION.SDK_INT >= Build.VERSION_CODES.O;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            alpha = true;
+        } else {
+            alpha = false;
+
+        }
     }
+
+    //private boolean overlayCreated = false;
+    //private PopupWindow popupWindow;
+    //private RelativeLayout base;
 
     @Override
     public void onBackPressed() {
@@ -612,14 +657,17 @@ public class BoatActivityMk extends Activity implements TextureView.SurfaceTextu
         System.out.println("SurfaceTexture is available!");
         BoatActivityMk.setBoatNativeWindow(new Surface(surface));
 
-        new Thread(() -> {
+        new Thread() {
+            @Override
+            public void run() {
 
-            LauncherConfig config = LauncherConfig.fromFile(getIntent().getExtras().getString("config"));
-            LoadMe.exec(config);
-            Message msg = new Message();
-            msg.what = -1;
-            mHandler.sendMessage(msg);
-        }).start();
+                LauncherConfig config = LauncherConfig.fromFile(getIntent().getExtras().getString("config"));
+                LoadMe.exec(config);
+                Message msg = new Message();
+                msg.what = -1;
+                mHandler.sendMessage(msg);
+            }
+        }.start();
     }
 
     public void setCursorMode(int mode) {
@@ -640,7 +688,7 @@ public class BoatActivityMk extends Activity implements TextureView.SurfaceTextu
 
     private String cp2() {
         try {
-            FileInputStream in = new FileInputStream("/sdcard/games/com.koishi.launcher/h2o2/h2ocfg.json");
+            FileInputStream in = new FileInputStream(h2co3Cfg);
             byte[] b = new byte[in.available()];
             in.read(b);
             in.close();
@@ -655,7 +703,7 @@ public class BoatActivityMk extends Activity implements TextureView.SurfaceTextu
 
     private String cp4() {
         try {
-            FileInputStream in = new FileInputStream("/sdcard/games/com.koishi.launcher/h2o2/h2ocfg.json");
+            FileInputStream in = new FileInputStream(h2co3Cfg);
             byte[] b = new byte[in.available()];
             in.read(b);
             in.close();

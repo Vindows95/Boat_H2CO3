@@ -1,5 +1,8 @@
 package org.koishi.launcher.h2co3.ui.manager;
 
+import static org.koishi.launcher.h2co3.tool.CHTools.LAUNCHER_FILE_DIR;
+import static org.koishi.launcher.h2co3.tool.CHTools.boatCfg;
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,9 +25,9 @@ import com.google.android.material.textfield.TextInputEditText;
 import org.json.JSONObject;
 import org.koishi.launcher.h2co3.R;
 import org.koishi.launcher.h2co3.VersionsActivity;
+import org.koishi.launcher.h2co3.tool.CHTools;
 import org.koishi.launcher.h2co3.tool.data.DbDao;
 import org.koishi.launcher.h2co3.tool.file.AppExecute;
-import org.koishi.launcher.h2co3.tool.GetGameJson;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -64,7 +67,7 @@ public class ManagerFragment extends Fragment {
 
         mSetButton.setOnClickListener(v -> setDirectory());
         mResetButton.setOnClickListener(v -> reset());
-        mDirectory.setText(GetGameJson.getBoatCfg("game_directory","/storage/emulated/0/games/com.koishi.launcher/h2o2/gamedir"));
+        mDirectory.setText(CHTools.getBoatCfg("game_directory",LAUNCHER_FILE_DIR+".minecraft"));
 
         mOutputButton.setOnClickListener(v -> setOutput());
 
@@ -168,13 +171,13 @@ public class ManagerFragment extends Fragment {
         mResetButton.setEnabled(true);
         mOutput.setEnabled(true);
         mOutputButton.setEnabled(true);
-        setDir("/storage/emulated/0/games/com.koishi.launcher/h2o2/gamedir");
-        mDirectory.setText("/storage/emulated/0/games/com.koishi.launcher/h2o2/gamedir");
+        setDir(LAUNCHER_FILE_DIR+".minecraft");
+        mDirectory.setText(LAUNCHER_FILE_DIR+".minecraft");
     }
 
     public static void setDir(String dir) {
         try {
-            FileInputStream in = new FileInputStream("/storage/emulated/0/games/com.koishi.launcher/h2o2/config.txt");
+            FileInputStream in = new FileInputStream(boatCfg);
             byte[] b = new byte[in.available()];
             in.read(b);
             in.close();
@@ -188,7 +191,7 @@ public class ManagerFragment extends Fragment {
             json.put("game_assets", dir + "/assets/virtual/legacy");
             json.put("assets_root", dir + "/assets");
             json.put("currentVersion", dir + "/versions");
-            FileWriter fr = new FileWriter("/storage/emulated/0/games/com.koishi.launcher/h2o2/config.txt");
+            FileWriter fr = new FileWriter(boatCfg);
             fr.write(json.toString());
             fr.close();
         } catch (Exception e) {

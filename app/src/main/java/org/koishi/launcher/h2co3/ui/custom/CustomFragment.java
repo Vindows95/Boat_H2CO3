@@ -1,6 +1,7 @@
 package org.koishi.launcher.h2co3.ui.custom;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.fragment.app.Fragment;
@@ -66,8 +68,8 @@ public class CustomFragment extends Fragment {
 
     /****************
      * <p>
-     * 发起添加群流程。群号：Boat_H2O2 &amp;&amp; 高 考 冲 刺 (572291176) 的 key 为： -c3oG3cfXX-v6W8MbEl9_Fl2JjuuvpC6
-     * 调用 joinQQGroup(-c3oG3cfXX-v6W8MbEl9_Fl2JjuuvpC6) 即可发起手Q客户端申请加群 Boat_H2O2 &amp;&amp; 高 考 冲 刺 (572291176)
+     * 发起添加群流程。群号：Boat_H2CO3 &amp;&amp; 高 考 冲 刺 (572291176) 的 key 为： -c3oG3cfXX-v6W8MbEl9_Fl2JjuuvpC6
+     * 调用 joinQQGroup(-c3oG3cfXX-v6W8MbEl9_Fl2JjuuvpC6) 即可发起手Q客户端申请加群 Boat_H2CO3 &amp;&amp; 高 考 冲 刺 (572291176)
      *
      * @param key 由官网生成的key
      ******************/
@@ -85,7 +87,7 @@ public class CustomFragment extends Fragment {
     //----------Menu点击----------
 
     public void openDonate() {
-        Dialog mDialog = new Dialog(requireActivity());
+        Dialog mDialog = new Dialog(requireActivity(), R.style.AppTheme_MaterialAlertDialog);
         View dialogView = requireActivity().getLayoutInflater().inflate(R.layout.custom_donate_layout, null);
         mDialog.setContentView(dialogView);
 
@@ -94,15 +96,15 @@ public class CustomFragment extends Fragment {
         ptr = dialogView.findViewById(R.id.donate_ptr);
 
         vx.setOnClickListener(v->{
-            CustomTabsIntent intent = new CustomTabsIntent.Builder().setToolbarColor(getResources().getColor(R.color.colorPrimary)).build();
+            CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
             intent.launchUrl(requireActivity(), Uri.parse("https://gitee.com/NaCln4c1/naclfile/raw/master/Documents/ic_donate_wx.png"));
         });
         afd.setOnClickListener(v->{
-            CustomTabsIntent intent = new CustomTabsIntent.Builder().setToolbarColor(getResources().getColor(R.color.colorPrimary)).build();
+            CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
             intent.launchUrl(requireActivity(), Uri.parse("https://afdian.net/@boat-h2o"));
         });
         ptr.setOnClickListener(v->{
-            CustomTabsIntent intent = new CustomTabsIntent.Builder().setToolbarColor(getResources().getColor(R.color.colorPrimary)).build();
+            CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
             intent.launchUrl(requireActivity(), Uri.parse("https://www.patreon.com/boatapp_h2o"));
         });
 
@@ -147,11 +149,11 @@ public class CustomFragment extends Fragment {
             mDialog.dismiss();
         });
         dis.setOnClickListener(v->{
-            CustomTabsIntent intent = new CustomTabsIntent.Builder().setToolbarColor(getResources().getColor(R.color.colorPrimary)).build();
+            CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
             intent.launchUrl(requireActivity(), Uri.parse("https://discord.gg/Ktw9sYx879\n"));
         });
         git.setOnClickListener(v->{
-            CustomTabsIntent intent = new CustomTabsIntent.Builder().setToolbarColor(getResources().getColor(R.color.colorPrimary)).build();
+            CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
             intent.launchUrl(requireActivity(), Uri.parse("https://github.com/NaCln4c1"));
         });
 
@@ -182,51 +184,51 @@ public class CustomFragment extends Fragment {
         libFast = dialogView.findViewById(R.id.lib_fastjson);
 
         libBoat.setOnClickListener(v->{
-            CustomTabsIntent intent = new CustomTabsIntent.Builder().setToolbarColor(getResources().getColor(R.color.colorPrimary)).build();
+            CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
             intent.launchUrl(requireActivity(), Uri.parse("https://github.com/AOF-Dev/BoatApp\n"));
         });
         libMio.setOnClickListener(v->{
-            CustomTabsIntent intent = new CustomTabsIntent.Builder().setToolbarColor(getResources().getColor(R.color.colorPrimary)).build();
+            CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
             intent.launchUrl(requireActivity(), Uri.parse("https://github.com/ShirosakiMio/BoatApp\n"));
         });
         libCrash.setOnClickListener(v->{
-            CustomTabsIntent intent = new CustomTabsIntent.Builder().setToolbarColor(getResources().getColor(R.color.colorPrimary)).build();
+            CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
             intent.launchUrl(requireActivity(), Uri.parse("https://github.com/Ereza/CustomActivityOnCrash\n"));
         });
         libLogin.setOnClickListener(v->{
-            CustomTabsIntent intent = new CustomTabsIntent.Builder().setToolbarColor(getResources().getColor(R.color.colorPrimary)).build();
+            CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
             intent.launchUrl(requireActivity(), Uri.parse("https://github.com/Ratsiiel/minecraft-auth-library\n"));
         });
         libXz.setOnClickListener(v->{
-            CustomTabsIntent intent = new CustomTabsIntent.Builder().setToolbarColor(getResources().getColor(R.color.colorPrimary)).build();
+            CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
             intent.launchUrl(requireActivity(), Uri.parse("https://tukaani.org/xz/java.html\n"));
         });
         libCommon.setOnClickListener(v->{
-            CustomTabsIntent intent = new CustomTabsIntent.Builder().setToolbarColor(getResources().getColor(R.color.colorPrimary)).build();
+            CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
             intent.launchUrl(requireActivity(), Uri.parse("https://github.com/apache/commons-compress\n"));
         });
         libJsoup.setOnClickListener(v->{
-            CustomTabsIntent intent = new CustomTabsIntent.Builder().setToolbarColor(getResources().getColor(R.color.colorPrimary)).build();
+            CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
             intent.launchUrl(requireActivity(), Uri.parse("https://github.com/jhy/jsoup\n"));
         });
         libGson.setOnClickListener(v->{
-            CustomTabsIntent intent = new CustomTabsIntent.Builder().setToolbarColor(getResources().getColor(R.color.colorPrimary)).build();
+            CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
             intent.launchUrl(requireActivity(), Uri.parse("https://github.com/google/gson\n"));
         });
         libShell.setOnClickListener(v->{
-            CustomTabsIntent intent = new CustomTabsIntent.Builder().setToolbarColor(getResources().getColor(R.color.colorPrimary)).build();
+            CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
             intent.launchUrl(requireActivity(), Uri.parse("https://github.com/jackpal/Android-Terminal-Emulator\n"));
         });
         libMd.setOnClickListener(v->{
-            CustomTabsIntent intent = new CustomTabsIntent.Builder().setToolbarColor(getResources().getColor(R.color.colorPrimary)).build();
+            CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
             intent.launchUrl(requireActivity(), Uri.parse("https://gitee.com/wateryuan/MarkDownTest\n"));
         });
         libHttp.setOnClickListener(v->{
-            CustomTabsIntent intent = new CustomTabsIntent.Builder().setToolbarColor(getResources().getColor(R.color.colorPrimary)).build();
+            CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
             intent.launchUrl(requireActivity(), Uri.parse("https://github.com/ejlchina/okhttps\n"));
         });
         libFast.setOnClickListener(v->{
-            CustomTabsIntent intent = new CustomTabsIntent.Builder().setToolbarColor(getResources().getColor(R.color.colorPrimary)).build();
+            CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
             intent.launchUrl(requireActivity(), Uri.parse("https://github.com/alibaba/fastjson\n"));
         });
 
@@ -251,27 +253,27 @@ public class CustomFragment extends Fragment {
         thkShulker = dialogView.findViewById(R.id.thk_shulker);
 
         thkBoat.setOnClickListener(v->{
-            CustomTabsIntent intent = new CustomTabsIntent.Builder().setToolbarColor(getResources().getColor(R.color.colorPrimary)).build();
+            CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
             intent.launchUrl(requireActivity(), Uri.parse("https://github.com/CosineMath\n"));
         });
         thkMio.setOnClickListener(v->{
-            CustomTabsIntent intent = new CustomTabsIntent.Builder().setToolbarColor(getResources().getColor(R.color.colorPrimary)).build();
+            CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
             intent.launchUrl(requireActivity(), Uri.parse("https://github.com/ShirosakiMio\n"));
         });
         thkLogin.setOnClickListener(v->{
-            CustomTabsIntent intent = new CustomTabsIntent.Builder().setToolbarColor(getResources().getColor(R.color.colorPrimary)).build();
+            CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
             intent.launchUrl(requireActivity(), Uri.parse("https://github.com/Ratsiiel\n"));
         });
         thkFire.setOnClickListener(v->{
-            CustomTabsIntent intent = new CustomTabsIntent.Builder().setToolbarColor(getResources().getColor(R.color.colorPrimary)).build();
+            CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
             intent.launchUrl(requireActivity(), Uri.parse("https://github.com/MCfire-miracle\n"));
         });
         thkFish.setOnClickListener(v->{
-            CustomTabsIntent intent = new CustomTabsIntent.Builder().setToolbarColor(getResources().getColor(R.color.colorPrimary)).build();
+            CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
             intent.launchUrl(requireActivity(), Uri.parse("https://github.com/TSaltedfishKing\n"));
         });
         thkShulker.setOnClickListener(v->{
-            CustomTabsIntent intent = new CustomTabsIntent.Builder().setToolbarColor(getResources().getColor(R.color.colorPrimary)).build();
+            CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
             intent.launchUrl(requireActivity(), Uri.parse("https://github.com/ShulkerSakura\n"));
         });
 

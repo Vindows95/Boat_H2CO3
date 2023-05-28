@@ -23,7 +23,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import org.koishi.launcher.h2co3.application.H2CO3Activity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -31,8 +31,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.switchmaterial.SwitchMaterial;
-
-import org.koishi.launcher.h2co3.tool.GetGameJson;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -47,7 +45,9 @@ import java.util.Objects;
 
 import static java.io.File.separator;
 
-public class ModsActivity extends AppCompatActivity {
+import org.koishi.launcher.h2co3.tool.CHTools;
+
+public class ModsActivity extends H2CO3Activity {
 
     public LinearLayout modv;
     public RecyclerView mModRecyclerView;
@@ -59,10 +59,10 @@ public class ModsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mods);
-        getWindow().setStatusBarColor(getResources().getColor(R.color.material_card_background));
+        
         modv = findViewById(R.id.mods_view);
         Toolbar toolbar = findViewById(R.id.toolbar);
-        String load = GetGameJson.getAppCfg("allVerLoad","false");
+        String load = CHTools.getAppCfg("allVerLoad","false");
         if (load.equals("true")){
             toolbar.setTitle(getResources().getString(R.string.menu_mod_single));
         } else {
@@ -247,7 +247,7 @@ public class ModsActivity extends AppCompatActivity {
                             holder.rl.setEnabled(false);
                             //TODO
                             new Thread(() -> {
-                                //String file2= "/data/data/com.koishi.launcher.h2o2/app_runtime";
+                                //String file2= "/data/data/org.koishi.launcher.h2co3/app_runtime";
                                 if (f.isDirectory()){
                                     deleteDirWihtFile(f);
                                 }else {
