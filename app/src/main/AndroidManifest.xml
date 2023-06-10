@@ -15,6 +15,7 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
+        android:hardwareAccelerated="true"
         android:name="cosine.boat.BoatApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_h2o2_low_px"
@@ -23,7 +24,7 @@
         android:supportsRtl="true"
         android:isGame="true"
         android:appCategory="game"
-        android:theme="@style/Theme.Boat_H2CO3">
+        android:theme="@style/Theme.Boat_H2CO3.DynamicColors">
         <activity
             android:name=".LogcatActivity"
             android:screenOrientation="portrait"
@@ -75,6 +76,11 @@
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".InitialActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+
+        <activity
+            android:name=".launch.boat.BoatActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
 

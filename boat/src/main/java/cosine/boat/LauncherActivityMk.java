@@ -1,6 +1,7 @@
 package cosine.boat;
 
 import static cosine.boat.CHTools.LAUNCHER_FILE_DIR;
+import static cosine.boat.CHTools.boatCfg;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -26,7 +27,8 @@ public class LauncherActivityMk extends Activity {
 			i = new Intent(LauncherActivityMk.this, BoatActivityMk.class);
 		}
 		Bundle bundle=new Bundle();
-		bundle.putString("config", LAUNCHER_FILE_DIR+"config.txt");
+		bundle.putString("config", boatCfg);
+		assert i != null;
 		i.putExtras(bundle);
 		//i.putExtra("dat",c);
 		this.startActivity(i);

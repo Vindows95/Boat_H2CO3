@@ -265,7 +265,7 @@
                                     android:orientation="horizontal">
 
                                     <com.google.android.material.button.MaterialButton
-                                        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+                                        style="@style/Widget.Material3.Button.UnelevatedButton"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
@@ -275,7 +275,7 @@
                                         app:iconGravity="textStart"/>
 
                                     <com.google.android.material.button.MaterialButton
-                                        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+                                        style="@style/Widget.Material3.Button.UnelevatedButton"
                                         android:id="@+id/home_reg"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
@@ -464,7 +464,7 @@
                                     android:orientation="horizontal">
 
                                     <com.google.android.material.button.MaterialButton
-                                        style="@style/Widget.MaterialComponents.Button.TextButton"
+                                        style="@style/Widget.Material3.Button.TextButton"
                                         android:id="@+id/home_new"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
@@ -477,7 +477,7 @@
                                         app:iconGravity="textStart"/>
 
                                     <com.google.android.material.button.MaterialButton
-                                        style="@style/Widget.MaterialComponents.Button.TextButton"
+                                        style="@style/Widget.Material3.Button.TextButton"
                                         android:id="@+id/home_manager"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
@@ -670,7 +670,7 @@
                                     android:orientation="horizontal">
 
                                     <com.google.android.material.button.MaterialButton
-                                        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+                                        style="@style/Widget.Material3.Button.UnelevatedButton"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
@@ -680,7 +680,7 @@
                                         app:iconGravity="textStart"/>
 
                                     <com.google.android.material.button.MaterialButton
-                                        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+                                        style="@style/Widget.Material3.Button.UnelevatedButton"
                                         android:id="@+id/home_qq"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"

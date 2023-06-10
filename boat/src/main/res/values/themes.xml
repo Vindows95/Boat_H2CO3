@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="BoatTheme" parent="@android:style/Theme.Holo.Light.DarkActionBar">
+    <style name="BoatTheme" parent="@android:style/Theme.Holo.Light.NoActionBar">
 	</style>
 	<style name="FullScreenTheme" parent="@android:style/Theme.Holo.Light.NoActionBar">
 		<item name="android:windowFullscreen">true</item>
 	</style>
-	<style name="AppBaseTheme" parent="Theme.MaterialComponents.Light">
+	<style name="AppBaseTheme" parent="Theme.Material3.Light">
 		<!-- Color Theme: https://material.io/develop/android/theming/color/ -->
 		<item name="colorPrimary">@color/colorPrimary</item>
 		<item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -16,8 +16,6 @@
 		<item name="colorOnSecondary">@color/white</item>
 		<item name="actionBarStyle">@style/MyActionBar</item>
 
-		<item name="android:windowLightStatusBar">true</item>
-		<item name="android:windowLightNavigationBar">true</item>
 		<item name="android:navigationBarColor">@color/material_card_background</item>
 		<item name="android:windowBackground">@color/material_background</item>
 		<item name="cardForegroundColor">@color/material_blue</item>
@@ -33,7 +31,7 @@
 		<item name="windowNoTitle">true</item>
 	</style>
 
-	<style name="AppBaseTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.ActionBar" />
+	<style name="AppBaseTheme.AppBarOverlay" parent="ThemeOverlay.Material3.ActionBar" />
 
-	<style name="AppBaseTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light" />
+	<style name="AppBaseTheme.PopupOverlay" parent="ThemeOverlay.Material3.Light" />
 </resources>

@@ -1,37 +1,37 @@
 package cosine.boat;
 
+import android.util.Log;
+
 import java.io.File;
 import java.util.Vector;
 
 public class LoadMe {
 
-    public static native int chdir(String str);
-    public static native int jliLaunch(String[] strArr);
-    public static native void redirectStdio(String file);
-    public static native void setenv(String str, String str2);
-    public static native void setupJLI();
-    public static native int dlopen(String name);
+	public static native int chdir(String str);
+	public static native int jliLaunch(String[] strArr);
+	public static native void redirectStdio(String file);
+	public static native void setenv(String str, String str2);
+	public static native void setupJLI();
+	public static native int dlopen(String name);
+	public static native int dlexec(String[] args);
 	public static native void setLibraryPath(String path);
 	public static native void patchLinker();
 
-    static {
-        System.loadLibrary("boat");
-    }
+	static {
+		System.loadLibrary("boat");
+	}
 
-    public static int exec(LauncherConfig config) {
-        try {
+	public static int exec(LauncherConfig config) {
+		try {
 
-            MinecraftVersion mcVersion = MinecraftVersion.fromDirectory(new File(config.get("currentVersion")));
-            String runtimePath = config.get("runtimePath");
+			MinecraftVersion mcVersion = MinecraftVersion.fromDirectory(new File(config.get("currentVersion")));
+			String runtimePath = config.get("runtimePath");
 
 			String arch = "aarch64";
 			String vm_variant = "server";
 
 			String token =config.get("auth_access_token");
-
-            //String libraryPath = runtimePath + "/j2re-image/lib/" + arch + "/jli:" + runtimePath + "/j2re-image/lib/" + arch + ":" + runtimePath + "/lwjgl-3:" + runtimePath;
-
-            //setLibraryPath(libraryPath);
+			//setLibraryPath(libraryPath);
 			patchLinker();
 
 			String pdir = LauncherConfig.privateDir();
@@ -40,7 +40,7 @@ public class LoadMe {
 
 			String home = config.get("home");
 
-            String strd = config.get("currentVersion");
+			String strd = config.get("currentVersion");
 
 			if (pdir.equals("false")) {
 				setenv("HOME", home);
@@ -48,50 +48,85 @@ public class LoadMe {
 				setenv("HOME", strd);
 			}
 
-			//setenv("HOME", home);
-
-            setenv("JAVA_HOME" , runtimePath + "/j2re-image");
-			setenv("LIBGL_MIPMAP", "3");
-			setenv("LIBGL_NORMALIZE", "1");
-
-            // openjdk
-            dlopen(runtimePath + "/j2re-image/lib/" + arch + "/libfreetype.so");
-            dlopen(runtimePath + "/j2re-image/lib/" + arch + "/libpng16.so.16");
-            dlopen(runtimePath + "/j2re-image/lib/" + arch + "/libfontmanager.so");
-            dlopen(runtimePath + "/j2re-image/lib/" + arch + "/libpng16.so");
-            dlopen(runtimePath + "/j2re-image/lib/" + arch + "/jli/libjli.so");
-            dlopen(runtimePath + "/j2re-image/lib/" + arch + "/" + vm_variant + "/libjvm.so");
-            dlopen(runtimePath + "/j2re-image/lib/" + arch + "/libverify.so");
-            dlopen(runtimePath + "/j2re-image/lib/" + arch + "/libjava.so");
-            dlopen(runtimePath + "/j2re-image/lib/" + arch + "/libnet.so");
-            dlopen(runtimePath + "/j2re-image/lib/" + arch + "/libnio.so");
-            dlopen(runtimePath + "/j2re-image/lib/" + arch + "/libawt.so");
-            dlopen(runtimePath + "/j2re-image/lib/" + arch + "/libawt_headless.so");
+			// 识别表单
+			String java_v = null;
+			String java = LauncherConfig.loadjava();
+			// Java版本选择
+			if (java.equals("jre_8")) {
+				java_v = "jre_8";
+				Log.w("JRE","当前使用JRE8");
+			} else {
+				java_v = "jre_17";
+				Log.w("JRE","当前使用JRE17");
+			}
+			// Java 版本加载
+			dlopen(runtimePath + "/libopenal.so");
+			if (java_v == "jre_8") {
+				//setenv("HOME", home);
+				setenv("JAVA_HOME" , runtimePath + "/jre_8");
+				setenv("LIBGL_MIPMAP", "3");
+				setenv("LIBGL_NORMALIZE", "1");
+				// openjdk
+				dlopen(runtimePath + "/jre_8/lib/" + arch + "/libfreetype.so");
+				dlopen(runtimePath + "/jre_8/lib/" + arch + "/libpng16.so.16");
+				dlopen(runtimePath + "/jre_8/lib/" + arch + "/libfontmanager.so");
+				dlopen(runtimePath + "/jre_8/lib/" + arch + "/libpng16.so");
+				dlopen(runtimePath + "/jre_8/lib/" + arch + "/jli/libjli.so");
+				dlopen(runtimePath + "/jre_8/lib/" + arch + "/" + vm_variant + "/libjvm.so");
+				dlopen(runtimePath + "/jre_8/lib/" + arch + "/libverify.so");
+				dlopen(runtimePath + "/jre_8/lib/" + arch + "/libjava.so");
+				dlopen(runtimePath + "/jre_8/lib/" + arch + "/libnet.so");
+				dlopen(runtimePath + "/jre_8/lib/" + arch + "/libnio.so");
+				dlopen(runtimePath + "/jre_8/lib/" + arch + "/libawt.so");
+				dlopen(runtimePath + "/jre_8/lib/" + arch + "/libawt_headless.so");
+			} else {
+				//setenv("HOME", home);
+				setenv("JAVA_HOME" , runtimePath + "/jre_17");
+				setenv("LIBGL_MIPMAP", "3");
+				setenv("LIBGL_NORMALIZE", "1");
+				// openjdk
+				dlopen(runtimePath + "/jre_17/lib/"+ vm_variant + "/libjvm.so");
+				dlopen(runtimePath + "/jre_17/lib/" + "libjava.so");
+				dlopen(runtimePath + "/jre_17/lib/" + "libjli.so");
+				dlopen(runtimePath + "/jre_17/lib/" + "libverify.so");
+				dlopen(runtimePath + "/jre_17/lib/" + "libnet.so");
+				dlopen(runtimePath + "/jre_17/lib/" + "libnio.so");
+				dlopen(runtimePath + "/jre_17/lib/" + "libawt.so");
+				dlopen(runtimePath + "/jre_17/lib/" + "libawt_headless.so");
+				dlopen(runtimePath + "/jre_17/lib/" + "libfreetype.so");
+				dlopen(runtimePath + "/jre_17/lib/" + "libfontmanager.so");
+				dlopen(runtimePath + "/jre_17/lib/" + "libawt_headless.so");
+			}
+			// 渲染器选择
+			dlopen(runtimePath + "/libglfw.so");
+			String gl = LauncherConfig.loadgl();
+			if (!gl.equals("libGL114-EX.so")) {
+				dlopen(runtimePath + "/libOSMesa_8.so");
+			}
+			if (gl.equals("libGL112.so")){
+				dlopen(runtimePath + "/libGL112.so");
+			} else if (gl.equals("libGL114.so")) {
+				dlopen(runtimePath + "/libGL114.so");
+			} else if (gl.equals("libGL115.so")) {
+				dlopen(runtimePath + "/libGL115.so");
+			} else if (gl.equals("VGPU")) {
+				dlopen(runtimePath + "/libvgpu.so");
+			}
 
 			boolean isLwjgl3=false;
-            if (mcVersion.minimumLauncherVersion >= 21) {
-                isLwjgl3 = true;
-            }
-
+			if (mcVersion.minimumLauncherVersion >= 21) {
+				isLwjgl3 = true;
+			}
 			String libraryPath;
 			String classPath;
 
-            // others
-			dlopen(runtimePath + "/libopenal.so.1");
-			String gl = LauncherConfig.loadgl();
-			if (gl.equals("libGL112.so")){
-				dlopen(runtimePath + "/libGL112.so.1");
-			} else {
-				dlopen(runtimePath + "/libGL115.so.1");
-			}
-
 			if (!isLwjgl3) {
-				libraryPath = runtimePath + "/j2re-image/lib/" + arch + "/jli:" + runtimePath + "/j2re-image/lib/" + arch + ":" + runtimePath + "/lwjgl-2:" + runtimePath;
+				libraryPath = runtimePath + "/"+java_v+"/lib/" + arch + "/jli:" + runtimePath + "/"+java_v+"/lib/" + arch + ":" + runtimePath + "/lwjgl-2:" + runtimePath;
 				classPath = config.get("runtimePath") + "/lwjgl-2/lwjgl.jar:" + config.get("runtimePath") + "/lwjgl-2/lwjgl_util.jar:" + mcVersion.getClassPath(config);
-				dlopen(runtimePath + "/lwjgl-2/liblwjgl64.so");
+				dlopen(runtimePath + "/lwjgl-2/liblwjgl.so");
 				setLibraryPath(libraryPath);
 			} else {
-				libraryPath = runtimePath + "/j2re-image/lib/aarch64/jli:" + runtimePath + "/j2re-image/lib/aarch64:" + runtimePath + "/lwjgl-3:" + runtimePath;
+				libraryPath = runtimePath + "/"+java_v+"/lib/aarch64/jli:" + runtimePath + "/"+java_v+"/lib/aarch64:" + runtimePath + "/lwjgl-3:" + runtimePath;
 				classPath = runtimePath + "/lwjgl-3/lwjgl-jemalloc.jar:" + runtimePath + "/lwjgl-3/lwjgl-tinyfd.jar:" + runtimePath + "/lwjgl-3/lwjgl-opengl.jar:" + runtimePath + "/lwjgl-3/lwjgl-openal.jar:" + runtimePath + "/lwjgl-3/lwjgl-glfw.jar:" + runtimePath + "/lwjgl-3/lwjgl-stb.jar:" + runtimePath + "/lwjgl-3/lwjgl.jar:" +  mcVersion.getClassPath(config);
 				dlopen(runtimePath + "/libglfw.so");
 				dlopen(runtimePath + "/lwjgl-3/liblwjgl.so");
@@ -99,25 +134,12 @@ public class LoadMe {
 				dlopen(runtimePath + "/lwjgl-3/liblwjgl_tinyfd.so");
 				dlopen(runtimePath + "/lwjgl-3/liblwjgl_opengl.so");
 				setLibraryPath(libraryPath);
-            }
-
-            setupJLI();	
-
-            redirectStdio(home + "/client_output.txt");
-
-            /*
-
-			if (pdir.equals("public")) {
-				if (ppdir.equals("public")) {
-					chdir(home);
-				} else {
-					chdir(strd);
-				}
-			} else {
-				chdir(strd);
 			}
 
-             */
+			setupJLI();
+
+			redirectStdio(home + "/output.log");
+
 
 			if (pdir.equals("false")) {
 				chdir(home);
@@ -125,12 +147,12 @@ public class LoadMe {
 				chdir(strd);
 			}
 
-            Vector<String> args = new Vector<String>();
+			Vector<String> args = new Vector<String>();
 
-            args.add(runtimePath +  "/j2re-image/bin/java");
-            args.add("-cp");
-            args.add(classPath);
-            args.add("-Djava.library.path=" + libraryPath);
+			args.add(runtimePath +  "/"+java_v+"/bin/java");
+			args.add("-cp");
+			args.add(classPath);
+			args.add("-Djava.library.path=" + libraryPath);
 
 			args.add("-Dorg.lwjgl.util.Debug=true");
 			args.add("-Dorg.lwjgl.util.DebugLoader=true");
@@ -140,37 +162,46 @@ public class LoadMe {
 			//禁止显示加载窗口
 			args.add("-Dfml.earlyprogresswindow=false");
 			//添加tｍpdir以获得权限读取json
-			args.add("-Djava.io.tmpdir=/data/data/org.koishi.launcher.h2co3/cache");
+			args.add("-Djava.io.tmpdir="+home+"/cache");
 
+			if (gl.equals("VGPU")) {
+				args.add("-Dorg.lwjgl.opengl.libname=libvgpu.so");
+			} else if (gl.equals("libGL112.so")) {
+				args.add("-Dorg.lwjgl.opengl.libname=libGL112.so");
+			} else if (gl.equals("libGL114.so")) {
+				args.add("-Dorg.lwjgl.opengl.libname=libGL114.so");
+			} else if (gl.equals("libGL115.so")) {
+				args.add("-Dorg.lwjgl.opengl.libname=libGL115.so");
+			}
 
-            String extraJavaFlags[] = config.get("extraJavaFlags").split(" ");
+			String extraJavaFlags[] = config.get("extraJavaFlags").split(" ");
 
-            for (String flag : extraJavaFlags) {
-                args.add(flag);
-                if (LauncherConfig.api().equals("Mojang")||LauncherConfig.api().equals("Microsoft")){
+			for (String flag : extraJavaFlags) {
+				args.add(flag);
+				if (LauncherConfig.api().equals("Mojang")||LauncherConfig.api().equals("Microsoft")){
 
 				} else {
-                	args.add("-javaagent:/storage/emulated/0/games/org.koishi.launcher/h2co3/authlib/authlib-injector-1.1.39.jar="+LauncherConfig.api());
+					args.add("-javaagent:/storage/emulated/0/games/org.koishi.launcher/h2co3/authlib/authlib-injector-1.1.39.jar="+LauncherConfig.api());
 				}
-            }
+			}
 
-            args.add(mcVersion.mainClass);
+			args.add(mcVersion.mainClass);
 
 			String minecraftArgs[]=null;
-            if (isLwjgl3) {
-                minecraftArgs = mcVersion.getMinecraftArguments(config, true);	
-            } else {
-                minecraftArgs = mcVersion.getMinecraftArguments(config, false);	
-            }
-            for (String flag : minecraftArgs) {
-                args.add(flag);
-            }
+			if (isLwjgl3) {
+				minecraftArgs = mcVersion.getMinecraftArguments(config, true);
+			} else {
+				minecraftArgs = mcVersion.getMinecraftArguments(config, false);
+			}
+			for (String flag : minecraftArgs) {
+				args.add(flag);
+			}
 
-            args.add("Update20210321");
+			args.add("Update20210321");
 			args.add("--width");
-            args.add(Integer.toString(BoatApplication.getCurrentActivity().getResources().getDisplayMetrics().widthPixels));
-            args.add("--height");
-            args.add(Integer.toString(BoatApplication.getCurrentActivity().getResources().getDisplayMetrics().heightPixels));
+			args.add(Integer.toString(BoatApplication.getCurrentActivity().getResources().getDisplayMetrics().widthPixels));
+			args.add("--height");
+			args.add(Integer.toString(BoatApplication.getCurrentActivity().getResources().getDisplayMetrics().heightPixels));
 
 			if (mcVersion.minimumLauncherVersion >= 21) {
 				//判断minimumLauncherVersion是否大于21，大于的是高版本，高版本需要用方法加载不同版本的loader，这个只是其中一个
@@ -209,7 +240,7 @@ public class LoadMe {
 					args.add("cpw.mods.fml.common.launcher.FMLTweaker");
 				}
 
-            }
+			}
 			if (token.equals("0000")) {
 				//args.add("--demo");
 			}
@@ -226,7 +257,7 @@ public class LoadMe {
 				System.out.println(finalArgs[i]);
 			}
 
-            System.out.println("OpenJDK exited with code : " + jliLaunch(finalArgs));
+			System.out.println("OpenJDK exited with code : " + jliLaunch(finalArgs));
 			/*
 			 File so_map = new File("/proc/self/maps");
 			 BufferedReader br=new BufferedReader(new InputStreamReader(new FileInputStream(so_map)));
@@ -240,11 +271,11 @@ public class LoadMe {
 			 }
 			 */
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            return 1;
-        }
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 1;
+		}
 		return 0;
-    }
+	}
 
 }

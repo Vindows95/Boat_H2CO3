@@ -37,7 +37,7 @@ public class SplashActivity extends H2CO3Activity {
     final boolean existMcConfig = FileExists(boatCfg);
     final boolean existH2oConfig = FileExists(h2co3Cfg);
     //boolean existH2oMd = FileExists(LAUNCHER_FILE_DIR+"info.md");
-    final boolean existRuntime = FileExists(LAUNCHER_DATA_DIR+"app_runtime/libopenal.so.1");
+    final boolean existRuntime = FileExists(LAUNCHER_DATA_DIR+"app_runtime/libopenal.so");
     final boolean existGame = FileExists(CHTools.getBoatCfg("game_directory", LAUNCHER_FILE_DIR+".minecraft"));
 
     @Override

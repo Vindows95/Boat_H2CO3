@@ -34,7 +34,7 @@
         android:text="@string/inst_open_bili"
         android:gravity="left|center"
         app:icon="@drawable/ic_redo"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
+        style="@style/Widget.Material3.Button.TextButton"
         android:fontFamily="@font/sans"/>
 
     <View

@@ -90,7 +90,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
-import cosine.boat.LauncherActivity;
+import org.koishi.launcher.h2co3.launch.boat.LauncherActivity;
 import cosine.boat.LauncherActivityMk;
 
 public class HomeFragment extends Fragment implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {

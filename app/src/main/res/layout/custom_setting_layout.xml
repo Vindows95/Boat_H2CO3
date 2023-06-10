@@ -145,7 +145,7 @@
 
                                 <com.google.android.material.button.MaterialButton
                                     android:id="@+id/custom_set_ctrl"
-                                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                                    style="@style/Widget.Material3.Button.TextButton"
                                     android:drawableEnd="@drawable/ic_login_drop"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -323,7 +323,7 @@
 
                                 <com.google.android.material.button.MaterialButton
                                     android:id="@+id/custom_set_gl"
-                                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                                    style="@style/Widget.Material3.Button.TextButton"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="@color/appBlack_ff"
@@ -348,7 +348,7 @@
 
                                 <com.google.android.material.button.MaterialButton
                                     android:id="@+id/custom_set_source"
-                                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                                    style="@style/Widget.Material3.Button.TextButton"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="@color/appBlack_ff"
@@ -430,7 +430,7 @@
                                 android:orientation="vertical">
 
                                 <com.google.android.material.button.MaterialButton
-                                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                                    style="@style/Widget.Material3.Button.TextButton"
                                     android:id="@+id/custom_reset"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -440,7 +440,7 @@
                                     app:icon="@drawable/refresh" />
 
                                 <com.google.android.material.button.MaterialButton
-                                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                                    style="@style/Widget.Material3.Button.TextButton"
                                     android:id="@+id/custom_del"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -452,7 +452,7 @@
                             </LinearLayout>
 
                             <com.google.android.material.button.MaterialButton
-                                style="@style/Widget.MaterialComponents.Button.TextButton"
+                                style="@style/Widget.Material3.Button.TextButton"
                                 android:id="@+id/custom_crash"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"

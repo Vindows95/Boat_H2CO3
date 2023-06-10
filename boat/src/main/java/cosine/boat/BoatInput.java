@@ -3,6 +3,8 @@ package cosine.boat;
 import android.app.*;
 import android.content.*;
 import android.os.Build;
+import android.view.Surface;
+
 import androidx.annotation.RequiresApi;
 
 public class BoatInput{
@@ -24,6 +26,18 @@ public class BoatInput{
 	public static final int CursorEnabled         = 1;
 	public static final int CursorDisabled        = 0;
 	public static final int CursorSetPos          = 2;
+	public static final int ConfigureNotify       = 22;
+	public static final int BoatMessage           = 37;
+
+	public static final int ShiftMask             = 1 << 0;
+	public static final int LockMask              = 1 << 1;
+	public static final int ControlMask           = 1 << 2;
+	public static final int Mod1Mask              = 1 << 3;
+	public static final int Mod2Mask              = 1 << 4;
+	public static final int Mod3Mask              = 1 << 5;
+	public static final int Mod4Mask              = 1 << 6;
+	public static final int Mod5Mask              = 1 << 7;
+	public static final int CloseRequest          = 0;
 
 	static {
         System.loadLibrary("boat");
@@ -57,9 +71,6 @@ public class BoatInput{
 		} else if (activity instanceof BoatActivityMk){
 			BoatActivityMk boatActivityMk = (BoatActivityMk)activity;
 			boatActivityMk.setCursorMode(mode);
-		} else {
-			BoatActivityBase boatActivity = (BoatActivityBase)activity;
-			boatActivity.setCursorMode(mode);
 		}
 
 	}
@@ -74,9 +85,6 @@ public class BoatInput{
 		} else if (activity instanceof  BoatActivityMk){
 			BoatActivityMk boatActivityMk = (BoatActivityMk)activity;
 			boatActivityMk.setCursorPos(x, y);
-		} else {
-			BoatActivityBase boatActivity = (BoatActivityBase)activity;
-			boatActivity.setCursorPos(x, y);
 		}
 
 	}
@@ -104,6 +112,26 @@ public class BoatInput{
 		}
 		return null;
 
+	}
+
+	public static native void setBoatNativeWindow(Surface surface);
+	public static native void setEventPipe();
+	public static native void pushEvent(long time, int type, int p1, int p2);
+
+	public static void pushEventMouseButton(int button, boolean press) {
+		BoatInput.pushEvent(System.nanoTime(), press ? ButtonPress : ButtonRelease, button, 0);
+	}
+	public static void pushEventPointer(int x, int y) {
+		BoatInput.pushEvent(System.nanoTime(), MotionNotify, x, y);
+	}
+	public static void pushEventKey(int keyCode, int keyChar, boolean press) {
+		BoatInput.pushEvent(System.nanoTime(), press ? KeyPress : KeyRelease, keyCode, keyChar);
+	}
+	public static void pushEventWindow(int width, int height) {
+		BoatInput.pushEvent(System.nanoTime(), ConfigureNotify, width, height);
+	}
+	public static void pushEventMessage(int msg) {
+		BoatInput.pushEvent(System.nanoTime(), BoatMessage, msg, 0);
 	}
 
 }

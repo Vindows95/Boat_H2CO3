@@ -35,7 +35,8 @@ package cosine.boat;
  * @author elias_naur
  */
 
-final class BoatKeycodes {
+public final class BoatKeycodes {
+	public static final int  BOAT_KEYBOARD_ESC             = 1;
 	public static final int BOAT_KEYBOARD_Kanji                         = 0xff21;
 
 	public static final int BOAT_KEYBOARD_ISO_Left_Tab                  = 0xfe20;
