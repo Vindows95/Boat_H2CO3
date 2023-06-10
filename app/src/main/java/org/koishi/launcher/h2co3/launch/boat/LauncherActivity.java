@@ -7,10 +7,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import cosine.boat.BoatActivity;
 import cosine.boat.BoatActivityBase;
 import cosine.boat.logcat.Logcat;
 import cosine.boat.logcat.LogcatService;
+
+import org.koishi.launcher.h2co3.launch.boat.BoatActivity;
 
 public class LauncherActivity extends Activity {
 

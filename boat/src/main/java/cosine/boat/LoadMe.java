@@ -3,6 +3,8 @@ package cosine.boat;
 import android.util.Log;
 
 import java.io.File;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Vector;
 
 public class LoadMe {
@@ -114,6 +116,7 @@ public class LoadMe {
 			}
 
 			boolean isLwjgl3=false;
+			assert mcVersion != null;
 			if (mcVersion.minimumLauncherVersion >= 21) {
 				isLwjgl3 = true;
 			}
@@ -174,28 +177,25 @@ public class LoadMe {
 				args.add("-Dorg.lwjgl.opengl.libname=libGL115.so");
 			}
 
-			String extraJavaFlags[] = config.get("extraJavaFlags").split(" ");
+			String[] extraJavaFlags = config.get("extraJavaFlags").split(" ");
 
 			for (String flag : extraJavaFlags) {
 				args.add(flag);
-				if (LauncherConfig.api().equals("Mojang")||LauncherConfig.api().equals("Microsoft")){
-
+				if ("Microsoft".equals(LauncherConfig.api())) {
 				} else {
-					args.add("-javaagent:/storage/emulated/0/games/org.koishi.launcher/h2co3/authlib/authlib-injector-1.1.39.jar="+LauncherConfig.api());
+					args.add("-javaagent:/storage/emulated/0/games/org.koishi.launcher/h2co3/authlib/authlib-injector-1.1.39.jar=" + LauncherConfig.api());
 				}
 			}
 
 			args.add(mcVersion.mainClass);
 
-			String minecraftArgs[]=null;
+			String[] minecraftArgs =null;
 			if (isLwjgl3) {
 				minecraftArgs = mcVersion.getMinecraftArguments(config, true);
 			} else {
 				minecraftArgs = mcVersion.getMinecraftArguments(config, false);
 			}
-			for (String flag : minecraftArgs) {
-				args.add(flag);
-			}
+			Collections.addAll(args, minecraftArgs);
 
 			args.add("Update20210321");
 			args.add("--width");
@@ -224,7 +224,7 @@ public class LoadMe {
 			if (mcVersion.minimumLauncherVersion >= 14 && mcVersion.minimumLauncherVersion < 21 && mcVersion.assetIndex.size != 72996) {
 				// 1.8-1.12.2
 				args.add("--tweakClass");
-				if (mcVersion.id.indexOf("OptiFine") != -1) {
+				if (mcVersion.id.contains("OptiFine")) {
 					args.add("optifine.OptiFineTweaker");
 				} else {
 					args.add("net.minecraftforge.fml.common.launcher.FMLTweaker");
@@ -234,7 +234,7 @@ public class LoadMe {
 			if (mcVersion.minimumLauncherVersion >= 14 && mcVersion.minimumLauncherVersion < 21 && mcVersion.assetIndex.size == 72996) {
 				// Below 1.7.10
 				args.add("--tweakClass");
-				if (mcVersion.id.indexOf("OptiFine") != -1) {
+				if (mcVersion.id.contains("OptiFine")) {
 					args.add("optifine.OptiFineTweaker");
 				} else {
 					args.add("cpw.mods.fml.common.launcher.FMLTweaker");
@@ -245,31 +245,17 @@ public class LoadMe {
 				//args.add("--demo");
 			}
 
-			String extraMinecraftArgs[] = config.get("extraMinecraftFlags").split(" ");
-			for (String flag : extraMinecraftArgs) {
-				args.add(flag);
-			}
+			String[] extraMinecraftArgs = config.get("extraMinecraftFlags").split(" ");
+			args.addAll(Arrays.asList(extraMinecraftArgs));
 
-			String finalArgs[] = new String[args.size()];
+			String[] finalArgs = new String[args.size()];
 			for (int i = 0; i < args.size(); i++) {
 
 				finalArgs[i] = args.get(i);
 				System.out.println(finalArgs[i]);
 			}
 
-			System.out.println("OpenJDK exited with code : " + jliLaunch(finalArgs));
-			/*
-			 File so_map = new File("/proc/self/maps");
-			 BufferedReader br=new BufferedReader(new InputStreamReader(new FileInputStream(so_map)));
-
-			 File map_log= new File("/sdcard/boat/boat_mem_maps.txt");
-			 BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(map_log)));
-			 String line;
-			 while((line = br.readLine()) != null){
-			 bw.write(line + "\n");
-
-			 }
-			 */
+			System.out.println("崩嘣嘣嘣嘣OpenJDK exited with code : " + jliLaunch(finalArgs));
 
 		} catch (Exception e) {
 			e.printStackTrace();

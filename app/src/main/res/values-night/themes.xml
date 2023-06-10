@@ -9,6 +9,7 @@
         <item name="switchPreferenceStyle">@style/AppTheme.SwitchPreference</item>
         <item name="shapeAppearanceLargeComponent">@style/AppTheme.ShapeOverlay.Large</item>
         <item name="bottomSheetDialogTheme">@style/AppTheme.BottomSheetDialog</item>
+        <item name="android:windowFullscreen">true</item>
         <!-- Primary brand color. -->
     </style>
     <style name="Theme.Boat_H2CO3.DynamicColors" parent="Theme.Material3.DynamicColors.Dark">
@@ -19,6 +20,7 @@
         <item name="switchPreferenceStyle">@style/AppTheme.SwitchPreference</item>
         <item name="shapeAppearanceLargeComponent">@style/AppTheme.ShapeOverlay.Large</item>
         <item name="bottomSheetDialogTheme">@style/AppTheme.BottomSheetDialog</item>
+        <item name="android:windowFullscreen">true</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>

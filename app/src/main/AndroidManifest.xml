@@ -15,6 +15,7 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
+        android:allowNativeHeapPointerTagging="false"
         android:hardwareAccelerated="true"
         android:name="cosine.boat.BoatApplication"
         android:allowBackup="true"
@@ -41,6 +42,10 @@
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".VersionsActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".launch.boat.LauncherActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
@@ -81,8 +86,16 @@
 
         <activity
             android:name=".launch.boat.BoatActivity"
-            android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity" />
+            android:alwaysRetainTaskState="true"
+            android:configChanges="fontScale|keyboard|keyboardHidden|locale|orientation|screenLayout|uiMode|screenSize|navigation"
+            android:excludeFromRecents="false"
+            android:launchMode="singleInstance"
+            android:screenOrientation="sensorLandscape"
+            android:theme="@style/FullScreenTheme">
+        <meta-data
+            android:name="android.app.lib_name"
+            android:value="boat" />
+        </activity>
 
         <service android:name="com.mistake.revision.Download.DownloadService" />
 

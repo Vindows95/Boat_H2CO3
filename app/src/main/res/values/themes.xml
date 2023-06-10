@@ -11,6 +11,7 @@
     </style>
 
     <style name="Theme.Boat_H2CO3.DynamicColors" parent="Theme.Material3.DynamicColors.Light">
+        <item name="android:windowFullscreen">true</item>
         <item name="fontFamily">@font/josefin_sans</item>
         <item name="checkboxStyle">@style/AppTheme.CheckBox</item>
         <item name="actionOverflowButtonStyle">@style/AppTheme.Toolbar.OverflowButton</item>
@@ -25,6 +26,7 @@
 
     <!--Custom themes-->
     <style name="AppBaseTheme" parent="Theme.Material3.Light.NoActionBar">
+        <item name="android:windowFullscreen">true</item>
         <item name="colorPrimary">@color/md_theme_primary</item>
         <item name="colorOnPrimary">@color/md_theme_onPrimary</item>
         <item name="colorPrimaryContainer">@color/md_theme_primaryContainer</item>
