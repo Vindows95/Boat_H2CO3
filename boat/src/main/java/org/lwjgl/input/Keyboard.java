@@ -191,7 +191,7 @@ public class Keyboard {
 	 *
 	 * @deprecated Use KEY_LMETA instead
 	 */
-	public static final int KEY_LWIN            = KEY_LMETA; /* Left Windows key */
+public static final int KEY_LWIN            = KEY_LMETA; /* Left Windows key */
 	public static final int KEY_RMETA            = 0xDC; /* Right Windows/Option key */
 	/**
 	 * The right windows key, mapped to KEY_RMETA

@@ -25,7 +25,8 @@
         android:supportsRtl="true"
         android:isGame="true"
         android:appCategory="game"
-        android:theme="@style/Theme.Boat_H2CO3.DynamicColors">
+        android:theme="@style/Theme.Boat_H2CO3.DynamicColors"
+        tools:targetApi="r">
         <activity
             android:name=".LogcatActivity"
             android:screenOrientation="portrait"

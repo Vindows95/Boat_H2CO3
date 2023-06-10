@@ -4,7 +4,6 @@ import com.aof.mcinabox.gamecontroller.definitions.map.KeyMap;
 
 import java.util.HashMap;
 
-import static com.aof.mcinabox.gamecontroller.codes.BoatKeycodes.*;
 import static com.aof.mcinabox.gamecontroller.codes.BoatMousecodes.BOAT_MOUSE_BUTTON_left;
 import static com.aof.mcinabox.gamecontroller.codes.BoatMousecodes.BOAT_MOUSE_BUTTON_middle;
 import static com.aof.mcinabox.gamecontroller.codes.BoatMousecodes.BOAT_MOUSE_BUTTON_right;
@@ -130,7 +129,6 @@ public class XKeyMap implements KeyMap, CoKeyMap {
         xKeyMap.put(KEYMAP_KEY_PRINT, GLFW_KEY_PRINT_SCREEN);
         xKeyMap.put(KEYMAP_KEY_LWIN, GLFW_KEY_LEFT_SUPER);
         xKeyMap.put(KEYMAP_KEY_RWIN, GLFW_KEY_RIGHT_SUPER);
-        /* missing RightK in BoatKeycodes.java */
 
         /* Mouse buttons codes */
         xKeyMap.put(MOUSEMAP_BUTTON_LEFT, GLFW_MOUSE_BUTTON_LEFT);

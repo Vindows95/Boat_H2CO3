@@ -35,15 +35,6 @@
                 android:layout_height="wrap_content">
 
                 <RadioButton
-                    android:id="@+id/api_mojang"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:foreground="?android:attr/selectableItemBackground"
-                    android:background="@color/empty"
-                    android:text="@string/api_mojang"
-                    android:fontFamily="@font/sans"/>
-
-                <RadioButton
                     android:id="@+id/api_microsoft"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -114,16 +105,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:text="@string/home_open_register_btn_text"
-                app:icon="@drawable/ic_link_open"
-                android:fontFamily="@font/sans"/>
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/custom_api_web_open_mojang"
-                style="@style/Widget.Material3.Button.TextButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:text="@string/home_open_mojang_btn_text"
                 app:icon="@drawable/ic_link_open"
                 android:fontFamily="@font/sans"/>
 

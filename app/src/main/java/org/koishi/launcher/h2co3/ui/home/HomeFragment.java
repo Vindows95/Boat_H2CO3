@@ -169,8 +169,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Navi
 
         new Thread(() -> {
             try {
-                HttpURLConnection con = (HttpURLConnection) new URL("https://gitee.com/NaCln4c1/naclfile/raw/master/Documents/Notification.txt").openConnection();
-                //HttpURLConnection con=(HttpURLConnection)new URL("http://49.234.85.55/Mio/tips.txt").openConnection();
+                HttpURLConnection con = (HttpURLConnection) new URL("https://gitee.com/cainiaohanhanyai/cnhhfile/raw/master/Documents/Notification.txt").openConnection();
                 con.setConnectTimeout(5000);
                 InputStream in = con.getInputStream();
                 BufferedReader bfr = new BufferedReader(new InputStreamReader(in));
@@ -642,6 +641,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Navi
     }
 
     /**-----------------点击--------------------*/
+    @SuppressLint("SetTextI18n")
     @Override
     public void onClick(View v) {
         File file = new File(CHTools.getBoatCfg("game_directory", LAUNCHER_FILE_DIR+".minecraft") + "/versions");
@@ -707,19 +707,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Navi
             mLoginButton.setEnabled(false);
             pb.show();
             //登录操作为耗时操作，必须放到线程中执行
-            if (api.equals("Mojang")) {
-                new Thread(() -> {
-                    if (LoginTask.checkif(LoginTask.get("auth_access_token"), "https://authserver.mojang.com/validate")) {
-                        //token不可用
-                        //调用LoginTask
-                        UserMsg = LoginTask.login(userName, password, "https://authserver.mojang.com/authenticate");
-                        CheckMsg.sendEmptyMessage(0);
-                    } else {
-                        //token可用，无需调用登录
-                        CheckMsg.sendEmptyMessage(1);
-                    }
-                }).start();
-            } else if (api.equals("Microsoft")) {
+            if (api.equals("Microsoft")) {
                 new Thread(() -> {
                     try {
                         MinecraftAuthenticator minecraftAuthenticator = new MinecraftAuthenticator();
@@ -1335,7 +1323,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Navi
 
     /**-----------------加载皮肤头像--------------------*/
     public void loadSkin() {
-        if (mAPI.getText().toString().equals("Mojang") || mAPI.getText().toString().equals("Microsoft")) {
+        if (mAPI.getText().toString().equals("Microsoft")) {
             String uuid = CHTools.getBoatCfg("auth_uuid", "0");
             String skinUrl = "https://crafatar.com/avatars/" + uuid + "?overlay=true";
             Glide.with(this).load(skinUrl).placeholder(R.drawable.ic_home_user_normal).error(R.drawable.xicon_red).into(skin);
@@ -1352,18 +1340,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Navi
         MaterialButton cancel = dialogView.findViewById(R.id.custom_api_cancel);
         MaterialButton ok = dialogView.findViewById(R.id.custom_api_ok);
         MaterialButton web = dialogView.findViewById(R.id.custom_api_web_open_dialog);
-        MaterialButton mojang = dialogView.findViewById(R.id.custom_api_web_open_mojang);
         MaterialButton reg = dialogView.findViewById(R.id.custom_api_web_open_register);
-        RadioButton apiMojang = dialogView.findViewById(R.id.api_mojang);
         RadioButton apiMs = dialogView.findViewById(R.id.api_microsoft);
         RadioButton api3rd = dialogView.findViewById(R.id.api_3rd);
         TextInputLayout lay = dialogView.findViewById(R.id.api_lay);
         TextInputEditText url = dialogView.findViewById(R.id.custom_api_url);
 
-        if (mAPI.getText().toString().equals("Mojang")) {
-            apiMojang.setChecked(true);
-            lay.setVisibility(View.GONE);
-        } else if (mAPI.getText().toString().equals("Microsoft")) {
+        if (mAPI.getText().toString().equals("Microsoft")) {
             apiMs.setChecked(true);
             lay.setVisibility(View.GONE);
         } else {
@@ -1372,16 +1355,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Navi
         }
         url.setText(CHTools.getAppCfg("LoginApiValue", ""));
 
-        apiMojang.setOnClickListener(v -> lay.setVisibility(View.GONE));
         apiMs.setOnClickListener(v -> lay.setVisibility(View.GONE));
         api3rd.setOnClickListener(v -> lay.setVisibility(View.VISIBLE));
         web.setOnClickListener(v->{
             mDialog.dismiss();
             showAPIWebDialog();
-        });
-        mojang.setOnClickListener(v->{
-            CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
-            intent.launchUrl(requireActivity(), Uri.parse("https://help.minecraft.net/hc/en-us/articles/360050865492-JAVA-Account-Migration-FAQ\n"));
         });
         reg.setOnClickListener(v->{
             CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
@@ -1390,10 +1368,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Navi
 
         cancel.setOnClickListener(v -> mDialog.dismiss());
         ok.setOnClickListener(v -> {
-            if (apiMojang.isChecked()) {
-                mAPI.setText("Mojang");
-                CHTools.setAppJson("LoginApi", "Mojang");
-            } else if (apiMs.isChecked()) {
+            if (apiMs.isChecked()) {
                 mAPI.setText("Microsoft");
                 CHTools.setAppJson("LoginApi", "Microsoft");
             } else if (api3rd.isChecked()) {

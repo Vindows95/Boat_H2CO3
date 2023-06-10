@@ -26,7 +26,7 @@
 
     <!--Custom themes-->
     <style name="AppBaseTheme" parent="Theme.Material3.Light.NoActionBar">
-        <item name="android:windowFullscreen">true</item>
+        <item name="android:statusBarColor">@android:color/holo_red_light</item>
         <item name="colorPrimary">@color/md_theme_primary</item>
         <item name="colorOnPrimary">@color/md_theme_onPrimary</item>
         <item name="colorPrimaryContainer">@color/md_theme_primaryContainer</item>
