@@ -163,6 +163,25 @@ public final class BoatKeycodes {
 	public static final int BOAT_KEYBOARD_F9                            = 0xffc6;
 	public static final int BOAT_KEYBOARD_F10                           = 0xffc7;
 	public static final int BOAT_KEYBOARD_F11                           = 0xffc8;
+	public static final int KEY_LBRACKET        = 0x1A;
+	public static final int KEY_RBRACKET        = 0x1B;
+	public static final int KEY_LCONTROL        = 0x1D;
+	public static final int KEY_MULTIPLY        = 0x37;
+	public static final int KEY_LMETA           = 0xDB; /* Left Windows/Option key */
+	/**
+	 * The left windows key, mapped to KEY_LMETA
+	 *
+	 * @deprecated Use KEY_LMETA instead
+	 */
+	public static final int KEY_LWIN            = KEY_LMETA; /* Left Windows key */
+	public static final int KEY_RMETA            = 0xDC; /* Right Windows/Option key */
+	/**
+	 * The right windows key, mapped to KEY_RMETA
+	 *
+	 * @deprecated Use KEY_RMETA instead
+	 */
+	public static final int KEY_RWIN            = KEY_RMETA; /* Right Windows key */
+	public static final int KEYBOARD_SIZE = 256;
 	public static final int BOAT_KEYBOARD_L1                            = 0xffc8;
 	public static final int BOAT_KEYBOARD_F12                           = 0xffc9;
 	public static final int BOAT_KEYBOARD_L2                            = 0xffc9;

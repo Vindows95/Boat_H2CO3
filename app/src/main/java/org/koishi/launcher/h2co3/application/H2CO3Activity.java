@@ -16,14 +16,14 @@ public class H2CO3Activity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             //这里做你想做的事
             SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-            boolean spIsAuth = sharedPreferences.getBoolean("material_you", true);
+            boolean spIsAuth = sharedPreferences.getBoolean("material", false);
             if (spIsAuth) {
-                setTheme(R.style.Theme_Boat_H2CO3_DynamicColors);
+                setTheme(R.style.Theme_H2CO3_DynamicColors);
             } else {
-                setTheme(R.style.Theme_Boat_H2CO3);
+                setTheme(R.style.Theme_H2CO3);
             }
         } else {
-            setTheme(R.style.Theme_Boat_H2CO3);
+            setTheme(R.style.Theme_H2CO3);
         }
 
     }

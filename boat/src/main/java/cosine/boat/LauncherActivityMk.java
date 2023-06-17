@@ -3,13 +3,15 @@ package cosine.boat;
 import static cosine.boat.CHTools.LAUNCHER_FILE_DIR;
 import static cosine.boat.CHTools.boatCfg;
 
-import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import cosine.boat.logcat.Logcat;
 import cosine.boat.logcat.LogcatService;
-import android.content.Intent;
 
-public class LauncherActivityMk extends Activity {
+public class LauncherActivityMk extends AppCompatActivity {
 
     public void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);

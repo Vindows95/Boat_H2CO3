@@ -1,14 +1,16 @@
 package org.koishi.launcher.h2co3;
 
+import static java.io.File.separator;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -23,7 +25,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import org.koishi.launcher.h2co3.application.H2CO3Activity;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -31,6 +33,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.switchmaterial.SwitchMaterial;
+
+import org.koishi.launcher.h2co3.application.H2CO3Activity;
+import org.koishi.launcher.h2co3.tool.CHTools;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -42,10 +47,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
-
-import static java.io.File.separator;
-
-import org.koishi.launcher.h2co3.tool.CHTools;
 
 public class ModsActivity extends H2CO3Activity {
 
@@ -71,10 +72,7 @@ public class ModsActivity extends H2CO3Activity {
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(v -> finish());
-        Typeface tf = Typeface.createFromAsset(this.getAssets(),
-                "Sans.ttf");
         TextView bigTitle= (TextView) toolbar.getChildAt(0);
-        bigTitle.setTypeface(tf);
         bigTitle.setText(getResources().getString(R.string.menu_mod));
     }
 
@@ -337,10 +335,12 @@ public class ModsActivity extends H2CO3Activity {
             Comparator<Object> cp = Collator.getInstance(Locale.CHINA);
             String[] getMods = modList.list();
             List< String > mList = Arrays.asList(Objects.requireNonNull(getMods));  //此集合无法操作添加元素
-            mList.sort(cp);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                mList.sort(cp);
+            }
             mModRecyclerView = findViewById(R.id.mod_list);
             mModRecyclerView.setLayoutManager(new LinearLayoutManager(this));//设置布局管理器
-            mModRecyclerView.setAdapter(mModAdapter = new ModsActivity.ModsRecyclerAdapter(this, mList));
+            mModRecyclerView.setAdapter(mModAdapter = new ModsRecyclerAdapter(this, mList));
         } else {
             mModRecyclerView = findViewById(R.id.mVerRecyclerView);
         }

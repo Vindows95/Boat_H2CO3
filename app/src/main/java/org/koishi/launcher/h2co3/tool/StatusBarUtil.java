@@ -1,19 +1,18 @@
 package org.koishi.launcher.h2co3.tool;
 
-import android.app.Activity;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.Objects;
 
 public class StatusBarUtil {
-    public static boolean hasNavigationBarShow(Activity activity) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            return false;
-        }
+    public static boolean hasNavigationBarShow(AppCompatActivity activity) {
         WindowManager wm = (WindowManager) activity.getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
         DisplayMetrics outMetrics = new DisplayMetrics();
@@ -43,7 +42,7 @@ public class StatusBarUtil {
         // 反射手机运行的类：android.R.dimen.status_bar_height.
         int statusHeight = -1;
         try {
-            Class<?> clazz = Class.forName("com.android.internal.R$dimen");
+            @SuppressLint("PrivateApi") Class<?> clazz = Class.forName("com.android.internal.R$dimen");
             Object object = clazz.newInstance();
             String heightStr = Objects.requireNonNull(clazz.getField(dimenName).get(object)).toString();
             int height = Integer.parseInt(heightStr);

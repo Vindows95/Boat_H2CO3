@@ -25,13 +25,12 @@
         android:supportsRtl="true"
         android:isGame="true"
         android:appCategory="game"
-        android:theme="@style/Theme.Boat_H2CO3.DynamicColors"
+        android:theme="@style/Theme.H2CO3"
         tools:targetApi="r">
         <activity
             android:name=".LogcatActivity"
             android:screenOrientation="portrait"
             android:label="@string/log_title"
-            android:theme="@style/AppBaseTheme.NoActionBar"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".SettingsActivity"
@@ -87,18 +86,15 @@
 
         <activity
             android:name=".launch.boat.BoatActivity"
-            android:alwaysRetainTaskState="true"
+            android:alwaysRetainTaskState="false"
             android:configChanges="fontScale|keyboard|keyboardHidden|locale|orientation|screenLayout|uiMode|screenSize|navigation"
             android:excludeFromRecents="false"
             android:launchMode="singleInstance"
-            android:screenOrientation="sensorLandscape"
-            android:theme="@style/FullScreenTheme">
+            android:screenOrientation="sensorLandscape">
         <meta-data
             android:name="android.app.lib_name"
             android:value="boat" />
         </activity>
-
-        <service android:name="com.mistake.revision.Download.DownloadService" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

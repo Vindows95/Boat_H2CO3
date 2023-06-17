@@ -13,8 +13,6 @@
         android:paddingBottom="7.5dp"
         android:paddingHorizontal="7.5dp">
 
-        <!--
-
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -22,111 +20,9 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="5dp"
-            android:foreground="?android:attr/selectableItemBackground"
+            android:foreground="?attr/selectableItemBackground"
             android:visibility="visible"
-            app:cardCornerRadius="15dp"
-            app:cardElevation="0dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/material_blue"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <com.google.android.material.circularreveal.CircularRevealLinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:background="@color/app_green_normal"
-                        android:paddingStart="15dp"
-                        android:paddingEnd="15dp">
-
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:src="@drawable/ic_main_msg_app"
-                            app:tint="@color/appWhite_ff" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:layout_margin="15dp">
-
-                            <com.google.android.material.circularreveal.CircularRevealLinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center_vertical"
-                                android:orientation="vertical">
-
-                                <com.google.android.material.circularreveal.CircularRevealLinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:gravity="center_vertical"
-                                    android:orientation="horizontal">
-
-                                    <com.google.android.material.textview.MaterialTextView
-                                        style="@style/TextStyleMain"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="1"
-                                        android:textSize="16sp"
-                                        android:textColor="@color/appWhite_ff"
-                                        android:text="@string/app_name"/>
-
-                                </com.google.android.material.circularreveal.CircularRevealLinearLayout>
-
-                            </com.google.android.material.circularreveal.CircularRevealLinearLayout>
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="@string/app_version"
-                                android:textColor="@color/appWhite_70"/>
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Boat app v0.4.6"
-                                android:textColor="@color/appWhite_70"/>
-
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="1dp"
-                            android:layout_height="40dp"
-                            android:layout_margin="5dp" />
-
-                    </com.google.android.material.circularreveal.CircularRevealLinearLayout>
-
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-
-        -->
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="5dp"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:visibility="visible"
-            app:cardCornerRadius="20dp"
+            app:cardCornerRadius="@dimen/card_radius"
             app:cardElevation="0dp">
 
             <LinearLayout
@@ -134,7 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/app_green_normal"
-                android:foreground="?android:attr/selectableItemBackground"
+                android:foreground="?attr/selectableItemBackground"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -155,7 +51,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@drawable/ic_btn_green"
-                            android:src="@drawable/ic_home_user_normal"
+                            app:srcCompat="@drawable/ic_home_user_normal"
                             android:contentDescription="TODO" />
 
                         <LinearLayout
@@ -185,7 +81,6 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
-                                        android:textColor="@color/material_background"
                                         android:textSize="16sp" />
 
                                     <com.google.android.material.textview.MaterialTextView
@@ -195,7 +90,6 @@
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:fontFamily="@font/sans"
-                                        android:textColor="@color/material_background"
                                         android:textSize="16sp" />
 
                                 </com.google.android.material.circularreveal.CircularRevealLinearLayout>
@@ -206,7 +100,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="@string/account_after"
-                                android:textColor="@color/material_background" />
+                                />
 
                         </LinearLayout>
 
@@ -237,7 +131,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_launcher_game_play"
+                            app:srcCompat="@drawable/ic_launcher_game_play"
                             app:tint="@color/empty"
                             android:background="@drawable/ic_btn_blue"
                             android:backgroundTint="@color/empty"
@@ -270,7 +164,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:layout_marginEnd="5dp"
-                                        app:cornerRadius="30dp"
+                                        app:cornerRadius="@dimen/card_radius"
                                         android:visibility="invisible"
                                         app:iconGravity="textStart"/>
 
@@ -280,7 +174,7 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
-                                        app:cornerRadius="30dp"
+                                        app:cornerRadius="@dimen/card_radius"
                                         app:iconGravity="textStart"
                                         android:text="@string/home_open_register_btn_text"/>
 
@@ -333,8 +227,8 @@
             android:layout_marginTop="5dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="5dp"
-            android:foreground="?android:attr/selectableItemBackground"
-            app:cardCornerRadius="20dp"
+            android:foreground="?attr/selectableItemBackground"
+            app:cardCornerRadius="@dimen/card_radius"
             app:cardElevation="0dp">
 
             <LinearLayout
@@ -342,7 +236,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
-                android:foreground="?android:attr/selectableItemBackground"
+                android:foreground="?attr/selectableItemBackground"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -361,10 +255,9 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_launcher_game_play"
+                            app:srcCompat="@drawable/ic_launcher_game_play"
                             android:background="@drawable/ic_btn_blue"
                             android:backgroundTint="?colorPrimary"
-                            app:tint="@color/material_background"
                             android:contentDescription="TODO" />
 
                         <LinearLayout
@@ -436,7 +329,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_launcher_game_play"
+                            app:srcCompat="@drawable/ic_launcher_game_play"
                             app:tint="@color/empty"
                             android:background="@drawable/ic_btn_blue"
                             android:backgroundTint="@color/empty"
@@ -471,7 +364,7 @@
                                         android:layout_weight="1"
                                         android:layout_marginEnd="5dp"
                                         android:fontFamily="@font/sans"
-                                        app:cornerRadius="30dp"
+                                        app:cornerRadius="@dimen/card_radius"
                                         android:text="@string/install"
                                         app:icon="@drawable/ic_new_add"
                                         app:iconGravity="textStart"/>
@@ -483,7 +376,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:layout_marginStart="5dp"
-                                        app:cornerRadius="30dp"
+                                        app:cornerRadius="@dimen/card_radius"
                                         app:icon="@drawable/ic_folder_outline"
                                         android:fontFamily="@font/sans"
                                         app:iconGravity="textStart"
@@ -540,8 +433,8 @@
             android:layout_marginTop="5dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="5dp"
-            android:foreground="?android:attr/selectableItemBackground"
-            app:cardCornerRadius="20dp"
+            android:foreground="?attr/selectableItemBackground"
+            app:cardCornerRadius="@dimen/card_radius"
             app:cardElevation="0dp">
 
             <LinearLayout
@@ -549,7 +442,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
-                android:foreground="?android:attr/selectableItemBackground"
+                android:foreground="?attr/selectableItemBackground"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -568,8 +461,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_home_notification"
-                            app:tint="@color/material_background"
+                            app:srcCompat="@drawable/ic_home_notification"
                             android:background="@drawable/ic_btn_blue"
                             android:backgroundTint="?colorPrimary"
                             android:contentDescription="TODO" />
@@ -642,7 +534,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_launcher_game_play"
+                            app:srcCompat="@drawable/ic_launcher_game_play"
                             app:tint="@color/empty"
                             android:background="@drawable/ic_btn_blue"
                             android:backgroundTint="@color/empty"
@@ -675,7 +567,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:layout_marginEnd="5dp"
-                                        app:cornerRadius="30dp"
+                                        app:cornerRadius="@dimen/card_radius"
                                         android:visibility="invisible"
                                         app:iconGravity="textStart"/>
 
@@ -686,10 +578,8 @@
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:layout_marginStart="5dp"
-                                        app:cornerRadius="30dp"
+                                        app:cornerRadius="@dimen/card_radius"
                                         app:iconGravity="textStart"
-                                        app:iconTint="@color/material_background"
-                                        android:textColor="@color/material_background"
                                         android:fontFamily="@font/sans"
                                         android:text="Tim/QQ"/>
 
@@ -743,7 +633,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
-            android:background="?android:attr/selectableItemBackground"
+            android:background="?attr/selectableItemBackground"
             android:gravity="center_vertical"
             android:orientation="vertical"
             android:paddingLeft="18dp"
@@ -802,7 +692,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
-            android:background="?android:attr/selectableItemBackground"
+            android:background="?attr/selectableItemBackground"
             android:gravity="center_vertical"
             android:orientation="vertical"
             android:paddingLeft="18dp"
@@ -861,9 +751,9 @@
             android:layout_marginTop="7.5dp"
             android:layout_marginEnd="15dp"
             android:layout_marginBottom="7.5dp"
-            android:foreground="?android:attr/selectableItemBackground"
+            android:foreground="?attr/selectableItemBackground"
             android:visibility="gone"
-            app:cardCornerRadius="15dp"
+            app:cardCornerRadius="@dimen/card_radius"
             app:cardElevation="0dp">
 
             <LinearLayout
@@ -888,7 +778,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_home_notification"
+                            app:srcCompat="@drawable/ic_home_notification"
                             app:tint="?colorPrimary"
                             android:contentDescription="TODO" />
 
@@ -950,7 +840,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:background="?android:attr/selectableItemBackground"
+            android:background="?attr/selectableItemBackground"
             android:gravity="center_vertical"
             android:orientation="vertical"
             android:paddingLeft="25dp"
@@ -1009,7 +899,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:background="?android:attr/selectableItemBackground"
+            android:background="?attr/selectableItemBackground"
             android:gravity="center_vertical"
             android:orientation="vertical"
             android:paddingLeft="25dp"
@@ -1067,7 +957,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:background="?android:attr/selectableItemBackground"
+            android:background="?attr/selectableItemBackground"
             android:gravity="center_vertical"
             android:orientation="vertical"
             android:paddingLeft="25dp"

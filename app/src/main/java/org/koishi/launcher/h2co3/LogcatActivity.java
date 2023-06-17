@@ -2,10 +2,6 @@ package org.koishi.launcher.h2co3;
 
 import static org.koishi.launcher.h2co3.tool.CHTools.LAUNCHER_FILE_DIR;
 
-import org.koishi.launcher.h2co3.application.H2CO3Activity;
-import androidx.appcompat.widget.Toolbar;
-
-import android.app.AlertDialog;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
@@ -16,8 +12,13 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.Toolbar;
+
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
+
+import org.koishi.launcher.h2co3.application.H2CO3Activity;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -143,10 +144,7 @@ public class LogcatActivity extends H2CO3Activity {
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(v -> finish());
 
-        Typeface tf = Typeface.createFromAsset(this.getAssets(),
-                "Sans.ttf");
         TextView bigTitle= (TextView) toolbar.getChildAt(0);
-        bigTitle.setTypeface(tf);
         bigTitle.setText(getResources().getString(R.string.log_title));
 
         tab = findViewById(R.id.log_tab);

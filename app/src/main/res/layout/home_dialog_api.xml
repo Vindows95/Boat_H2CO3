@@ -38,7 +38,7 @@
                     android:id="@+id/api_microsoft"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:foreground="?android:attr/selectableItemBackground"
+                    android:foreground="?attr/selectableItemBackground"
                     android:background="@color/empty"
                     android:text="@string/api_ms"
                     android:fontFamily="@font/sans"/>
@@ -47,7 +47,7 @@
                     android:id="@+id/api_3rd"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:foreground="?android:attr/selectableItemBackground"
+                    android:foreground="?attr/selectableItemBackground"
                     android:background="@color/empty"
                     android:text="@string/api_3rd"
                     android:fontFamily="@font/sans"/>

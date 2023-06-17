@@ -3,19 +3,13 @@ package org.koishi.launcher.h2co3;
 import static org.koishi.launcher.h2co3.tool.CHTools.LAUNCHER_FILE_DIR;
 import static org.koishi.launcher.h2co3.tool.CHTools.boatCfg;
 
-import androidx.annotation.NonNull;
-import org.koishi.launcher.h2co3.application.H2CO3Activity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -32,6 +26,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -42,7 +42,7 @@ import com.mistake.revision.VanillaActivity;
 
 import org.json.JSONObject;
 import org.koishi.launcher.h2co3.adapters.BaseRecycleAdapter;
-//import org.koishi.launcher.h2co3.adapters.SeachRecordAdapter;
+import org.koishi.launcher.h2co3.application.H2CO3Activity;
 import org.koishi.launcher.h2co3.tool.CHTools;
 import org.koishi.launcher.h2co3.tool.data.DbDao;
 import org.koishi.launcher.h2co3.tool.file.AppExecute;
@@ -57,6 +57,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
+
+//import org.koishi.launcher.h2co3.adapters.SeachRecordAdapter;
 
 public class VersionsActivity extends H2CO3Activity {
 
@@ -89,10 +91,7 @@ public class VersionsActivity extends H2CO3Activity {
             finish();
             startActivity(new Intent(VersionsActivity.this,MainActivity.class));
         });
-        Typeface tf = Typeface.createFromAsset(this.getAssets(),
-                "Sans.ttf");
         TextView bigTitle= (TextView) toolbar.getChildAt(0);
-        bigTitle.setTypeface(tf);
         bigTitle.setText(getResources().getString(R.string.menu_ver));
 
         //rb1 = findViewById(R.id.ver_title_dir);
@@ -195,7 +194,9 @@ public class VersionsActivity extends H2CO3Activity {
             Comparator<Object> cp = Collator.getInstance(Locale.CHINA);
             String[] getVer = versionlist.list();
             List< String > verList = Arrays.asList(Objects.requireNonNull(getVer));  //此集合无法操作添加元素
-            verList.sort(cp);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                verList.sort(cp);
+            }
             mVerRecyclerView = findViewById(R.id.mVerRecyclerView);
             mVerRecyclerView.setLayoutManager(new LinearLayoutManager(this));//设置布局管理器
             VersionRecyclerAdapter mVerAdapter;

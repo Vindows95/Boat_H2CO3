@@ -3,17 +3,15 @@ package org.koishi.launcher.h2co3.launch.boat;
 import static cosine.boat.CHTools.LAUNCHER_FILE_DIR;
 import static cosine.boat.CHTools.boatCfg;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import cosine.boat.BoatActivityBase;
+import androidx.appcompat.app.AppCompatActivity;
+
 import cosine.boat.logcat.Logcat;
 import cosine.boat.logcat.LogcatService;
 
-import org.koishi.launcher.h2co3.launch.boat.BoatActivity;
-
-public class LauncherActivity extends Activity {
+public class LauncherActivity extends AppCompatActivity {
 
     public void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);

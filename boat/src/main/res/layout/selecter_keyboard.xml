@@ -13,7 +13,7 @@
         android:layout_weight="1"
         android:orientation="horizontal">
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -26,7 +26,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1" />
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -34,7 +34,7 @@
             android:text="F1"
             custom:key="F1" />
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -42,7 +42,7 @@
             android:text="F2"
             custom:key="F2" />
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -50,7 +50,7 @@
             android:text="F3"
             custom:key="F3" />
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -63,7 +63,7 @@
             android:layout_height="match_parent"
             android:layout_weight="0.5" />
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -71,7 +71,7 @@
             android:text="F5"
             custom:key="F5" />
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -79,7 +79,7 @@
             android:text="F6"
             custom:key="F6" />
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -87,7 +87,7 @@
             android:text="F7"
             custom:key="F7" />
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -100,7 +100,7 @@
             android:layout_height="match_parent"
             android:layout_weight="0.5" />
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -108,7 +108,7 @@
             android:text="F9"
             custom:key="F9" />
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -116,7 +116,7 @@
             android:text="F10"
             custom:key="F10" />
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -124,7 +124,7 @@
             android:text="F11"
             custom:key="F11" />
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -137,7 +137,7 @@
             android:layout_height="match_parent"
             android:layout_weight="0.5" />
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -145,7 +145,7 @@
             android:text="Prt"
             custom:key="PRINT" />
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -153,7 +153,7 @@
             android:text="Scr"
             custom:key="SCROLL" />
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -179,7 +179,7 @@
         android:layout_weight="1"
         android:orientation="horizontal">
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -187,7 +187,7 @@
             android:text="`"
             custom:key="`"/>
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -195,7 +195,7 @@
             android:text="1"
             custom:key="1"/>
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -203,7 +203,7 @@
             android:text="2"
             custom:key="2"/>
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -211,7 +211,7 @@
             android:text="3"
             custom:key="3"/>
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -219,7 +219,7 @@
             android:text="4"
             custom:key="4"/>
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -227,7 +227,7 @@
             android:text="5"
             custom:key="5"/>
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -235,7 +235,7 @@
             android:text="6"
             custom:key="6"/>
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -243,7 +243,7 @@
             android:text="7"
             custom:key="7"/>
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -251,7 +251,7 @@
             android:text="8"
             custom:key="8"/>
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -259,7 +259,7 @@
             android:text="9"
             custom:key="9"/>
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -267,7 +267,7 @@
             android:text="0"
             custom:key="0"/>
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -275,7 +275,7 @@
             android:text="-"
             custom:key="-"/>
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -283,7 +283,7 @@
             android:text="="
             custom:key="="/>
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -291,7 +291,7 @@
             android:text="\"
             custom:key="\"/>
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -304,7 +304,7 @@
             android:layout_height="match_parent"
             android:layout_weight="0.5" />
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -312,7 +312,7 @@
             android:text="Ins"
             custom:key="INSERT" />
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -320,7 +320,7 @@
             android:text="Hom"
             custom:key="HOME" />
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -333,7 +333,7 @@
             android:layout_height="match_parent"
             android:layout_weight="0.5"/>
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -341,7 +341,7 @@
             android:text="Num"
             custom:key="NUMLOCK" />
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -349,7 +349,7 @@
             android:text="/"
             custom:key="NUMPAD/" />
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -357,7 +357,7 @@
             android:text="*"
             custom:key="NUMPAD*" />
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -374,7 +374,7 @@
         android:layout_weight="1"
         android:orientation="horizontal">
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -382,7 +382,7 @@
             android:text="TAB"
             custom:key="TAB" />
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -390,7 +390,7 @@
             android:text="Q"
             custom:key="Q"/>
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -398,7 +398,7 @@
             android:text="W"
             custom:key="W"/>
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -406,7 +406,7 @@
             android:text="E"
             custom:key="E"/>
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -414,7 +414,7 @@
             android:text="R"
             custom:key="R"/>
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -422,7 +422,7 @@
             android:text="T"
             custom:key="T"/>
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -430,7 +430,7 @@
             android:text="Y"
             custom:key="Y"/>
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -438,7 +438,7 @@
             android:text="U"
             custom:key="U"/>
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -446,7 +446,7 @@
             android:text="I"
             custom:key="I"/>
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -454,7 +454,7 @@
             android:text="O"
             custom:key="O"/>
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -462,7 +462,7 @@
             android:text="P"
             custom:key="P"/>
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -470,7 +470,7 @@
             android:text="["
             custom:key="["/>
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -478,7 +478,7 @@
             android:text="]"
             custom:key="]"/>
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -491,7 +491,7 @@
             android:layout_height="match_parent"
             android:layout_weight="0.5"/>
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -499,7 +499,7 @@
             android:text="Del"
             custom:key="DELETE" />
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -507,7 +507,7 @@
             android:text="End"
             custom:key="END" />
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -520,7 +520,7 @@
             android:layout_height="match_parent"
             android:layout_weight="0.5"/>
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -528,7 +528,7 @@
             android:text="7"
             custom:key="NUMPAD7" />
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -536,7 +536,7 @@
             android:text="8"
             custom:key="NUMPAD8" />
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -544,7 +544,7 @@
             android:text="9"
             custom:key="NUMPAD9" />
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -560,7 +560,7 @@
         android:layout_weight="1"
         android:orientation="horizontal">
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -568,7 +568,7 @@
             android:text="Caps L"
             custom:key="CAPITAL" />
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -576,7 +576,7 @@
             android:text="A"
             custom:key="A"/>
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -584,7 +584,7 @@
             android:text="S"
             custom:key="S"/>
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -592,7 +592,7 @@
             android:text="D"
             custom:key="D"/>
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -600,7 +600,7 @@
             android:text="F"
             custom:key="F"/>
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -608,7 +608,7 @@
             android:text="G"
             custom:key="G"/>
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -616,7 +616,7 @@
             android:text="H"
             custom:key="H"/>
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -624,7 +624,7 @@
             android:text="J"
             custom:key="J"/>
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -632,7 +632,7 @@
             android:text="K"
             custom:key="K"/>
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -640,7 +640,7 @@
             android:text="L"
             custom:key="L"/>
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -648,7 +648,7 @@
             android:text=";"
             custom:key=";"/>
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -656,7 +656,7 @@
             android:text="'"
             custom:key="'"/>
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -669,7 +669,7 @@
             android:layout_height="match_parent"
             android:layout_weight="4"/>
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -677,7 +677,7 @@
             android:text="4"
             custom:key="NUMPAD4" />
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -685,7 +685,7 @@
             android:text="5"
             custom:key="NUMPAD5" />
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -693,7 +693,7 @@
             android:text="6"
             custom:key="NUMPAD6" />
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -709,7 +709,7 @@
         android:layout_weight="1"
         android:orientation="horizontal">
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -717,7 +717,7 @@
             android:text="Shift"
             custom:key="LSHIFT" />
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -725,7 +725,7 @@
             android:text="Z"
             custom:key="Z"/>
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -733,7 +733,7 @@
             android:text="X"
             custom:key="X"/>
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -741,7 +741,7 @@
             android:text="C"
             custom:key="C"/>
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -749,7 +749,7 @@
             android:text="V"
             custom:key="V"/>
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -757,7 +757,7 @@
             android:text="B"
             custom:key="B"/>
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -765,7 +765,7 @@
             android:text="N"
             custom:key="N"/>
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -773,7 +773,7 @@
             android:text="M"
             custom:key="M"/>
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -781,7 +781,7 @@
             android:text=","
             custom:key=","/>
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -789,7 +789,7 @@
             android:text="."
             custom:key="."/>
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -797,7 +797,7 @@
             android:text="/"
             custom:key="/"/>
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -810,7 +810,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1.5"/>
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -823,7 +823,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1.5"/>
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -831,7 +831,7 @@
             android:text="1"
             custom:key="NUMPAD1" />
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -839,7 +839,7 @@
             android:text="2"
             custom:key="NUMPAD2" />
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -847,7 +847,7 @@
             android:text="3"
             custom:key="NUMPAD3" />
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -863,7 +863,7 @@
         android:layout_weight="1"
         android:orientation="horizontal">
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -871,7 +871,7 @@
             android:text="Ctrl"
             custom:key="LCTRL" />
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -879,7 +879,7 @@
             android:text="Win"
             custom:key="LWIN" />
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -887,7 +887,7 @@
             android:text="Alt"
             custom:key="LALT" />
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -895,7 +895,7 @@
             android:text="Space"
             custom:key="SPACE"/>
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -903,7 +903,7 @@
             android:text="Alt"
             custom:key="RALT" />
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -911,7 +911,7 @@
             android:text="Win"
             custom:key="RWIN" />
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -919,7 +919,7 @@
             android:text="RightK"
             custom:key="RIGHTK" />
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -932,7 +932,7 @@
             android:layout_height="match_parent"
             android:layout_weight="0.5"/>
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -940,7 +940,7 @@
             android:text="←"
             custom:key="LEFT" />
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -948,7 +948,7 @@
             android:text="↓"
             custom:key="DOWN" />
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -961,7 +961,7 @@
             android:layout_height="match_parent"
             android:layout_weight="0.5"/>
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -969,7 +969,7 @@
             android:text="0"
             custom:key="NUMPAD0" />
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -977,7 +977,7 @@
             android:text="."
             custom:key="NUMPAD." />
 
-        <com.mio.mclauncher.customcontrol.MioSelectButton
+        <org.koishi.h2co3.mclauncher.customcontrol.MioSelectButton
             style="@style/selecterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"

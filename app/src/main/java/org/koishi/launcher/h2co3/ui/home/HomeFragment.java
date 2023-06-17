@@ -4,7 +4,6 @@ import static org.koishi.launcher.h2co3.tool.CHTools.LAUNCHER_FILE_DIR;
 import static org.koishi.launcher.h2co3.tool.CHTools.boatCfg;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -41,6 +40,7 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.core.widget.NestedScrollView;
@@ -61,6 +61,7 @@ import org.json.JSONObject;
 import org.koishi.launcher.h2co3.InstructionActivity;
 import org.koishi.launcher.h2co3.R;
 import org.koishi.launcher.h2co3.VersionsActivity;
+import org.koishi.launcher.h2co3.launch.boat.LauncherActivity;
 import org.koishi.launcher.h2co3.tool.CHTools;
 import org.koishi.launcher.h2co3.tool.data.DBHelper;
 import org.koishi.launcher.h2co3.tool.login.NewLoginTask.auth.abstracts.exception.AuthenticationException;
@@ -90,7 +91,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
-import org.koishi.launcher.h2co3.launch.boat.LauncherActivity;
 import cosine.boat.LauncherActivityMk;
 
 public class HomeFragment extends Fragment implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
@@ -208,7 +208,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Navi
                 Comparator<Object> cp = Collator.getInstance(Locale.CHINA);
                 String[] getVer = versionlist.list();
                 List<String> verList = Arrays.asList(Objects.requireNonNull(getVer));  //此集合无法操作添加元素
-                verList.sort(cp);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    verList.sort(cp);
+                }
                 getVer = verList.toArray(new String[0]);
                 ArrayAdapter< String > adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, getVer);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -1207,6 +1209,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Navi
     }
 
     /**-----------------设备信息--------------------*/
+    @SuppressLint("SetTextI18n")
     public void showInfoDialog() {
         Dialog dialog = new Dialog(getContext());
         View dialogView = requireActivity().getLayoutInflater().inflate(R.layout.dialog_info, null);

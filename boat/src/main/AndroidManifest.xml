@@ -47,18 +47,6 @@
                 android:value="boat" />
         </activity>
         <activity
-            android:name=".BoatActivityBase"
-            android:alwaysRetainTaskState="true"
-            android:configChanges="fontScale|keyboard|keyboardHidden|locale|orientation|screenLayout|uiMode|screenSize|navigation"
-            android:excludeFromRecents="false"
-            android:launchMode="singleInstance"
-            android:screenOrientation="sensorLandscape"
-            android:theme="@style/FullScreenTheme">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="boat" />
-        </activity>
-        <activity
             android:name=".BoatActivityMk"
             android:alwaysRetainTaskState="true"
             android:configChanges="fontScale|keyboard|keyboardHidden|locale|orientation|screenLayout|uiMode|screenSize|navigation"

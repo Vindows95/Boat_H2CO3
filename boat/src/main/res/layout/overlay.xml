@@ -1,25 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:id="@+id/base_layout"
-	android:layout_width="fill_parent"
-	android:layout_height="fill_parent">
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:layout_alignParentEnd="true"
+    android:id="@+id/overlay_drawer_options"
+    android:keepScreenOn="true">
+    <RelativeLayout
+        android:id="@+id/r_base"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-	<TextureView
-		android:id="@+id/main_surface"
-		android:layout_width="fill_parent"
-		android:layout_height="fill_parent"
-		android:layout_alignParentStart="true"
-		android:layout_alignParentTop="true"
-		android:layout_marginStart="0dp"
-		android:layout_marginBottom="0dp" />
+    <FrameLayout
+        android:id="@+id/content_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-	<ImageView
-		android:layout_height="16dp"
-		android:layout_width="16dp"
-		android:src="@drawable/cursor"
-		android:id="@+id/mouse_cursor"/>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <org.koishi.h2co3.mclauncher.customcontrol.ControlLayout
+                android:id="@+id/client_surface"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="0dp"
+                android:layout_marginBottom="0dp" />
+                <ImageView
+                    android:layout_height="27dp"
+                    android:layout_width="18dp"
+                    android:src="@drawable/cursor5"
+                    android:id="@+id/mouse_cursor"/>
+            <Button
+                android:id="@+id/touch_pad"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginStart="0dp"
+                android:layout_marginBottom="0dp"
+                android:alpha="0.0" />
+            <Button
+                android:id="@+id/touch_pad2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_weight="1"
+                android:alpha="0.0"
+                android:visibility="invisible" />
+
+            <org.koishi.h2co3.mclauncher.customcontrol.H2CO3CrossingKeyboard
+                android:id="@+id/mio_keyboard"
+                android:layout_width="170dp"
+                android:layout_height="160dp"/>
+
+        </FrameLayout>
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="H2CO3 debug" />
+
+    </FrameLayout>
 
 
-</RelativeLayout>
-
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </RelativeLayout>
+    <com.google.android.material.navigation.NavigationView
+        android:layout_width="200dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="right"
+        android:fitsSystemWindows="false"
+        app:menu="@menu/menu_boat_overlay"
+        android:id="@+id/main_navigation_view"/>
+</androidx.drawerlayout.widget.DrawerLayout>

@@ -10,7 +10,6 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/material_card_background"
         android:theme="@style/AppBaseTheme.AppBarOverlay"
         app:elevation="0dp">
 
@@ -18,7 +17,6 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/material_card_background"
             app:elevation="0dp"
             app:popupTheme="@style/AppBaseTheme.PopupOverlay"
             app:title="@string/crash_title"/>
@@ -31,8 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
         android:text="@string/app_restart"
-        app:cornerRadius="30dp"
-        android:textColor="@color/material_background"/>
+        app:cornerRadius="30dp" />
 
     <TextView
         android:layout_width="match_parent"
@@ -41,9 +38,9 @@
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
         android:layout_marginBottom="15dp"
-        android:drawableStart="@drawable/ic_boat_action"
         android:gravity="center_vertical"
-        android:drawablePadding="15dp"/>
+        android:drawablePadding="15dp"
+        app:drawableStartCompat="@drawable/ic_boat_action" />
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
@@ -51,9 +48,9 @@
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
         android:layout_marginBottom="10dp"
-        android:foreground="?android:attr/selectableItemBackground"
+        android:foreground="?attr/selectableItemBackground"
         android:visibility="visible"
-        app:cardCornerRadius="20dp"
+        app:cardCornerRadius="@dimen/card_radius"
         app:cardElevation="0dp">
 
         <LinearLayout
@@ -61,7 +58,7 @@
             android:layout_height="wrap_content"
             android:paddingHorizontal="15dp"
             android:paddingVertical="15dp"
-            android:background="@color/material_card_background">
+            >
 
             <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"

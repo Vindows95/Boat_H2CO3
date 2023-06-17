@@ -79,7 +79,7 @@ public class MinecraftVersion
 	}
 	public class RuledArgumentJsonDeserializer implements JsonDeserializer<RuledArgument> {
 		@Override
-		public MinecraftVersion.RuledArgument deserialize(JsonElement json, Type type, JsonDeserializationContext context) throws JsonParseException
+		public RuledArgument deserialize(JsonElement json, Type type, JsonDeserializationContext context) throws JsonParseException
 		{
 			// TODO: Implement this method
 			JsonObject obj = json.getAsJsonObject();
@@ -117,7 +117,7 @@ public class MinecraftVersion
 	}
 	public class ArgumentJsonDeserializer implements JsonDeserializer<Argument> {
 		@Override
-		public MinecraftVersion.Argument deserialize(JsonElement json, Type type, JsonDeserializationContext context) throws JsonParseException
+		public Argument deserialize(JsonElement json, Type type, JsonDeserializationContext context) throws JsonParseException
 		{
 			// TODO: Implement this method
 			if (json.isJsonPrimitive()) {

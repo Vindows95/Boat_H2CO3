@@ -34,10 +34,9 @@
     <PreferenceCategory app:title="@string/app">
 
         <SwitchPreferenceCompat
-            app:key="material_you"
+            app:key="material"
             app:title="@string/menu_theme"
             app:summary="@string/theme_summary"
-            app:enabled="true"
             app:icon="@drawable/ic_theme_custom" />
 
         <ListPreference

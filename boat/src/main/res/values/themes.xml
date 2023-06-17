@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="BoatTheme" parent="@android:style/Theme.Holo.Light.NoActionBar">
-	</style>
-	<style name="FullScreenTheme" parent="@android:style/Theme.Holo.Light.NoActionBar">
+
+    <style name="FullScreenTheme" parent="Theme.Material3.Light.NoActionBar">
 		<item name="android:windowFullscreen">true</item>
 	</style>
 	<style name="AppBaseTheme" parent="Theme.Material3.Light">
@@ -23,7 +22,7 @@
 	</style>
 
 	<style name="MyActionBar" parent="@style/Widget.AppCompat.ActionBar">
-		<item name="android:background">@color/material_background</item>
+		<item name="background">@color/material_background</item>
 	</style>
 
 	<style name="AppBaseTheme.NoActionBar">

@@ -2,6 +2,7 @@ package cosine.boat;
 
 import java.lang.reflect.Type;
 import java.text.ParseException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -154,7 +155,7 @@ public class BoatScript {
         }
         catch (Exception e) {
             System.out.println("Exception occurred, " + this.scriptFile + ":" + line);
-            System.out.println(this.commands.get(line));
+            System.out.println(Arrays.toString(this.commands.get(line)));
             e.printStackTrace();
         }
     }

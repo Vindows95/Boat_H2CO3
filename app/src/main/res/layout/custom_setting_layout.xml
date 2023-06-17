@@ -29,8 +29,8 @@
                     android:layout_marginTop="7.5dp"
                     android:layout_marginEnd="15dp"
                     android:layout_marginBottom="7.5dp"
-                    android:foreground="?android:attr/selectableItemBackground"
-                    app:cardCornerRadius="10dp"
+                    android:foreground="?attr/selectableItemBackground"
+                    app:cardCornerRadius="@dimen/card_radius"
                     app:cardElevation="0dp">
 
                     <LinearLayout
@@ -55,7 +55,7 @@
                                 <ImageView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:src="@drawable/ic_build"
+                                    app:srcCompat="@drawable/ic_build"
                                     app:tint="?colorPrimary"
                                     android:contentDescription="TODO" />
 
@@ -99,7 +99,7 @@
                                 android:id="@+id/custom_edit_id_click"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/md_button_height"
-                                android:background="?android:attr/selectableItemBackground"
+                                android:background="?attr/selectableItemBackground"
                                 android:gravity="center_vertical"
                                 android:orientation="horizontal"
                                 android:paddingHorizontal="15dp"
@@ -124,7 +124,7 @@
                                 <ImageView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:src="@drawable/ic_home_edit"
+                                    app:srcCompat="@drawable/ic_home_edit"
                                     android:contentDescription="TODO" />
 
                             </com.google.android.material.circularreveal.CircularRevealLinearLayout>
@@ -167,8 +167,8 @@
                     android:layout_marginTop="7.5dp"
                     android:layout_marginEnd="15dp"
                     android:layout_marginBottom="7.5dp"
-                    android:foreground="?android:attr/selectableItemBackground"
-                    app:cardCornerRadius="10dp"
+                    android:foreground="?attr/selectableItemBackground"
+                    app:cardCornerRadius="@dimen/card_radius"
                     app:cardElevation="0dp">
 
                     <LinearLayout
@@ -193,7 +193,7 @@
                                 <ImageView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:src="@drawable/ic_more_jvm"
+                                    app:srcCompat="@drawable/ic_more_jvm"
                                     app:tint="?colorPrimary"
                                     android:contentDescription="TODO" />
 
@@ -237,7 +237,7 @@
                                 android:id="@+id/custom_edit_jvm_click"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/md_button_height"
-                                android:background="?android:attr/selectableItemBackground"
+                                android:background="?attr/selectableItemBackground"
                                 android:gravity="center_vertical"
                                 android:orientation="horizontal"
                                 android:paddingHorizontal="15dp"
@@ -262,7 +262,7 @@
                                 <ImageView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:src="@drawable/ic_home_edit"
+                                    app:srcCompat="@drawable/ic_home_edit"
                                     android:contentDescription="TODO" />
 
                             </com.google.android.material.circularreveal.CircularRevealLinearLayout>
@@ -272,7 +272,7 @@
                                 android:id="@+id/custom_edit_mcf_click"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/md_button_height"
-                                android:background="?android:attr/selectableItemBackground"
+                                android:background="?attr/selectableItemBackground"
                                 android:gravity="center_vertical"
                                 android:orientation="horizontal"
                                 android:paddingHorizontal="15dp"
@@ -297,7 +297,7 @@
                                 <ImageView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:src="@drawable/ic_home_edit"
+                                    app:srcCompat="@drawable/ic_home_edit"
                                     android:contentDescription="TODO" />
 
                             </com.google.android.material.circularreveal.CircularRevealLinearLayout>
@@ -374,7 +374,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:background="@color/empty"
-                                    android:foreground="?android:attr/selectableItemBackground"
+                                    android:foreground="?attr/selectableItemBackground"
                                     android:text="@string/custom_right_click"
                                     android:textSize="15sp"
                                     android:paddingHorizontal="15dp"/>
@@ -393,7 +393,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:background="@color/empty"
-                                    android:foreground="?android:attr/selectableItemBackground"
+                                    android:foreground="?attr/selectableItemBackground"
                                     android:text="@string/custom_back"
                                     android:textSize="15sp"
                                     android:paddingHorizontal="15dp"/>
@@ -412,7 +412,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:background="@color/empty"
-                                    android:foreground="?android:attr/selectableItemBackground"
+                                    android:foreground="?attr/selectableItemBackground"
                                     android:text="@string/custom_isolate"
                                     android:textSize="15sp"
                                     android:paddingHorizontal="15dp"/>

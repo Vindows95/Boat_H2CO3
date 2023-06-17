@@ -4,7 +4,6 @@ import static org.koishi.launcher.h2co3.tool.CHTools.LAUNCHER_DATA_DIR;
 import static org.koishi.launcher.h2co3.tool.CHTools.h2co3Cfg;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -14,6 +13,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.preference.EditTextPreference;
 import androidx.preference.Preference;
@@ -39,8 +39,8 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.settings_preferences, rootKey);
-        editJvm = (EditTextPreference) findPreference("set_jvm");
-        editMcf= (EditTextPreference) findPreference("set_mcf");
+        editJvm = findPreference("set_jvm");
+        editMcf= findPreference("set_mcf");
 
         assert  editJvm != null;
         editJvm.setText(CHTools.getBoatCfg("extraJavaFlags","-client -Xmx4000M"));
@@ -62,7 +62,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 return true;
             });
         }
-        appTheme = findPreference("material_you");
+        appTheme = findPreference("material");
         assert appTheme != null;
         if (Build.VERSION.SDK_INT >= 31) {
             appTheme.setEnabled(true);
@@ -116,7 +116,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                         getActivity().finish();
                          */ AppExecute.output(getActivity(),"h2co3.zip",  Environment.getExternalStorageDirectory() + "/games/org.koishi.launcher/h2co3");
                         Intent i2 = new Intent(getActivity(), MainActivity.class);
-                        i2.putExtra("fragment", getResources().getString(R.string.menu_home));
+                        i2.putExtra("fragment", getResources().getString(R.string.app_name));
                         startActivity(i2);
                         getActivity().finish();
                     } catch (IOException e) {

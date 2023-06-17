@@ -3,9 +3,6 @@ package cosine.boat;
 
 import static cosine.boat.CHTools.h2co3Cfg;
 
-import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.res.Resources;
 import android.graphics.SurfaceTexture;
 import android.os.Build;
@@ -23,7 +20,6 @@ import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.TextureView;
 import android.view.View;
-import android.view.View.OnSystemUiVisibilityChangeListener;
 import android.view.View.OnTouchListener;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
@@ -33,6 +29,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONObject;
 
@@ -42,7 +39,7 @@ import java.io.InputStreamReader;
 
 
 @RequiresApi(api = Build.VERSION_CODES.O)
-public class BoatActivityMk extends Activity implements TextureView.SurfaceTextureListener, SurfaceHolder.Callback, OnTouchListener, View.OnClickListener, TextWatcher, TextView.OnEditorActionListener, View.OnCapturedPointerListener {
+public class BoatActivityMk extends AppCompatActivity implements TextureView.SurfaceTextureListener, SurfaceHolder.Callback, OnTouchListener, View.OnClickListener, TextWatcher, TextView.OnEditorActionListener, View.OnCapturedPointerListener {
     public static final int FLAG_HOMEKEY_DISPATCHED = 0x80000000;
 
     static {

@@ -6,7 +6,7 @@
 	android:orientation="horizontal"
 	android:paddingBottom="10dip"
 	android:paddingTop="10dip"
-	android:foreground="?android:attr/selectableItemBackground">
+	android:foreground="?attr/selectableItemBackground">
 
 	<ImageButton
 		android:id="@+id/delete"

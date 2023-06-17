@@ -3,13 +3,14 @@ package com.mistake.revision;
 import static org.koishi.launcher.h2co3.tool.CHTools.LAUNCHER_FILE_DIR;
 import static org.koishi.launcher.h2co3.tool.CHTools.boatCfg;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -17,38 +18,38 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
 import com.download.service.downloader.HttpUtil;
 import com.download.service.util.VersionUtil;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.mistake.revision.Download.DownloadFragment;
 import com.mistake.revision.adapter.Version_List_Adpater;
 import com.mistake.revision.view.PullListView;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import okhttp3.Call;
-import okhttp3.Response;
-import com.mistake.revision.Download.DownloadFragment;
-import com.google.gson.Gson;
-import java.lang.reflect.Type;
-import com.google.gson.reflect.TypeToken;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.util.Objects;
-
-import android.view.MenuItem;
-import android.view.Menu;
-
-import androidx.annotation.NonNull;
-import org.koishi.launcher.h2co3.application.H2CO3Activity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
-
 import org.koishi.launcher.h2co3.MainActivity;
 import org.koishi.launcher.h2co3.R;
+import org.koishi.launcher.h2co3.application.H2CO3Activity;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Objects;
+
+import okhttp3.Call;
+import okhttp3.Response;
 
 public class VanillaActivity extends H2CO3Activity
 {
@@ -216,7 +217,7 @@ public class VanillaActivity extends H2CO3Activity
 							rbOldbeta.setEnabled(false);
 							get("https://launchermeta.mojang.com/mc/game/version_manifest.json");
 							download_source = "https://launchermeta.mojang.com";
-							Toast.makeText(VanillaActivity.this, download_source , Toast.LENGTH_SHORT).show();
+							//Toast.makeText(VanillaActivity.this, download_source , Toast.LENGTH_SHORT).show();
 							break;
 						case 1:
 							list.setAdapter(null);
@@ -226,7 +227,7 @@ public class VanillaActivity extends H2CO3Activity
 							rbOldbeta.setEnabled(false);
 							get("https://download.mcbbs.net/mc/game/version_manifest.json");
 							download_source = "https://download.mcbbs.net";
-							Toast.makeText(VanillaActivity.this, download_source , Toast.LENGTH_SHORT).show();
+							//Toast.makeText(VanillaActivity.this, download_source , Toast.LENGTH_SHORT).show();
 							break;
 						case 2:
 							list.setAdapter(null);
@@ -236,7 +237,7 @@ public class VanillaActivity extends H2CO3Activity
 							rbOldbeta.setEnabled(false);
 							get("https://bmclapi2.bangbang93.com/mc/game/version_manifest.json");
 							download_source = "https://bmclapi2.bangbang93.com";
-							Toast.makeText(VanillaActivity.this, download_source , Toast.LENGTH_SHORT).show();
+							//Toast.makeText(VanillaActivity.this, download_source , Toast.LENGTH_SHORT).show();
 							break;
 						default:
 							break;
@@ -427,7 +428,7 @@ public class VanillaActivity extends H2CO3Activity
 		return data_list;
 	}
 
-	public static void verifyStoragePermissions(Activity activity) {
+	public static void verifyStoragePermissions(AppCompatActivity activity) {
 
         try {
 			//检测是否有写的权限
@@ -501,68 +502,5 @@ public class VanillaActivity extends H2CO3Activity
 			return null;
 		}
     }
-
-    /*
-	public void buildJsonData() {
-		settingModel = new LauncherSettingModel();
-		
-		HashMap<String, Object> arrayMap = new HashMap<String, Object>();
-        ArrayList arrayList = new ArrayList();
-        arrayMap.put("auth_uuid", settingModel.getMinecraftParameter().getauth_uuid());
-        arrayMap.put("extraMinecraftFlags", settingModel.getMinecraftParameter().getextraMinecraftFlags());
-        arrayMap.put("auth_session", settingModel.getMinecraftParameter().getauth_session());
-        arrayMap.put("home", settingModel.getMinecraftParameter().gethome());
-        arrayMap.put("runtimePath", settingModel.getMinecraftParameter().getruntimePath());
-        arrayMap.put("auth_access_token", settingModel.getMinecraftParameter().getauth_access_token());
-        arrayMap.put("game_assets", settingModel.getMinecraftParameter().getgame_assets());
-        arrayMap.put("user_type", settingModel.getMinecraftParameter().getuser_type());
-        arrayMap.put("game_directory", settingModel.getMinecraftParameter().getgame_directory());
-        arrayMap.put("user_properties", settingModel.getMinecraftParameter().getuser_properties());
-        arrayMap.put("assets_root", settingModel.getMinecraftParameter().getassets_root());
-        arrayMap.put("auth_player_name", settingModel.getMinecraftParameter().getauth_player_name());
-        arrayMap.put("extraJavaFlags", settingModel.getMinecraftParameter().getextraJavaFlags());
-        arrayList.add(arrayMap);
-		
-        Gson gson = new Gson();
-        File file = new File(boatCfg);
-        boolean r=false;
-        if (!file.exists()) {
-			for (int i = 0; i < arrayList.size(); i++) {
-				String a = settingModel.getMinecraftParameter().getextraJavaFlags();
-				a = gson.toJson(arrayMap);
-
-				settingModel.getMinecraftParameter().setauth_session("aaa");//此为写入Json
-            try {
-				BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
-                //FileWriter bufferedWriter=new FileWriter(new File("/sdcard/boat/config.txt"));
-                bufferedWriter.write(a);
-                bufferedWriter.flush();
-                bufferedWriter.close();
-                r=file.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            if(r) {
-                Toast.makeText(this, "文件创建成功", Toast.LENGTH_SHORT).show();
-            }
-        }
-		/*  String auth_uuid = getPreferences(MODE_PRIVATE).getString("auth_uuid", "00000000-0000-0000-0000-000000000000").toString();
-		 String extraMinecraftFlags = getPreferences(MODE_PRIVATE).getString("extraMinecraftFlags", "").toString();
-		 String auth_session = getPreferences(MODE_PRIVATE).getString("auth_session", "0").toString();
-		 String home = getPreferences(MODE_PRIVATE).getString("home", "/sdcard/boat").toString();
-		 String runtimePath = getPreferences(MODE_PRIVATE).getString("runtimePath", "/data/user/0/cosine.boat/app_runtime").toString();
-		 String auth_access_token = getPreferences(MODE_PRIVATE).getString("auth_access_token", "0").toString();
-		 String game_assets = getPreferences(MODE_PRIVATE).getString("game_assets", "/storage/emulated/0/boat/.minecraft/assets/virtual/legacy").toString();
-		 String user_type = getPreferences(MODE_PRIVATE).getString("user_type", "mojang").toString();
-		 String game_directory = getPreferences(MODE_PRIVATE).getString("game_directory", "/sdcard/boat/.minecraft").toString();
-		 String user_properties = getPreferences(MODE_PRIVATE).getString("user_properties", "{}").toString();
-		 String assets_root = getPreferences(MODE_PRIVATE).getString("assets_root", "/sdcard/boat/.minecraft/assets").toString();
-		 String auth_player_name = getPreferences(MODE_PRIVATE).getString("auth_player_name", "steve").toString();
-		 String extraJavaFlags = getPreferences(MODE_PRIVATE).getString("extraJavaFlags", "450").toString();
-		 extraJavaFlags = new StringBuffer().append(new StringBuffer().append(new StringBuffer().append(new StringBuffer().append("-client -Xms").append(extraJavaFlags).toString()).append("M -Xmx").toString()).append(extraJavaFlags).toString()).append("M").toString();*/
-        //ArrayMap arrayMap = new ArrayMap();
-        
-        //}
-	//}
 }
 

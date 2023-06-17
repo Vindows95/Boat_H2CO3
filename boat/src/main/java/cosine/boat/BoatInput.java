@@ -1,11 +1,13 @@
 package cosine.boat;
 
-import android.app.*;
-import android.content.*;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.os.Build;
 import android.view.Surface;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class BoatInput{
 	
@@ -63,8 +65,7 @@ public class BoatInput{
 	// To be called by lwjgl/glfw.
 	@RequiresApi(api = Build.VERSION_CODES.O)
 	public static void setCursorMode(int mode){
-
-		Activity activity = BoatApplication.getCurrentActivity();
+		AppCompatActivity activity = BoatApplication.getCurrentActivity();
 		if (activity instanceof BoatActivity){
 			BoatActivity boatActivity = (BoatActivity)activity;
 			boatActivity.setCursorMode(mode);
@@ -78,7 +79,7 @@ public class BoatInput{
 	@RequiresApi(api = Build.VERSION_CODES.O)
 	public static void setCursorPos(int x, int y){
 
-		Activity activity = BoatApplication.getCurrentActivity();
+		AppCompatActivity activity = BoatApplication.getCurrentActivity();
 		if (activity instanceof BoatActivity){
 			BoatActivity boatActivity = (BoatActivity)activity;
 			boatActivity.setCursorPos(x, y);
@@ -90,7 +91,7 @@ public class BoatInput{
 	}
 
 	public static void setPrimaryClipString(String string){
-		Activity activity = BoatApplication.getCurrentActivity();
+		AppCompatActivity activity = BoatApplication.getCurrentActivity();
 		if (activity instanceof BoatActivity){
 			ClipboardManager clipboard = (ClipboardManager)activity.getSystemService(Context.CLIPBOARD_SERVICE);
 			ClipData clip = ClipData.newPlainText("Boat Clipboard", string);
@@ -100,7 +101,7 @@ public class BoatInput{
 	}
 
 	public static String getPrimaryClipString(){
-		Activity activity = BoatApplication.getCurrentActivity();
+		AppCompatActivity activity = BoatApplication.getCurrentActivity();
 		if (activity instanceof BoatActivity){
 
 			ClipboardManager clipboard = (ClipboardManager)activity.getSystemService(Context.CLIPBOARD_SERVICE);

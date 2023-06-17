@@ -86,19 +86,19 @@ public class ManagerFragment extends Fragment {
         if (!f.exists()) {
             new Thread(() -> {
                 try {
-                    AppExecute.output(getActivity(), "boat.zip", file);
+                    AppExecute.output(getActivity(), "pack.zip", file);
                     //Snackbar.make(getView(), getResources().getString(R.string.install_done), Snackbar.LENGTH_LONG)
                             //.setAction("Action", null).show();
                     han.sendEmptyMessage(0);
                 } catch (IOException e) {
-                    Snackbar.make(Objects.requireNonNull(getView()), e.toString(), Snackbar.LENGTH_LONG)
+                    Snackbar.make(requireView(), e.toString(), Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                     han.sendEmptyMessage(-1);
                 }
             }).start();
 
         } else {
-            Snackbar.make(Objects.requireNonNull(getView()), getResources().getString(R.string.install_done), Snackbar.LENGTH_LONG)
+            Snackbar.make(requireView(), getResources().getString(R.string.install_done), Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
             setDir(file);
             mDirectory.setText(file);
@@ -121,7 +121,7 @@ public class ManagerFragment extends Fragment {
                 //.setAction("Action", null).show();
                 han.sendEmptyMessage(1);
             } catch (IOException e) {
-                Snackbar.make(Objects.requireNonNull(getView()), e.toString(), Snackbar.LENGTH_LONG)
+                Snackbar.make(requireView(), e.toString(), Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
                 han.sendEmptyMessage(-1);
             }
@@ -137,13 +137,13 @@ public class ManagerFragment extends Fragment {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if (msg.what == 0) {
-                Snackbar.make(Objects.requireNonNull(getView()), getResources().getString(R.string.install_done), Snackbar.LENGTH_LONG)
+                Snackbar.make(requireView(), getResources().getString(R.string.install_done), Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
                 setDir(Objects.requireNonNull(mDirectory.getText()).toString());
                 mDirectory.setText(mDirectory.getText().toString());
             }
             if (msg.what == 1) {
-                Snackbar.make(Objects.requireNonNull(getView()), getResources().getString(R.string.install_done), Snackbar.LENGTH_LONG)
+                Snackbar.make(requireView(), getResources().getString(R.string.install_done), Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
                 boolean hasData = mDbDao.hasData(Objects.requireNonNull(mOutput.getText()).toString());
                 if (!hasData){

@@ -32,12 +32,9 @@ public class SettingsActivity extends H2CO3Activity {
             finish();
             //startActivity(new Intent(SettingsActivity.this,HomeActivity.class));
         });
-        Typeface tf = Typeface.createFromAsset(this.getAssets(),
-                "Sans.ttf");
         TextView bigTitle= (TextView) toolbar.getChildAt(0);
-        bigTitle.setTypeface(tf);
         bigTitle.setText(getResources().getString(R.string.settings));
-        sp = getSharedPreferences("org.koishi.launcher.h2co3_preferences", MODE_PRIVATE);
+        sp = getSharedPreferences("h2co3_preferences_setting", MODE_PRIVATE);
         if (savedInstanceState == null) {
             getSupportFragmentManager()
                     .beginTransaction()

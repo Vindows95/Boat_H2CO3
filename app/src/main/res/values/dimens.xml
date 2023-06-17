@@ -14,4 +14,5 @@
 	<dimen name="text_large">13sp</dimen>
 	<dimen name="text_mediums">12sp</dimen>
     <dimen name="text_small">10sp</dimen>
+    <dimen name="card_radius">25sp</dimen>
 </resources>

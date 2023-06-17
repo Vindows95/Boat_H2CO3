@@ -1,23 +1,21 @@
 package org.koishi.launcher.h2co3;
 
-import android.graphics.Typeface;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.View;
-
-import org.koishi.launcher.h2co3.application.H2CO3Activity;
-import androidx.appcompat.widget.Toolbar;
-
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.Html;
 import android.text.Spanned;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
@@ -25,6 +23,8 @@ import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.textfield.TextInputEditText;
 import com.jrummyapps.android.shell.CommandResult;
 import com.jrummyapps.android.shell.Shell;
+
+import org.koishi.launcher.h2co3.application.H2CO3Activity;
 
 import java.util.Objects;
 
@@ -52,10 +52,7 @@ public class TerminalActivity extends H2CO3Activity {
         toolbar.setTitle(R.string.menu_terminal);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(v -> finish());
-        Typeface tf = Typeface.createFromAsset(this.getAssets(),
-                "Sans.ttf");
         TextView bigTitle= (TextView) toolbar.getChildAt(0);
-        bigTitle.setTypeface(tf);
         bigTitle.setText(getResources().getString(R.string.menu_terminal));
         inputText = findViewById(R.id.terminal_input);
         backText = findViewById(R.id.terminal_backspace);
@@ -104,9 +101,6 @@ public class TerminalActivity extends H2CO3Activity {
 
         exec.setOnClickListener(v-> {
             if (!Objects.requireNonNull(inputText.getText()).toString().equals("")) {
-                //exec();
-                //InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                //imm.hideSoftInputFromWindow(inputText.getWindowToken(), 0);
                 String command = inputText.getText().toString();
                 boolean asRoot = cbRoot.isChecked();
                 new RunCommandTask(asRoot).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, command);
@@ -122,6 +116,7 @@ public class TerminalActivity extends H2CO3Activity {
         return true;
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -154,6 +149,7 @@ public class TerminalActivity extends H2CO3Activity {
     }
 
     // Ignore the bad AsyncTask usage.
+    @SuppressLint("StaticFieldLeak")
     final class RunCommandTask extends AsyncTask<String, Void, CommandResult> {
 
         private final boolean asRoot;
@@ -163,7 +159,7 @@ public class TerminalActivity extends H2CO3Activity {
         }
 
         @Override protected void onPreExecute() {
-            dialog = ProgressDialog.show(TerminalActivity.this, getResources().getString(R.string.menu_terminal), "Please Wait...");
+            dialog = ProgressDialog.show(TerminalActivity.this, getResources().getString(R.string.menu_terminal), "等一等...");
             dialog.setCanceledOnTouchOutside(false);
             dialog.setCancelable(true);
         }
@@ -192,8 +188,8 @@ public class TerminalActivity extends H2CO3Activity {
             StringBuilder html = new StringBuilder();
             // exit status
             html.append("<p>");
-            html.append("<font>").append("Command: ").append("</font>");
-            html.append("<font color = ?colorPrimary >").append(Objects.requireNonNull(inputText.getText()).toString()).append("</font>");
+            html.append("<font>").append("command: ").append("</font>");
+            html.append("<font color = ?colorPrimary >").append(Objects.requireNonNull(inputText.getText())).append("</font>");
             html.append("</p>");
             html.append("<p>Exit Code: ");
             if (result.isSuccessful()) {
@@ -215,7 +211,7 @@ public class TerminalActivity extends H2CO3Activity {
                         .append("</font></p>");
             }
             html.append("<p>");
-            html.append("<font>").append("\n-----Finished-----").append("</font>");
+            html.append("<font>").append("\n-----结束-----").append("</font>");
             html.append("</p>");
             return Html.fromHtml(html.toString());
         }
@@ -236,50 +232,4 @@ public class TerminalActivity extends H2CO3Activity {
         }
     }
 
-    /*
-
-    public String getShellResult() {
-        try {
-            String cmds = "";
-            String[] arr = cmds.split("\n"); // 用,分割
-            for (String cmd : arr) {
-                cmds += cmd + ";";
-            }
-            String[] cmdA = {"/bin/sh", "-c", cmds};
-            Process process = Runtime.getRuntime().exec(cmdA);
-            LineNumberReader br = new LineNumberReader(new InputStreamReader(
-                    process.getInputStream()));
-            StringBuffer sb = new StringBuffer();
-            String line;
-            while ((line = br.readLine()) != null) {
-                System.out.println(line);
-                sb.append(line).append("\n");
-                return sb.toString();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return e.toString();
-        }
-        return null;
-
-    }
-
-    public void exec(){
-        new Thread(() -> {
-            b = getShellResult();
-            han.sendEmptyMessage(0);
-        }).start();
-    }
-
-    Handler han = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            if (msg.what == 0) {
-                outputText.append(b+"\n");
-            }
-        }
-    };
-
-     */
 }

@@ -290,7 +290,7 @@
 		</RelativeLayout>
 
 		<View
-			android:background="?android:attr/dividerVertical"
+			android:background="?attr/dividerVertical"
 			android:layout_width="match_parent"
 			android:layout_height="1dp"/>
 
@@ -327,7 +327,7 @@
 		</RadioGroup>
 
 		<View
-			android:background="?android:attr/dividerVertical"
+			android:background="?attr/dividerVertical"
 			android:layout_width="match_parent"
 			android:layout_height="1dp"/>
 
@@ -468,7 +468,7 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:text="选择按键"
-				android:background="@drawable/background_button"
+				android:background="@drawable/control_button"
 				android:textColor="#FFFFFFFF"
 				android:layout_margin="5dp"/>
 
@@ -486,7 +486,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:text="确定"
-				android:background="@drawable/background_button"
+				android:background="@drawable/control_button"
 				android:layout_marginRight="10dp"
 				android:textColor="#FFFFFFFF"
 				android:layout_weight="1.0"/>
@@ -496,7 +496,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:text="取消"
-				android:background="@drawable/background_button"
+				android:background="@drawable/control_button"
 				android:textColor="#FFFFFFFF"
 				android:layout_weight="1.0"/>
 

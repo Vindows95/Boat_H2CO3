@@ -29,10 +29,6 @@ import org.koishi.launcher.h2co3.TerminalActivity;
 
 public class CustomFragment extends Fragment {
 
-    /****************
-     * 此页面不再使用
-     * 改为SettingsFragment
-     ******************/
 
     public LinearLayout pg1,pg2,pg3;
 

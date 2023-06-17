@@ -1,38 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Boat_H2CO3</string>
-	<string name="play">開始</string>
-	<string name="excute">執行</string>
-	<string name="install">安裝</string>
-	<string name="mouse_primary">Pri</string>
-    <string name="mouse_secondary">Sec</string>
-    <string name="control_chat">聊天</string>
-	<string name="control_command">命令</string>
-    <string name="control_debug">調試</string>
-    <string name="control_shift">■</string>
-    <string name="control_inventory">E</string>
-	<string name="control_thirdperson">視角</string>
-	<string name="control_jump">■</string>
-    <string name="control_up">▲</string>
-    <string name="control_left">◀</string>
-    <string name="control_right">▶</string>
-    <string name="control_down">▼</string>
-    <string name="control_keyboard">鍵盤</string>
-	<string name="esc">離開</string>
-	
-	<string name="control_bs">退格</string>
-	<string name="control_set">只把文字放進遊戲裡的文本框</string>
-	<string name="control_send">發送訊息</string>
-	<!--
-	<string name="step0">No such file!</string>
-	<string name="step1">Installing...</string>
-	<string name="step2">Package has been extracted in </string>
-	<string name="step3">Try to set executing permission: true</string>
-	<string name="step4">Try to set executing permission: false</string>
-	<string name="step5">Setting up property...</string>
-	<string name="step6">Finished!</string>
-	<string name="step7">Command process exited with value: </string>
-	<string name="cfg_inputhint">运行库路径，若安装则无视</string>
+    <string name="install">安裝</string>
+
+    <!--
+    <string name="step0">No such file!</string>
+    <string name="step1">Installing...</string>
+    <string name="step2">Package has been extracted in </string>
+    <string name="step3">Try to set executing permission: true</string>
+    <string name="step4">Try to set executing permission: false</string>
+    <string name="step5">Setting up property...</string>
+    <string name="step6">Finished!</string>
+    <string name="step7">Command process exited with value: </string>
+    <string name="cfg_inputhint">运行库路径，若安装则无视</string>
     
     <string name="cfg_name">游戏ID(若需要玩服务器建议使用英文+数字)</string>
     <string name="cfg_ram">JVM参数/内存(默认请填 -client -Xmx750M，此段文本可复制)</string>
@@ -61,11 +41,9 @@
     <string name="down">下载文件(Beta)</string>
     <string name="downtip">如果你在下载过程中不小心关闭了这个软件的进程，需要点击Delete键来进行清除缓存，然后重新进行下载。</string>
     -->
-    
-    <string name="touch_mode_1">戰鬥模式</string>
-	<string name="touch_mode_2">建築模式</string>
- 
-    <string name="fc">快速點擊</string>
+
+    <string name="touch_mode_2">建築模式</string>
+
     <string name="app_restart">重新启动</string>
 
     <string name="crash_test">崩潰測試</string>

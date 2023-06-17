@@ -41,7 +41,7 @@
                 android:layout_weight="1"
                 android:text="@string/manager_set"
                 android:backgroundTint="?colorOnPrimary"
-                app:cornerRadius="15dp"
+                app:cornerRadius="@dimen/card_radius"
                 android:textColor="@color/appBlack_ff_l"/>
 
             <com.google.android.material.button.MaterialButton
@@ -54,7 +54,7 @@
                 android:text="@string/manager_reset"
                 app:icon="@drawable/refresh"
                 android:backgroundTint="@color/colorOnPrimary"
-                app:cornerRadius="15dp"
+                app:cornerRadius="@dimen/card_radius"
                 app:iconTint="@color/appBlack_ff"
                 android:textColor="@color/appBlack_ff_l"/>
 
@@ -84,7 +84,7 @@
             android:layout_weight="1"
             android:elevation="0dp"
             android:text="@string/manager_output"
-            app:cornerRadius="30dp"
+            app:cornerRadius="@dimen/card_radius"
             android:textColor="@color/appBlack_ff_l"
             android:enabled="false"
             android:fontFamily="@font/sans"/>
@@ -93,7 +93,7 @@
             android:id="@+id/manager_open_ver"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?android:attr/selectableItemBackground"
+            android:background="?attr/selectableItemBackground"
             android:gravity="center_vertical"
             android:orientation="vertical"
             android:paddingLeft="18dp"

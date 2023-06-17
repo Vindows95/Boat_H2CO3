@@ -2,51 +2,14 @@
 <resources>
     <string name="app_name" translatable="false">Boat_H2CO3</string>
     <string name="app_version" translatable="false">Boat_H2CO3 DEV</string>
-    <string name="play">Play</string>
-    <string name="excute">Excute</string>
     <string name="install">Install</string>
-    <string name="mouse_primary">Pri</string>
-    <string name="mouse_secondary">Sec</string>
-    <string name="control_chat">Chat</string>
-    <string name="control_command">Cmd</string>
-    <string name="control_debug">Debug</string>
-    <string name="control_shift">Sft</string>
-    <string name="control_inventory">Inv</string>
-    <string name="control_thirdperson">3rd</string>
-    <string name="control_jump">■</string>
-    <string name="control_up">▲</string>
-    <string name="control_left">◀</string>
-    <string name="control_right">▶</string>
-    <string name="control_down">▼</string>
-    <string name="esc">Esc</string>
-    <string name="control_keyboard">Keyboard</string>
 
-    <string name="control_bs" translatable="false">Backspace</string>
-    <string name="control_set" translatable="false">Set text into the input box of the game</string>
-    <string name="control_send" translatable="false">Send</string>
-
-    <string name="touch_mode_1">Battle</string>
     <string name="touch_mode_2">Build</string>
 
-    <string name="fc">Fast Click</string>
     <string name="app_restart">Restart</string>
 
     <string name="crash_test">Crash test</string>
     <string name="crash_hint">App is crashed! Do not worry, app will restart if you press the restart button. You can also view the information from this page.</string>
     <string name="crash_title">Error</string>
-    <string name="control_ime">IME</string>
-
-    <string name="lfile_NotFoundBooks">Please select a file at least</string>
-    <string name="lfile_NotFoundPath">The sd card is not available</string>
-    <string name="lfile_UpOneLevel">Up</string>
-    <string name="lfile_Selected">selected</string>
-    <string name="lfile_LItem">item</string>
-    <string name="lfile_Detail">detail</string>
-    <string name="lfile_FileSize">size : </string>
-    <string name="lfile_OutSize">Has reached the maximum number</string>
-    <string name="lfile_SelectAll">SelectAll</string>
-    <string name="lfile_Cancel">Cancel</string>
-    <string name="lfile_OK">OK</string>
-    <string name="lfile_ChooseTip">Please select folders path</string>
 
 </resources>

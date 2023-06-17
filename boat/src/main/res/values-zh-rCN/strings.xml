@@ -1,46 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Boat_H2CO3</string>
-	<string name="play">开始游戏</string>
-	<string name="excute">执行</string>
-	<string name="install">安装</string>
-	<string name="mouse_primary">Pri</string>
-    <string name="mouse_secondary">Sec</string>
-    <string name="control_chat">聊天</string>
-	<string name="control_command">指令</string>
-    <string name="control_debug">调试</string>
-    <string name="control_shift">■</string>
-    <string name="control_inventory">E</string>
-	<string name="control_thirdperson">视角</string>
-	<string name="control_jump">■</string>
-    <string name="control_up">▲</string>
-    <string name="control_left">◀</string>
-    <string name="control_right">▶</string>
-    <string name="control_down">▼</string>
-    <string name="control_keyboard">键盘</string>
-	<string name="esc">返回</string>
-	
-	<string name="control_bs">退格</string>
-	<string name="control_set">仅将文字输入进游戏内文本框</string>
-	<string name="control_send">发送</string>
+    <string name="install">安装</string>
 
-    <string name="lfile_NotFoundBooks">Please select a file at least</string>
-    <string name="lfile_NotFoundPath">The sd card is not available</string>
-    <string name="lfile_UpOneLevel">Up</string>
-    <string name="lfile_Selected">selected</string>
-    <string name="lfile_LItem">item</string>
-    <string name="lfile_Detail">detail</string>
-    <string name="lfile_FileSize">size : </string>
-    <string name="lfile_OutSize">Has reached the maximum number</string>
-    <string name="lfile_SelectAll">SelectAll</string>
-    <string name="lfile_Cancel">Cancel</string>
-    <string name="lfile_OK">OK</string>
-    <string name="lfile_ChooseTip">Please select folders path</string>
+    <string name="touch_mode_2">建筑模式</string>
 
-    <string name="touch_mode_1">战斗模式</string>
-	<string name="touch_mode_2">建筑模式</string>
- 
-    <string name="fc">连点</string>
     <string name="app_restart">重新启动</string>
 
     <string name="crash_test">崩溃测试</string>

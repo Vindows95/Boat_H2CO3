@@ -1,20 +1,22 @@
 package cosine.boat;
 
-import android.app.Application;
+import static android.content.ContentValues.TAG;
+
 import android.app.Activity;
-import android.os.Bundle;
+import android.app.Application;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.util.Log;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import cat.ereza.customactivityoncrash.CustomActivityOnCrash;
 import cat.ereza.customactivityoncrash.config.CaocConfig;
 
-import static android.content.ContentValues.TAG;
-
 public class BoatApplication extends Application implements Application.ActivityLifecycleCallbacks
 {
-	public static Activity mCurrentActivity;
-	public static Activity getCurrentActivity(){
+	public static AppCompatActivity mCurrentActivity;
+	public static AppCompatActivity getCurrentActivity(){
 		return BoatApplication.mCurrentActivity;
 	}
 	public static BoatApplication mInstance = null;
@@ -45,7 +47,7 @@ public class BoatApplication extends Application implements Application.Activity
 	public void onActivityStarted(Activity p1)
 	{
 		// TODO: Implement this method
-		BoatApplication.mCurrentActivity = p1;
+		BoatApplication.mCurrentActivity = (AppCompatActivity) p1;
 		System.out.println(BoatApplication.mCurrentActivity);
 	}
 
@@ -87,8 +89,6 @@ public class BoatApplication extends Application implements Application.Activity
 	{
 		// TODO: Implement this method
 		super.onCreate();
-
-		setAppColorTheme();
 		this.registerActivityLifecycleCallbacks(this);
 		CaocConfig.Builder.create()
 				//程序在后台时，发生崩溃的三种处理方式
@@ -132,10 +132,6 @@ public class BoatApplication extends Application implements Application.Activity
 			Log.e(TAG, "onCloseAppFromErrorActivity()");
 		}
 
-	}
-
-	public void setAppColorTheme(){
-		//setTheme(R.style.Theme_Boat_H2CO3_Custom_GREEN);
 	}
 
 }

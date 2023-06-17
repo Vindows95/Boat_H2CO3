@@ -1,24 +1,18 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="Theme.Boat_H2CO3" parent="AppBaseTheme">
+    <style name="Theme.H2CO3" parent="AppBaseTheme.NoActionBar">
         <item name="fontFamily">@font/josefin_sans</item>
         <item name="checkboxStyle">@style/AppTheme.CheckBox</item>
         <item name="actionOverflowButtonStyle">@style/AppTheme.Toolbar.OverflowButton</item>
         <item name="chipStyle">@style/AppTheme.UIDesigner.WidgetGroupChip</item>
-        <item name="switchPreferenceStyle">@style/AppTheme.SwitchPreference</item>
         <item name="shapeAppearanceLargeComponent">@style/AppTheme.ShapeOverlay.Large</item>
         <item name="bottomSheetDialogTheme">@style/AppTheme.BottomSheetDialog</item>
     </style>
 
-    <style name="Theme.Boat_H2CO3.DynamicColors" parent="Theme.Material3.DynamicColors.Light">
+    <style name="Theme.H2CO3.DynamicColors" parent="Theme.Material3.DynamicColors.Light">
+        <item name="switchPreferenceStyle">@style/AppTheme.SwitchPreference</item>
         <item name="android:windowFullscreen">true</item>
         <item name="fontFamily">@font/josefin_sans</item>
-        <item name="checkboxStyle">@style/AppTheme.CheckBox</item>
-        <item name="actionOverflowButtonStyle">@style/AppTheme.Toolbar.OverflowButton</item>
-        <item name="chipStyle">@style/AppTheme.UIDesigner.WidgetGroupChip</item>
-        <item name="switchPreferenceStyle">@style/AppTheme.SwitchPreference</item>
-        <item name="shapeAppearanceLargeComponent">@style/AppTheme.ShapeOverlay.Large</item>
-        <item name="bottomSheetDialogTheme">@style/AppTheme.BottomSheetDialog</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
@@ -26,6 +20,7 @@
 
     <!--Custom themes-->
     <style name="AppBaseTheme" parent="Theme.Material3.Light.NoActionBar">
+        <item name="switchPreferenceStyle">@style/AppTheme.SwitchPreference</item>
         <item name="android:statusBarColor">@android:color/holo_red_light</item>
         <item name="colorPrimary">@color/md_theme_primary</item>
         <item name="colorOnPrimary">@color/md_theme_onPrimary</item>
@@ -80,7 +75,7 @@
     </style>
 
     <style name="AppTheme.Toolbar.OverflowButton" parent="@style/Widget.AppCompat.ActionButton.Overflow">
-        <item name="android:tint">@color/md_theme_secondary</item>
+        <item name="tint">@color/md_theme_secondary</item>
     </style>
 
     <style name="AppTheme.ShapeOverlay.Large" parent="">
@@ -138,19 +133,18 @@
     \
     <style name="AppTheme.BottomSheetDialog" parent="Theme.Material3.Dark.BottomSheetDialog">
         <item name="android:windowIsFloating">false</item>
-        <item name="android:windowLightStatusBar">false</item>
     </style>
 
     <style name="TextStyleMain">
         <item name="android:textAppearance">?textAppearanceSubtitle1</item>
         <item name="android:textSize">16sp</item>
         <item name="android:lineSpacingExtra">1sp</item>
-        <item name="android:fontFamily">@font/google_sans</item>
+        <item name="fontFamily">@font/google_sans</item>
     </style>
 
     <style name="TextStyleMain_sec">
         <item name="android:textAppearance">?textAppearanceSubtitle1</item>
-        <item name="android:fontFamily">@font/google_sans</item>
+        <item name="fontFamily">@font/google_sans</item>
         <item name="android:textSize">14sp</item>
         <item name="android:lineSpacingExtra">1sp</item>
     </style>
@@ -190,5 +184,10 @@
         </item>
         <item name="android:progressDrawable">@drawable/progress</item>
     </style>
+
+    <style name="Theme.H2CO3.AppBarOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="Theme.H2CO3.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
 
 </resources>

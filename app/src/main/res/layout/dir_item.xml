@@ -11,8 +11,7 @@
         android:layout_marginHorizontal="5dp"
         android:layout_marginVertical="5dp"
         android:visibility="visible"
-        app:cardBackgroundColor="@color/material_card_background"
-        app:cardCornerRadius="20dp"
+        app:cardCornerRadius="@dimen/card_radius"
         app:cardElevation="0dp">
 
         <LinearLayout
@@ -36,7 +35,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:paddingHorizontal="10dp"
-                    android:src="@drawable/ic_list_ver"
+                    app:srcCompat="@drawable/ic_list_ver"
                     app:tint="?colorPrimary"
                     android:contentDescription="TODO" />
 
@@ -83,10 +82,8 @@
                             android:layout_weight="1"
                             android:text="@string/delete"
                             android:layout_marginEnd="5dp"
-                            android:textColor="@color/material_background"
                             android:fontFamily="@font/sans"
-                            app:iconTint="@color/material_background"
-                            app:cornerRadius="30dp"
+                            app:cornerRadius="@dimen/card_radius"
                             app:icon="@drawable/ic_del_all"
                             app:iconGravity="textStart" />
 
@@ -99,10 +96,8 @@
                             android:layout_weight="1"
                             android:text="@string/remove"
                             android:layout_marginStart="5dp"
-                            android:textColor="@color/material_background"
                             android:fontFamily="@font/sans"
-                            app:iconTint="@color/material_background"
-                            app:cornerRadius="30dp"
+                            app:cornerRadius="@dimen/card_radius"
                             app:icon="@drawable/xicon"
                             app:iconGravity="textStart" />
 

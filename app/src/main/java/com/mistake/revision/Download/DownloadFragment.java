@@ -1,5 +1,6 @@
 package com.mistake.revision.Download;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,13 +37,13 @@ public class DownloadFragment extends DialogFragment
 	private ArrayList<AssetsUtil>assets;
 
 	private TextView mlist;
-	private TextView mpath1,mpath2, mpath3;
-	private ProgressBar mpath_progress1, mpath_progress2, mpath_progress3;
+	private TextView mpath1,mpath2, mpath3 ,mpath4;
+	private ProgressBar mpath_progress1, mpath_progress2, mpath_progress3 ,mpath_progress4;
 	private TextView stages_progress;
 
 	private TextView title;
 
-	private ImageButton pause_start1,pause_start2,pause_start3;
+	private ImageButton pause_start1,pause_start2,pause_start3 ,pause_start4;
 	
 	private Button btnCancel;
 	private static String
@@ -73,6 +74,7 @@ public class DownloadFragment extends DialogFragment
 	private boolean download1=false;
 	private boolean download2=false;
 	private boolean download3=false;
+	private boolean download4=false;
 
 
 	private  String ReadString(String sourcePath){
@@ -104,9 +106,11 @@ public class DownloadFragment extends DialogFragment
 		mpath1=(TextView)basefindViewById(base,R.id.downloadTextView1);
 		mpath2=(TextView)basefindViewById(base,R.id.downloadTextView2);
 		mpath3=(TextView)basefindViewById(base,R.id.downloadTextView3);
+		mpath4=(TextView)basefindViewById(base,R.id.downloadTextView7);
 		mpath_progress1=(ProgressBar)base.findViewById(R.id.downloadProgressBar1);
 		mpath_progress2=(ProgressBar)base.findViewById(R.id.downloadProgressBar2);
 		mpath_progress3=(ProgressBar)base.findViewById(R.id.downloadProgressBar3);
+		mpath_progress4=(ProgressBar)base.findViewById(R.id.downloadProgressBar4);
 		TextView overall_progress = (TextView) basefindViewById(base, R.id.downloadTextView4);
 		stages_progress=(TextView)basefindViewById(base,R.id.downloadTextView5);
 		mlist=(TextView)basefindViewById(base,R.id.downloadTextView6);
@@ -115,22 +119,26 @@ public class DownloadFragment extends DialogFragment
 		pause_start1=(ImageButton)base.findViewById(R.id.downloadImageButton2);
 		pause_start2=(ImageButton)base.findViewById(R.id.downloadImageButton3);
 		pause_start3=(ImageButton)base.findViewById(R.id.downloadImageButton4);
+		pause_start4=(ImageButton)base.findViewById(R.id.downloadImageButton5);
 		btnCancel = (Button)base.findViewById(R.id.btn_cancel);
 //
 		close.setVisibility(View.GONE);
 		pause_start1.setOnClickListener(onclick);
 		pause_start2.setOnClickListener(onclick);
 		pause_start3.setOnClickListener(onclick);
+		pause_start4.setOnClickListener(onclick);
 		btnCancel.setOnClickListener(onclick);
 //
 		mpath_progress1.setProgress(0);
 		mpath_progress2.setProgress(0);
 		mpath_progress3.setProgress(0);
+		mpath_progress4.setProgress(0);
 		mpath1.setText("");
 		mpath2.setText("");
 		mpath3.setText("");
+		mpath4.setText("");
 
-		String version = Objects.requireNonNull(getArguments()).getString("version");
+		String version = requireArguments().getString("version");
 		String homepath = getArguments().getString("game");
 		String address = getArguments().getString("address");
 	
@@ -160,23 +168,6 @@ public class DownloadFragment extends DialogFragment
 		Version_libraries = game_directory+"/libraries/";
 		Version_assets = assets_root +"/";
 
-		/*{
-		 "assets_root":"/storage/emulated/0/boat/.minecraft/assets",
-		 "auth_access_token":"0",
-		 "auth_player_name":"Steve",
-		 "auth_session":"0",
-		 "auth_uuid":"00000000-0000-0000-0000-000000000000",
-		 "currentVersion":"/storage/emulated/0/boat/.minecraft/versions/1.7.10",
-		 "extraJavaFlags":"-server -Xms500M -Xmx500M",
-		 "extraMinecraftFlags":"",
-		 "game_assets":"/storage/emulated/0/boat/.minecraft/assets/virtual/legacy",
-		 "game_directory":"/storage/emulated/0/boat/.minecraft",
-		 "home":"/storage/emulated/0/boat",
-		 "runtimePath":"/data/user/0/cosine.boat/app_runtime/32",
-		 "user_properties":"{}",
-		 "user_type":"mojang"
-		 }*/
-//起点
 		mhandler.sendEmptyMessage(0);//一切的开端
 
 	}
@@ -190,7 +181,7 @@ public class DownloadFragment extends DialogFragment
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
-        Objects.requireNonNull(getActivity()).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        requireActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         // 横屏时取高度为宽度，高度为为 warp_content
         int screenWidth = displayMetrics.widthPixels;
         int screenHeight = displayMetrics.heightPixels;
@@ -212,7 +203,7 @@ public class DownloadFragment extends DialogFragment
     public void onResume() {
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
-        Objects.requireNonNull(getActivity()).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        requireActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         // 横屏时取高度为宽度，高度为为 warp_content
         int screenWidth = displayMetrics.widthPixels;
         int screenHeight = displayMetrics.heightPixels;
@@ -249,7 +240,11 @@ public class DownloadFragment extends DialogFragment
 				//谨慎点击
 				download3(mDownloadManager.Self_destruction3());
 
-			}else if (p1 == btnCancel) {
+			}else if(p1==pause_start4){
+			 //谨慎点击
+			 download4(mDownloadManager.Self_destruction4());
+
+		    }else if (p1 == btnCancel) {
 				Objects.requireNonNull(getDialog()).dismiss();
 			}
 		}
@@ -262,7 +257,9 @@ public class DownloadFragment extends DialogFragment
 		return a;
 	}
 	
+	@SuppressLint("HandlerLeak")
 	private final Handler mhandler=new Handler(){
+		@SuppressLint("SetTextI18n")
 		@Override
 		public void handleMessage(Message msg) {
 			switch(msg.what){
@@ -279,6 +276,11 @@ public class DownloadFragment extends DialogFragment
 								if(!download3){
 									mhandler.sendEmptyMessage(101);
 									setlibraries();
+								}else {
+									if (!download4) {
+										mhandler.sendEmptyMessage(101);
+										setlibraries();
+									}
 								}
 							}
 						}
@@ -303,6 +305,11 @@ public class DownloadFragment extends DialogFragment
 								if(!download3){
 									mhandler.sendEmptyMessage(101);
 									setassets();
+								}else{
+									if(!download4){
+										mhandler.sendEmptyMessage(101);
+										setassets();
+									}
 								}
 							}
 						}
@@ -354,16 +361,19 @@ public class DownloadFragment extends DialogFragment
 					mpath_progress1.setProgress(100);
 					mpath_progress2.setProgress(100);
 					mpath_progress3.setProgress(100);
+					mpath_progress4.setProgress(100);
 					mpath1.setText(getResources().getString(R.string.download_done)+Version);
 					mpath2.setText(getResources().getString(R.string.download_done)+Version);
 					mpath3.setText(getResources().getString(R.string.download_done)+Version);
+					mpath4.setText(getResources().getString(R.string.download_done)+Version);
 					append(getResources().getString(R.string.download_done)+Version,100,100);
+
 					
 					//-可自定义个回调机制-
 					
 					break;
 				case 8:
-					if(!download2&&!download3&&!download1){
+					if(!download2&&!download3&&!download1&&!download4){
 						mhandler.sendEmptyMessage(3);
 					}
 					break;
@@ -389,59 +399,93 @@ public class DownloadFragment extends DialogFragment
 		// 1 0 11 01 1 02 10 32 0 12 0 22 03
 		try{
 			ArrayList<Object> list=new ArrayList<>();
-			if(Temporary.size()>1){
-				LibrariesUtil rock=(LibrariesUtil) Temporary.get(0);
-				String url=rock.geturl();
+			if(Temporary.size()>1) {
+				LibrariesUtil rock = (LibrariesUtil) Temporary.get(0);
+				String url = rock.geturl();
 				String path = Path(rock.getpath());
 				String name = Path_name(rock.getpath());
-				if (!download1){
-					download_manager_1(url,path,name,1000,name,rock.getsize());
-					for (int i = 0; i < Temporary.size(); i++){
-						if (i!=0){
-							list.add((LibrariesUtil)Temporary.get(i));
+				if (!download1) {
+					download_manager_1(url, path, name, 1000, name, rock.getsize());
+					for (int i = 0; i < Temporary.size(); i++) {
+						if (i != 0) {
+							list.add((LibrariesUtil) Temporary.get(i));
 						}
 					}
-					Temporary=(ArrayList<Object>)list;
-					if(!download2){
+					Temporary = (ArrayList<Object>) list;
+					if (!download2) {
 						mhandler.sendEmptyMessage(101);
-					}else{
-						if(!download3){
+					} else {
+						if (!download3) {
 							mhandler.sendEmptyMessage(101);
+						} else {
+							if (!download4) {
+								mhandler.sendEmptyMessage(101);
+							}
 						}
 					}//true未加载
-				}else{
-					if(!download2){
-						download_manager_2(url,path,name,1000,name,rock.getsize());
-						for (int i = 0; i < Temporary.size(); i++){
-							if (i!=0){
-								list.add((LibrariesUtil)Temporary.get(i));
+				} else {
+					if (!download2) {
+						download_manager_2(url, path, name, 1000, name, rock.getsize());
+						for (int i = 0; i < Temporary.size(); i++) {
+							if (i != 0) {
+								list.add((LibrariesUtil) Temporary.get(i));
 							}
 						}
-						Temporary=(ArrayList<Object>)list;
-						if(!download3){
+						Temporary = (ArrayList<Object>) list;
+						if (!download3) {
 							mhandler.sendEmptyMessage(101);
-						}else{
-							if(!download1){
+						} else {
+							if (!download1) {
 								mhandler.sendEmptyMessage(101);
-							}
-						}//true未加载
-					}else{
-						if(!download3){
-							download_manager_3(url,path,name,1000,name,rock.getsize());
-							for (int i = 0; i < Temporary.size(); i++){
-								if (i!=0){
-									list.add((LibrariesUtil)Temporary.get(i));
+							} else {
+								if (!download4) {
+									mhandler.sendEmptyMessage(101);
 								}
 							}
-							Temporary=(ArrayList<Object>)list;
-							if(!download2){
+						}//true未加载
+					} else {
+						if (!download4) {
+							download_manager_4(url, path, name, 1000, name, rock.getsize());
+							for (int i = 0; i < Temporary.size(); i++) {
+								if (i != 0) {
+									list.add((LibrariesUtil) Temporary.get(i));
+								}
+							}
+							Temporary = (ArrayList<Object>) list;
+							if (!download2) {
 								mhandler.sendEmptyMessage(101);
-							}else{
-								if(!download3){
+							} else {
+								if (!download3) {
 									mhandler.sendEmptyMessage(101);
+								} else {
+									if (!download1) {
+										mhandler.sendEmptyMessage(101);
+									}
 								}//list2.clear();
 
 							}//true未加载
+						} else {
+							if (!download3) {
+								download_manager_3(url, path, name, 1000, name, rock.getsize());
+								for (int i = 0; i < Temporary.size(); i++) {
+									if (i != 0) {
+										list.add((LibrariesUtil) Temporary.get(i));
+									}
+								}
+								Temporary = (ArrayList<Object>) list;
+								if (!download2) {
+									mhandler.sendEmptyMessage(101);
+								} else {
+									if (!download3) {
+										mhandler.sendEmptyMessage(101);
+									} else {
+										if (!download4) {
+											mhandler.sendEmptyMessage(101);
+										}
+									}//list2.clear();
+
+								}//true未加载
+							}
 						}
 					}
 				}
@@ -461,6 +505,11 @@ public class DownloadFragment extends DialogFragment
 						if(!download3){
 							download_manager_3(url,path,name,1000,name,rock.getsize());
 							Temporary.remove(0);
+						}else{
+							if(!download4){
+								download_manager_3(url,path,name,1000,name,rock.getsize());
+								Temporary.remove(0);
+							}
 						}
 					}
 				}
@@ -494,6 +543,10 @@ public class DownloadFragment extends DialogFragment
 					}else{
 						if(!download3){
 							mhandler.sendEmptyMessage(101);
+						}else{
+							if(!download4){
+								mhandler.sendEmptyMessage(101);
+							}
 						}
 					}//true未加载
 				}else{
@@ -526,9 +579,37 @@ public class DownloadFragment extends DialogFragment
 							}else{
 								if(!download3){
 									mhandler.sendEmptyMessage(101);
+								}else{
+									if(!download4){
+										mhandler.sendEmptyMessage(101);
+									}//list2.clear();
+
 								}//list2.clear();
 
 							}//true未加载
+						}else{
+							if(!download4){
+								download_manager_3(url,path,name,2000,rock.getname(),rock.getsize());
+								for (int i = 0; i < Temporary.size(); i++){
+									if (i!=0){
+										list.add((AssetsUtil)Temporary.get(i));
+									}
+								}
+								Temporary=(ArrayList<Object>)list;
+								if(!download2){
+									mhandler.sendEmptyMessage(101);
+								}else{
+									if(!download3){
+										mhandler.sendEmptyMessage(101);
+									}else{
+										if(!download1){
+											mhandler.sendEmptyMessage(101);
+										}//list2.clear();
+
+									}//list2.clear();
+
+								}//true未加载
+							}
 						}
 					}
 				}
@@ -548,6 +629,11 @@ public class DownloadFragment extends DialogFragment
 						if(!download3){
 							download_manager_3(url,path,name,2000,rock.getname(),rock.getsize());
 							Temporary.remove(0);
+						}else{
+							if(!download4){
+								download_manager_4(url,path,name,2000,rock.getname(),rock.getsize());
+								Temporary.remove(0);
+							}
 						}
 					}
 				}
@@ -557,6 +643,7 @@ public class DownloadFragment extends DialogFragment
 			setText(e.toString());
 		}
 	}
+	@SuppressLint("SetTextI18n")
 	private void Dwonload_Version_json(String id, String url){
 		File e=new File(Version_json);
 		if(!e.exists()){
@@ -595,6 +682,7 @@ public class DownloadFragment extends DialogFragment
 			});
 	}
 
+	@SuppressLint("SetTextI18n")
 	private void Download_client_Assets(String json){
 		try{
 			JSONObject objects=JSON.parseObject(json);
@@ -615,14 +703,26 @@ public class DownloadFragment extends DialogFragment
 			if(!version_client.exists()&&!version_assetindex.exists()){
 				download_manager_2(Url,game_directory+"/versions/"+Version,Version+".jar",8,"Version->"+Version+"->jar",size);
 				download_manager_3(url,Version_assets+"indexes",(String)assetindex.get("id")+".json",8,"Version->"+assets_id+"->assets->json",0);
+				download_manager_4(url,Version_assets+"indexes",(String)assetindex.get("id")+".json",8,"Version->"+assets_id+"->assets->json",0);
 			}else if(!version_client.exists()&&version_assetindex.exists()){
 				download_manager_2(Url,game_directory+"/versions/"+Version,Version+".jar",8,"Version->"+Version+"->jar",size);
 				//同上
 				mpath3.setText("Version->"+assets_id+"->assets->json");
 				mpath_progress3.setProgress(100);
+				mpath4.setText("Version->"+assets_id+"->assets->json");
+				mpath_progress4.setProgress(100);
 			}else if(version_client.exists()&&!version_assetindex.exists()){
 				download_manager_3(url,Version_assets+"indexes",(String)assetindex.get("id")+".json",8,"Version->"+assets_id+"->assets->json",0);
 				//同上
+				mpath4.setText("Version->"+Version+"->jar");
+				mpath_progress4.setProgress(100);
+				mpath2.setText("Version->"+Version+"->jar");
+				mpath_progress2.setProgress(100);
+			}else if(version_client.exists()&&!version_assetindex.exists()){
+				download_manager_4(url,Version_assets+"indexes",(String)assetindex.get("id")+".json",8,"Version->"+assets_id+"->assets->json",0);
+				//同上
+				mpath3.setText("Version->"+Version+"->jar");
+				mpath_progress3.setProgress(100);
 				mpath2.setText("Version->"+Version+"->jar");
 				mpath_progress2.setProgress(100);
 			}else if(version_client.exists()&&version_assetindex.exists()){
@@ -641,16 +741,14 @@ public class DownloadFragment extends DialogFragment
 						
 						mpath2.setText("Version->"+Version+"->jar");
 						mpath_progress2.setProgress(100);
-						
 						mpath3.setText("Version->"+assets_id+"->assets->json");
 						mpath_progress3.setProgress(100);
+						mpath4.setText("Version->"+assets_id+"->assets->json");
+						mpath_progress4.setProgress(100);
 						Message msg=new Message();
 						msg.what=8;
 						msg.arg1=3;
 						mhandler.sendMessage(msg);
-						
-						
-						
 					}
 				}
 			}
@@ -766,6 +864,7 @@ public class DownloadFragment extends DialogFragment
 	
 	
 	//尺寸
+	@SuppressLint("DefaultLocale")
 	private String turn_Length(long len){
 		if(len<1024){
 			return len+"B";
@@ -842,7 +941,14 @@ public class DownloadFragment extends DialogFragment
 			pause_start3.setBackgroundResource(R.drawable.download_play);
 		}
 
+	}private void download_status4(boolean status){
+	if(status){
+		pause_start4.setBackgroundResource(R.drawable.download_pause);
+	}else{
+		pause_start4.setBackgroundResource(R.drawable.download_play);
 	}
+
+}
 
 
 	private void run_download_assets(){
@@ -933,6 +1039,24 @@ public class DownloadFragment extends DialogFragment
 
 
 	}
+
+	private void download4(FilePoint f){
+		if(null!=f){
+			download_manager_4(
+					f.getUrl(),//链接
+					f.getFilePath(),//路径
+					f.getFileName(),//文件名
+					f.getA(),
+					f.getObject(),
+					f.getSize());
+
+			//完全移植
+			setText("重新下载>"+f.getObject());
+			//选择继续or选择新下载
+		}
+
+
+	}
 	private void download_manager_1(//第一个通道
 		final String url,//链接
 		final String path,//路径
@@ -960,6 +1084,7 @@ public class DownloadFragment extends DialogFragment
 					mhandler.sendEmptyMessage(a);
 
 				}
+				@SuppressLint("SetTextI18n")
 				@Override
 				public void onProgress(float progress, long i, long s)
 				{
@@ -1059,6 +1184,7 @@ public class DownloadFragment extends DialogFragment
 
 					mhandler.sendEmptyMessage(a);
 				}
+				@SuppressLint("SetTextI18n")
 				@Override
 				public void onProgress(float progress, long i, long s)
 				{
@@ -1079,10 +1205,60 @@ public class DownloadFragment extends DialogFragment
 		download_status3(mDownloadManager.download3_stop_start());
 
     }
+	private  void download_manager_4(//第一个通道
+									 final String url,//链接
+									 final String path,//路径
+									 final String name,//文件名
+									 final int a,
+									 final Object object,
+									 final int size
+	) {
+		mDownloadManager.add4(url, path, name,a,object,size, new DownloadListner() {
+
+
+
+			@Override
+			public void onFinished() {
+				download4=false;
+				if(a==2000){
+					assets_loading_size+=1;
+
+					append((String)object,assets_loading_size,assets_loader_size);
+				}else if(a==1000){
+					libraries_loading_size+=1;
+					append((String)object,libraries_loading_size,libraries_loader_size);
+				}
+				success_libraries+=size;
+
+				mhandler.sendEmptyMessage(a);
+			}
+			@SuppressLint("SetTextI18n")
+			@Override
+			public void onProgress(float progress, long i, long s)
+			{
+				mpath_progress4.setProgress((int) (progress * 100));
+				mpath4.setText(object+"："+turn_Length(i) + File.pathSeparatorChar+turn_Length(s));
+
+			}
+			@Override
+			public void onPause() {//暂停
+				setText(object+"Pause");
+			}
+			@Override
+			public void onCancel() {//取消
+				setText(object+"Cancel");
+			}
+		});
+		download4=true;
+		download_status4(mDownloadManager.download4_stop_start());
+
+	}
+	@SuppressLint("SetTextI18n")
 	private void setlibraries(){
 		//overall_progress.setText(getResources().getString(R.string.total)+libraries_loading_size+"/"+libraries_loader_size);
 		stages_progress.setText(turn_Length(success_libraries)+File.pathSeparatorChar+turn_Length(overall_libraries));
 	}
+	@SuppressLint("SetTextI18n")
 	private void setassets(){
 		//overall_progress.setText(getResources().getString(R.string.total)+assets_loading_size+"/"+assets_loader_size);
 		stages_progress.setText(turn_Length(success_libraries)+File.pathSeparatorChar+turn_Length(overall_libraries));

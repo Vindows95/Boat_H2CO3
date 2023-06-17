@@ -24,7 +24,7 @@ public class DialogFragmentDownloadMinecraft extends DialogFragment
 		Objects.requireNonNull(getDialog()).requestWindowFeature(STYLE_NO_TITLE);
 		setCancelable(false);
 
-		String version = Objects.requireNonNull(getArguments()).getString("version");
+		String version = requireArguments().getString("version");
 		String homepath = getArguments().getString("game");
 		String address = getArguments().getString("address");
 

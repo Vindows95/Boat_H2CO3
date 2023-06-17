@@ -197,7 +197,7 @@ public class LoadMe {
 			}
 			Collections.addAll(args, minecraftArgs);
 
-			args.add("Update20210321");
+			args.add("Update20230611");
 			args.add("--width");
 			args.add(Integer.toString(BoatApplication.getCurrentActivity().getResources().getDisplayMetrics().widthPixels));
 			args.add("--height");

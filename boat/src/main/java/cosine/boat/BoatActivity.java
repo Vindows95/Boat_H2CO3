@@ -1,53 +1,26 @@
 package cosine.boat;
 
 import android.annotation.SuppressLint;
-import android.view.MotionEvent;
+import android.graphics.SurfaceTexture;
 import android.os.Bundle;
-import android.app.Activity;
-import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-
-import android.widget.LinearLayout;
 import android.os.Handler;
 import android.os.Message;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.text.TextWatcher;
-import android.text.Editable;
-import android.view.inputmethod.EditorInfo;
-import android.view.KeyEvent;
-import android.view.SurfaceHolder;
-import android.view.TextureView;
-import android.graphics.SurfaceTexture;
 import android.view.Surface;
-import android.view.SurfaceView;
-import android.app.AlertDialog;
-import android.view.View.OnClickListener;
-
-import java.util.Timer;
-
-import android.content.DialogInterface;
-
-import java.util.TimerTask;
-
-import android.os.Build;
-
-import java.io.FileInputStream;
-
-import org.json.JSONObject;
-
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
+import android.view.TextureView;
+import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import org.koishi.h2co3.mclauncher.customcontrol.ControlLayout;
+
+import org.lwjgl.glfw.CallbackBridge;
+
+import java.util.Timer;
 
 //import com.koishi.launcher.h2o2.MainActivity;
 
 
-public class BoatActivity extends Activity implements TextureView.SurfaceTextureListener{
+public class BoatActivity extends AppCompatActivity implements TextureView.SurfaceTextureListener{
 
     static {
         System.loadLibrary("boat");
@@ -57,7 +30,7 @@ public class BoatActivity extends Activity implements TextureView.SurfaceTexture
     public int cursorMode = BoatInput.CursorEnabled;
     public Timer timer, timer2;
     public RelativeLayout base;
-    public TextureView mainTextureView;
+    public ControlLayout mainTextureView;
     public MyHandler mHandler;
     public int initialX;
     public int initialY;
@@ -74,13 +47,6 @@ public class BoatActivity extends Activity implements TextureView.SurfaceTexture
         super.onCreate(savedInstanceState);
         //mainSurfaceView = new SurfaceView(this);
         //mainSurfaceView.getHolder().addCallback(this);
-
-        setContentView(R.layout.overlay_old);
-
-        base = (RelativeLayout) findViewById(R.id.base);
-        mainTextureView = base.findViewById(R.id.client_surface);
-        mainTextureView.setSurfaceTextureListener(this);
-
         timer = new Timer();
     }
 
@@ -88,10 +54,6 @@ public class BoatActivity extends Activity implements TextureView.SurfaceTexture
     protected void onPause() {
         // TODO: Implement this method
         super.onPause();
-
-        if (cursorMode == BoatInput.CursorDisabled) {
-        } else {
-        }
 
         //popupWindow.dismiss();
     }
@@ -156,6 +118,24 @@ public class BoatActivity extends Activity implements TextureView.SurfaceTexture
 
     @SuppressLint("HandlerLeak")
     private static class MyHandler extends Handler {
+    }
+
+    public static void sendKeyPress(int keyCode, int modifiers, boolean status) {
+        //sendKeyPress(keyCode, 0, modifiers, status);
+        BoatInput.setKey(keyCode, 0, status);
+    }
+
+    public static void sendKeyPress(int keyCode, char keyChar, int scancode, int modifiers, boolean status) {
+        CallbackBridge.sendKeycode(keyCode, keyChar, scancode, modifiers, status);
+        System.out.print(keyCode);
+    }
+    public static void sendKeyPress(int keyCode) {
+        sendKeyPress(keyCode, CallbackBridge.getCurrentMods(), true);
+        sendKeyPress(keyCode, CallbackBridge.getCurrentMods(), false);
+    }
+
+    public static void sendMouseButton(int button, boolean status) {
+        CallbackBridge.sendMouseKeycode(button, CallbackBridge.getCurrentMods(), status);
     }
 
 
