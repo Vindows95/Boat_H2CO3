@@ -103,7 +103,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Navi
 
     public AppCompatSpinner list;
     public Button newacc;
-    public LinearLayout mainCheck, mainInfo, mainHelp, mainFix, showAcc, saveAcc, openBc;
+    public LinearLayout mainCheck, mainInfo, mainHelp, mainFix, showAcc, saveAcc;
     public CheckBox mCheckBox, info, xbox;
     public DBHelper dbHelper;
     public EditText mUserName, mPassword, mOffline, mAPI;
@@ -112,7 +112,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Navi
     public ImageView img1, skin;
     public ImageButton mDropDown;
     public MaterialButton homeReg, homeNew, homeMan, homeQQ;
-    MaterialCardView mLoginButton;
+    MaterialCardView mLoginButton, openBc;
     public MyAdapter dropDownAdapter;
     public MinecraftProfile pf;
     public MinecraftToken tk;
