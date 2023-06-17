@@ -1,16 +1,12 @@
 package org.koishi.launcher.h2co3.tool.json;
 
-import android.os.Build;
-
-import androidx.annotation.RequiresApi;
-
-import org.koishi.launcher.h2co3.tool.json.abstracts.JsonHandler;
 import org.koishi.launcher.h2co3.tool.json.abstracts.JsonValue;
 import org.koishi.launcher.h2co3.tool.json.model.JsonArray;
 import org.koishi.launcher.h2co3.tool.json.model.JsonBoolean;
 import org.koishi.launcher.h2co3.tool.json.model.JsonNull;
 import org.koishi.launcher.h2co3.tool.json.model.JsonNumber;
 import org.koishi.launcher.h2co3.tool.json.model.JsonObject;
+import org.koishi.launcher.h2co3.tool.json.abstracts.JsonHandler;
 import org.koishi.launcher.h2co3.tool.json.model.JsonString;
 
 import java.lang.reflect.Field;
@@ -38,7 +34,6 @@ public class JsonGenerator {
      * @param value the value used to parse
      * @return the json value returns raw type of {@link JsonValue}
      */
-    @RequiresApi(api = Build.VERSION_CODES.N)
     public <T> JsonValue toJson(T value) {
         JsonValue jsonValue;
         if (value == null) {
@@ -147,7 +142,6 @@ public class JsonGenerator {
      * @param clazz     the clazz is used to determine object in {@link List}
      * @return T is a list with cast {@link Class<T>}
      */
-    @RequiresApi(api = Build.VERSION_CODES.N)
     public <T extends List<K>, K> T fromJson(JsonValue jsonValue, Class<T> listClazz, Class<K> clazz) {
         return listClazz.cast(fromJson(null, jsonValue, clazz));
     }
@@ -161,7 +155,6 @@ public class JsonGenerator {
      * @param clazz     the clazz is used to cast {@link T}
      * @return {@link T} cast with {@link Class<T>}
      */
-    @RequiresApi(api = Build.VERSION_CODES.N)
     public <T> T fromJsonCast(JsonValue jsonValue, Class<T> clazz) {
         return clazz.cast(fromJson(null, jsonValue, clazz));
     }
@@ -175,7 +168,6 @@ public class JsonGenerator {
      * @param clazz     the clazz is used create object
      * @return the object
      */
-    @RequiresApi(api = Build.VERSION_CODES.N)
     public <T> Object fromJson(JsonValue jsonValue, Class<T> clazz) {
         return fromJson(null, jsonValue, clazz);
     }
@@ -190,7 +182,6 @@ public class JsonGenerator {
      * @param clazz     the clazz is used create object
      * @return the object
      */
-    @RequiresApi(api = Build.VERSION_CODES.N)
     public <T> Object fromJson(String key, JsonValue jsonValue, Class<T> clazz) {
         if (jsonValue instanceof JsonString) {
             return clazz.cast(((JsonString) jsonValue).getValue());

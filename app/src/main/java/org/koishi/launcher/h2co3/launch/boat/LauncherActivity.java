@@ -16,7 +16,7 @@ public class LauncherActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
 
-        final String logPath = LAUNCHER_FILE_DIR + "log.txt";
+        final String logPath = LAUNCHER_FILE_DIR+"log.txt";
         Logcat.initializeOutOfProcess(this, logPath, LogcatService.class);
 
         setContentView(cosine.boat.R.layout.overlay);

@@ -3,10 +3,10 @@
     <PreferenceCategory app:title="@string/custom_basic">
 
         <SwitchPreferenceCompat
-            app:icon="@drawable/ic_settings_mouse_mode"
             app:key="set_click"
-            app:summary="@string/launcher_settings_right_click_mode_summary"
-            app:title="@string/custom_right_click" />
+            app:title="@string/custom_right_click"
+            app:icon="@drawable/ic_settings_mouse_mode"
+            app:summary="@string/launcher_settings_right_click_mode_summary"/>
 
         <!--
 
@@ -24,33 +24,33 @@
             app:defaultValue="None"
             app:entries="@array/list_preference_control"
             app:entryValues="@array/list_preference_control_value"
-            app:icon="@drawable/ic_settings_control_outline"
             app:key="set_control"
             app:title="@string/custom_control"
-            app:useSimpleSummaryProvider="true" />
+            app:useSimpleSummaryProvider="true"
+            app:icon="@drawable/ic_settings_control_outline"/>
 
     </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/app">
 
         <SwitchPreferenceCompat
-            app:icon="@drawable/ic_theme_custom"
             app:key="material"
+            app:title="@string/menu_theme"
             app:summary="@string/theme_summary"
-            app:title="@string/menu_theme" />
+            app:icon="@drawable/ic_theme_custom" />
 
         <ListPreference
             app:defaultValue="None"
-            app:enabled="false"
-            app:icon="@drawable/ic_lang"
             app:key="set_lang"
+            app:title="@string/set_launguage_title"
+            app:icon="@drawable/ic_lang"
             app:summary="@string/set_language_summary"
-            app:title="@string/set_launguage_title" />
+            app:enabled="false"/>
 
         <Preference
             app:key="set_lang_tr"
-            app:summary="@string/set_language_help_summary"
-            app:title="@string/set_language_help_title" />
+            app:title="@string/set_language_help_title"
+            app:summary="@string/set_language_help_summary"/>
 
         <!--
         <Preference
@@ -62,10 +62,10 @@
     <PreferenceCategory app:title="@string/menu_title_game">
 
         <SwitchPreferenceCompat
-            app:icon="@drawable/ic_launcher_file_checker"
             app:key="set_single"
+            app:title="@string/custom_isolate"
             app:summary="@string/single_ver"
-            app:title="@string/custom_isolate" />
+            app:icon="@drawable/ic_launcher_file_checker"/>
 
         <!--
         <Preference
@@ -73,25 +73,25 @@
         -->
         <SwitchPreferenceCompat
             app:key="set_pause"
-            app:summary="@string/custom_pause"
-            app:title="@string/custom_back" />
+            app:title="@string/custom_back"
+            app:summary="@string/custom_pause"/>
 
     </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/custom_more">
 
         <EditTextPreference
-            app:defaultValue="-client -Xmx750M"
-            app:icon="@drawable/ic_settings_jvm_flag"
             app:key="set_jvm"
             app:title="@string/custom_jvm"
-            app:useSimpleSummaryProvider="true" />
+            app:useSimpleSummaryProvider="true"
+            app:defaultValue="-client -Xmx750M"
+            app:icon="@drawable/ic_settings_jvm_flag"/>
 
         <EditTextPreference
-            app:defaultValue=""
             app:key="set_mcf"
             app:title="@string/custom_mcf"
-            app:useSimpleSummaryProvider="true" />
+            app:useSimpleSummaryProvider="true"
+            app:defaultValue="" />
 
         <ListPreference
             app:defaultValue="libGL112.so"
@@ -115,42 +115,42 @@
         <SwitchPreferenceCompat
             app:defaultValue="false"
             app:key="set_check_file"
-            app:summary="@string/launcher_check_file_summary"
-            app:title="@string/launcher_check_file" />
+            app:title="@string/launcher_check_file"
+            app:summary="@string/launcher_check_file_summary"/>
 
         <ListPreference
             app:defaultValue="https://download.mcbbs.net"
             app:entries="@array/download_source"
             app:entryValues="@array/download_source_value"
-            app:icon="@drawable/ic_menu_install"
             app:key="set_source"
             app:title="@string/custom_source"
-            app:useSimpleSummaryProvider="true" />
+            app:useSimpleSummaryProvider="true"
+            app:icon="@drawable/ic_menu_install"/>
 
     </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/menu_custom">
 
         <Preference
-            app:icon="@drawable/refresh"
             app:key="set_reset_cfg"
-            app:title="@string/resetcfg" />
+            app:title="@string/resetcfg"
+            app:icon="@drawable/refresh"/>
 
         <Preference
-            app:icon="@drawable/ic_del_all"
             app:key="set_reset_run"
+            app:title="@string/custom_reset_runtime"
             app:summary="@string/resetapp"
-            app:title="@string/custom_reset_runtime" />
+            app:icon="@drawable/ic_del_all"/>
 
         <Preference
-            app:icon="@drawable/ic_log_outline"
             app:key="set_log"
-            app:title="@string/log_title" />
+            app:title="@string/log_title"
+            app:icon="@drawable/ic_log_outline"/>
 
         <Preference
-            app:icon="@drawable/ic_crash"
             app:key="set_crash"
-            app:title="@string/crash_test" />
+            app:title="@string/crash_test"
+            app:icon="@drawable/ic_crash"/>
 
     </PreferenceCategory>
 

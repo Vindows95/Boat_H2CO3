@@ -46,8 +46,8 @@
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/sans"
-                        android:text="微信" />
+                        android:text="微信"
+                        android:fontFamily="@font/sans"/>
 
                 </com.google.android.material.circularreveal.CircularRevealLinearLayout>
 
@@ -70,8 +70,8 @@
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/sans"
-                        android:text="爱发电" />
+                        android:text="爱发电"
+                        android:fontFamily="@font/sans"/>
 
                 </com.google.android.material.circularreveal.CircularRevealLinearLayout>
 
@@ -94,8 +94,8 @@
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/sans"
-                        android:text="Patreon" />
+                        android:text="Patreon"
+                        android:fontFamily="@font/sans"/>
 
                 </com.google.android.material.circularreveal.CircularRevealLinearLayout>
 

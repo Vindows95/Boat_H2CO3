@@ -7,96 +7,96 @@
     tools:context=".VersionsActivity">
 
     <LinearLayout
-        android:id="@+id/dir_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/dir_layout"
         android:orientation="vertical">
 
-        <com.google.android.material.appbar.AppBarLayout
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+
+        android:fitsSystemWindows="true"
+        android:theme="@style/AppBaseTheme.AppBarOverlay"
+        app:elevation="0dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
 
-            android:fitsSystemWindows="true"
-            android:theme="@style/AppBaseTheme.AppBarOverlay"
-            app:elevation="0dp">
+            app:title="@string/menu_ver"
+            app:elevation="0dp"
+            app:popupTheme="@style/AppBaseTheme.PopupOverlay" />
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
+    </com.google.android.material.appbar.AppBarLayout>
 
-                app:elevation="0dp"
-                app:popupTheme="@style/AppBaseTheme.PopupOverlay"
-                app:title="@string/menu_ver" />
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/ver_tab"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
 
-        </com.google.android.material.appbar.AppBarLayout>
+        android:orientation="horizontal"
+        app:tabIndicatorFullWidth="false"
+        app:layout_scrollFlags="scroll|enterAlways"
+        app:tabIndicatorAnimationMode="elastic"
+        app:tabIndicator="@drawable/tab_selector">
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/ver_tab"
-            android:layout_width="match_parent"
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/ver_title_dir"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/manager_set_directory"
+            android:checked="true"
+            android:fontFamily="@font/sans"/>
 
-            android:orientation="horizontal"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:tabIndicator="@drawable/tab_selector"
-            app:tabIndicatorAnimationMode="elastic"
-            app:tabIndicatorFullWidth="false">
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/ver_title_ver"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/menu_ver"
+            android:fontFamily="@font/sans"/>
 
-            <com.google.android.material.tabs.TabItem
-                android:id="@+id/ver_title_dir"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:fontFamily="@font/sans"
-                android:text="@string/manager_set_directory" />
+    </com.google.android.material.tabs.TabLayout>
 
-            <com.google.android.material.tabs.TabItem
-                android:id="@+id/ver_title_ver"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/sans"
-                android:text="@string/menu_ver" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="2.5dp"
+        android:layout_weight="1">
 
-        </com.google.android.material.tabs.TabLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <RelativeLayout
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginTop="2.5dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
+            android:animateLayoutChanges="true">
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/mRecyclerView"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:animateLayoutChanges="true">
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/mRecyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="5dp"
-                    android:layout_marginBottom="5dp" />
+        </RelativeLayout>
 
-            </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:animateLayoutChanges="true">
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/mVerRecyclerView"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:animateLayoutChanges="true">
+                android:layout_margin="5dp"
+                android:visibility="gone" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/mVerRecyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="5dp"
-                    android:visibility="gone" />
+        </RelativeLayout>
 
-            </RelativeLayout>
-
-        </LinearLayout>
+    </LinearLayout>
 
     </LinearLayout>
 
@@ -110,10 +110,10 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:contentDescription="TODO"
         android:onClick="newDir"
         android:src="@drawable/file_folder"
-        android:tint="@color/appWhite_ff_l" />
+        android:tint="@color/appWhite_ff_l"
+        android:contentDescription="TODO" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/ver_new_ver"
@@ -121,10 +121,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_margin="16dp"
-        android:contentDescription="TODO"
         android:onClick="newVer"
+        android:layout_margin="16dp"
         android:src="@drawable/ic_launcher_install_file"
-        android:tint="@color/appWhite_ff_l" />
+        android:tint="@color/appWhite_ff_l"
+        android:contentDescription="TODO" />
 
 </RelativeLayout>

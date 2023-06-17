@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
-    <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/ver_item"
-        style="@style/CardViewStyle"
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="5dp"
         android:layout_marginVertical="5dp"
         android:visibility="visible"
-        app:strokeWidth="0dp">
+        app:cardCornerRadius="@dimen/card_radius"
+        app:cardElevation="0dp">
 
         <LinearLayout
+            android:id="@+id/ver_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingVertical="10dp"
+            android:background="@drawable/recycler_button"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -31,18 +31,20 @@
 
                 <ImageView
                     android:id="@+id/ver_check_icon"
-                    style="@style/CardIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:contentDescription="TODO"
+                    android:layout_marginStart="10dp"
+                    android:paddingHorizontal="10dp"
                     app:srcCompat="@drawable/ic_list_ver"
-                    app:tint="?colorPrimary" />
+                    app:tint="?colorPrimary"
+                    android:contentDescription="TODO" />
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:layout_marginHorizontal="10dp">
 
                     <TextView
                         android:id="@+id/tv_name"
@@ -53,7 +55,8 @@
                         android:gravity="center_vertical"
                         android:singleLine="true"
                         android:text=""
-                        android:textSize="18sp" />
+                        android:textSize="18sp"
+                        android:layout_marginVertical="5dp"/>
 
                     <TextView
                         android:id="@+id/tv_record"
@@ -63,34 +66,37 @@
                         android:gravity="center_vertical"
                         android:singleLine="true"
                         android:text=""
-                        android:textSize="13.5sp" />
+                        android:textSize="13.5sp"
+                        android:layout_marginBottom="10dp"/>
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="horizontal">
 
                         <com.google.android.material.button.MaterialButton
-                            android:id="@+id/tv_del_dir"
                             style="@style/Widget.Material3.Button.UnelevatedButton"
+                            android:id="@+id/tv_del_dir"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:fontFamily="@font/sans"
                             android:text="@string/delete"
+                            android:layout_marginEnd="5dp"
+                            android:fontFamily="@font/sans"
                             app:cornerRadius="@dimen/card_radius"
                             app:icon="@drawable/ic_del_all"
                             app:iconGravity="textStart" />
 
 
                         <com.google.android.material.button.MaterialButton
-                            android:id="@+id/tv_remove_dir"
                             style="@style/Widget.Material3.Button.UnelevatedButton"
+                            android:id="@+id/tv_remove_dir"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:fontFamily="@font/sans"
                             android:text="@string/remove"
+                            android:layout_marginStart="5dp"
+                            android:fontFamily="@font/sans"
                             app:cornerRadius="@dimen/card_radius"
                             app:icon="@drawable/xicon"
                             app:iconGravity="textStart" />

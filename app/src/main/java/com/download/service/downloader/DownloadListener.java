@@ -7,13 +7,9 @@ package com.download.service.downloader;
  */
 public interface DownloadListener {
 
-
     void onFinished();
-
-    void onProgress(float progress, long i, long s);
-
+    void onProgress(float progress, long currentSize, long totalSize);
     void onPause();
-
     void onCancel();
-}
 
+}

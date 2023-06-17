@@ -1,6 +1,7 @@
 package org.koishi.launcher.h2co3.ui.custom;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.fragment.app.Fragment;
@@ -28,11 +30,11 @@ import org.koishi.launcher.h2co3.TerminalActivity;
 public class CustomFragment extends Fragment {
 
 
-    public LinearLayout pg1, pg2, pg3;
+    public LinearLayout pg1,pg2,pg3;
 
-    public AppCompatImageButton vx, afd, ptr, qq, dis, git;
-    public ImageButton libBoat, libMio, libCrash, libLogin, libXz, libCommon, libJsoup, libGson, libShell, libMd, libHttp, libFast, thkBoat, thkMio, thkLogin, thkFire, thkFish, thkShulker;
-    public LinearLayout cSet, cTer, cDonate, cApp, cLib, cThk;
+    public AppCompatImageButton vx,afd,ptr,qq,dis,git;
+    public ImageButton libBoat,libMio,libCrash,libLogin,libXz,libCommon,libJsoup,libGson,libShell,libMd,libHttp,libFast,thkBoat,thkMio,thkLogin,thkFire,thkFish,thkShulker;
+    public LinearLayout cSet,cTer,cDonate,cApp,cLib,cThk;
     public TextView ab;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -46,12 +48,12 @@ public class CustomFragment extends Fragment {
         cLib = root.findViewById(R.id.open_lib);
         cThk = root.findViewById(R.id.open_thk);
 
-        cSet.setOnClickListener(v -> startActivity(new Intent(requireActivity(), SettingsActivity.class)));
-        cTer.setOnClickListener(v -> startActivity(new Intent(requireActivity(), TerminalActivity.class)));
-        cDonate.setOnClickListener(v -> openDonate());
-        cApp.setOnClickListener(v -> showAboutDialog());
-        cLib.setOnClickListener(v -> openLibDialog());
-        cThk.setOnClickListener(v -> openThkDialog());
+        cSet.setOnClickListener(v-> startActivity(new Intent(requireActivity(), SettingsActivity.class)));
+        cTer.setOnClickListener(v-> startActivity(new Intent(requireActivity(), TerminalActivity.class)));
+        cDonate.setOnClickListener(v->openDonate());
+        cApp.setOnClickListener(v->showAboutDialog());
+        cLib.setOnClickListener(v->openLibDialog());
+        cThk.setOnClickListener(v->openThkDialog());
 
         return root;
     }
@@ -89,15 +91,15 @@ public class CustomFragment extends Fragment {
         afd = dialogView.findViewById(R.id.donate_afd);
         ptr = dialogView.findViewById(R.id.donate_ptr);
 
-        vx.setOnClickListener(v -> {
+        vx.setOnClickListener(v->{
             CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
             intent.launchUrl(requireActivity(), Uri.parse("https://gitee.com/NaCln4c1/naclfile/raw/master/Documents/ic_donate_wx.png"));
         });
-        afd.setOnClickListener(v -> {
+        afd.setOnClickListener(v->{
             CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
             intent.launchUrl(requireActivity(), Uri.parse("https://afdian.net/@boat-h2o"));
         });
-        ptr.setOnClickListener(v -> {
+        ptr.setOnClickListener(v->{
             CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
             intent.launchUrl(requireActivity(), Uri.parse("https://www.patreon.com/boatapp_h2o"));
         });
@@ -106,7 +108,7 @@ public class CustomFragment extends Fragment {
         WindowManager windowManager = requireActivity().getWindowManager();
         Display display = windowManager.getDefaultDisplay();
         WindowManager.LayoutParams lp = mDialog.getWindow().getAttributes();
-        lp.width = (int) (display.getWidth() * 0.9); //设置宽度 dialog.getWindow().setAttributes(lp);
+        lp.width = (int)(display.getWidth()*0.9); //设置宽度 dialog.getWindow().setAttributes(lp);
         mDialog.show();
     }
 
@@ -122,7 +124,7 @@ public class CustomFragment extends Fragment {
         WindowManager windowManager = requireActivity().getWindowManager();
         Display display = windowManager.getDefaultDisplay();
         WindowManager.LayoutParams lp = mDialog.getWindow().getAttributes();
-        lp.width = (int) (display.getWidth() * 0.9); //设置宽度 dialog.getWindow().setAttributes(lp);
+        lp.width = (int)(display.getWidth()*0.9); //设置宽度 dialog.getWindow().setAttributes(lp);
         mDialog.show();
     }
 
@@ -138,15 +140,15 @@ public class CustomFragment extends Fragment {
         dis = dialogView.findViewById(R.id.about_dis);
         git = dialogView.findViewById(R.id.about_git);
 
-        qq.setOnClickListener(v -> {
+        qq.setOnClickListener(v->{
             showDonateDialog();
             mDialog.dismiss();
         });
-        dis.setOnClickListener(v -> {
+        dis.setOnClickListener(v->{
             CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
             intent.launchUrl(requireActivity(), Uri.parse("https://discord.gg/Ktw9sYx879\n"));
         });
-        git.setOnClickListener(v -> {
+        git.setOnClickListener(v->{
             CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
             intent.launchUrl(requireActivity(), Uri.parse("https://github.com/NaCln4c1"));
         });
@@ -155,7 +157,7 @@ public class CustomFragment extends Fragment {
         WindowManager windowManager = requireActivity().getWindowManager();
         Display display = windowManager.getDefaultDisplay();
         WindowManager.LayoutParams lp = mDialog.getWindow().getAttributes();
-        lp.width = (int) (display.getWidth() * 0.9); //设置宽度 dialog.getWindow().setAttributes(lp);
+        lp.width = (int)(display.getWidth()*0.9); //设置宽度 dialog.getWindow().setAttributes(lp);
         mDialog.show();
     }
 
@@ -177,51 +179,51 @@ public class CustomFragment extends Fragment {
         libHttp = dialogView.findViewById(R.id.lib_okhttp);
         libFast = dialogView.findViewById(R.id.lib_fastjson);
 
-        libBoat.setOnClickListener(v -> {
+        libBoat.setOnClickListener(v->{
             CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
             intent.launchUrl(requireActivity(), Uri.parse("https://github.com/AOF-Dev/BoatApp\n"));
         });
-        libMio.setOnClickListener(v -> {
+        libMio.setOnClickListener(v->{
             CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
             intent.launchUrl(requireActivity(), Uri.parse("https://github.com/ShirosakiMio/BoatApp\n"));
         });
-        libCrash.setOnClickListener(v -> {
+        libCrash.setOnClickListener(v->{
             CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
             intent.launchUrl(requireActivity(), Uri.parse("https://github.com/Ereza/CustomActivityOnCrash\n"));
         });
-        libLogin.setOnClickListener(v -> {
+        libLogin.setOnClickListener(v->{
             CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
             intent.launchUrl(requireActivity(), Uri.parse("https://github.com/Ratsiiel/minecraft-auth-library\n"));
         });
-        libXz.setOnClickListener(v -> {
+        libXz.setOnClickListener(v->{
             CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
             intent.launchUrl(requireActivity(), Uri.parse("https://tukaani.org/xz/java.html\n"));
         });
-        libCommon.setOnClickListener(v -> {
+        libCommon.setOnClickListener(v->{
             CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
             intent.launchUrl(requireActivity(), Uri.parse("https://github.com/apache/commons-compress\n"));
         });
-        libJsoup.setOnClickListener(v -> {
+        libJsoup.setOnClickListener(v->{
             CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
             intent.launchUrl(requireActivity(), Uri.parse("https://github.com/jhy/jsoup\n"));
         });
-        libGson.setOnClickListener(v -> {
+        libGson.setOnClickListener(v->{
             CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
             intent.launchUrl(requireActivity(), Uri.parse("https://github.com/google/gson\n"));
         });
-        libShell.setOnClickListener(v -> {
+        libShell.setOnClickListener(v->{
             CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
             intent.launchUrl(requireActivity(), Uri.parse("https://github.com/jackpal/Android-Terminal-Emulator\n"));
         });
-        libMd.setOnClickListener(v -> {
+        libMd.setOnClickListener(v->{
             CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
             intent.launchUrl(requireActivity(), Uri.parse("https://gitee.com/wateryuan/MarkDownTest\n"));
         });
-        libHttp.setOnClickListener(v -> {
+        libHttp.setOnClickListener(v->{
             CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
             intent.launchUrl(requireActivity(), Uri.parse("https://github.com/ejlchina/okhttps\n"));
         });
-        libFast.setOnClickListener(v -> {
+        libFast.setOnClickListener(v->{
             CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
             intent.launchUrl(requireActivity(), Uri.parse("https://github.com/alibaba/fastjson\n"));
         });
@@ -230,7 +232,7 @@ public class CustomFragment extends Fragment {
         WindowManager windowManager = requireActivity().getWindowManager();
         Display display = windowManager.getDefaultDisplay();
         WindowManager.LayoutParams lp = mDialog.getWindow().getAttributes();
-        lp.width = (int) (display.getWidth() * 0.9); //设置宽度 dialog.getWindow().setAttributes(lp);
+        lp.width = (int)(display.getWidth()*0.9); //设置宽度 dialog.getWindow().setAttributes(lp);
         mDialog.show();
     }
 
@@ -246,27 +248,27 @@ public class CustomFragment extends Fragment {
         thkFish = dialogView.findViewById(R.id.thk_fish);
         thkShulker = dialogView.findViewById(R.id.thk_shulker);
 
-        thkBoat.setOnClickListener(v -> {
+        thkBoat.setOnClickListener(v->{
             CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
             intent.launchUrl(requireActivity(), Uri.parse("https://github.com/CosineMath\n"));
         });
-        thkMio.setOnClickListener(v -> {
+        thkMio.setOnClickListener(v->{
             CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
             intent.launchUrl(requireActivity(), Uri.parse("https://github.com/ShirosakiMio\n"));
         });
-        thkLogin.setOnClickListener(v -> {
+        thkLogin.setOnClickListener(v->{
             CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
             intent.launchUrl(requireActivity(), Uri.parse("https://github.com/Ratsiiel\n"));
         });
-        thkFire.setOnClickListener(v -> {
+        thkFire.setOnClickListener(v->{
             CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
             intent.launchUrl(requireActivity(), Uri.parse("https://github.com/MCfire-miracle\n"));
         });
-        thkFish.setOnClickListener(v -> {
+        thkFish.setOnClickListener(v->{
             CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
             intent.launchUrl(requireActivity(), Uri.parse("https://github.com/TSaltedfishKing\n"));
         });
-        thkShulker.setOnClickListener(v -> {
+        thkShulker.setOnClickListener(v->{
             CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
             intent.launchUrl(requireActivity(), Uri.parse("https://github.com/ShulkerSakura\n"));
         });
@@ -275,7 +277,7 @@ public class CustomFragment extends Fragment {
         WindowManager windowManager = requireActivity().getWindowManager();
         Display display = windowManager.getDefaultDisplay();
         WindowManager.LayoutParams lp = mDialog.getWindow().getAttributes();
-        lp.width = (int) (display.getWidth() * 0.9); //设置宽度 dialog.getWindow().setAttributes(lp);
+        lp.width = (int)(display.getWidth()*0.9); //设置宽度 dialog.getWindow().setAttributes(lp);
         mDialog.show();
     }
 

@@ -24,12 +24,12 @@
 
     <Spinner
         android:id="@+id/sp_download_source_mode"
-        style="@style/TextStyleMain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="100dp"
         android:spinnerMode="dropdown"
+        style="@style/TextStyleMain"
         android:textSize="@dimen/text_mid" />
 
     <RadioGroup
@@ -41,38 +41,38 @@
 
         <RadioButton
             android:id="@+id/rb_release"
-            style="@style/TextStyleMain"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:checked="true"
-            android:text="@string/download_release" />
+            android:text="@string/download_release"
+            style="@style/TextStyleMain"/>
 
         <RadioButton
             android:id="@+id/rb_snapshot"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:text="@string/download_snapshot" />
+            android:text="@string/download_snapshot"/>
 
         <RadioButton
             android:id="@+id/rb_old_beta"
-            style="@style/TextStyleMain"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:text="@string/download_old_beta" />
+            android:text="@string/download_old_beta"
+            style="@style/TextStyleMain"/>
 
     </RadioGroup>
 
     <com.mistake.revision.view.PullListView
+        android:layout_marginTop="2.5dp"
         android:id="@+id/loadingversionFileListView1"
-        style="@style/TextStyleMain"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="2.5dp"
         android:layout_weight="1.0"
-        android:listSelector="?attr/selectableItemBackground" />
+        android:listSelector="?attr/selectableItemBackground"
+        style="@style/TextStyleMain"/>
 
 </LinearLayout>
 

@@ -2,11 +2,12 @@ package org.koishi.launcher.h2co3.ui.install;
 
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import androidx.fragment.app.Fragment;
 
 import com.google.android.material.card.MaterialCardView;
 import com.mistake.revision.VanillaActivity;
@@ -25,7 +26,7 @@ public class InstallFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    public MaterialCardView cardMc, cardForge, cardOpti, cardFab, cardLl, cardPack, cardMod, cardCf, cardMcmod;
+    public MaterialCardView cardMc,cardForge,cardOpti,cardFab,cardLl,cardPack,cardMod,cardCf,cardMcmod;
 
     public InstallFragment() {
         // Required empty public constructor
@@ -66,7 +67,7 @@ public class InstallFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_install, container, false);
         cardMc = root.findViewById(R.id.install_mc);
 
-        cardMc.setOnClickListener(v -> {
+        cardMc.setOnClickListener(v->{
             startActivity(new Intent(getActivity(), VanillaActivity.class));
             requireActivity().finish();
         });

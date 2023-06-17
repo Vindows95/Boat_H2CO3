@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,17 +29,17 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="@font/sans"
                 android:text="Github: CosineMath/BoatApp"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:fontFamily="@font/sans"/>
 
             <ImageButton
                 android:id="@+id/lib_boat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="TODO"
-                app:srcCompat="@drawable/ic_link_open" />
+                app:srcCompat="@drawable/ic_link_open"
+                android:contentDescription="TODO" />
 
         </LinearLayout>
 
@@ -55,17 +56,17 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="@font/sans"
                 android:text="Github: ShirosakiMio/BoatApp(forked)"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:fontFamily="@font/sans"/>
 
             <ImageButton
                 android:id="@+id/lib_mio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="TODO"
-                app:srcCompat="@drawable/ic_link_open" />
+                app:srcCompat="@drawable/ic_link_open"
+                android:contentDescription="TODO" />
 
         </LinearLayout>
 
@@ -82,17 +83,17 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="@font/sans"
                 android:text="Github: Ereza/CustomActivityOnCrash"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:fontFamily="@font/sans"/>
 
             <ImageButton
                 android:id="@+id/lib_cat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="TODO"
-                app:srcCompat="@drawable/ic_link_open" />
+                app:srcCompat="@drawable/ic_link_open"
+                android:contentDescription="TODO" />
 
         </LinearLayout>
 
@@ -109,17 +110,17 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="@font/sans"
                 android:text="Github: Ratsiiel/minecraft-auth-library"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:fontFamily="@font/sans"/>
 
             <ImageButton
                 android:id="@+id/lib_login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="TODO"
-                app:srcCompat="@drawable/ic_link_open" />
+                app:srcCompat="@drawable/ic_link_open"
+                android:contentDescription="TODO" />
 
         </LinearLayout>
 
@@ -136,17 +137,17 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="@font/sans"
                 android:text="GitLink: Tukaani/XZ"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:fontFamily="@font/sans"/>
 
             <ImageButton
                 android:id="@+id/lib_xz"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="TODO"
-                app:srcCompat="@drawable/ic_link_open" />
+                app:srcCompat="@drawable/ic_link_open"
+                android:contentDescription="TODO" />
 
         </LinearLayout>
 
@@ -163,17 +164,17 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="@font/sans"
                 android:text="Github: apache/commons-compress"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:fontFamily="@font/sans"/>
 
             <ImageButton
                 android:id="@+id/lib_common"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="TODO"
-                app:srcCompat="@drawable/ic_link_open" />
+                app:srcCompat="@drawable/ic_link_open"
+                android:contentDescription="TODO" />
 
         </LinearLayout>
 
@@ -190,17 +191,17 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="@font/sans"
                 android:text="Github: jhy/jsoup"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:fontFamily="@font/sans"/>
 
             <ImageButton
                 android:id="@+id/lib_jsoup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="TODO"
-                app:srcCompat="@drawable/ic_link_open" />
+                app:srcCompat="@drawable/ic_link_open"
+                android:contentDescription="TODO" />
 
         </LinearLayout>
 
@@ -217,17 +218,17 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="@font/sans"
                 android:text="Github: Google/gson"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:fontFamily="@font/sans"/>
 
             <ImageButton
                 android:id="@+id/lib_gson"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="TODO"
-                app:srcCompat="@drawable/ic_link_open" />
+                app:srcCompat="@drawable/ic_link_open"
+                android:contentDescription="TODO" />
 
         </LinearLayout>
 
@@ -244,17 +245,17 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="@font/sans"
                 android:text="Github: jackpal/Android-Terminal-Emulator"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:fontFamily="@font/sans"/>
 
             <ImageButton
                 android:id="@+id/lib_shell"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="TODO"
-                app:srcCompat="@drawable/ic_link_open" />
+                app:srcCompat="@drawable/ic_link_open"
+                android:contentDescription="TODO" />
 
         </LinearLayout>
 
@@ -271,17 +272,17 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="@font/sans"
                 android:text="Gitee: Water/MarkDownTest"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:fontFamily="@font/sans"/>
 
             <ImageButton
                 android:id="@+id/lib_md"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="TODO"
-                app:srcCompat="@drawable/ic_link_open" />
+                app:srcCompat="@drawable/ic_link_open"
+                android:contentDescription="TODO" />
 
         </LinearLayout>
 
@@ -298,17 +299,17 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="@font/sans"
                 android:text="GitHub: ejlchina/okhttps"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:fontFamily="@font/sans"/>
 
             <ImageButton
                 android:id="@+id/lib_okhttp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="TODO"
-                app:srcCompat="@drawable/ic_link_open" />
+                app:srcCompat="@drawable/ic_link_open"
+                android:contentDescription="TODO" />
 
         </LinearLayout>
 
@@ -325,17 +326,17 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="@font/sans"
                 android:text="GitHub: alibaba/fastjson"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:fontFamily="@font/sans"/>
 
             <ImageButton
                 android:id="@+id/lib_fastjson"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="TODO"
-                app:srcCompat="@drawable/ic_link_open" />
+                app:srcCompat="@drawable/ic_link_open"
+                android:contentDescription="TODO" />
 
         </LinearLayout>
 

@@ -29,10 +29,10 @@
         android:id="@+id/username_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp">
+        android:layout_marginTop="10dp">
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
@@ -65,20 +65,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="15dp"
         android:gravity="center_vertical"
+        android:layout_marginHorizontal="15dp"
         android:orientation="horizontal">
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/terminal_exec"
             style="@style/Widget.Material3.Button.UnelevatedButton"
+            android:id="@+id/terminal_exec"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="5dp"
             android:layout_weight="3"
-            android:fontFamily="@font/sans"
             android:text="@string/terminal_exec"
-            app:cornerRadius="@dimen/card_radius" />
+            app:cornerRadius="@dimen/card_radius"
+            android:fontFamily="@font/sans"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/terminal_clear"
@@ -87,9 +87,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_weight="3"
-            android:fontFamily="@font/sans"
             android:text="@string/terminal_clear"
-            app:cornerRadius="@dimen/card_radius" />
+            app:cornerRadius="@dimen/card_radius"
+            android:fontFamily="@font/sans"/>
 
     </LinearLayout>
 
@@ -107,15 +107,14 @@
         android:layout_marginHorizontal="15dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
-        android:autofillHints=""
         android:background="@color/empty"
         android:textColor="?colorPrimary"
         android:textIsSelectable="true"
         android:textSize="14.5sp"
-        android:typeface="monospace" />
+        android:typeface="monospace"
+        android:autofillHints="" />
 
     <com.google.android.material.card.MaterialCardView
-        style="@style/CardViewStyle"
         android:id="@+id/terminal_card"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -126,22 +125,21 @@
         android:foreground="?attr/selectableItemBackground"
         android:visibility="gone"
         app:cardCornerRadius="@dimen/card_radius"
-        app:cardElevation="0dp"
-        app:strokeWidth="0dp">
+        app:cardElevation="0dp">
 
         <EditText
-            android:id="@+id/terminal_output"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:layout_marginTop="7.5dp"
             android:layout_marginEnd="15dp"
             android:layout_marginBottom="7.5dp"
+            android:id="@+id/terminal_output"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:alpha="0.85"
-            android:autofillHints="name"
             android:textIsSelectable="true"
             android:textSize="14.5sp"
             android:typeface="monospace"
+            android:autofillHints="name"
             tools:ignore="LabelFor" />
 
     </com.google.android.material.card.MaterialCardView>

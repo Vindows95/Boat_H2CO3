@@ -7,11 +7,8 @@ public class FilePoint {
     private String fileName;//文件名
     private String url;//下载地址
     private String filePath;
-
     private int a;
-
     private Object object;
-
     private int size;//下载目录
 
     public FilePoint(String url) {

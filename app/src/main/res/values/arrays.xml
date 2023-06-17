@@ -14,9 +14,26 @@
         <item>LShift</item>
     </string-array>
 
+    <string-array name="list_preference_theme">
+        <item>Red</item>
+        <item>Orange</item>
+        <item>Yellow</item>
+        <item>Green</item>
+        <item>Blue(Default)</item>
+        <item>Cyan</item>
+        <item>Purple</item>
+        <item>Pink</item>
+        <item>Brown</item>
+    </string-array>
+
     <string-array name="list_java">
         <item>JRE8</item>
         <item>JRE17</item>
+    </string-array>
+
+    <string-array name="list_java_value">
+        <item>jre_8</item>
+        <item>jre_17</item>
     </string-array>
 
     <string-array name="list_preference_gl">
@@ -34,6 +51,15 @@
     </string-array>
 
     <!-- Reply Preference -->
+    <string-array name="reply_entries">
+        <item>Reply</item>
+        <item>Reply to all</item>
+    </string-array>
+
+    <string-array name="reply_values">
+        <item>reply</item>
+        <item>reply_all</item>
+    </string-array>
 
     <string-array name="download_source">
         <item>@string/spinner_official</item>

@@ -1,25 +1,14 @@
 package org.koishi.launcher.h2co3.tool.json;
 
-import android.os.Build;
-
-import androidx.annotation.RequiresApi;
-
-import org.koishi.launcher.h2co3.tool.json.abstracts.JsonValue;
 import org.koishi.launcher.h2co3.tool.json.model.JsonArray;
 import org.koishi.launcher.h2co3.tool.json.model.JsonBoolean;
 import org.koishi.launcher.h2co3.tool.json.model.JsonNull;
 import org.koishi.launcher.h2co3.tool.json.model.JsonNumber;
 import org.koishi.launcher.h2co3.tool.json.model.JsonObject;
+import org.koishi.launcher.h2co3.tool.json.abstracts.JsonValue;
 import org.koishi.launcher.h2co3.tool.json.model.JsonString;
 
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 
 /**
@@ -210,7 +199,6 @@ public class JsonParser {
      *
      * @return the json object
      */
-    @RequiresApi(api = Build.VERSION_CODES.N)
     public JsonObject parseJsonObject() {
         JsonObject jsonObject = new JsonObject();
 
@@ -514,7 +502,6 @@ public class JsonParser {
     /**
      * Is number boolean.
      * Check if current char is a number
-     *
      * @param currentChar the current char is used to check
      * @return the boolean true or false
      */

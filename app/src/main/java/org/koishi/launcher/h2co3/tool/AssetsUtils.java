@@ -16,11 +16,24 @@ import java.io.InputStream;
  */
 public class AssetsUtils {
 
+    private static AssetsUtils instance;
     private static final int SUCCESS = 1;
     private static final int FAILED = 0;
-    private static AssetsUtils instance;
     private final Context context;
     private FileOperateCallback callback;
+    private volatile boolean isSuccess;
+    private String errorStr;
+
+    public static AssetsUtils getInstance(Context context) {
+        if (instance == null)
+            instance = new AssetsUtils(context);
+        return instance;
+    }
+
+    private AssetsUtils (Context context) {
+        this.context = context;
+    }
+
     private final Handler handler = new Handler(Looper.getMainLooper()) {
         @Override
         public void handleMessage(Message msg) {
@@ -35,18 +48,6 @@ public class AssetsUtils {
             }
         }
     };
-    private volatile boolean isSuccess;
-    private String errorStr;
-
-    private AssetsUtils(Context context) {
-        this.context = context;
-    }
-
-    public static AssetsUtils getInstance(Context context) {
-        if (instance == null)
-            instance = new AssetsUtils(context);
-        return instance;
-    }
 
     public AssetsUtils copyAssetsToSD(final String srcPath, final String sdPath) {
         new Thread(() -> {

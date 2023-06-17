@@ -7,11 +7,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
+import org.koishi.launcher.h2co3.application.H2CO3Activity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.google.android.material.snackbar.Snackbar;
-
-import org.koishi.launcher.h2co3.application.H2CO3Activity;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -21,6 +20,8 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 public class InitialActivity extends H2CO3Activity {
+
+    public ConstraintLayout initial;
 
     @SuppressLint("HandlerLeak")
     final
@@ -35,7 +36,6 @@ public class InitialActivity extends H2CO3Activity {
 
         }
     };
-    public ConstraintLayout initial;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +45,7 @@ public class InitialActivity extends H2CO3Activity {
         initial = findViewById(R.id.initial_view);
         new Thread(() -> {
             try {
-                unZip(InitialActivity.this, "app_runtime.zip", "/data/data/org.koishi.launcher.h2co3");
+                unZip(InitialActivity.this, "app_runtime.zip",  "/data/data/org.koishi.launcher.h2co3");
                 han.sendEmptyMessage(0);
             } catch (IOException e) {
                 Snackbar.make(initial, e.toString(), Snackbar.LENGTH_LONG)

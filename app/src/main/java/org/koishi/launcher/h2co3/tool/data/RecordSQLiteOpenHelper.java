@@ -8,10 +8,10 @@ import android.database.sqlite.SQLiteOpenHelper;
  * Created by yi.huangxing on 17/12/13.类描述:
  */
 
-public class RecordSQLiteOpenHelper extends SQLiteOpenHelper {
+public class RecordSQLiteOpenHelper  extends SQLiteOpenHelper{
     private static final String name = "record.db";
     private static final Integer version = 1;
-
+    
 
     public RecordSQLiteOpenHelper(Context context) {
         super(context, name, null, version);
@@ -21,7 +21,7 @@ public class RecordSQLiteOpenHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         //打开数据库，建立了一个叫records的表，里面只有一列name来存储历史记录：
         db.execSQL("create table records(id integer primary key autoincrement,name varchar(200))");
-
+        
     }
 
     @Override

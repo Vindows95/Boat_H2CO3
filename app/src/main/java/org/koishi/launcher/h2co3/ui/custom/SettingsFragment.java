@@ -32,36 +32,21 @@ import java.util.Objects;
 
 public class SettingsFragment extends PreferenceFragmentCompat {
 
-    @SuppressLint("HandlerLeak")
-    final
-    Handler han = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            if (msg.what == 0) {
-                Intent intent1 = new Intent(getActivity(), MainActivity.class);
-                intent1.putExtra("fragment", getResources().getString(R.string.menu_home));
-                startActivity(intent1);
-                Toast.makeText(getActivity(), getResources().getString(R.string.delete), Toast.LENGTH_SHORT).show();
-                requireActivity().finish();
-            }
-        }
-    };
-    public Preference delRun, delCfg, crash, logView, langTr;
-    public EditTextPreference etId, editJvm, editMcf;
+    public Preference delRun,delCfg,crash,logView,langTr;
+    public EditTextPreference etId,editJvm,editMcf;
     public SwitchPreferenceCompat appTheme;
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.settings_preferences, rootKey);
         editJvm = findPreference("set_jvm");
-        editMcf = findPreference("set_mcf");
+        editMcf= findPreference("set_mcf");
 
-        assert editJvm != null;
-        editJvm.setText(CHTools.getBoatCfg("extraJavaFlags", "-client -Xmx4000M"));
+        assert  editJvm != null;
+        editJvm.setText(CHTools.getBoatCfg("extraJavaFlags","-client -Xmx4000M"));
 
-        assert editMcf != null;
-        editMcf.setText(CHTools.getBoatCfg("extraMinecraftFlags", ""));
+        assert  editMcf != null;
+        editMcf.setText(CHTools.getBoatCfg("extraMinecraftFlags",""));
 
         delRun = findPreference("set_reset_cfg");
         if (delRun != null) {
@@ -86,7 +71,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             appTheme.setEnabled(false);
         }
         langTr = findPreference("set_lang_tr");
-        if (langTr != null) {
+        if (langTr != null){
             langTr.setOnPreferenceClickListener(preference -> {
                 CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
                 intent.launchUrl(requireActivity(), Uri.parse("https://wwa.lanzoui.com/iGyPkvlgqdc\n"));
@@ -129,8 +114,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                         startActivity(intent);// TODO: Implement this method
                         System.out.println("success");
                         getActivity().finish();
-                         */
-                        AppExecute.output(getActivity(), "h2co3.zip", Environment.getExternalStorageDirectory() + "/games/org.koishi.launcher/h2co3");
+                         */ AppExecute.output(getActivity(),"h2co3.zip",  Environment.getExternalStorageDirectory() + "/games/org.koishi.launcher/h2co3");
                         Intent i2 = new Intent(getActivity(), MainActivity.class);
                         i2.putExtra("fragment", getResources().getString(R.string.app_name));
                         startActivity(i2);
@@ -211,4 +195,20 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     private void crash() {
         throw new RuntimeException("Crash test from SettingsActivity. 这是从设置里点进来的崩溃，给我发这个是没用的！！请在log.txt或者client_output.txt中找原因。路径是/sdcard/games/org.koishi.launcher/h2co3。");
     }
+
+    @SuppressLint("HandlerLeak")
+    final
+    Handler han = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if (msg.what == 0) {
+                Intent intent1 = new Intent(getActivity(), MainActivity.class);
+                intent1.putExtra("fragment", getResources().getString(R.string.menu_home));
+                startActivity(intent1);
+                Toast.makeText(getActivity(), getResources().getString(R.string.delete), Toast.LENGTH_SHORT).show();
+                requireActivity().finish();
+            }
+        }
+    };
 }

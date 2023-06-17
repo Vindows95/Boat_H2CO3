@@ -1,30 +1,29 @@
 package com.download.service.util;
 
-public class VersionAssetsUtil {
-    private String hash;
-    private int size;
+public class VersionAssetsUtil
+{
+	private String hash;
+	private int size;
 
-    public VersionAssetsUtil() {
+	public VersionAssetsUtil(){
 
-    }
+	}
 
-    public String gethash() {
+	public String gethash(){
 
-        return hash;
-    }
+		return hash;
+	}
+	public int getsize(){
 
-    public int getsize() {
-
-        return size;
-    }
-
-    public void sethash(String a) {
-        hash = a;
-    }
-
-    public void setsize(int a) {
-        size = a;
-    }
+		return size;
+	}
+	
+	public void sethash(String a){
+		hash=a;
+	}
+	public void setsize(int a){
+		size=a;
+	}
 	/*
 	{
 		"objects":{

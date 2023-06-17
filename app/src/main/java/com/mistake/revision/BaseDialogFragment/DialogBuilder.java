@@ -6,13 +6,14 @@ import java.lang.reflect.Constructor;
 
 public class DialogBuilder<T> {
 
-    public Class<T> tClass;
     private Object view;
     private float mAlpha = 1;
     private boolean mAutoDismiss = false;
     private boolean mCancelable = true;
     private int mAnimation = 0;
     private int mGravity;
+
+    public Class<T> tClass;
 
     public DialogBuilder() {
     }
@@ -78,13 +79,13 @@ public class DialogBuilder<T> {
         if (tClass != null) {
             try {
                 Constructor<T> constructor = tClass.getConstructor(
-                        Object.class, float.class, boolean.class, boolean.class, int.class, int.class);
-                return constructor.newInstance(view, mAlpha, mAutoDismiss, mCancelable, mAnimation, mGravity);
+					Object.class, float.class, boolean.class, boolean.class, int.class,int.class);
+                return constructor.newInstance(view, mAlpha, mAutoDismiss, mCancelable,mAnimation,mGravity);
             } catch (Exception e) {
-                throw new RuntimeException("创建 " + tClass.getName() + " 失败，原因可能是构造参数有问题：" + e.getMessage());
+                throw new RuntimeException("创建 "+tClass.getName()+" 失败，原因可能是构造参数有问题："+e.getMessage());
             }
         } else {
-            return (T) BaseDialogFragmnet.newInstance(view, mAlpha, mAutoDismiss, mCancelable, mAnimation, mGravity);
+            return (T) BaseDialogFragmnet.newInstance(view, mAlpha, mAutoDismiss, mCancelable,mAnimation,mGravity);
         }
-    }
+	}
 }

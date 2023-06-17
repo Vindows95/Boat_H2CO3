@@ -1,6 +1,5 @@
 package org.koishi.launcher.h2co3.tool.data;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -39,7 +38,7 @@ public class DbDao {
 
         while (cursor.moveToNext()) {
             //注意这里的name跟建表的name统一
-            @SuppressLint("Range") String name = cursor.getString(cursor.getColumnIndex("name"));
+            String name = cursor.getString(cursor.getColumnIndex("name"));
             data.add(name);
         }
         cursor.close();
@@ -49,6 +48,7 @@ public class DbDao {
 
     /**
      * 检查数据库中是否已经有该条记录
+     *
      */
     public boolean hasData(String tempName) {
         //从Record这个表里找到name=tempName的id
@@ -60,6 +60,7 @@ public class DbDao {
 
     /**
      * 插入数据
+     *
      */
     public void insertData(String tempName) {
         db = helper.getWritableDatabase();

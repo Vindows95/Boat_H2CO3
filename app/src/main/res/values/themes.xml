@@ -10,10 +10,8 @@
     </style>
 
     <style name="Theme.H2CO3.DynamicColors" parent="Theme.Material3.DynamicColors.Light">
-        <item name="android:windowActionBar">false</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:statusBarColor">?android:colorBackground</item>
-        <item name="switchPreferenceStyle">@style/AppBaseTheme.SwitchPreference</item>
+        <item name="switchPreferenceStyle">@style/AppTheme.SwitchPreference</item>
+        <item name="android:windowFullscreen">true</item>
         <item name="fontFamily">@font/josefin_sans</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -22,10 +20,8 @@
 
     <!--Custom themes-->
     <style name="AppBaseTheme" parent="Theme.Material3.Light.NoActionBar">
-        <item name="android:statusBarColor">?android:colorBackground</item>
-        <item name="android:windowActionBar">false</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="switchPreferenceStyle">@style/AppBaseTheme.SwitchPreference</item>
+        <item name="switchPreferenceStyle">@style/AppTheme.SwitchPreference</item>
+        <item name="android:statusBarColor">@android:color/holo_red_light</item>
         <item name="colorPrimary">@color/md_theme_primary</item>
         <item name="colorOnPrimary">@color/md_theme_onPrimary</item>
         <item name="colorPrimaryContainer">@color/md_theme_primaryContainer</item>
@@ -57,41 +53,6 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="CardViewStyle" parent="@style/Widget.Material3.CardView.Outlined">
-        <item name="android:checkable">true</item>
-        <item name="android:clickable">true</item>
-        <item name="android:focusable">true</item>
-        <item name="android:clipChildren">false</item>
-        <item name="android:clipToPadding">false</item>
-        <item name="cardCornerRadius">@dimen/card_radius</item>
-        <item name="contentPaddingStart">15dp</item>
-        <item name="contentPaddingEnd">15dp</item>
-        <item name="contentPaddingLeft">15dp</item>
-        <item name="contentPaddingRight">15dp</item>
-        <item name="contentPaddingTop">15dp</item>
-        <item name="contentPaddingBottom">15dp</item>
-        <item name="cardBackgroundColor">?colorSecondaryContainer</item>
-        <item name="strokeWidth">0dp</item>
-    </style>
-
-    <style name="CardTitle">
-        <item name="android:textAppearance">?textAppearanceBodyLarge</item>
-        <item name="android:textColor">?android:textColorPrimary</item>
-        <item name="android:textSize">16sp</item>
-        <item name="android:lineSpacingExtra">1sp</item>
-    </style>
-
-    <style name="CardIcon">
-        <item name="android:layout_marginRight">15dp</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:background">@drawable/shape_circle_icon_background</item>
-        <item name="android:tint">?colorOnPrimaryContainer</item>
-        <item name="android:tintMode">src_in</item>
-        <item name="android:backgroundTint">?colorPrimaryContainer</item>
-        <item name="android:backgroundTintMode">src_in</item>
-    </style>
-
     <style name="AppBaseTheme.AppBarOverlay" parent="ThemeOverlay.Material3.ActionBar" />
 
     <style name="AppBaseTheme.PopupOverlay" parent="ThemeOverlay.Material3.Light" />
@@ -101,7 +62,7 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppBaseTheme.SwitchPreference" parent="Preference.SwitchPreference.Material">
+    <style name="AppTheme.SwitchPreference" parent="Preference.SwitchPreference.Material">
         <item name="android:widgetLayout">@layout/preference_widget_materialswitch</item>
     </style>
 
@@ -130,12 +91,9 @@
         <item name="shapeAppearanceOverlay">@style/MaterialDialog.ShapeAppearance</item>
         <item name="materialAlertDialogTitleTextStyle">@style/MaterialDialog.Title.Text</item>
         <item name="materialAlertDialogBodyTextStyle">@style/MaterialDialog.Body.Text</item>
-        <item name="buttonBarPositiveButtonStyle">@style/MaterialAlertDialog.PositiveButtonStyle
-        </item>
-        <item name="buttonBarNegativeButtonStyle">@style/MaterialAlertDialog.NegativeButtonStyle
-        </item>
-        <item name="buttonBarNeutralButtonStyle">@style/MaterialAlertDialog.NeutralButtonStyle
-        </item>
+        <item name="buttonBarPositiveButtonStyle">@style/MaterialAlertDialog.PositiveButtonStyle</item>
+        <item name="buttonBarNegativeButtonStyle">@style/MaterialAlertDialog.NegativeButtonStyle</item>
+        <item name="buttonBarNeutralButtonStyle">@style/MaterialAlertDialog.NeutralButtonStyle</item>
         <item name="android:windowEnterAnimation">@animator/dialog_in</item>
         <item name="android:windowExitAnimation">@animator/dialog_out</item>
     </style>
@@ -168,8 +126,11 @@
         <item name="fontFamily">@font/josefin_sans</item>
     </style>
 
+    <style name="PopupAnimation">
+        <item name="android:windowEnterAnimation">@anim/popup_in</item>
+        <item name="android:windowExitAnimation">@anim/popup_out</item>
+    </style>
     \
-
     <style name="AppTheme.BottomSheetDialog" parent="Theme.Material3.Dark.BottomSheetDialog">
         <item name="android:windowIsFloating">false</item>
     </style>
@@ -194,6 +155,39 @@
         <item name="android:textSize">14sp</item>
         <item name="android:lineSpacingExtra">2sp</item>
     </style>
+
+    <style name="TextStyleSummary_pri">
+        <item name="android:textAppearance">?textAppearanceBody2</item>
+        <item name="android:textColor">?android:textColorSecondary</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">1sp</item>
+    </style>
+
+    <style name="myActionButtonStyle" parent="Widget.AppCompat.ActionButton">
+        <item name="android:minWidth">36dp</item>
+        <item name="android:minHeight">36dp</item>
+    </style>
+
+    <style name="toolbar_style">
+        <item name="android:textAppearance">?textAppearanceBody2</item>
+        <item name="android:textColor">?android:textColorSecondary</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:lineSpacingExtra">1sp</item>
+    </style>
+
+    <style name="NProgressBar" parent="@android:style/Widget.ProgressBar.Horizontal">
+        <item name="android:maxHeight">50dip</item>
+        <item name="android:minHeight">5dip</item>
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:indeterminateDrawable">
+            @android:drawable/progress_indeterminate_horizontal
+        </item>
+        <item name="android:progressDrawable">@drawable/progress</item>
+    </style>
+
+    <style name="Theme.H2CO3.AppBarOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="Theme.H2CO3.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 
 </resources>

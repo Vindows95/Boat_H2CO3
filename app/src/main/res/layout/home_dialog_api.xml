@@ -8,7 +8,8 @@
     android:paddingStart="20dp"
     android:paddingTop="20dp"
     android:paddingEnd="20dp"
-    android:paddingBottom="10dp">
+    android:paddingBottom="10dp"
+    >
 
     <TextView
         style="@style/TextStyleMain"
@@ -37,19 +38,19 @@
                     android:id="@+id/api_microsoft"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/empty"
-                    android:fontFamily="@font/sans"
                     android:foreground="?attr/selectableItemBackground"
-                    android:text="@string/api_ms" />
+                    android:background="@color/empty"
+                    android:text="@string/api_ms"
+                    android:fontFamily="@font/sans"/>
 
                 <RadioButton
                     android:id="@+id/api_3rd"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/empty"
-                    android:fontFamily="@font/sans"
                     android:foreground="?attr/selectableItemBackground"
-                    android:text="@string/api_3rd" />
+                    android:background="@color/empty"
+                    android:text="@string/api_3rd"
+                    android:fontFamily="@font/sans"/>
 
             </RadioGroup>
 
@@ -60,10 +61,10 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:drawablePadding="5dp"
-                android:fontFamily="@font/sans"
                 android:paddingStart="4dp"
                 android:text="@string/api_action"
                 android:textSize="14sp"
+                android:fontFamily="@font/sans"
                 app:drawableStartCompat="@drawable/ic_main_msg_app"
                 tools:ignore="RtlSymmetry" />
 
@@ -76,7 +77,6 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/custom_api_url"
-                    style="@style/TextStyleMain"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -84,7 +84,8 @@
                     android:hint="API URL"
                     android:maxLines="1"
                     android:singleLine="true"
-                    android:textIsSelectable="true" />
+                    android:textIsSelectable="true"
+                    style="@style/TextStyleMain"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.button.MaterialButton
@@ -93,9 +94,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:fontFamily="@font/sans"
                 android:text="@string/home_open_api_btn_text"
-                app:icon="@drawable/ic_link_open" />
+                app:icon="@drawable/ic_link_open"
+                android:fontFamily="@font/sans"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/custom_api_web_open_register"
@@ -103,9 +104,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:fontFamily="@font/sans"
                 android:text="@string/home_open_register_btn_text"
-                app:icon="@drawable/ic_link_open" />
+                app:icon="@drawable/ic_link_open"
+                android:fontFamily="@font/sans"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -118,16 +119,16 @@
                     style="@style/Widget.Material3.Button.TextButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/sans"
-                    android:text="@string/cancel" />
+                    android:text="@string/cancel"
+                    android:fontFamily="@font/sans"/>
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/custom_api_ok"
                     style="@style/Widget.Material3.Button.TextButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/sans"
-                    android:text="@string/settings" />
+                    android:text="@string/settings"
+                    android:fontFamily="@font/sans"/>
 
             </LinearLayout>
 
