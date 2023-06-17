@@ -8,7 +8,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
-import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -33,6 +32,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
@@ -62,52 +62,64 @@ import java.util.Objects;
 
 public class VersionsActivity extends H2CO3Activity {
 
+    @SuppressLint("HandlerLeak")
+    final
+    Handler han = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if (msg.what == 0) {
+                mDialog.dismiss();
+            }
+            if (msg.what == 1) {
+                mDialog.dismiss();
+                mDbDao.insertData(getBoatDir);
+                mAdapter.updata(mDbDao.queryData(""));
+                Snackbar.make(page, getResources().getString(R.string.ver_add_done), Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+            if (msg.what == 2) {
+                //mVerRecyclerView.setAdapter(null);
+                //initVers();
+                Snackbar.make(page, getResources().getString(R.string.ver_add_done), Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+
+        }
+    };
     private Button mbtn_serarch;
     private Dialog mDialog;
     private EditText met_search;
-    private FloatingActionButton dir,ver;
+    private final String sd1 = LAUNCHER_FILE_DIR + ".minecraft";
     private LinearLayout page;
-    private RecyclerView mRecyclerView,mVerRecyclerView;
+    private FloatingActionButton dir, ver;
     private TextView mtv_deleteAll;
     private SearchDirAdapter mAdapter;
     private String getBoatDir;
-    private final String sd1 = LAUNCHER_FILE_DIR+".minecraft";
-
     private List<String> verList;
 
     private DbDao mDbDao;
-
+    private RecyclerView mRecyclerView, mVerRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_versions);
-        
+
         page = findViewById(R.id.dir_layout);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(v -> {
             finish();
-            startActivity(new Intent(VersionsActivity.this,MainActivity.class));
+            startActivity(new Intent(VersionsActivity.this, MainActivity.class));
         });
-        TextView bigTitle= (TextView) toolbar.getChildAt(0);
+        TextView bigTitle = (TextView) toolbar.getChildAt(0);
         bigTitle.setText(getResources().getString(R.string.menu_ver));
-
-        //rb1 = findViewById(R.id.ver_title_dir);
-        //rb2 = findViewById(R.id.ver_title_ver);
 
         initViews();
         initVers();
 
-        //rb1.setOnClickListener(v->{
-            //mRecyclerView.setVisibility(View.VISIBLE);
-            //mVerRecyclerView.setVisibility(View.GONE);
-        //});
-        //rb2.setOnClickListener(v->{
-           // mRecyclerView.setVisibility(View.GONE);
-            //mVerRecyclerView.setVisibility(View.VISIBLE);
-        //});
         dir = findViewById(R.id.ver_new_dir);
         ver = findViewById(R.id.ver_new_ver);
         ver.hide();
@@ -119,23 +131,25 @@ public class VersionsActivity extends H2CO3Activity {
 
                 //  tab.getPosition()  返回数字，从0开始
                 // tab.getText()  返回字符串类型，从0开始
-                if (tab.getPosition()==0){
+                if (tab.getPosition() == 0) {
                     mRecyclerView.setVisibility(View.VISIBLE);
                     mVerRecyclerView.setVisibility(View.GONE);
                     ver.hide();
                     dir.show();
                 }
-                if (tab.getPosition()==1){
+                if (tab.getPosition() == 1) {
                     mRecyclerView.setVisibility(View.GONE);
                     mVerRecyclerView.setVisibility(View.VISIBLE);
                     dir.hide();
                     ver.show();
                 }
             }
+
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
 
             }
+
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
 
@@ -145,14 +159,7 @@ public class VersionsActivity extends H2CO3Activity {
     }
 
     private void initViews() {
-        mDbDao =new DbDao(this);
-        //mbtn_serarch = findViewById(R.id.btn_serarch);
-        //met_search = findViewById(R.id.et_search);
-        //mtv_deleteAll = findViewById(R.id.tv_deleteAll);
-        //mtv_deleteAll.setOnClickListener(view -> {
-            //mDbDao.deleteData();
-            //mAdapter.updata(mDbDao.queryData(""));
-        //});
+        mDbDao = new DbDao(this);
         mRecyclerView = findViewById(R.id.mRecyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new SearchDirAdapter(mDbDao.queryData(""), this);
@@ -160,40 +167,19 @@ public class VersionsActivity extends H2CO3Activity {
             mDbDao.delete(mDbDao.queryData("").get(position));
             mAdapter.updata(mDbDao.queryData(""));
         });
-        if (!mDbDao.hasData(sd1)){
+        if (!mDbDao.hasData(sd1)) {
             mDbDao.insertData(sd1);
             mAdapter.updata(mDbDao.queryData(""));
         }
         mRecyclerView.setAdapter(mAdapter);
-        //事件监听
-        /*
-        mbtn_serarch.setOnClickListener(view -> {
-
-            if (met_search.getText().toString().trim().length() != 0){
-                boolean hasData = mDbDao.hasData(met_search.getText().toString().trim());
-                if (!hasData){
-                    mDbDao.insertData(met_search.getText().toString().trim());
-                }else {
-                    Toast.makeText(VersionsActivity.this, "该内容已在历史记录中", Toast.LENGTH_SHORT).show();
-                }
-
-                //
-                mAdapter.updata(mDbDao.queryData(""));
-
-            }else {
-                Toast.makeText(VersionsActivity.this, "请输入内容", Toast.LENGTH_SHORT).show();
-            }
-
-        });
-         */
     }
 
-    public void initVers(){
-        File versionlist = new File(CHTools.getBoatCfg("game_directory","null") + "/versions");
+    public void initVers() {
+        File versionlist = new File(CHTools.getBoatCfg("game_directory", "null") + "/versions");
         if (versionlist.isDirectory() && versionlist.exists()) {
             Comparator<Object> cp = Collator.getInstance(Locale.CHINA);
             String[] getVer = versionlist.list();
-            List< String > verList = Arrays.asList(Objects.requireNonNull(getVer));  //此集合无法操作添加元素
+            List<String> verList = Arrays.asList(Objects.requireNonNull(getVer));  //此集合无法操作添加元素
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 verList.sort(cp);
             }
@@ -207,11 +193,11 @@ public class VersionsActivity extends H2CO3Activity {
         }
     }
 
-    public void newDir(View v){
+    public void newDir(View v) {
         showDirDialog();
     }
 
-    public void newVer(View v){
+    public void newVer(View v) {
         finish();
         startActivity(new Intent(VersionsActivity.this, VanillaActivity.class));
     }
@@ -227,7 +213,7 @@ public class VersionsActivity extends H2CO3Activity {
         lay.setError(getString(R.string.ver_input_hint));
         start.setEnabled(false);
         TextInputEditText et = dialogView.findViewById(R.id.dialog_dir_name);
-        et.addTextChangedListener(new TextWatcher(){
+        et.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence p1, int p2, int p3, int p4) {
             }
@@ -239,7 +225,7 @@ public class VersionsActivity extends H2CO3Activity {
             @Override
             public void afterTextChanged(Editable p1) {
                 String value = Objects.requireNonNull(et.getText()).toString();
-                if (value.matches("(/storage/emulated/0|/sdcard|/mnt/sdcard).*")){
+                if (value.matches("(/storage/emulated/0|/sdcard|/mnt/sdcard).*")) {
                     lay.setErrorEnabled(false);
                     start.setEnabled(true);
                 } else {
@@ -249,14 +235,14 @@ public class VersionsActivity extends H2CO3Activity {
             }
         });
 
-        cancel.setOnClickListener(v-> mDialog.dismiss());
-        start.setOnClickListener(v->{
-            if (Objects.requireNonNull(et.getText()).toString().trim().length() != 0){
+        cancel.setOnClickListener(v -> mDialog.dismiss());
+        start.setOnClickListener(v -> {
+            if (Objects.requireNonNull(et.getText()).toString().trim().length() != 0) {
                 boolean hasData = mDbDao.hasData(et.getText().toString().trim());
-                if (!hasData){
+                if (!hasData) {
                     File f = new File(et.getText().toString().trim());
-                    if (f.exists()){
-                        if (f.isDirectory()){
+                    if (f.exists()) {
+                        if (f.isDirectory()) {
                             getBoatDir = et.getText().toString();
                             newDir();
                         } else {
@@ -267,7 +253,7 @@ public class VersionsActivity extends H2CO3Activity {
                         getBoatDir = et.getText().toString();
                         newDir();
                     }
-                }else {
+                } else {
                     Snackbar.make(page, getResources().getString(R.string.ver_already_exists), Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                 }
@@ -275,7 +261,7 @@ public class VersionsActivity extends H2CO3Activity {
                 //
                 mAdapter.updata(mDbDao.queryData(""));
 
-            }else {
+            } else {
                 Snackbar.make(page, "Please input", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
@@ -286,11 +272,11 @@ public class VersionsActivity extends H2CO3Activity {
         WindowManager windowManager = VersionsActivity.this.getWindowManager();
         Display display = windowManager.getDefaultDisplay();
         WindowManager.LayoutParams lp = mDialog.getWindow().getAttributes();
-        lp.width = (int)(display.getWidth()*0.9); //设置宽度 dialog.getWindow().setAttributes(lp);
+        lp.width = (int) (display.getWidth() * 0.9); //设置宽度 dialog.getWindow().setAttributes(lp);
         mDialog.show();
     }
 
-    public void newDir(){
+    public void newDir() {
         new Thread(() -> {
             try {
                 AppExecute.output(VersionsActivity.this, "pack.zip", getBoatDir);
@@ -298,46 +284,82 @@ public class VersionsActivity extends H2CO3Activity {
                 //.setAction("Action", null).show();
                 han.sendEmptyMessage(1);
             } catch (IOException e) {
-                Snackbar.make(page, getResources().getString(R.string.ver_not_right_dir)+ e, Snackbar.LENGTH_LONG)
+                Snackbar.make(page, getResources().getString(R.string.ver_not_right_dir) + e, Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
                 han.sendEmptyMessage(0);
             }
         }).start();
     }
 
-    @SuppressLint("HandlerLeak")
-    final
-    Handler han = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            if (msg.what == 0) {
-                mDialog.dismiss();
-            }
-            if (msg.what == 1) {
-               mDialog.dismiss();
-               mDbDao.insertData(getBoatDir);
-               mAdapter.updata(mDbDao.queryData(""));
-               Snackbar.make(page, getResources().getString(R.string.ver_add_done), Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-            if (msg.what == 2) {
-               //mVerRecyclerView.setAdapter(null);
-               //initVers();
-                Snackbar.make(page, getResources().getString(R.string.ver_add_done), Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-
-        }
-    };
-
     //public void refresh(){
-        //finish();
-        //startActivity(new Intent(VersionsActivity.this,VersionsActivity.class));
+    //finish();
+    //startActivity(new Intent(VersionsActivity.this,VersionsActivity.class));
     //}
 
+    @Override
+    public void onBackPressed() {
+        finish();
+        startActivity(new Intent(VersionsActivity.this, MainActivity.class));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //updateDirList();
+        //initViews();
+        //mRecyclerView.post(() -> updateDirList());
+
+        String currentDir = CHTools.getBoatCfg("game_directory", "Null");
+        File f = new File(currentDir);
+        //if (mRecyclerView.isComputingLayout()) {
+        //updateDirList();
+        //if (f.exists()&&f.isDirectory()){
+        //if (mDbDao.hasData(dir.trim())){
+        //mDbDao.delete(dir);
+        //updateDirList();
+        //}else{
+//
+        // }
+        //}
+        // }
+        if (f.exists() && f.isDirectory()) {
+            initVers();
+        } else {
+            setDir(sd1);
+            Snackbar.make(page, getResources().getString(R.string.ver_null_dir), Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
+            mDbDao.delete(currentDir);
+            mAdapter.updata(mDbDao.queryData(""));
+            initVers();
+        }
+    }
+
+    public void setDir(String dir) {
+        try {
+            FileInputStream in = new FileInputStream(boatCfg);
+            byte[] b = new byte[in.available()];
+            in.read(b);
+            in.close();
+            String str = new String(b);
+            JSONObject json = new JSONObject(str);
+            json.remove("game_directory");
+            json.remove("game_assets");
+            json.remove("assets_root");
+            json.remove("currentVersion");
+            json.put("game_directory", dir);
+            json.put("game_assets", dir + "/assets/virtual/legacy");
+            json.put("assets_root", dir + "/assets");
+            json.put("currentVersion", dir + "/versions");
+            FileWriter fr = new FileWriter(boatCfg);
+            fr.write(json.toString());
+            fr.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
     class SearchDirAdapter extends BaseRecycleAdapter<String> {
-        public SearchDirAdapter(List< String > datas, Context mContext) {
+        public SearchDirAdapter(List<String> datas, Context mContext) {
             super(datas, mContext);
         }
 
@@ -347,7 +369,7 @@ public class VersionsActivity extends H2CO3Activity {
 
             TextView textView = (TextView) holder.getView(R.id.tv_record);
             TextView textView1 = (TextView) holder.getView(R.id.tv_name);
-            LinearLayout lay = (LinearLayout) holder.getView(R.id.ver_item);
+            MaterialCardView lay = (MaterialCardView) holder.getView(R.id.ver_item);
             ImageView check = (ImageView) holder.getView(R.id.ver_check_icon);
             MaterialButton del = (MaterialButton) holder.getView(R.id.tv_remove_dir);
             MaterialButton delDir = (MaterialButton) holder.getView(R.id.tv_del_dir);
@@ -355,14 +377,15 @@ public class VersionsActivity extends H2CO3Activity {
             if (datas.get(position).equals(CHTools.getBoatCfg("game_directory", "null"))) {
                 //lay.setSelected(true);
                 //check.setImageDrawable(getResources().getDrawable(R.drawable.ic_launcher_check_file_blue_true));
-                lay.setBackground(getResources().getDrawable(R.drawable.recycler_button_pressed));
+                lay.setStrokeWidth(15);
+                lay.setElevation(5);
             } else {
                 //lay.setSelected(false);
                 //check.setImageDrawable(getResources().getDrawable(R.drawable.cv_shape));
-                lay.setBackground(getResources().getDrawable(R.drawable.recycler_button_normal));
+                lay.setStrokeWidth(0);
             }
-            String sd3 = LAUNCHER_FILE_DIR+".minecraft";
-            String sd2 = LAUNCHER_FILE_DIR+".minecraft";
+            String sd3 = LAUNCHER_FILE_DIR + ".minecraft";
+            String sd2 = LAUNCHER_FILE_DIR + ".minecraft";
             if (datas.get(position).equals(sd1) || datas.get(position).equals(sd2) || datas.get(position).equals(sd3)) {
                 del.setVisibility(View.GONE);
                 delDir.setVisibility(View.GONE);
@@ -374,27 +397,16 @@ public class VersionsActivity extends H2CO3Activity {
             String str1 = textView.getText().toString();
             str1 = str1.substring(0, str1.lastIndexOf("/"));
             int idx = str1.lastIndexOf("/");
-            str1 = str1.substring(idx+1,str1.length());
+            str1 = str1.substring(idx + 1);
             textView1.setText(str1);
 
             File f = new File(textView.getText().toString());
-            if (f.isDirectory() && f.exists()){
+            if (f.isDirectory() && f.exists()) {
 
             } else {
                 check.setImageDrawable(getResources().getDrawable(R.drawable.xicon_red));
                 delDir.setVisibility(View.VISIBLE);
             }
-            /*
-            if (f.exists() && f.isDirectory()) {
-                mRvItemOnclickListener.RvItemOnclick(position);
-                mAdapter.updata(mDbDao.queryData(""));
-            } else {
-                if (null != mRvItemOnclickListener) {
-                    mRvItemOnclickListener.RvItemOnclick(position);
-                    mAdapter.updata(mDbDao.queryData(""));
-                }
-            }
-             */
             lay.setOnClickListener(v -> {
                 if (f.exists() && f.isDirectory()) {
                     setDir(textView.getText().toString());
@@ -412,7 +424,7 @@ public class VersionsActivity extends H2CO3Activity {
                         mVerRecyclerView.setAdapter(null);
                     }
                 }
-                
+
             });
             //
             del.setOnClickListener(view -> {
@@ -423,7 +435,7 @@ public class VersionsActivity extends H2CO3Activity {
 
                 //}
                 // }
-                if (null!=mRvItemOnclickListener){
+                if (null != mRvItemOnclickListener) {
                     mRvItemOnclickListener.RvItemOnclick(position);
                 }
             });
@@ -513,38 +525,42 @@ public class VersionsActivity extends H2CO3Activity {
         }
     }
 
-    class VersionRecyclerAdapter extends RecyclerView.Adapter<VersionRecyclerAdapter.MyViewHolder>{
+    class VersionRecyclerAdapter extends RecyclerView.Adapter<VersionRecyclerAdapter.MyViewHolder> {
         private final List<String> datas;
         private final LayoutInflater inflater;
-        public VersionRecyclerAdapter(Context context,List<String> datas){
-            inflater=LayoutInflater.from(context);
-            this.datas=datas;
+
+        public VersionRecyclerAdapter(Context context, List<String> datas) {
+            inflater = LayoutInflater.from(context);
+            this.datas = datas;
         }
+
         //创建每一行的View 用RecyclerView.ViewHolder包装
         @NonNull
         @Override
         public VersionRecyclerAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View itemView=inflater.inflate(R.layout.version_local_item,null);
+            View itemView = inflater.inflate(R.layout.version_local_item, null);
             return new MyViewHolder(itemView);
         }
+
         //给每一行View填充数据
+        @SuppressLint("UseCompatLoadingForDrawables")
         @Override
         public void onBindViewHolder(VersionRecyclerAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
             holder.textview.setText(datas.get(position));
-            File f = new File(CHTools.getBoatCfg("game_directory","Null")+"/versions/"+datas.get(position));
-            if (f.isDirectory()&&f.exists()){
-            }else{
+            File f = new File(CHTools.getBoatCfg("game_directory", "Null") + "/versions/" + datas.get(position));
+            if (f.isDirectory() && f.exists()) {
+            } else {
                 holder.rl.setEnabled(false);
                 holder.ic.setImageDrawable(getResources().getDrawable(R.drawable.xicon_red));
             }
-            holder.rl.setOnClickListener(v->{
+            holder.rl.setOnClickListener(v -> {
                 holder.dirs = datas.get(position);
                 showExecDialog(holder.dirs);
             });
-            holder.btn.setOnClickListener(v->{
+            holder.btn.setOnClickListener(v -> {
                 //添加"Yes"按钮
                 //添加"Yes"按钮
-                AlertDialog alertDialog1 = new AlertDialog.Builder(VersionsActivity.this)
+                @SuppressLint("UseCompatLoadingForDrawables") AlertDialog alertDialog1 = new AlertDialog.Builder(VersionsActivity.this)
                         .setTitle(getResources().getString(R.string.action))//标题
                         .setIcon(R.drawable.ic_boat)//图标
                         .setMessage(R.string.ver_if_del)
@@ -553,14 +569,14 @@ public class VersionsActivity extends H2CO3Activity {
                             holder.btn.setVisibility(View.INVISIBLE);
                             holder.textview.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG | Paint.ANTI_ALIAS_FLAG);
                             holder.rl.setEnabled(false);
-                            File f1 = new File(CHTools.getBoatCfg("game_directory","Null")+"/versions/"+datas.get(position));
+                            File f1 = new File(CHTools.getBoatCfg("game_directory", "Null") + "/versions/" + datas.get(position));
                             //TODO
                             new Thread(() -> {
                                 //String file2= "/data/data/org.koishi.launcher.h2co3/app_runtime";
-                                if (f1.isDirectory()){
+                                if (f1.isDirectory()) {
                                     deleteDirWihtFile(f1);
-                                }else{
-                                    deleteFile(CHTools.getBoatCfg("game_directory","Null")+"/versions/"+datas.get(position));
+                                } else {
+                                    deleteFile(CHTools.getBoatCfg("game_directory", "Null") + "/versions/" + datas.get(position));
                                 }
                         /*
                          File file = new File(file2);
@@ -588,17 +604,17 @@ public class VersionsActivity extends H2CO3Activity {
             mDialog = new Dialog(VersionsActivity.this);
             View dialogView = VersionsActivity.this.getLayoutInflater().inflate(R.layout.custom_dialog_choose_exec, null);
             mDialog.setContentView(dialogView);
-            String load = CHTools.getAppCfg("allVerLoad","false");
+            String load = CHTools.getAppCfg("allVerLoad", "false");
             String loadDir;
-            if (load.equals("true")){
-                loadDir = CHTools.getBoatCfg("game_directory","Null")+"/versions/"+dir;
-            }else{
-                loadDir = CHTools.getBoatCfg("game_directory","Null");
+            if (load.equals("true")) {
+                loadDir = CHTools.getBoatCfg("game_directory", "Null") + "/versions/" + dir;
+            } else {
+                loadDir = CHTools.getBoatCfg("game_directory", "Null");
             }
             LinearLayout lay = dialogView.findViewById(R.id.ver_exec_mod);
-            lay.setOnClickListener(v->{
+            lay.setOnClickListener(v -> {
                 Intent i = new Intent(VersionsActivity.this, ModsActivity.class);
-                Bundle bundle=new Bundle();
+                Bundle bundle = new Bundle();
                 bundle.putString("mod", loadDir);
                 i.putExtras(bundle);
                 //i.putExtra("dat",c);
@@ -610,28 +626,14 @@ public class VersionsActivity extends H2CO3Activity {
             WindowManager windowManager = VersionsActivity.this.getWindowManager();
             Display display = windowManager.getDefaultDisplay();
             WindowManager.LayoutParams lp = mDialog.getWindow().getAttributes();
-            lp.width = (int)(display.getWidth()*0.9); //设置宽度 dialog.getWindow().setAttributes(lp);
+            lp.width = (int) (display.getWidth() * 0.9); //设置宽度 dialog.getWindow().setAttributes(lp);
             mDialog.show();
         }
+
         //数据源的数量
         @Override
         public int getItemCount() {
             return datas.size();
-        }
-        class MyViewHolder extends RecyclerView.ViewHolder{
-            private final TextView textview;
-            private final MaterialButton btn;
-            private final ImageView ic;
-            private final LinearLayout rl;
-            private String dirs;
-
-            public MyViewHolder(View itemView) {
-                super(itemView);
-                textview = itemView.findViewById(R.id.ver_name);
-                btn = itemView.findViewById(R.id.ver_remove);
-                rl = itemView.findViewById(R.id.ver_item);
-                ic = itemView.findViewById(R.id.ver_icon);
-            }
         }
 
         public void deleteDirWihtFile(File dir) {
@@ -652,67 +654,21 @@ public class VersionsActivity extends H2CO3Activity {
                 file.delete();
             }
         }
-    }
 
-    @Override
-    public void onBackPressed() {
-        finish();
-        startActivity(new Intent(VersionsActivity.this,MainActivity.class));
-    }
+        class MyViewHolder extends RecyclerView.ViewHolder {
+            private final TextView textview;
+            private final MaterialButton btn;
+            private final ImageView ic;
+            private final MaterialCardView rl;
+            private String dirs;
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        //updateDirList();
-        //initViews();
-        //mRecyclerView.post(() -> updateDirList());
-
-        String currentDir = CHTools.getBoatCfg("game_directory","Null");
-        File f = new File(currentDir);
-        //if (mRecyclerView.isComputingLayout()) {
-           //updateDirList();
-            //if (f.exists()&&f.isDirectory()){
-                //if (mDbDao.hasData(dir.trim())){
-                    //mDbDao.delete(dir);
-                    //updateDirList();
-                //}else{
-//
-               // }
-            //}
-       // }
-        if (f.exists()&&f.isDirectory()){
-            initVers();
-        } else {
-            setDir(sd1);
-            Snackbar.make(page, getResources().getString(R.string.ver_null_dir), Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
-            mDbDao.delete(currentDir);
-            mAdapter.updata(mDbDao.queryData(""));
-            initVers();
-        }
-    }
-
-    public void setDir(String dir) {
-        try {
-            FileInputStream in = new FileInputStream(boatCfg);
-            byte[] b = new byte[in.available()];
-            in.read(b);
-            in.close();
-            String str = new String(b);
-            JSONObject json = new JSONObject(str);
-            json.remove("game_directory");
-            json.remove("game_assets");
-            json.remove("assets_root");
-            json.remove("currentVersion");
-            json.put("game_directory", dir);
-            json.put("game_assets", dir + "/assets/virtual/legacy");
-            json.put("assets_root", dir + "/assets");
-            json.put("currentVersion", dir + "/versions");
-            FileWriter fr = new FileWriter(boatCfg);
-            fr.write(json.toString());
-            fr.close();
-        } catch (Exception e) {
-            System.out.println(e);
+            public MyViewHolder(View itemView) {
+                super(itemView);
+                textview = itemView.findViewById(R.id.ver_name);
+                btn = itemView.findViewById(R.id.ver_remove);
+                rl = itemView.findViewById(R.id.ver_item);
+                ic = itemView.findViewById(R.id.ver_icon);
+            }
         }
     }
 

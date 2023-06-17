@@ -34,7 +34,7 @@ public class JsonNumber extends JsonValue {
     /**
      * Instantiates a new Json number.
      *
-     * @param key the key is the identifier of {@link JsonValue}
+     * @param key   the key is the identifier of {@link JsonValue}
      * @param value the value is the given string that is set to {@link #value}
      */
     public JsonNumber(String key, String value) {
@@ -80,6 +80,7 @@ public class JsonNumber extends JsonValue {
     /**
      * Byte value byte.
      * Convert {@link #value} to {@link Byte}
+     *
      * @return the byte converted value
      */
     public byte byteValue() {
@@ -89,6 +90,7 @@ public class JsonNumber extends JsonValue {
     /**
      * Int value int.
      * Convert {@link #value} to {@link Integer}
+     *
      * @return the int converted value
      */
     public int intValue() {
@@ -98,6 +100,7 @@ public class JsonNumber extends JsonValue {
     /**
      * Short value short.
      * Convert {@link #value} to {@link Short}
+     *
      * @return the short converted value
      */
     public short shortValue() {
@@ -107,6 +110,7 @@ public class JsonNumber extends JsonValue {
     /**
      * Double value double.
      * Convert {@link #value} to {@link Double}
+     *
      * @return the double converted value
      */
     public double doubleValue() {
@@ -116,6 +120,7 @@ public class JsonNumber extends JsonValue {
     /**
      * Float value float.
      * Convert {@link #value} to {@link Float}
+     *
      * @return the float converted value
      */
     public float floatValue() {
@@ -125,6 +130,7 @@ public class JsonNumber extends JsonValue {
     /**
      * Long value long.
      * Convert {@link #value} to {@link Long}
+     *
      * @return the long converted value
      */
     public long longValue() {
@@ -170,6 +176,7 @@ public class JsonNumber extends JsonValue {
     /**
      * Is numeric boolean.
      * Check if given string is a number
+     *
      * @param value the value is used to check
      * @return the boolean true or false
      */
@@ -222,6 +229,7 @@ public class JsonNumber extends JsonValue {
     /**
      * Is float boolean.
      * Check if given string is a float
+     *
      * @param value the value is used to check
      * @return the boolean true or false
      */
@@ -237,6 +245,7 @@ public class JsonNumber extends JsonValue {
     /**
      * Is integer boolean.
      * Check if given string is a integer
+     *
      * @param value the value is used to check
      * @return the boolean true or false
      */
@@ -252,6 +261,7 @@ public class JsonNumber extends JsonValue {
     /**
      * Is double boolean.
      * Check if given string is a double
+     *
      * @param value the value is used to check
      * @return the boolean true or false
      */

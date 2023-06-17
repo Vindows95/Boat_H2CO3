@@ -2,7 +2,6 @@ package org.koishi.launcher.h2co3;
 
 import static org.koishi.launcher.h2co3.tool.CHTools.LAUNCHER_FILE_DIR;
 
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,13 +30,13 @@ import java.util.Objects;
 public class LogcatActivity extends H2CO3Activity {
 
     public LinearLayout logLay;
-    public ListView log,log2;
+    public ListView log, log2;
     public TabLayout tab;
 
     //public TextView textList, li;
     public List clientTxt() {
         //将读出来的一行行数据使用List存储
-        String filePath = LAUNCHER_FILE_DIR+"client_output.txt";
+        String filePath = LAUNCHER_FILE_DIR + "client_output.txt";
 
         List<String> newList = new ArrayList<>();
         try {
@@ -68,7 +67,7 @@ public class LogcatActivity extends H2CO3Activity {
 
     public List appTxt() {
         //将读出来的一行行数据使用List存储
-        String filePath = LAUNCHER_FILE_DIR+"log.txt";
+        String filePath = LAUNCHER_FILE_DIR + "log.txt";
 
         List<String> newList = new ArrayList<>();
         try {
@@ -134,7 +133,6 @@ public class LogcatActivity extends H2CO3Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_logcat);
 
-        
 
         logLay = findViewById(R.id.log_lay);
 
@@ -144,7 +142,7 @@ public class LogcatActivity extends H2CO3Activity {
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(v -> finish());
 
-        TextView bigTitle= (TextView) toolbar.getChildAt(0);
+        TextView bigTitle = (TextView) toolbar.getChildAt(0);
         bigTitle.setText(getResources().getString(R.string.log_title));
 
         tab = findViewById(R.id.log_tab);
@@ -154,32 +152,34 @@ public class LogcatActivity extends H2CO3Activity {
 
                 //  tab.getPosition()  返回数字，从0开始
                 // tab.getText()  返回字符串类型，从0开始
-                if (tab.getPosition()==0){
+                if (tab.getPosition() == 0) {
                     log();
                 }
-                if (tab.getPosition()==1){
+                if (tab.getPosition() == 1) {
                     log2();
                 }
             }
+
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
 
             }
+
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
 
-                }
-            });
+            }
+        });
         initLogs();
         log();
-        }
+    }
 
-        //textList = (TextView) findViewById(R.id.tl);
-        //textList.setText("Loading log...");
-        //li = (TextView) findViewById(R.id.li);
+    //textList = (TextView) findViewById(R.id.tl);
+    //textList.setText("Loading log...");
+    //li = (TextView) findViewById(R.id.li);
 
-        //li.setText(" 1");
-        //li.setVisibility(View.GONE);
+    //li.setText(" 1");
+    //li.setVisibility(View.GONE);
 
         /*
         textList.addTextChangedListener(new TextWatcher() {
@@ -216,7 +216,7 @@ public class LogcatActivity extends H2CO3Activity {
          */
 
 
-        //new Handler().postDelayed(() -> log(), 500);
+    //new Handler().postDelayed(() -> log(), 500);
 
     public void log() {
         log.setVisibility(View.VISIBLE);
@@ -229,12 +229,12 @@ public class LogcatActivity extends H2CO3Activity {
         log2.setVisibility(View.VISIBLE);
     }
 
-    public void initLogs(){
+    public void initLogs() {
         log = findViewById(R.id.view_log);
-        ArrayAdapter< String > adapter = new ArrayAdapter<>(this, R.layout.log_list_item, clientTxt());
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.log_list_item, clientTxt());
         log.setAdapter(adapter);
         log2 = findViewById(R.id.view_log2);
-        ArrayAdapter< String > adapter2 = new ArrayAdapter<>(this, R.layout.log_list_item, appTxt());
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this, R.layout.log_list_item, appTxt());
         log2.setAdapter(adapter2);
     }
 

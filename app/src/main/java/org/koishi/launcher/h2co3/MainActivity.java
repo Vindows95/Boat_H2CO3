@@ -5,11 +5,12 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.*;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import org.koishi.launcher.h2co3.application.H2CO3Activity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -17,6 +18,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.navigation.NavigationView;
 
+import org.koishi.launcher.h2co3.application.H2CO3Activity;
 import org.koishi.launcher.h2co3.ui.custom.CustomFragment;
 import org.koishi.launcher.h2co3.ui.home.HomeFragment;
 import org.koishi.launcher.h2co3.ui.install.InstallFragment;
@@ -74,10 +76,11 @@ public class MainActivity extends H2CO3Activity implements NavigationView.OnNavi
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_settings) {
             drawer.closeDrawer(GravityCompat.START);
-            new Handler().postDelayed(() -> {navigationView.setCheckedItem(R.id.fragment_custom);
+            new Handler().postDelayed(() -> {
+                navigationView.setCheckedItem(R.id.fragment_custom);
                 Objects.requireNonNull(getSupportActionBar()).setTitle(getResources().getString(R.string.menu_more));
                 initFragment5();
-                },350);
+            }, 350);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -100,7 +103,7 @@ public class MainActivity extends H2CO3Activity implements NavigationView.OnNavi
                     navigationView.setCheckedItem(R.id.fragment_home);
                     Objects.requireNonNull(getSupportActionBar()).setTitle(getResources().getString(R.string.menu_home));
                     initFragment1();
-                },350);
+                }, 350);
 
                 break;
             case R.id.fragment_version:
@@ -109,7 +112,7 @@ public class MainActivity extends H2CO3Activity implements NavigationView.OnNavi
                     navigationView.setCheckedItem(R.id.fragment_version);
                     Objects.requireNonNull(getSupportActionBar()).setTitle(getResources().getString(R.string.menu_ver));
                     initFragment2();
-                },350);
+                }, 350);
                 break;
             case R.id.fragment_manager:
                 drawer.closeDrawer(GravityCompat.START);
@@ -117,7 +120,7 @@ public class MainActivity extends H2CO3Activity implements NavigationView.OnNavi
                     navigationView.setCheckedItem(R.id.fragment_manager);
                     Objects.requireNonNull(getSupportActionBar()).setTitle(getResources().getString(R.string.menu_manager));
                     initFragment3();
-                },350);
+                }, 350);
                 break;
             case R.id.fragment_install:
                 drawer.closeDrawer(GravityCompat.START);
@@ -125,16 +128,18 @@ public class MainActivity extends H2CO3Activity implements NavigationView.OnNavi
                     navigationView.setCheckedItem(R.id.fragment_install);
                     Objects.requireNonNull(getSupportActionBar()).setTitle(getResources().getString(R.string.menu_install));
                     initFragment4();
-                },350);
+                }, 350);
                 break;
             case R.id.fragment_custom:
                 drawer.closeDrawer(GravityCompat.START);
-                new Handler().postDelayed(() -> {navigationView.setCheckedItem(R.id.fragment_custom);
+                new Handler().postDelayed(() -> {
+                    navigationView.setCheckedItem(R.id.fragment_custom);
                     Objects.requireNonNull(getSupportActionBar()).setTitle(getResources().getString(R.string.menu_more));
-                    initFragment5();},350);
+                    initFragment5();
+                }, 350);
                 break;
             case R.id.activity_terminal:
-                new Handler().postDelayed(() -> startActivity(new Intent(this, TerminalActivity.class)),350);
+                new Handler().postDelayed(() -> startActivity(new Intent(this, TerminalActivity.class)), 350);
                 break;
             default:
                 break;
@@ -170,10 +175,10 @@ public class MainActivity extends H2CO3Activity implements NavigationView.OnNavi
     }
 
     @Override
-    public void onWindowFocusChanged(boolean hasFocus){
-        if (hasFocus){
+    public void onWindowFocusChanged(boolean hasFocus) {
+        if (hasFocus) {
             dialogBg.setVisibility(View.GONE);
-        }else{
+        } else {
             dialogBg.setVisibility(View.VISIBLE);
             if (mDialog != null) {
                 mDialog.dismiss();

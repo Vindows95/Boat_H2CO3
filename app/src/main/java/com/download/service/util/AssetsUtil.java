@@ -1,49 +1,50 @@
 package com.download.service.util;
 
-public class AssetsUtil
-{
-	private String name;
-	private String hash;
-	private int size;
-	private boolean download;
-	public AssetsUtil(){
-	}
-	
-	public String gethash(){
+public class AssetsUtil {
+    private String name;
+    private String hash;
+    private int size;
+    private boolean download;
 
-		return hash;
-	}
-	
-	
-	
-	public int getsize(){
+    public AssetsUtil() {
+    }
 
-		return size;
-	}
-	public String getname(){
+    public String gethash() {
 
-		return name;
-	}
-	public boolean get(){
+        return hash;
+    }
 
-		return download;
-	}
 
-	public void set(boolean a){
-		download=a;
-	}
-	public void setname(String a){
-		name=a;
-	}
-	public void sethash(String a){
-		hash=a;
-	}
-	public void setsize(int a){
-		size=a;
-	}
-	
-	
-	
-	
-	
+    public int getsize() {
+
+        return size;
+    }
+
+    public String getname() {
+
+        return name;
+    }
+
+    public boolean get() {
+
+        return download;
+    }
+
+    public void set(boolean a) {
+        download = a;
+    }
+
+    public void setname(String a) {
+        name = a;
+    }
+
+    public void sethash(String a) {
+        hash = a;
+    }
+
+    public void setsize(int a) {
+        size = a;
+    }
+
+
 }

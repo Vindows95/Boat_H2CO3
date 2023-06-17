@@ -32,7 +32,7 @@ public class JsonBoolean extends JsonValue {
     /**
      * Instantiates a new Json boolean.
      *
-     * @param key the key is the identifier of {@link JsonValue}
+     * @param key   the key is the identifier of {@link JsonValue}
      * @param value the value is the given boolean that is set to {@link #value}
      */
     public JsonBoolean(String key, boolean value) {
@@ -74,7 +74,6 @@ public class JsonBoolean extends JsonValue {
     public void setValue(boolean value) {
         this.value = value;
     }
-
 
 
 }

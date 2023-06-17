@@ -1,9 +1,12 @@
 package org.koishi.launcher.h2co3.tool.json.model;
 
-import androidx.annotation.NonNull;
+import android.os.Build;
 
-import org.koishi.launcher.h2co3.tool.json.interfaces.IListable;
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+
 import org.koishi.launcher.h2co3.tool.json.abstracts.JsonValue;
+import org.koishi.launcher.h2co3.tool.json.interfaces.IListable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +38,7 @@ public class JsonObject extends JsonValue implements IListable<JsonValue> {
         super(key);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @NonNull
     @Override
     public String toString() {
@@ -51,7 +55,7 @@ public class JsonObject extends JsonValue implements IListable<JsonValue> {
         loop((integer, jsonValue) -> {
             jsonValue.setIntend(getIntend() + 2);
             stringBuilder.append("\n");
-            if(!(integer == size() - 1)) {
+            if (!(integer == size() - 1)) {
                 stringBuilder.append(jsonValue).append(",");
             } else {
                 stringBuilder.append(jsonValue);
@@ -69,9 +73,9 @@ public class JsonObject extends JsonValue implements IListable<JsonValue> {
      * @param key the key is the identifier of {@link JsonValue}
      * @return the json value is null or the Json value that is found in {@link #values}
      */
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public JsonValue get(String key) {
-        if(!has(key)) return null;
-
+        if (!has(key)) return null;
         return values.stream().filter(jsonValue -> jsonValue.getKey().equalsIgnoreCase(key)).findFirst().get();
     }
 
@@ -79,10 +83,11 @@ public class JsonObject extends JsonValue implements IListable<JsonValue> {
      * Get {@link T} by key and cast it to {@link Class<T>}
      *
      * @param <T>   the type parameter is used to determine what type of object is needed
-     * @param key the key is the identifier of {@link JsonValue}
+     * @param key   the key is the identifier of {@link JsonValue}
      * @param clazz the clazz is used to cast the {@link T}
      * @return the {@link T} object
      */
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public <T extends JsonValue> T get(String key, Class<T> clazz) {
         return clazz.cast(get(key));
     }
@@ -93,6 +98,7 @@ public class JsonObject extends JsonValue implements IListable<JsonValue> {
      * @param key the key is the identifier of {@link JsonValue}
      * @return the boolean true or false
      */
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public boolean has(String key) {
         return values.stream().anyMatch(jsonValue -> jsonValue.getKey() != null && jsonValue.getKey().equalsIgnoreCase(key));
     }
@@ -100,15 +106,17 @@ public class JsonObject extends JsonValue implements IListable<JsonValue> {
     /**
      * Gets index.
      * Used to get the index of an key if it is found in {@link #values}
+     *
      * @param key the key is the identifier of {@link JsonValue}
      * @return the index by key
      */
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public int getIndex(String key) {
-        if(!has(key)) return -1;
+        if (!has(key)) return -1;
 
         for (int index = 0; index < values.size(); index++) {
             JsonValue jsonValue = values.get(index);
-            if(jsonValue.getKey().equalsIgnoreCase(key)) {
+            if (jsonValue.getKey().equalsIgnoreCase(key)) {
                 return index;
             }
         }
@@ -118,9 +126,10 @@ public class JsonObject extends JsonValue implements IListable<JsonValue> {
     /**
      * Add an object to {@link #values} by its key.
      *
-     * @param key the key is the identifier of {@link JsonValue}
+     * @param key       the key is the identifier of {@link JsonValue}
      * @param jsonValue the json value is the {@link JsonValue} that is going to be added to {@link #values}
      */
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public void add(String key, JsonValue jsonValue) {
         jsonValue.setKey(key);
         add(jsonValue);
@@ -131,9 +140,10 @@ public class JsonObject extends JsonValue implements IListable<JsonValue> {
         return values.size();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void add(JsonValue value) {
-        if(has(value.getKey())) {
+        if (has(value.getKey())) {
             int index = getIndex(value.getKey());
             add(index, value);
         } else {
@@ -156,6 +166,7 @@ public class JsonObject extends JsonValue implements IListable<JsonValue> {
         return values.get(index);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void loop(Consumer<JsonValue> consumer) {
         for (JsonValue value : values) {
@@ -163,6 +174,7 @@ public class JsonObject extends JsonValue implements IListable<JsonValue> {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void loop(BiConsumer<Integer, JsonValue> consumer) {
         for (int index = 0; index < values.size(); index++) {

@@ -11,7 +11,7 @@
     <item
         android:id="@+id/home_open_fix"
         android:icon="@drawable/ic_launcher_file_checker"
-        android:title="@string/launcher_check_file"/>
+        android:title="@string/launcher_check_file" />
 
     <item
         android:id="@+id/home_open_help"

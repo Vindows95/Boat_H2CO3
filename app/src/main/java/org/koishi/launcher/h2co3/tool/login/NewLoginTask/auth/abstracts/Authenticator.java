@@ -21,5 +21,4 @@ public abstract class Authenticator<T> {
     public abstract T login(String email, String password) throws UnsupportedEncodingException;
 
 
-
 }

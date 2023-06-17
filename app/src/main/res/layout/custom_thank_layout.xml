@@ -2,8 +2,7 @@
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -32,17 +31,17 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:fontFamily="@font/sans"
                     android:text="Github: CosineMath"
-                    android:textSize="16sp"
-                    android:fontFamily="@font/sans"/>
+                    android:textSize="16sp" />
 
                 <ImageButton
                     android:id="@+id/thk_boat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="?attr/selectableItemBackgroundBorderless"
-                    app:srcCompat="@drawable/ic_link_open"
-                    android:contentDescription="TODO" />
+                    android:contentDescription="TODO"
+                    app:srcCompat="@drawable/ic_link_open" />
 
             </LinearLayout>
 
@@ -59,17 +58,17 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:fontFamily="@font/sans"
                     android:text="Github: ShirosakiMio"
-                    android:textSize="16sp"
-                    android:fontFamily="@font/sans"/>
+                    android:textSize="16sp" />
 
                 <ImageButton
                     android:id="@+id/thk_mio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="?attr/selectableItemBackgroundBorderless"
-                    app:srcCompat="@drawable/ic_link_open"
-                    android:contentDescription="TODO" />
+                    android:contentDescription="TODO"
+                    app:srcCompat="@drawable/ic_link_open" />
 
             </LinearLayout>
 
@@ -86,17 +85,17 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:fontFamily="@font/sans"
                     android:text="Github: Rastiiel"
-                    android:textSize="16sp"
-                    android:fontFamily="@font/sans"/>
+                    android:textSize="16sp" />
 
                 <ImageButton
                     android:id="@+id/thk_ratsiiel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="?attr/selectableItemBackgroundBorderless"
-                    app:srcCompat="@drawable/ic_link_open"
-                    android:contentDescription="TODO" />
+                    android:contentDescription="TODO"
+                    app:srcCompat="@drawable/ic_link_open" />
 
             </LinearLayout>
 
@@ -113,17 +112,17 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:fontFamily="@font/sans"
                     android:text="Github: Fire"
-                    android:textSize="16sp"
-                    android:fontFamily="@font/sans"/>
+                    android:textSize="16sp" />
 
                 <ImageButton
                     android:id="@+id/thk_fire"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="?attr/selectableItemBackgroundBorderless"
-                    app:srcCompat="@drawable/ic_link_open"
-                    android:contentDescription="TODO" />
+                    android:contentDescription="TODO"
+                    app:srcCompat="@drawable/ic_link_open" />
 
             </LinearLayout>
 
@@ -140,17 +139,17 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:fontFamily="@font/sans"
                     android:text="Github: TSaltedfishKing"
-                    android:textSize="16sp"
-                    android:fontFamily="@font/sans"/>
+                    android:textSize="16sp" />
 
                 <ImageButton
                     android:id="@+id/thk_fish"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="?attr/selectableItemBackgroundBorderless"
-                    app:srcCompat="@drawable/ic_link_open"
-                    android:contentDescription="TODO" />
+                    android:contentDescription="TODO"
+                    app:srcCompat="@drawable/ic_link_open" />
 
             </LinearLayout>
 
@@ -167,17 +166,17 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:fontFamily="@font/sans"
                     android:text="Github: ShulkerSakura"
-                    android:textSize="16sp"
-                    android:fontFamily="@font/sans"/>
+                    android:textSize="16sp" />
 
                 <ImageButton
                     android:id="@+id/thk_shulker"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="?attr/selectableItemBackgroundBorderless"
-                    app:srcCompat="@drawable/ic_link_open"
-                    android:contentDescription="TODO" />
+                    android:contentDescription="TODO"
+                    app:srcCompat="@drawable/ic_link_open" />
 
             </LinearLayout>
 

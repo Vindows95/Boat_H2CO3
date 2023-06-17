@@ -7,8 +7,7 @@
     android:layout_height="wrap_content"
     android:gravity="center"
     android:orientation="vertical"
-    android:padding="15dp"
-    >
+    android:padding="15dp">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -24,10 +23,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
                 android:layout_marginTop="20dp"
-                android:gravity="center_vertical"
+                android:layout_marginRight="10dp"
                 android:alpha="0"
+                android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:visibility="gone">
 
@@ -63,15 +62,15 @@
                 android:layout_marginHorizontal="10dp"
                 android:indeterminate="true"
                 android:visibility="gone"
-                app:hideAnimationBehavior="outward"/>
+                app:hideAnimationBehavior="outward" />
 
             <TextView
                 style="@style/TextStyleSummary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
                 android:drawablePadding="15dp"
                 android:gravity="center_vertical"
+                android:padding="10dp"
                 android:text="@string/download_tip"
                 android:textSize="14sp"
                 app:drawableStartCompat="@drawable/ic_main_msg_app" />
@@ -143,7 +142,7 @@
                         android:id="@+id/downloadProgressBar2"
                         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content" />
 
                 </LinearLayout>
 
@@ -184,7 +183,7 @@
                         android:id="@+id/downloadProgressBar3"
                         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content" />
 
                 </LinearLayout>
 
@@ -198,6 +197,7 @@
                     tools:ignore="TouchTargetSizeCheck" />
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -223,7 +223,7 @@
                         android:id="@+id/downloadProgressBar4"
                         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content" />
 
                 </LinearLayout>
 
@@ -253,10 +253,10 @@
 
                 <TextView
                     android:id="@+id/downloadTextView5"
+                    style="@style/TextStyleMain"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.0"
-                    style="@style/TextStyleMain" />
+                    android:layout_weight="1.0" />
 
             </LinearLayout>
 

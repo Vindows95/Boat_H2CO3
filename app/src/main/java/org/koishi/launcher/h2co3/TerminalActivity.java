@@ -33,12 +33,12 @@ import ren.qinc.edit.PerformEdit;
 public class TerminalActivity extends H2CO3Activity {
 
     public MaterialCardView card;
-    public EditText outputText,commandText;
+    public EditText outputText, commandText;
     public ProgressDialog dialog;
     public ImageButton backText;
-    public MaterialButton clearText,exec;
+    public MaterialButton clearText, exec;
     public MaterialCheckBox cbRoot;
-    public PerformEdit mPerformEdit,mPerformEdit2;
+    public PerformEdit mPerformEdit, mPerformEdit2;
     public TextInputEditText inputText;
     public Toolbar toolbar;
 
@@ -46,13 +46,13 @@ public class TerminalActivity extends H2CO3Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_terminal);
-        
+
         toolbar = findViewById(R.id.terminal_toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle(R.string.menu_terminal);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(v -> finish());
-        TextView bigTitle= (TextView) toolbar.getChildAt(0);
+        TextView bigTitle = (TextView) toolbar.getChildAt(0);
         bigTitle.setText(getResources().getString(R.string.menu_terminal));
         inputText = findViewById(R.id.terminal_input);
         backText = findViewById(R.id.terminal_backspace);
@@ -66,7 +66,7 @@ public class TerminalActivity extends H2CO3Activity {
 
         commandText.setKeyListener(null);
         outputText.setKeyListener(null);
-        outputText.addTextChangedListener(new TextWatcher(){
+        outputText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence p1, int p2, int p3, int p4) {
             }
@@ -77,7 +77,7 @@ public class TerminalActivity extends H2CO3Activity {
 
             @Override
             public void afterTextChanged(Editable p1) {
-                if (outputText.getText().toString().equals("")){
+                if (outputText.getText().toString().equals("")) {
                     card.setVisibility(View.GONE);
                 } else {
                     card.setVisibility(View.VISIBLE);
@@ -91,15 +91,15 @@ public class TerminalActivity extends H2CO3Activity {
 
         //outputText.setMovementMethod(new ScrollingMovementMethod());
 
-        backText.setOnClickListener(v->inputText.setText(""));
-        clearText.setOnClickListener(v-> {
+        backText.setOnClickListener(v -> inputText.setText(""));
+        clearText.setOnClickListener(v -> {
             outputText.setText("");
             commandText.setText("");
             mPerformEdit.clearHistory();
             mPerformEdit2.clearHistory();
         });
 
-        exec.setOnClickListener(v-> {
+        exec.setOnClickListener(v -> {
             if (!Objects.requireNonNull(inputText.getText()).toString().equals("")) {
                 String command = inputText.getText().toString();
                 boolean asRoot = cbRoot.isChecked();
@@ -141,10 +141,25 @@ public class TerminalActivity extends H2CO3Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override protected void onDestroy() {
+    @Override
+    protected void onDestroy() {
         super.onDestroy();
         if (isFinishing()) {
             Shell.SU.closeConsole();
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (dialog != null) {
+            if (dialog.isShowing()) {
+                dialog.dismiss();
+                //Shell.SU.closeConsole();
+            } else {
+                finish();
+            }
+        } else {
+            finish();
         }
     }
 
@@ -158,13 +173,15 @@ public class TerminalActivity extends H2CO3Activity {
             this.asRoot = asRoot;
         }
 
-        @Override protected void onPreExecute() {
+        @Override
+        protected void onPreExecute() {
             dialog = ProgressDialog.show(TerminalActivity.this, getResources().getString(R.string.menu_terminal), "等一等...");
             dialog.setCanceledOnTouchOutside(false);
             dialog.setCancelable(true);
         }
 
-        @Override protected CommandResult doInBackground(String... commands) {
+        @Override
+        protected CommandResult doInBackground(String... commands) {
             if (asRoot) {
                 return Shell.SU.run(commands);
             } else {
@@ -172,9 +189,10 @@ public class TerminalActivity extends H2CO3Activity {
             }
         }
 
-        @Override protected void onPostExecute(CommandResult result) {
+        @Override
+        protected void onPostExecute(CommandResult result) {
             if (!isFinishing()) {
-                if (dialog.isShowing()){
+                if (dialog.isShowing()) {
                     dialog.dismiss();
                     card.setVisibility(View.VISIBLE);
                     outputText.append(resultToHtml(result));
@@ -216,20 +234,6 @@ public class TerminalActivity extends H2CO3Activity {
             return Html.fromHtml(html.toString());
         }
 
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (dialog != null){
-            if (dialog.isShowing()){
-                dialog.dismiss();
-                //Shell.SU.closeConsole();
-            } else {
-                finish();
-            }
-        } else {
-            finish();
-        }
     }
 
 }

@@ -5,13 +5,15 @@ package com.download.service.downloader;
  *
  * @author Cheny
  */
-public interface DownloadListner
-{
+public interface DownloadListener {
 
-	
+
     void onFinished();
-    void onProgress(float progress,long i ,long s);
+
+    void onProgress(float progress, long i, long s);
+
     void onPause();
+
     void onCancel();
 }
 

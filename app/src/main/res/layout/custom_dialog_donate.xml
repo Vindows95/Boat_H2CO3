@@ -3,17 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
     <TextView
         style="@style/TextStyleMain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="RMB ¥ 5.00"
         android:paddingHorizontal="20dp"
-        android:textSize="20sp"/>
+        android:text="RMB ¥ 5.00"
+        android:textSize="20sp" />
 
     <TextView
         style="@style/TextStyleSummary"
@@ -23,7 +22,7 @@
         android:drawableStart="@drawable/ic_main_msg_app"
         android:drawablePadding="15dp"
         android:paddingHorizontal="15dp"
-        android:text="通过捐赠即可有资格加入到启动器官方群中参与讨论以及获取最新的开发进度消息。记住，这只是入群资格，并不代表启动器需要付费！可以放心传播哦。"/>
+        android:text="通过捐赠即可有资格加入到启动器官方群中参与讨论以及获取最新的开发进度消息。记住，这只是入群资格，并不代表启动器需要付费！可以放心传播哦。" />
 
     <TextView
         style="@style/TextStyleSummary"
@@ -49,16 +48,16 @@
             style="@style/Widget.Material3.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/cancel"
-            android:fontFamily="@font/sans"/>
+            android:fontFamily="@font/sans"
+            android:text="@string/cancel" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/custom_donate_ok"
             style="@style/Widget.Material3.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="我已经捐赠"
-            android:fontFamily="@font/sans"/>
+            android:fontFamily="@font/sans"
+            android:text="我已经捐赠" />
 
     </LinearLayout>
 

@@ -12,13 +12,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import org.koishi.launcher.h2co3.application.H2CO3Activity;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.hjq.permissions.OnPermissionCallback;
 import com.hjq.permissions.Permission;
 import com.hjq.permissions.XXPermissions;
 
+import org.koishi.launcher.h2co3.application.H2CO3Activity;
 import org.koishi.launcher.h2co3.tool.AssetsUtils;
 import org.koishi.launcher.h2co3.tool.CHTools;
 import org.koishi.launcher.h2co3.tool.file.AppExecute;
@@ -31,14 +31,27 @@ import java.util.List;
 
 public class SplashActivity extends H2CO3Activity {
 
-    public LinearLayout splash;
-    public TextView splashCheck;
-
     final boolean existMcConfig = FileExists(boatCfg);
     final boolean existH2oConfig = FileExists(h2co3Cfg);
     //boolean existH2oMd = FileExists(LAUNCHER_FILE_DIR+"info.md");
-    final boolean existRuntime = FileExists(LAUNCHER_DATA_DIR+"app_runtime/libopenal.so");
-    final boolean existGame = FileExists(CHTools.getBoatCfg("game_directory", LAUNCHER_FILE_DIR+".minecraft"));
+    final boolean existRuntime = FileExists(LAUNCHER_DATA_DIR + "app_runtime/libopenal.so");
+    final boolean existGame = FileExists(CHTools.getBoatCfg("game_directory", LAUNCHER_FILE_DIR + ".minecraft"));
+    public LinearLayout splash;
+    public TextView splashCheck;
+
+    public static boolean FileExists(String strFile) {
+        try {
+            File f = new File(strFile);
+            if (!f.exists()) {
+                return false;
+            }
+
+        } catch (Exception e) {
+            return false;
+        }
+
+        return true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,8 +92,8 @@ public class SplashActivity extends H2CO3Activity {
     }
 
     public void updateMarkDown() {
-        File md = new File(LAUNCHER_FILE_DIR+"markdown");
-        if (md.exists()&&md.isDirectory()){
+        File md = new File(LAUNCHER_FILE_DIR + "markdown");
+        if (md.exists() && md.isDirectory()) {
         } else {
             md.mkdir();
         }
@@ -101,59 +114,47 @@ public class SplashActivity extends H2CO3Activity {
          */
     }
 
-    public void copyData()
-
-    {
+    public void copyData() {
         InputStream in = null;
 
         FileOutputStream out = null;
 
         //String path = this.getApplicationContext().getFilesDir()
 
-                //.getAbsolutePath() + "/mydb.db3"; // data/data目录
-        String path = LAUNCHER_FILE_DIR+"markdown/info.md";
+        //.getAbsolutePath() + "/mydb.db3"; // data/data目录
+        String path = LAUNCHER_FILE_DIR + "markdown/info.md";
 
         File file = new File(path);
-            try
-            {
-                in = this.getAssets().open("markdown/info.md"); // 从assets目录下复制
-                out = new FileOutputStream(file);
-                int length = -1;
-                byte[] buf = new byte[1024];
-                while ((length = in.read(buf)) != -1)
-                {
-                    out.write(buf, 0, length);
-                }
-                out.flush();
+        try {
+            in = this.getAssets().open("markdown/info.md"); // 从assets目录下复制
+            out = new FileOutputStream(file);
+            int length = -1;
+            byte[] buf = new byte[1024];
+            while ((length = in.read(buf)) != -1) {
+                out.write(buf, 0, length);
             }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-            }
-
-            finally{
-                if (in != null)
-                {
-                    try {
-                        in.close();
-                    } catch (IOException e1) {
-                        // TODO Auto-generated catch block
-                        e1.printStackTrace();
-                    }
+            out.flush();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (IOException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
                 }
-                if (out != null)
-                {
-                    try {
-                        out.close();
-                    } catch (IOException e1) {
-                        // TODO Auto-generated catch block
-                        e1.printStackTrace();
-                    }
+            }
+            if (out != null) {
+                try {
+                    out.close();
+                } catch (IOException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
                 }
             }
         }
-
-
+    }
 
     public void updateAuthlib() {
         AssetsUtils.getInstance(SplashActivity.this).copyAssetsToSD("authlib", "games/org.koishi.launcher/h2co3/authlib").setFileOperateCallback(new AssetsUtils.FileOperateCallback() {
@@ -218,20 +219,6 @@ public class SplashActivity extends H2CO3Activity {
             }
         }
 
-    }
-
-    public static boolean FileExists(String strFile) {
-        try {
-            File f = new File(strFile);
-            if (!f.exists()) {
-                return false;
-            }
-
-        } catch (Exception e) {
-            return false;
-        }
-
-        return true;
     }
 
 }

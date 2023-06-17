@@ -8,15 +8,16 @@ public class FilePoint {
     private String url;//下载地址
     private String filePath;
 
-	private int a ;
+    private int a;
 
-	private Object object;
+    private Object object;
 
-	private int size;//下载目录
-	
+    private int size;//下载目录
+
     public FilePoint(String url) {
         this.url = url;
     }
+
     public FilePoint(String filePath, String url) {
         this.filePath = filePath;
         this.url = url;
@@ -27,14 +28,16 @@ public class FilePoint {
         this.filePath = filePath;
         this.fileName = fileName;
     }
-	public FilePoint(String url, String filePath, String fileName, int a,Object object,int size) {
+
+    public FilePoint(String url, String filePath, String fileName, int a, Object object, int size) {
         this.url = url;
         this.filePath = filePath;
         this.fileName = fileName;
-		this.a=a;
-		this.object=object;
-		this.size=size;
+        this.a = a;
+        this.object = object;
+        this.size = size;
     }
+
     public String getFileName() {
         return fileName;
     }
@@ -54,18 +57,21 @@ public class FilePoint {
     public String getFilePath() {
         return filePath;
     }
-	
+
     public void setFilePath(String filePath) {
         this.filePath = filePath;
     }
-	public int getA() {
+
+    public int getA() {
         return a;
     }
-	public Object getObject() {
+
+    public Object getObject() {
         return object;
     }
-	public int getSize() {
+
+    public int getSize() {
         return size;
     }
-	
+
 }

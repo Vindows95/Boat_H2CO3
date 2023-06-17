@@ -1,14 +1,27 @@
 package org.koishi.launcher.h2co3.tool.login.NewLoginTask.auth.model.microsoft;
 
-import org.koishi.launcher.h2co3.tool.login.NewLoginTask.auth.model.mojang.MinecraftToken;
-import org.koishi.launcher.h2co3.tool.login.NewLoginTask.auth.abstracts.Authenticator;
-import org.koishi.launcher.h2co3.tool.login.NewLoginTask.auth.abstracts.exception.AuthenticationException;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import org.koishi.launcher.h2co3.tool.json.model.JsonArray;
 import org.koishi.launcher.h2co3.tool.json.model.JsonObject;
 import org.koishi.launcher.h2co3.tool.json.model.JsonString;
+import org.koishi.launcher.h2co3.tool.login.NewLoginTask.auth.abstracts.Authenticator;
+import org.koishi.launcher.h2co3.tool.login.NewLoginTask.auth.abstracts.exception.AuthenticationException;
+import org.koishi.launcher.h2co3.tool.login.NewLoginTask.auth.model.mojang.MinecraftToken;
 
-import java.io.*;
-import java.net.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
@@ -29,6 +42,7 @@ public class MicrosoftAuthenticator extends Authenticator<XboxToken> {
     protected String loginCookie;
     protected String loginPPFT;
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public XboxToken login(String email, String password) throws UnsupportedEncodingException {
         MicrosoftToken microsoftToken = generateTokenPair(generateLoginCode(email, password));
@@ -43,6 +57,7 @@ public class MicrosoftAuthenticator extends Authenticator<XboxToken> {
      * @param password microsoft password
      * @return login code
      */
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private String generateLoginCode(String email, String password) throws UnsupportedEncodingException {
         try {
             URL url = new URL("https://login.live.com/oauth20_authorize.srf?redirect_uri=https://login.live.com/oauth20_desktop.srf&scope=" + scopeUrl + "&display=touch&response_type=code&locale=en&client_id=" + clientId);
@@ -137,6 +152,7 @@ public class MicrosoftAuthenticator extends Authenticator<XboxToken> {
     /**
      * Send xbox auth request
      */
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void sendXboxRequest(HttpURLConnection httpURLConnection, JsonObject request, JsonObject properties) throws IOException {
         request.add("Properties", properties);
 
@@ -157,6 +173,7 @@ public class MicrosoftAuthenticator extends Authenticator<XboxToken> {
      * @param authToken from {@link #generateLoginCode(String, String)}
      * @return {@link MinecraftToken}
      */
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private MicrosoftToken generateTokenPair(String authToken) {
         try {
             Map<String, String> arguments = new HashMap<>();
@@ -201,6 +218,7 @@ public class MicrosoftAuthenticator extends Authenticator<XboxToken> {
      * @param microsoftToken the microsoft token
      * @return the xbox live token
      */
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public XboxLiveToken generateXboxTokenPair(MicrosoftToken microsoftToken) {
         try {
             URL url = new URL("https://user.auth.xboxlive.com/user/authenticate");
@@ -235,6 +253,7 @@ public class MicrosoftAuthenticator extends Authenticator<XboxToken> {
      * @param xboxLiveToken the xbox live token
      * @return the xbox token
      */
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public XboxToken generateXboxTokenPair(XboxLiveToken xboxLiveToken) {
         try {
             URL url = new URL("https://xsts.auth.xboxlive.com/xsts/authorize");
@@ -275,6 +294,7 @@ public class MicrosoftAuthenticator extends Authenticator<XboxToken> {
      * @return the json object
      * @throws IOException the io exception
      */
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public JsonObject parseResponseData(HttpURLConnection httpURLConnection) throws IOException {
         BufferedReader bufferedReader;
 
@@ -317,8 +337,8 @@ public class MicrosoftAuthenticator extends Authenticator<XboxToken> {
                 sb.append("&");
             }
             sb.append(String.format("%s=%s",
-                    encodeURL(entry.getKey().toString()),
-                    encodeURL(entry.getValue().toString())
+                    encodeURL(entry.getKey()),
+                    encodeURL(entry.getValue())
             ));
         }
         return sb.toString();

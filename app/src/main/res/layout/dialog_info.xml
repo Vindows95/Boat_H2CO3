@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
-    >
+    android:orientation="vertical"
+    android:padding="10dp">
 
     <com.google.android.material.circularreveal.CircularRevealLinearLayout
-        android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="10dp">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:layout_width="wrap_content"
@@ -50,11 +49,11 @@
     </com.google.android.material.circularreveal.CircularRevealLinearLayout>
 
     <com.google.android.material.circularreveal.CircularRevealLinearLayout
-        android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="10dp">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:layout_width="wrap_content"
@@ -93,11 +92,11 @@
     </com.google.android.material.circularreveal.CircularRevealLinearLayout>
 
     <com.google.android.material.circularreveal.CircularRevealLinearLayout
-        android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="10dp">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:layout_width="wrap_content"
@@ -136,11 +135,11 @@
     </com.google.android.material.circularreveal.CircularRevealLinearLayout>
 
     <com.google.android.material.circularreveal.CircularRevealLinearLayout
-        android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="10dp">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:layout_width="wrap_content"

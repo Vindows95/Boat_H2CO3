@@ -12,97 +12,98 @@
         android:layout_marginVertical="5dp"
         android:visibility="visible"
         app:cardCornerRadius="@dimen/card_radius"
-        app:cardElevation="0dp">
+        app:cardElevation="0dp"
+        app:strokeWidth="0dp">
 
         <LinearLayout
             android:id="@+id/ver_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:foreground="?attr/selectableItemBackground"
-            android:paddingHorizontal="10dp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
+            android:paddingHorizontal="10dp"
             android:paddingVertical="10dp">
 
-        <ImageView
-            android:id="@+id/mod_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingVertical="2dp"
-            android:paddingHorizontal="15dp"
-            android:layout_marginEnd="10dp"
-            app:srcCompat="@drawable/ic_custom_more"
-            app:tint="?colorPrimary"
-            android:contentDescription="TODO" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            <ImageView
+                android:id="@+id/mod_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:contentDescription="TODO"
+                android:paddingHorizontal="15dp"
+                android:paddingVertical="2dp"
+                app:srcCompat="@drawable/ic_custom_more"
+                app:tint="?colorPrimary" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
+                android:layout_weight="1"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/ver_name"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:layout_marginVertical="10dp"
-                        style="@style/TextStyleMain"
-                        android:textSize="18sp" />
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/ver_info"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="13.5sp"
-                        android:visibility="gone"/>
+                        <TextView
+                            android:id="@+id/ver_name"
+                            style="@style/TextStyleMain"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="10dp"
+                            android:gravity="center_vertical"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/ver_info"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="13.5sp"
+                            android:visibility="gone" />
+
+                    </LinearLayout>
+
+
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:id="@+id/mod_toggle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="24dp"
+                        android:layout_marginEnd="5dp"
+                        android:gravity="start" />
 
                 </LinearLayout>
 
-
-                <com.google.android.material.switchmaterial.SwitchMaterial
-                    android:id="@+id/mod_toggle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="24dp"
-                    android:layout_marginEnd="5dp"
-                    android:gravity="start"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center_vertical">
-
-                <com.google.android.material.button.MaterialButton
-                    style="@style/Widget.Material3.Button.UnelevatedButton"
-                    android:id="@+id/ver_remove"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/delete"
-                    app:icon="@drawable/ic_del_all"
-                    app:cornerRadius="@dimen/card_radius"
-                    app:tint="?colorPrimary"
-                    android:fontFamily="@font/sans"/>
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/ver_remove"
+                        style="@style/Widget.Material3.Button.UnelevatedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/sans"
+                        android:text="@string/delete"
+                        app:cornerRadius="@dimen/card_radius"
+                        app:icon="@drawable/ic_del_all"
+                        app:tint="?colorPrimary" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
         </LinearLayout>
-
-    </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
 

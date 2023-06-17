@@ -1,36 +1,37 @@
 package com.mistake.revision.BaseDialogFragment;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
 import android.os.Handler;
-import android.view.View;
-import android.view.Window;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
-import java.util.Objects;
+import android.view.Window;
 import android.view.WindowManager;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.Color;
-import android.os.Bundle;
 
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
+import java.util.Objects;
+
 public class BaseDialogFragmnet extends DialogFragment {
 
     public static final Handler HANDLER = new Handler();
     private final Object mView;
-    private View mRootView;
     private final float mAlpha;
     private final boolean mAutoDismiss;
     private final boolean mCancelable;
-    private Window window;
     private final int mAnimation;
     private final int mGravity;
+    private final SparseArray<String> mSetImage;
+    private View mRootView;
+    private Window window;
     private SparseArray<OnListener> mClickArray;
     private SparseArray<String> mSetText;
-    private final SparseArray<String> mSetImage;
 
     BaseDialogFragmnet(Object view, float alpha, boolean autoDismiss, boolean cancelable, int animation, int gravity) {
         this.mView = view;
@@ -45,11 +46,14 @@ public class BaseDialogFragmnet extends DialogFragment {
     }
 
     public static BaseDialogFragmnet newInstance(Object view, float alpha,
-                                             boolean mAutoDismiss, boolean cancelable,
-                                             int animation, int gravity) {
+                                                 boolean mAutoDismiss, boolean cancelable,
+                                                 int animation, int gravity) {
         return new BaseDialogFragmnet(view, alpha, mAutoDismiss, cancelable, animation, gravity);
     }
 
+    public static DialogBuilder Builder() {
+        return new DialogBuilder<>();
+    }
 
     @Nullable
     @Override
@@ -66,10 +70,6 @@ public class BaseDialogFragmnet extends DialogFragment {
             create();
         }
         return mRootView;
-    }
-
-    public static DialogBuilder Builder() {
-        return new DialogBuilder<>();
     }
 
     /**
@@ -111,33 +111,6 @@ public class BaseDialogFragmnet extends DialogFragment {
     }
 
     /**
-     * 对点击事件进行处理
-     */
-    private final class ViewOnClick implements View.OnClickListener {
-        private final BaseDialogFragmnet dialog;
-        private final OnListener listener;
-
-        ViewOnClick(BaseDialogFragmnet dialog, OnListener listener) {
-            this.dialog = dialog;
-            this.listener = listener;
-        }
-
-        @Override
-        public void onClick(View view) {
-            if (!mAutoDismiss) {
-                listener.onClick(dialog, view);
-            }
-        }
-    }
-
-    /**
-     * 对事件进行监听，
-     */
-    public interface OnListener {
-        void onClick(BaseDialogFragmnet dialog, View view);
-    }
-
-    /**
      * 设置 文本
      *
      * @param Id      id
@@ -167,7 +140,6 @@ public class BaseDialogFragmnet extends DialogFragment {
         return this;
     }
 
-
     private void setLocation() {
         WindowManager.LayoutParams attributes = window.getAttributes();
         attributes.alpha = mAlpha;
@@ -196,6 +168,33 @@ public class BaseDialogFragmnet extends DialogFragment {
      */
     public void initView(View view) {
 
+    }
+
+    /**
+     * 对事件进行监听，
+     */
+    public interface OnListener {
+        void onClick(BaseDialogFragmnet dialog, View view);
+    }
+
+    /**
+     * 对点击事件进行处理
+     */
+    private final class ViewOnClick implements View.OnClickListener {
+        private final BaseDialogFragmnet dialog;
+        private final OnListener listener;
+
+        ViewOnClick(BaseDialogFragmnet dialog, OnListener listener) {
+            this.dialog = dialog;
+            this.listener = listener;
+        }
+
+        @Override
+        public void onClick(View view) {
+            if (!mAutoDismiss) {
+                listener.onClick(dialog, view);
+            }
+        }
     }
 }
 

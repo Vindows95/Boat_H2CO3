@@ -26,6 +26,4 @@ public class MinecraftCape extends TextureVariable {
     }
 
 
-
-
 }

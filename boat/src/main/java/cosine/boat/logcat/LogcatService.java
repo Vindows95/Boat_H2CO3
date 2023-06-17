@@ -1,10 +1,11 @@
 package cosine.boat.logcat;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.IBinder;
-import android.content.Context;
+
 import java.io.IOException;
 
 /**
@@ -89,8 +90,6 @@ public class LogcatService extends Service
      *
      * @param context         Context instance. Used to determine a socket name.
      * @param crashReportPath Path where to save a crash report.
-     * @param unwinder        Unwinder to use.
-     * @param callback        Callback to execute when a crash has occurred.
      * @return Error status.
      */
     static int startOutOfProcessDaemon(

@@ -18,7 +18,6 @@ public class Logcat {
      *
      * @param context         Context instance. Used to determine a socket name and start a service.
      * @param crashReportPath Path where a crash report is saved.
-     * @param unwinder        Used unwinder. See ndcrash_unwinder type in ndcrash.h.
      * @param serviceClass    Class of background service. Used when we need to use a custom subclass
      *                        of NDCrashUnwinder to use as a background service. If you didn't subclass
      *                        NDCrashUnwinder, please pass NDCrashUnwinder.class.

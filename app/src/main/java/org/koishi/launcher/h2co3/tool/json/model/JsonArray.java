@@ -1,9 +1,11 @@
 package org.koishi.launcher.h2co3.tool.json.model;
 
+import android.os.Build;
+
 import androidx.annotation.NonNull;
 
-import org.koishi.launcher.h2co3.tool.json.interfaces.IListable;
 import org.koishi.launcher.h2co3.tool.json.abstracts.JsonValue;
+import org.koishi.launcher.h2co3.tool.json.interfaces.IListable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,8 +39,6 @@ public class JsonArray extends JsonValue implements IListable<JsonValue> {
     }
 
 
-
-
     @NonNull
     @Override
     public String toString() {
@@ -55,7 +55,7 @@ public class JsonArray extends JsonValue implements IListable<JsonValue> {
         loop((integer, jsonValue) -> {
             jsonValue.setIntend(getIntend() + 2);
             stringBuilder.append("\n");
-            if(!(integer == size() - 1)) {
+            if (!(integer == size() - 1)) {
                 stringBuilder.append(jsonValue).append(",");
             } else {
                 stringBuilder.append(jsonValue);
@@ -95,7 +95,9 @@ public class JsonArray extends JsonValue implements IListable<JsonValue> {
     @Override
     public void loop(Consumer<JsonValue> consumer) {
         for (JsonValue value : values) {
-            consumer.accept(value);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                consumer.accept(value);
+            }
         }
     }
 
@@ -103,7 +105,9 @@ public class JsonArray extends JsonValue implements IListable<JsonValue> {
     public void loop(BiConsumer<Integer, JsonValue> consumer) {
         for (int index = 0; index < values.size(); index++) {
             JsonValue jsonValue = values.get(index);
-            consumer.accept(index, jsonValue);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                consumer.accept(index, jsonValue);
+            }
         }
     }
 

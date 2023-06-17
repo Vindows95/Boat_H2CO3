@@ -15,7 +15,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import okhttp3.*;
+import okhttp3.Call;
+import okhttp3.Response;
 
 /**
  * Created by Cheny on 2017/4/29.
@@ -23,45 +24,42 @@ import okhttp3.*;
 
 public class DownloadTask extends Handler {
 
-    private final int THREAD_COUNT = 4;//线程数
-    private final FilePoint mPoint;
-    private long mFileLength;
-
-    private volatile boolean isDownloading = false;
-    private final AtomicInteger childCanleCount = new AtomicInteger(0);//子线程取消数量
-    private final AtomicInteger childPauseCount = new AtomicInteger(0);//子线程暂停数量
-    private final AtomicInteger childFinshCount = new AtomicInteger(0);//子线程完成数量
-    private final HttpUtil mHttpUtil;
-    private long[] mProgress;
-    private final File[] mCacheFiles;
-    private File mTmpFile;//临时占位文件
-    private volatile boolean pause;//是否暂停
-    private volatile boolean cancel;//是否取消下载
     private static final int MSG_PROGRESS = 1;//进度
     private static final int MSG_FINISH = 2;//完成下载
     private static final int MSG_PAUSE = 3;//暂停
     private static final int MSG_CANCEL = 4;//暂停
-    private final DownloadListner mListner;//下载回调监听
-
+    private static final String TAG = "DownloadTask";
+    private final int THREAD_COUNT = 4;//线程数
+    private final FilePoint mPoint;
+    private final AtomicInteger childCanleCount = new AtomicInteger(0);//子线程取消数量
+    private final AtomicInteger childPauseCount = new AtomicInteger(0);//子线程暂停数量
+    private final AtomicInteger childFinshCount = new AtomicInteger(0);//子线程完成数量
+    private final HttpUtil mHttpUtil;
+    private final File[] mCacheFiles;
+    private final DownloadListener mListner;//下载回调监听
+    private long mFileLength;
+    private volatile boolean isDownloading = false;
+    private long[] mProgress;
+    private File mTmpFile;//临时占位文件
+    private volatile boolean pause;//是否暂停
+    private volatile boolean cancel;//是否取消下载
 
     /**
      * 任务管理器初始化数据
-     *
      */
-    public DownloadTask(FilePoint point, DownloadListner l) {
+    public DownloadTask(FilePoint point, DownloadListener l) {
         this.mPoint = point;
         this.mListner = l;
         this.mProgress = new long[THREAD_COUNT];
         this.mCacheFiles = new File[THREAD_COUNT];
-		
-		this.mHttpUtil =HttpUtil.getInstance();
-		
-        
+
+        this.mHttpUtil = HttpUtil.getInstance();
+
+
     }
 
     /**
      * 任务回调消息
-     *
      */
     @Override
     public void handleMessage(Message msg) {
@@ -74,7 +72,7 @@ public class DownloadTask extends Handler {
                 for (long l : mProgress) {
                     progress += l;
                 }
-                mListner.onProgress(progress * 1.0f / mFileLength,progress,mFileLength);
+                mListner.onProgress(progress * 1.0f / mFileLength, progress, mFileLength);
                 break;
             case MSG_PAUSE://暂停
                 if (confirmStatus(childPauseCount)) return;
@@ -93,13 +91,10 @@ public class DownloadTask extends Handler {
                 mProgress = new long[THREAD_COUNT];
                 mListner.onCancel();
                 break;
-			
-				
-				
+
+
         }
     }
-
-    private static final String TAG = "DownloadTask";
 
     public synchronized void start() {
         try {
@@ -113,21 +108,21 @@ public class DownloadTask extends Handler {
                     if (response.code() != 200) {
                         close(response.body());
                         resetStutus();
-						
-						
-						
+
+
                         return;
                     }
-					
-					
+
+
                     // 获取资源大小
                     mFileLength = response.body().contentLength();
-					
-					
+
+
                     close(response.body());
                     // 在本地创建一个与资源同样大小的文件来占位
                     mTmpFile = new File(mPoint.getFilePath(), mPoint.getFileName() + ".tmp");
-                    if (!Objects.requireNonNull(mTmpFile.getParentFile()).exists()) mTmpFile.getParentFile().mkdirs();
+                    if (!Objects.requireNonNull(mTmpFile.getParentFile()).exists())
+                        mTmpFile.getParentFile().mkdirs();
                     RandomAccessFile tmpAccessFile = new RandomAccessFile(mTmpFile, "rw");
                     tmpAccessFile.setLength(mFileLength);//长度0修复
                     /*将下载任务分配给每个线程*/
@@ -142,25 +137,22 @@ public class DownloadTask extends Handler {
                         }
                         download(startIndex, endIndex, threadId);// 开启线程下载
                     }
-				
-           }
+
+                }
 
                 @Override
                 public void onFailure(@NonNull Call call, @NonNull IOException e) {
                     Log.e(TAG, "start:Exception " + e.getMessage() + "\n" + mPoint.getUrl());
                     resetStutus();
-					
-					
-					
-					
-					
+
+
                 }
             });
         } catch (IOException e) {
             e.printStackTrace();
             resetStutus();
-			
-			
+
+
         }
     }
 
@@ -186,9 +178,8 @@ public class DownloadTask extends Handler {
                 Log.e(TAG, "download: " + response.code() + "\t isDownloading:" + isDownloading + "\t" + mPoint.getUrl());
                 if (response.code() != 206) {// 206：请求部分资源成功码
                     resetStutus();
-					
-					
-					
+
+
                     return;
                 }
                 InputStream is = response.body().byteStream();// 获取流
@@ -236,17 +227,14 @@ public class DownloadTask extends Handler {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
                 isDownloading = false;
-				
-				
-				
-				
+
+
             }
         });
     }
 
     /**
      * 关闭资源
-     *
      */
     private void close(Closeable... closeables) {
         int length = closeables.length;
@@ -307,7 +295,6 @@ public class DownloadTask extends Handler {
 
     /**
      * 确认下载状态
-     *
      */
     private boolean confirmStatus(AtomicInteger count) {
         return count.incrementAndGet() % THREAD_COUNT != 0;

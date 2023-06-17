@@ -2,7 +2,6 @@ package org.koishi.launcher.h2co3.tool;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.os.Build;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;
@@ -32,7 +31,6 @@ public class StatusBarUtil {
 
     /**
      * 获取导航栏高度
-     *
      */
     public static int getNavigationBarHeight(Context context) {
         return getSystemComponentDimen(context, "navigation_bar_height");

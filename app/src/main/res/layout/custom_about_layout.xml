@@ -3,8 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:animateLayoutChanges="true"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
     <com.google.android.material.circularreveal.CircularRevealLinearLayout
         android:id="@+id/custom_page_3"
@@ -61,9 +60,9 @@
                                 style="@style/TextStyleMain"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:fontFamily="@font/sans"
                                 android:text="@string/app_version"
-                                android:textSize="13.5sp"
-                                android:fontFamily="@font/sans"/>
+                                android:textSize="13.5sp" />
 
                         </LinearLayout>
 
@@ -94,8 +93,8 @@
                             <com.google.android.material.textview.MaterialTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Tim/QQ"
-                                android:fontFamily="@font/sans"/>
+                                android:fontFamily="@font/sans"
+                                android:text="Tim/QQ" />
 
                         </com.google.android.material.circularreveal.CircularRevealLinearLayout>
 
@@ -118,8 +117,8 @@
                             <com.google.android.material.textview.MaterialTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Discord"
-                                android:fontFamily="@font/sans"/>
+                                android:fontFamily="@font/sans"
+                                android:text="Discord" />
 
                         </com.google.android.material.circularreveal.CircularRevealLinearLayout>
 
@@ -142,8 +141,8 @@
                             <com.google.android.material.textview.MaterialTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Github"
-                                android:fontFamily="@font/sans"/>
+                                android:fontFamily="@font/sans"
+                                android:text="Github" />
 
                         </com.google.android.material.circularreveal.CircularRevealLinearLayout>
 

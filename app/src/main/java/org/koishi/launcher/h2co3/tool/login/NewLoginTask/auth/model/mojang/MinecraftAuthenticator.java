@@ -1,5 +1,12 @@
 package org.koishi.launcher.h2co3.tool.login.NewLoginTask.auth.model.mojang;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
+import org.koishi.launcher.h2co3.tool.json.model.JsonArray;
+import org.koishi.launcher.h2co3.tool.json.model.JsonObject;
+import org.koishi.launcher.h2co3.tool.json.model.JsonString;
 import org.koishi.launcher.h2co3.tool.login.NewLoginTask.auth.abstracts.Authenticator;
 import org.koishi.launcher.h2co3.tool.login.NewLoginTask.auth.abstracts.exception.AuthenticationException;
 import org.koishi.launcher.h2co3.tool.login.NewLoginTask.auth.model.microsoft.MicrosoftAuthenticator;
@@ -7,9 +14,6 @@ import org.koishi.launcher.h2co3.tool.login.NewLoginTask.auth.model.microsoft.Xb
 import org.koishi.launcher.h2co3.tool.login.NewLoginTask.auth.model.mojang.profile.MinecraftCape;
 import org.koishi.launcher.h2co3.tool.login.NewLoginTask.auth.model.mojang.profile.MinecraftProfile;
 import org.koishi.launcher.h2co3.tool.login.NewLoginTask.auth.model.mojang.profile.MinecraftSkin;
-import org.koishi.launcher.h2co3.tool.json.model.JsonArray;
-import org.koishi.launcher.h2co3.tool.json.model.JsonObject;
-import org.koishi.launcher.h2co3.tool.json.model.JsonString;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -46,6 +50,7 @@ public class MinecraftAuthenticator extends Authenticator<MinecraftToken> {
      * @param password the password
      * @return the minecraft token
      */
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public MinecraftToken loginWithXbox(String email, String password) throws UnsupportedEncodingException {
         XboxToken xboxToken = microsoftAuthenticator.login(email, password);
 
@@ -83,6 +88,7 @@ public class MinecraftAuthenticator extends Authenticator<MinecraftToken> {
      * @param minecraftToken the minecraft token
      * @return the minecraft profile
      */
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public MinecraftProfile checkOwnership(MinecraftToken minecraftToken) {
         try {
             URL url = new URL("https://api.minecraftservices.com/minecraft/profile");
@@ -114,6 +120,7 @@ public class MinecraftAuthenticator extends Authenticator<MinecraftToken> {
      * @return the json object
      * @throws IOException the io exception
      */
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public JsonObject parseResponseData(HttpURLConnection httpURLConnection) throws IOException {
         BufferedReader bufferedReader;
 

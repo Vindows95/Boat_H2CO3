@@ -28,10 +28,10 @@ import androidx.annotation.NonNull;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
-import org.koishi.h2co3.mclauncher.customcontrol.H2CO3CrossingKeyboard;
-import org.koishi.h2co3.mclauncher.customcontrol.MioCustomButton;
-import org.koishi.h2co3.mclauncher.customcontrol.H2CO3CustomManager;
 
+import org.koishi.h2co3.mclauncher.customcontrol.H2CO3CrossingKeyboard;
+import org.koishi.h2co3.mclauncher.customcontrol.H2CO3CustomManager;
+import org.koishi.h2co3.mclauncher.customcontrol.MioCustomButton;
 import org.lwjgl.glfw.CallbackBridge;
 
 import cosine.boat.BoatInput;
@@ -50,6 +50,7 @@ public class BoatActivity extends cosine.boat.BoatActivity implements OnClickLis
     public H2CO3CrossingKeyboard h2CO3CrossingKeyboard;
     public SharedPreferences msh;
     public SharedPreferences.Editor mshe;
+    public int cursorMode = BoatInput.CursorEnabled;
     MyHandler mHandler;
     Button touchPad2, touchPad;
     private DrawerLayout drawerLayout;
@@ -288,6 +289,7 @@ public class BoatActivity extends cosine.boat.BoatActivity implements OnClickLis
             public void 键值接收事件(short 键值, boolean 按下) {
                 sendKeyPress(键值, 0, 按下);
             }
+
             @Override
             public void 控制鼠标指针移动事件(int x, int y) {
 
@@ -512,7 +514,6 @@ public class BoatActivity extends cosine.boat.BoatActivity implements OnClickLis
         });
     }
 
-
     @SuppressLint("ClickableViewAccessibility")
     public Button findButton(int id) {
         Button b = (Button) findViewById(id);
@@ -580,7 +581,6 @@ public class BoatActivity extends cosine.boat.BoatActivity implements OnClickLis
         mHandler.sendMessage(msg);
     }
 
-
     public void setCursorPos(int x, int y) {
         Message msg = new Message();
         msg.what = BoatInput.CursorSetPos;
@@ -627,8 +627,6 @@ public class BoatActivity extends cosine.boat.BoatActivity implements OnClickLis
     public void onClick(View p1) {
         // TODO: Implement this method
     }
-
-    public int cursorMode = BoatInput.CursorEnabled;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override

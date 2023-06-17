@@ -24,8 +24,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 
-import org.koishi.aof.mcinabox.gamecontroller.codes.Translation;
-import org.koishi.aof.mcinabox.gamecontroller.definitions.id.key.KeyEvent;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializationContext;
@@ -39,6 +37,8 @@ import com.larswerkman.holocolorpicker.SVBar;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.koishi.aof.mcinabox.gamecontroller.codes.Translation;
+import org.koishi.aof.mcinabox.gamecontroller.definitions.id.key.KeyEvent;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -220,16 +220,16 @@ public class H2CO3CustomManager implements OnTouchListener,CompoundButton.OnChec
 				自定义按键集合.get(标识).初始化();
 			}
 			for (String 标识:标识集) {
-			    try{
-                    if (自定义按键集合.get(标识).get按键类型().equals("显隐控制按键")) {
-                        for (String 标识_:自定义按键集合.get(标识).get目标按键标识()) {
-                            获取按键(标识_).setVisibility(View.GONE);
-                        }
-                        自定义按键集合.get(标识).setTextColor(Color.RED);
-                    }
-                }catch (Exception e){
+				try {
+					if (自定义按键集合.get(标识).get按键类型().equals("显隐控制按键")) {
+						for (String 标识_ : 自定义按键集合.get(标识).get目标按键标识()) {
+							获取按键(标识_).setVisibility(View.GONE);
+						}
+						自定义按键集合.get(标识).setTextColor(Color.RED);
+					}
+				} catch (Exception ignored) {
 
-                }
+				}
 
 			}
 		}
@@ -274,12 +274,12 @@ public class H2CO3CustomManager implements OnTouchListener,CompoundButton.OnChec
 			tmp.setOnTouchListener(this);
 			自定义按键对话框.dismiss();
 			if (tmp.get按键类型().equals("显隐控制按键")) {
-				for (String 标识:tmp.get目标按键标识()) {
-					MioCustomButton b=获取按键(标识);
+				for (String 标识 : tmp.get目标按键标识()) {
+					MioCustomButton b = 获取按键(标识);
 					b.setTextColor(Color.parseColor(b.get文本颜色()));
 				}
 			}
-		} catch (JSONException e) {
+		} catch (JSONException ignored) {
 
 		}
 
@@ -344,12 +344,12 @@ public class H2CO3CustomManager implements OnTouchListener,CompoundButton.OnChec
 			自定义按键对话框.dismiss();
 			容器.removeView(当前按键);
 			if (tmp.get按键类型().equals("显隐控制按键")) {
-				for (String 标识:tmp.get目标按键标识()) {
-					MioCustomButton b=获取按键(标识);
+				for (String 标识 : tmp.get目标按键标识()) {
+					MioCustomButton b = 获取按键(标识);
 					b.setTextColor(Color.parseColor(b.get文本颜色()));
 				}
 			}
-		} catch (JSONException e) {
+		} catch (JSONException ignored) {
 
 		}
 	}

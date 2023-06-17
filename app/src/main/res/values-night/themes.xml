@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
 
     <style name="Theme.H2CO3" parent="AppBaseTheme">
@@ -10,22 +10,28 @@
         <item name="bottomSheetDialogTheme">@style/AppTheme.BottomSheetDialog</item>
         <!-- Primary brand color. -->
     </style>
+
     <style name="Theme.H2CO3.DynamicColors" parent="Theme.Material3.DynamicColors.Dark">
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:statusBarColor">?android:colorBackground</item>
         <item name="fontFamily">@font/josefin_sans</item>
         <item name="checkboxStyle">@style/AppTheme.CheckBox</item>
         <item name="actionOverflowButtonStyle">@style/AppTheme.Toolbar.OverflowButton</item>
         <item name="chipStyle">@style/AppTheme.UIDesigner.WidgetGroupChip</item>
-        <item name="switchPreferenceStyle">@style/AppTheme.SwitchPreference</item>
+        <item name="switchPreferenceStyle">@style/AppBaseTheme.SwitchPreference</item>
         <item name="shapeAppearanceLargeComponent">@style/AppTheme.ShapeOverlay.Large</item>
         <item name="bottomSheetDialogTheme">@style/AppTheme.BottomSheetDialog</item>
-        <item name="android:windowFullscreen">true</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
     <style name="AppBaseTheme" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:statusBarColor">?android:colorBackground</item>
         <!-- Color Theme: https://material.io/develop/android/theming/color/ -->
-        <item name="switchPreferenceStyle">@style/AppTheme.SwitchPreference</item>
+        <item name="switchPreferenceStyle">@style/AppBaseTheme.SwitchPreference</item>
         <item name="colorPrimary">@color/md_theme_primary</item>
         <item name="colorOnPrimary">@color/md_theme_onPrimary</item>
         <item name="colorPrimaryContainer">@color/md_theme_primaryContainer</item>
@@ -56,10 +62,6 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-
-    <style name="Theme.H2CO3.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="Theme.H2CO3.PopupOverlay" parent="ThemeOverlay.AppCompat.Dark" />
 
 
     <style name="AppBaseTheme.AppBarOverlay" parent="ThemeOverlay.Material3.ActionBar" />

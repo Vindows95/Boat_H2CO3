@@ -1,8 +1,8 @@
 package org.koishi.launcher.h2co3;
 
-import org.koishi.launcher.h2co3.application.H2CO3Activity;
-
 import android.os.Bundle;
+
+import org.koishi.launcher.h2co3.application.H2CO3Activity;
 
 public class LoginActivity extends H2CO3Activity {
 

@@ -1,50 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-	android:layout_width="match_parent"
-	android:background="@drawable/hide">
+    android:background="@drawable/hide">
 
-	<LinearLayout
-		android:id="@+id/download_ver_item"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:paddingVertical="10dp"
-		android:paddingHorizontal="10dp"
-		android:background="?attr/selectableItemBackground"
-		android:orientation="horizontal"
-		android:gravity="center_vertical">
+    <LinearLayout
+        android:id="@+id/download_ver_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="10dp">
 
-		<ImageView
-			android:id="@+id/img"
-			app:srcCompat="@drawable/ic_btm_install"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_marginEnd="10dp"
-            android:contentDescription="TODO" />
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:contentDescription="TODO"
+            app:srcCompat="@drawable/ic_btm_install" />
 
-		<LinearLayout
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-			<TextView
-				android:id="@+id/id"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:textSize="18sp"
-				style="@style/TextStyleMain"/>
+            <TextView
+                android:id="@+id/id"
+                style="@style/TextStyleMain"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp" />
 
-			<TextView
-				android:id="@+id/type"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:textSize="13.5sp"/>
+            <TextView
+                android:id="@+id/type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="13.5sp" />
 
-		</LinearLayout>
+        </LinearLayout>
 
-	</LinearLayout>
+    </LinearLayout>
 
 </RelativeLayout>
 

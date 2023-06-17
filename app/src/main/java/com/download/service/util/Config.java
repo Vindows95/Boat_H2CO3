@@ -1,138 +1,136 @@
 package com.download.service.util;
 
-public class Config
-{
-	public Config(){
-		
-	}
+public class Config {
+    private String auth_uuid;
+    private String extraMinecraftFlags;
+    private String auth_player_name;
+    private String auth_session;
+    private String extraJavaFlags;
+    private String home;
+    private String runtimePath;
+    private String auth_access_token;
+    private String currentVersion;
+    private String game_assets;
+    private String user_type;
+    private String game_directory;
+    private String user_properties;
+    private String assets_root;
 
-	private String auth_uuid;
-	private String extraMinecraftFlags;
-	private String auth_player_name;
-	private String auth_session;
-	private String extraJavaFlags;
-	private String home;
-	private String runtimePath;
-	private String auth_access_token;
-	private String currentVersion;
-	private String game_assets;
-	private String user_type;
-	private String game_directory;
-	private String user_properties;
-	private String assets_root;
-	
-	public void setauth_uuid(String a){
-		auth_uuid=a;
-	}
+    public Config() {
 
-	public void setextraMinecraftFlags(String a){
-		extraMinecraftFlags=a;
-	}
+    }
 
-	public void setauth_player_name(String a){
-		auth_player_name=a;
-	}
+    public void setauth_uuid(String a) {
+        auth_uuid = a;
+    }
 
-	public void setauth_session(String a){
-		auth_session=a;
-	}
+    public void setextraMinecraftFlags(String a) {
+        extraMinecraftFlags = a;
+    }
 
-	public void setextraJavaFlags(String a){
-		extraJavaFlags=a;
-	}
+    public void setauth_player_name(String a) {
+        auth_player_name = a;
+    }
 
-	public void sethome(String a){
-		home=a;
-	}
+    public void setauth_session(String a) {
+        auth_session = a;
+    }
 
-	public void setruntimePath(String a){
-		runtimePath=a;
-	}
+    public void setextraJavaFlags(String a) {
+        extraJavaFlags = a;
+    }
 
-	public void setauth_access_token(String a){
-		auth_access_token=a;
-	}
+    public void sethome(String a) {
+        home = a;
+    }
 
-	public void setcurrentVersion(String a){
-		currentVersion=a;
-	}
+    public void setruntimePath(String a) {
+        runtimePath = a;
+    }
 
-	public void setgame_assets(String a){
-		game_assets=a;
-	}
+    public void setauth_access_token(String a) {
+        auth_access_token = a;
+    }
 
-	public void setuser_type(String a){
-		user_type=a;
-	}
+    public void setcurrentVersion(String a) {
+        currentVersion = a;
+    }
 
-	public void setgame_directory(String a){
-		game_directory=a;
-	}
+    public void setgame_assets(String a) {
+        game_assets = a;
+    }
 
-	public void setuser_properties(String a){
-		user_properties=a;
-	}
+    public void setuser_type(String a) {
+        user_type = a;
+    }
 
-	public void setassets_root(String a){
-		assets_root=a;
-	}
+    public void setgame_directory(String a) {
+        game_directory = a;
+    }
 
-	public String setauth_uuid()
-	{
-		return auth_uuid;
-	}
+    public void setuser_properties(String a) {
+        user_properties = a;
+    }
 
-	public String setextraMinecraftFlags()
-	{return extraMinecraftFlags;
-	}
+    public void setassets_root(String a) {
+        assets_root = a;
+    }
 
-	public String setauth_player_name()
-	{return auth_player_name;
-	}
+    public String setauth_uuid() {
+        return auth_uuid;
+    }
 
-	public String setauth_session()
-	{return auth_session;
-	}
+    public String setextraMinecraftFlags() {
+        return extraMinecraftFlags;
+    }
 
-	public String setextraJavaFlags()
-	{return extraJavaFlags;
-	}
+    public String setauth_player_name() {
+        return auth_player_name;
+    }
 
-	public String sethome()
-	{return home;
-	}
+    public String setauth_session() {
+        return auth_session;
+    }
 
-	public String setruntimePath()
-	{return runtimePath;
-	}
+    public String setextraJavaFlags() {
+        return extraJavaFlags;
+    }
 
-	public String setauth_access_token()
-	{return auth_access_token;
-	}
+    public String sethome() {
+        return home;
+    }
 
-	public String setcurrentVersion()
-	{return currentVersion;
-	}
+    public String setruntimePath() {
+        return runtimePath;
+    }
 
-	public String setgame_assets()
-	{return game_assets;
-	}
+    public String setauth_access_token() {
+        return auth_access_token;
+    }
 
-	public String setuser_type()
-	{return user_type;
-	}
+    public String setcurrentVersion() {
+        return currentVersion;
+    }
 
-	public String setgame_directory()
-	{return game_directory;
-	}
+    public String setgame_assets() {
+        return game_assets;
+    }
 
-	public String setuser_properties()
-	{return user_properties;
-	}
+    public String setuser_type() {
+        return user_type;
+    }
 
-	public String setassets_root()
-	{return assets_root;
-	}
+    public String setgame_directory() {
+        return game_directory;
+    }
+
+    public String setuser_properties() {
+        return user_properties;
+    }
+
+    public String setassets_root() {
+        return assets_root;
+    }
 
 }
 

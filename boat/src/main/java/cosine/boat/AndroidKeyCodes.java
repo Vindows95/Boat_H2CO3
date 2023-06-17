@@ -1,9 +1,9 @@
 package cosine.boat;
 
 import android.view.KeyEvent;
-import java.util.Map;
+
 import java.util.HashMap;
-import cosine.boat.BoatKeycodes;
+import java.util.Map;
 
 
 public class AndroidKeyCodes {
@@ -170,9 +170,8 @@ public class AndroidKeyCodes {
         androidKeyMap.put(KeyEvent.KEYCODE_NUMPAD_MULTIPLY, KEYMAP_KEY_MULTIPLY);
         androidKeyMap.put(KeyEvent.KEYCODE_SYSRQ, KEYMAP_KEY_PRINT);
 		*/
-		
-		keyCodeMap.put(KeyEvent.KEYCODE_0,BoatKeycodes.BOAT_KEYBOARD_0);
-		keyCodeMap.put(KeyEvent.KEYCODE_1,BoatKeycodes.BOAT_KEYBOARD_1);
+        keyCodeMap.put(KeyEvent.KEYCODE_0, BoatKeycodes.BOAT_KEYBOARD_0);
+        keyCodeMap.put(KeyEvent.KEYCODE_1, BoatKeycodes.BOAT_KEYBOARD_1);
 		keyCodeMap.put(KeyEvent.KEYCODE_2,BoatKeycodes.BOAT_KEYBOARD_2);
 		keyCodeMap.put(KeyEvent.KEYCODE_3,BoatKeycodes.BOAT_KEYBOARD_3);
 		keyCodeMap.put(KeyEvent.KEYCODE_4,BoatKeycodes.BOAT_KEYBOARD_4);

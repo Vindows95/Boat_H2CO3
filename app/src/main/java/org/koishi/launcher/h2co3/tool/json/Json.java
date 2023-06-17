@@ -1,5 +1,9 @@
 package org.koishi.launcher.h2co3.tool.json;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import org.koishi.launcher.h2co3.tool.json.abstracts.JsonHandler;
 import org.koishi.launcher.h2co3.tool.json.abstracts.JsonValue;
 
@@ -95,6 +99,7 @@ public class Json {
      * @param value the value used to parse
      * @return the json value returns raw type of {@link JsonValue}
      */
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public <T> JsonValue toJson(T value) {
         return jsonGenerator.toJson(value);
     }
@@ -111,6 +116,7 @@ public class Json {
      * @param clazz     the clazz is used to determine object in {@link List}
      * @return T is a list with cast {@link Class<T>}
      */
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public <T extends List<K>, K> T fromJson(JsonValue jsonValue, Class<T> listClazz, Class<K> clazz) {
         return jsonGenerator.fromJson(jsonValue, listClazz, clazz);
     }
@@ -124,6 +130,7 @@ public class Json {
      * @param clazz     the clazz is used to cast {@link T}
      * @return {@link T} cast with {@link Class<T>}
      */
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public <T> T fromJsonCast(JsonValue jsonValue, Class<T> clazz) {
         return jsonGenerator.fromJsonCast(jsonValue, clazz);
     }
@@ -137,6 +144,7 @@ public class Json {
      * @param clazz     the clazz is used create object
      * @return the object
      */
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public <T> Object fromJson(JsonValue jsonValue, Class<T> clazz) {
         return jsonGenerator.fromJson(jsonValue, clazz);
     }

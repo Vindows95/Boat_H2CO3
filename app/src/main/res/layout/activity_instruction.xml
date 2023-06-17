@@ -11,8 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
-        app:elevation="0dp"
-        android:theme="@style/AppBaseTheme.AppBarOverlay">
+        android:theme="@style/AppBaseTheme.AppBarOverlay"
+        app:elevation="0dp">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar3"
@@ -25,26 +25,26 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:onClick="startBili"
+        style="@style/Widget.Material3.Button.TextButton"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="10dp"
         android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
-        android:text="@string/inst_open_bili"
+        android:fontFamily="@font/sans"
         android:gravity="left|center"
-        app:icon="@drawable/ic_redo"
-        style="@style/Widget.Material3.Button.TextButton"
-        android:fontFamily="@font/sans"/>
+        android:onClick="startBili"
+        android:text="@string/inst_open_bili"
+        app:icon="@drawable/ic_redo" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"
         android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
-        android:background="@color/appBlack_35"/>
+        android:layout_marginBottom="10dp"
+        android:background="@color/appBlack_35" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -67,7 +67,7 @@
                     android:id="@+id/markdown_view"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/white"/>
+                    android:background="@color/white" />
 
             </LinearLayout>
 
